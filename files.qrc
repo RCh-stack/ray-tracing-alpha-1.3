@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/demo_files">
+        <file>files/step_first.html</file>
+        <file>files/step_second.html</file>
+        <file>files/step_third.html</file>
+        <file>files/step_four.html</file>
+        <file>files/step_fifth.html</file>
+    </qresource>
+</RCC>

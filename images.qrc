@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>images/main_icon.ico</file>
+        <file>images/mainwindow_background.jpg</file>
+        <file>images/left-arrow.png</file>
+        <file>images/right-arrow.png</file>
+        <file>images/start-button.png</file>
+        <file>images/help-button.png</file>
+    </qresource>
+</RCC>
