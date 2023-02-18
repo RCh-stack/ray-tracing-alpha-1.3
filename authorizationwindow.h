@@ -2,6 +2,7 @@
 #define AUTHORIZATIONWINDOW_H
 
 #include <QDialog>
+#include <QDir>
 #include <QMessageBox>
 #include <QSqlDatabase>
 #include <QSqlError>
@@ -20,7 +21,11 @@ public:
     ~AuthorizationWindow();
 
 private slots:
-    void on_button_input_clicked();
+    void on_button_entry_clicked();
+
+    void on_button_exit_clicked();
+
+    void on_button_help_clicked();
 
 private:
     Ui::AuthorizationWindow *ui;

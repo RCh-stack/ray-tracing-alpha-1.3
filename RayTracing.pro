@@ -21,23 +21,38 @@ SOURCES += main.cpp\
     authorizationwindow.cpp \
     theorywindow.cpp \
     demonstrationwindow.cpp \
-    testwindow.cpp
+    optiondemowindow.cpp \
+    optiontestwindow.cpp \
+    testwindow.cpp \
+    practicwindow.cpp \
+    adminmainwindow.cpp \
+    aboutwindowinformation.cpp
 
 HEADERS  += mainwindow.h \
     authorizationwindow.h \
     theorywindow.h \
     demonstrationwindow.h \
-    testwindow.h \
     geometry.h \
     sphere.h \
     light.h \
-    material.h
+    material.h \
+    optiondemowindow.h \
+    optiontestwindow.h \
+    testwindow.h \
+    practicwindow.h \
+    adminmainwindow.h \
+    aboutwindowinformation.h
 
 FORMS    += mainwindow.ui \
     authorizationwindow.ui \
     theorywindow.ui \
     demonstrationwindow.ui \
-    testwindow.ui
+    optiondemowindow.ui \
+    optiontestwindow.ui \
+    testwindow.ui \
+    practicwindow.ui \
+    adminmainwindow.ui \
+    aboutwindowinformation.ui
 
 RESOURCES += \
     images.qrc \

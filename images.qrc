@@ -4,7 +4,23 @@
         <file>images/mainwindow_background.jpg</file>
         <file>images/left-arrow.png</file>
         <file>images/right-arrow.png</file>
-        <file>images/start-button.png</file>
+        <file>images/next-page.png</file>
+        <file>images/prev-page.png</file>
         <file>images/help-button.png</file>
+        <file>images/download.png</file>
+        <file>images/start-button.png</file>
+        <file>images/cancel-button.png</file>
+        <file>images/complete-button.png</file>
+        <file>images/exit-button.png</file>
+        <file>images/entry-button.png</file>
+        <file>images/attach-button.png</file>
+        <file>images/save-button.png</file>
+        <file>images/admin-panel-button.png</file>
+        <file>images/admin-theory-button.png</file>
+        <file>images/admin-lab-button.png</file>
+        <file>images/admin-test-button.png</file>
+        <file>images/admin-demo-button.png</file>
+        <file>images/github-button.png</file>
+        <file>images/telegram-button.png</file>
     </qresource>
 </RCC>

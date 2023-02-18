@@ -22,6 +22,10 @@ private slots:
 
     void on_button_test_clicked();
 
+    void on_button_practic_clicked();
+
+    void on_action_about_information_triggered();
+
 private:
     Ui::MainWindow *ui;
 };

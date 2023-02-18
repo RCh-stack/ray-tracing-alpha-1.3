@@ -9,8 +9,8 @@ DemonstrationWindow::DemonstrationWindow(QWidget *parent) :
 
     step = 0;
     QPixmap start (":/icons/images/start-button.png");
-    QPixmap leftArrow (":/icons/images/left-arrow.png");
-    QPixmap rightArrow (":/icons/images/right-arrow.png");
+    QPixmap leftArrow (":/icons/images/prev-page.png");
+    QPixmap rightArrow (":/icons/images/next-page.png");
     QPixmap help(":/icons/images/help-button.png");
 
     QIcon ButtonStart(start);
@@ -22,6 +22,12 @@ DemonstrationWindow::DemonstrationWindow(QWidget *parent) :
     ui->button_next_step->setIcon(ButtonNextStep);
     ui->button_prev_step->setIcon(ButtonPrevStep);
     ui->button_help->setIcon(ButtonInformation);
+
+    QPixmap bkgnd(":/icons/images/mainwindow_background.jpg");
+    bkgnd = bkgnd.scaled(size(), Qt::IgnoreAspectRatio);
+    QPalette p = palette();
+    p.setBrush(QPalette::Background, bkgnd);
+    setPalette(p);
 }
 
 DemonstrationWindow::~DemonstrationWindow()
@@ -468,7 +474,94 @@ void DemonstrationWindow::on_button_next_step_clicked()
 
 void DemonstrationWindow::on_button_prev_step_clicked()
 {
+    if(step > 0)
+        step--;
 
+    if(step == 2)
+    {
+        open_and_output_htmlFile(":/demo_files/files/step_second.html");
+        Material ivory(Vec3f(0.4, 0.4, 0.3));
+        Material red_rubber(Vec3f(0.3, 0.1, 0.1));
+
+        std::vector<Sphere> spheres;
+        spheres.push_back(Sphere(Vec3f(-3, 0, -16), 2, ivory));
+        spheres.push_back(Sphere(Vec3f(-1.0, -1.5, -12), 2, red_rubber));
+        spheres.push_back(Sphere(Vec3f( 1.5, -0.5, -18), 3, red_rubber));
+        spheres.push_back(Sphere(Vec3f( 7, 5, -18), 4, ivory));
+
+        std::vector<Light> lights;
+        lights.push_back(Light(Vec3f(-20, 20, 20), 1.5));
+
+        start_render(spheres, lights);
+    }
+
+    if(step == 3)
+    {
+        open_and_output_htmlFile(":/demo_files/files/step_third.html");
+        Material ivory(Vec2f(0.6, 0.3), Vec3f(0.4, 0.4, 0.3), 50.);
+        Material red_rubber(Vec2f(0.9, 0.1), Vec3f(0.3, 0.1, 0.1), 10.);
+
+        std::vector<Sphere> spheres;
+        spheres.push_back(Sphere(Vec3f(-3, 0, -16), 2, ivory));
+        spheres.push_back(Sphere(Vec3f(-1.0, -1.5, -12), 2, red_rubber));
+        spheres.push_back(Sphere(Vec3f( 1.5, -0.5, -18), 3, red_rubber));
+        spheres.push_back(Sphere(Vec3f( 7, 5, -18), 4, ivory));
+
+        std:: vector<Light> lights;
+        lights.push_back(Light(Vec3f(-20, 20, 20), 1.5));
+        lights.push_back(Light(Vec3f( 30, 50, -25), 1.8));
+        lights.push_back(Light(Vec3f( 30, 20, 30), 1.7));
+
+        start_render_light(spheres, lights);
+    }
+    if(step == 4)
+    {
+        open_and_output_htmlFile(":/demo_files/files/step_four.html");
+        Material ivory(Vec2f(0.6, 0.3), Vec3f(0.4, 0.4, 0.3), 50.);
+        Material red_rubber(Vec2f(0.9, 0.1), Vec3f(0.3, 0.1, 0.1), 10.);
+
+        std::vector<Sphere> spheres;
+        spheres.push_back(Sphere(Vec3f(-3, 0, -16), 2, ivory));
+        spheres.push_back(Sphere(Vec3f(-1.0, -1.5, -12), 2, red_rubber));
+        spheres.push_back(Sphere(Vec3f( 1.5, -0.5, -18), 3, red_rubber));
+        spheres.push_back(Sphere(Vec3f( 7, 5, -18), 4, ivory));
+
+        std::vector<Light> lights;
+        lights.push_back(Light(Vec3f(-20, 20, 20), 1.5));
+        lights.push_back(Light(Vec3f( 30, 50, -25), 1.8));
+        lights.push_back(Light(Vec3f( 30, 20, 30), 1.7));
+
+        start_render_light2(spheres, lights);
+    }
+    if(step == 5)
+    {
+        open_and_output_htmlFile(":/demo_files/files/step_fifth.html");
+        Material3f ivory(Vec3f(0.6, 0.3, 0.1), Vec3f(0.4, 0.4, 0.3), 50.);
+        Material3f red_rubber(Vec3f(0.9, 0.1, 0.0), Vec3f(0.3, 0.1, 0.1), 10.);
+        Material3f mirror(Vec3f(0.0, 10.0, 0.8), Vec3f(1.0, 1.0, 1.0), 1425.);
+
+        std::vector<Sphere> spheres;
+        spheres.push_back(Sphere(Vec3f(-3, 0, -16), 2,  ivory));
+        spheres.push_back(Sphere(Vec3f(-1.0, -1.5, -12), 2, mirror));
+        spheres.push_back(Sphere(Vec3f( 1.5, -0.5, -18), 3, red_rubber));
+        spheres.push_back(Sphere(Vec3f( 7, 5, -18), 4, mirror));
+
+        std::vector<Light> lights;
+        lights.push_back(Light(Vec3f(-20, 20, 20), 1.5));
+        lights.push_back(Light(Vec3f( 30, 50, -25), 1.8));
+        lights.push_back(Light(Vec3f( 30, 20, 30), 1.7));
+
+        start_render_light3(spheres, lights);
+    }
+
+    if(step > 0)
+    {
+        QGraphicsScene *scene = new QGraphicsScene();
+        QPixmap image("C:/Program Files (x86)/Qt Project/RayTracing/out.ppm");
+        scene->addPixmap(image);
+        ui->view_demo->setScene(scene);
+        ui->view_demo->showFullScreen();
+    }
 }
 
 void DemonstrationWindow::on_button_help_clicked()

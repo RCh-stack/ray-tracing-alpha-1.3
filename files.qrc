@@ -6,4 +6,8 @@
         <file>files/step_four.html</file>
         <file>files/step_fifth.html</file>
     </qresource>
+    <qresource prefix="/theory_files">
+        <file>files/theory/content.html</file>
+        <file>files/theory/first.html</file>
+    </qresource>
 </RCC>

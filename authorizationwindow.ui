@@ -6,17 +6,93 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>312</width>
-    <height>168</height>
+    <width>398</width>
+    <height>258</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Авторизация</string>
   </property>
-  <widget class="QLabel" name="label_login">
+  <widget class="QLabel" name="label_code_admin">
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>80</x>
+     <y>160</y>
+     <width>71</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>9</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);
+</string>
+   </property>
+   <property name="text">
+    <string>Код:</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="text_code_admin">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>160</y>
+     <width>141</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>8</pointsize>
+    </font>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="button_entry">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>200</y>
+     <width>51</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    background-color: rgb(255, 255, 255);
+    border: 2px solid #094065;
+}
+
+QPushButton:pressed {
+    background-color:  rgb(118, 118, 118);
+}
+</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>images/entry-button.png</normaloff>images/entry-button.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>36</width>
+     <height>36</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_login_user">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
      <y>30</y>
      <width>71</width>
      <height>21</height>
@@ -24,35 +100,21 @@
    </property>
    <property name="font">
     <font>
-     <pointsize>10</pointsize>
+     <pointsize>9</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);
+</string>
    </property>
    <property name="text">
     <string>Логин:</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_password">
+  <widget class="QLineEdit" name="text_login_user">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>80</y>
-     <width>71</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>10</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Пароль:</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="text_login">
-   <property name="geometry">
-    <rect>
-     <x>90</x>
+     <x>130</x>
      <y>30</y>
      <width>191</width>
      <height>22</height>
@@ -64,11 +126,33 @@
     </font>
    </property>
   </widget>
-  <widget class="QLineEdit" name="text_password">
+  <widget class="QLabel" name="label_password_user">
    <property name="geometry">
     <rect>
-     <x>90</x>
-     <y>80</y>
+     <x>50</x>
+     <y>70</y>
+     <width>71</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>9</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);
+</string>
+   </property>
+   <property name="text">
+    <string>Пароль:</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="text_password_user">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>70</y>
      <width>191</width>
      <height>22</height>
     </rect>
@@ -79,22 +163,116 @@
     </font>
    </property>
   </widget>
-  <widget class="QPushButton" name="button_input">
+  <widget class="QRadioButton" name="radioButton">
    <property name="geometry">
     <rect>
-     <x>70</x>
+     <x>40</x>
      <y>120</y>
-     <width>171</width>
-     <height>31</height>
+     <width>141</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>10</pointsize>
+     <pointsize>9</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);
+</string>
+   </property>
    <property name="text">
-    <string>Войти</string>
+    <string>Пользователь</string>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="radioButton_2">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>120</y>
+     <width>151</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>9</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);
+</string>
+   </property>
+   <property name="text">
+    <string>Администратор</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="button_exit">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>200</y>
+     <width>51</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    background-color: rgb(255, 255, 255);
+    border: 2px solid #094065;
+}
+
+QPushButton:pressed {
+    background-color:  rgb(118, 118, 118);
+}
+</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>images/exit-button.png</normaloff>images/exit-button.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>36</width>
+     <height>36</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="button_help">
+   <property name="geometry">
+    <rect>
+     <x>350</x>
+     <y>210</y>
+     <width>41</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    background-color: rgb(255, 255, 255);
+    border: 2px solid #094065;
+}
+
+QPushButton:pressed {
+    background-color:  rgb(118, 118, 118);
+}
+</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>images/help-button.png</normaloff>images/help-button.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>36</width>
+     <height>36</height>
+    </size>
    </property>
   </widget>
  </widget>
