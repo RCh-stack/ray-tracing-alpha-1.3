@@ -92,13 +92,19 @@ Vec3f reflect(const Vec3f &I, const Vec3f &N)
     return I - N * 2.f * (I * N);
 }
 
+// -- ПЕРВЫЙ ШАГ --
+// -- Vec3f(0.2, 0.5, 0.8);  - синий темнее --
+// -- Vec3f(0.2, 0.7, 0.8);  - голубой (стандарт)--
+// -- Vec3f(0.2, 0.6, 0.9);  - синий светлее
+// -- Vec3f(0.2, 0.7, 0.7);  - зеленый (болотный)
+// -- Vec3f(0.3, 0.9, 0.7);  - зеленый (светлее)
 Vec3f cast_ray(const Vec3f &orig, const Vec3f &dir, const std::vector<Sphere> &spheres)
 {
     Vec3f point, N;
     Material material;
     if (!scene_intersect(orig, dir, spheres, point, N, material))
     {
-        return Vec3f(0.2, 0.7, 0.8); // background color
+        return Vec3f(0.3, 0.9, 0.7); // background color
     }
     return material.diffuse_color;
 }
@@ -108,7 +114,7 @@ Vec3f cast_ray(const Vec3f &orig, const Vec3f &dir, const std::vector<Sphere> &s
     Vec3f point, N;
     Material material;
     if (!scene_intersect(orig, dir, spheres, point, N, material))
-        return Vec3f(0.2, 0.7, 0.8); // background color
+        return Vec3f(0.3, 0.9, 0.7); // background color
 
     float diffuse_light_intensity = 0;
     for (size_t i = 0; i < lights.size(); i++)
@@ -125,7 +131,7 @@ Vec3f cast_ray_light(const Vec3f &orig, const Vec3f &dir, const std:: vector<Sph
     Vec3f point, N;
     Material material;
     if (!scene_intersect(orig, dir, spheres, point, N, material))
-        return Vec3f(0.2, 0.7, 0.8); // background color
+        return Vec3f(0.3, 0.9, 0.7); // background color
 
     float diffuse_light_intensity = 0, specular_light_intensity = 0;
     for (size_t i = 0; i < lights.size(); i++)
@@ -143,7 +149,7 @@ Vec3f cast_ray_light2(const Vec3f &orig, const Vec3f &dir, const std::vector<Sph
     Vec3f point, N;
     Material material;
     if (!scene_intersect(orig, dir, spheres, point, N, material))
-        return Vec3f(0.2, 0.7, 0.8); // background color
+        return Vec3f(0.3, 0.9, 0.7); // background color
 
     float diffuse_light_intensity = 0, specular_light_intensity = 0;
     for (size_t i = 0; i < lights.size(); i++)
@@ -168,7 +174,7 @@ Vec3f cast_ray_light3(const Vec3f &orig, const Vec3f &dir, const std:: vector<Sp
     Vec3f point, N;
     Material3f material;
     if (depth > 4 || !scene_intersect3f(orig, dir, spheres, point, N, material))
-        return Vec3f(0.2, 0.7, 0.8); // background color
+        return Vec3f(0.3, 0.9, 0.7); // background color
 
     Vec3f reflect_dir = reflect(dir, N).normalize();
     Vec3f reflect_orig = reflect_dir * N < 0 ? point - N * 1e-3 : point + N * 1e-3;
@@ -360,7 +366,7 @@ void DemonstrationWindow::start_render_light3(const std::vector<Sphere> &spheres
 void DemonstrationWindow::on_button_start_demo_clicked()
 {
     step = 1; // -- номер шага --
-    open_and_output_htmlFile(":/demo_files/files/step_first.html");
+    open_and_output_htmlFile(":/demo_files/files/demo/step_first.html");
 
     Material ivory(Vec3f(0.4, 0.4, 0.3));
     Material red_rubber(Vec3f(0.3, 0.1, 0.1));
@@ -387,7 +393,7 @@ void DemonstrationWindow::on_button_next_step_clicked()
 
     if(step == 2)
     {
-        open_and_output_htmlFile(":/demo_files/files/step_second.html");
+        open_and_output_htmlFile(":/demo_files/files/demo/step_second.html");
         Material ivory(Vec3f(0.4, 0.4, 0.3));
         Material red_rubber(Vec3f(0.3, 0.1, 0.1));
 
@@ -405,7 +411,7 @@ void DemonstrationWindow::on_button_next_step_clicked()
 
     if(step == 3)
     {
-        open_and_output_htmlFile(":/demo_files/files/step_third.html");
+        open_and_output_htmlFile(":/demo_files/files/demo/step_third.html");
         Material ivory(Vec2f(0.6, 0.3), Vec3f(0.4, 0.4, 0.3), 50.);
         Material red_rubber(Vec2f(0.9, 0.1), Vec3f(0.3, 0.1, 0.1), 10.);
 
@@ -415,7 +421,7 @@ void DemonstrationWindow::on_button_next_step_clicked()
         spheres.push_back(Sphere(Vec3f( 1.5, -0.5, -18), 3, red_rubber));
         spheres.push_back(Sphere(Vec3f( 7, 5, -18), 4, ivory));
 
-        std:: vector<Light> lights;
+        std::vector<Light> lights;
         lights.push_back(Light(Vec3f(-20, 20, 20), 1.5));
         lights.push_back(Light(Vec3f( 30, 50, -25), 1.8));
         lights.push_back(Light(Vec3f( 30, 20, 30), 1.7));
@@ -424,7 +430,7 @@ void DemonstrationWindow::on_button_next_step_clicked()
     }
     if(step == 4)
     {
-        open_and_output_htmlFile(":/demo_files/files/step_four.html");
+        open_and_output_htmlFile(":/demo_files/files/demo/step_four.html");
         Material ivory(Vec2f(0.6, 0.3), Vec3f(0.4, 0.4, 0.3), 50.);
         Material red_rubber(Vec2f(0.9, 0.1), Vec3f(0.3, 0.1, 0.1), 10.);
 
@@ -443,7 +449,7 @@ void DemonstrationWindow::on_button_next_step_clicked()
     }
     if(step == 5)
     {
-        open_and_output_htmlFile(":/demo_files/files/step_fifth.html");
+        open_and_output_htmlFile(":/demo_files/files/demo/step_fifth.html");
         Material3f ivory(Vec3f(0.6, 0.3, 0.1), Vec3f(0.4, 0.4, 0.3), 50.);
         Material3f red_rubber(Vec3f(0.9, 0.1, 0.0), Vec3f(0.3, 0.1, 0.1), 10.);
         Material3f mirror(Vec3f(0.0, 10.0, 0.8), Vec3f(1.0, 1.0, 1.0), 1425.);
@@ -474,7 +480,7 @@ void DemonstrationWindow::on_button_next_step_clicked()
 
 void DemonstrationWindow::on_button_prev_step_clicked()
 {
-    if(step > 0)
+    if(step >= 0)
         step--;
 
     if(step == 2)

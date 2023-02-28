@@ -83,7 +83,7 @@ QPushButton:pressed {
     </rect>
    </property>
    <property name="toolTip">
-    <string>Получить помощь</string>
+    <string>Получить справку</string>
    </property>
    <property name="styleSheet">
     <string notr="true">QPushButton {

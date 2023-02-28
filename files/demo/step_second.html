@@ -1,0 +1,35 @@
+﻿<html>
+<body>
+<p><font size = '7' face = 'Times New Roman'><strong>Этап 2. Добавление освещения</strong></font></p>
+<p><font size = '5' face = 'Times New Roman'> Создадим структуру для источника освещения: <br></font></p>
+<p><font size = '4' face = 'Century Gothic'>
+struct Light <br>
+{ <br>
+&nbsp;&nbsp;&nbsp; Vec3f stand;
+&nbsp;&nbsp;&nbsp; float depth; <br>
+&nbsp;&nbsp;&nbsp; Light(const Vec3f &s, const float &d) : stand(s), depth(d) {} <br>
+} <br>
+</font></p>
+<p><font size = '5' face = 'Times New Roman'>Чтобы понять, что освещена точка пересечения, можно просто посмотреть на угол между нормальным вектором в этой 
+точке и вектором, описывающим направление света. Чем меньше угол, тем лучше освещена поверхность. Чтобы считать было ещё удобнее, можно просто взять 
+скалярное произвдение между вектором нормали и вектором освещения. Скалярное произведение между двумя векторами a и b равно 
+произведению норм векторов на косинус угла между векторами: a*b = |a| |b| cos(alpha(a,b)). Если взять векторы единичной длины, то простейшее скалярное 
+произведение даст нам интенсивность освещения поверхности. <br> <br>
+Таким образом, в функции cast_ray вместо постоянного цвета будем возвращать цвет с учётом источников освещения: </font></p>
+<p><font size = '4' face = 'Century Gothic'>
+Vec3f cast_ray(const Vec3f &orig, const Vec3f &dir, const Sphere &sphere) <br>
+{<br>
+&nbsp;&nbsp;&nbsp;    Vec3f point, N;<br>
+&nbsp;&nbsp;&nbsp;    Material material; <br>
+&nbsp;&nbsp;&nbsp;   if (!scene_intersect(orig, dir, spheres, point, N, material)) <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 		return Vec3f(0.2, 0.7, 0.8); <br><br>
+&nbsp;&nbsp;&nbsp;    float diffuse_light_intensity = 0;<br>
+&nbsp;&nbsp;&nbsp;    for (size_t i = 0; i &lt lights.size(); i++) <br>
+&nbsp;&nbsp;&nbsp;	{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        Vec3f light_dir      = (lights[i].stand - point).normalize();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        diffuse_light_intensity  += lights[i].depth * std::max(0.f, light_dir*N);<br>
+&nbsp;&nbsp;&nbsp;   }<br>
+&nbsp;&nbsp;&nbsp;    return material.diffuse_color * diffuse_light_intensity;<br>
+}<br> </font></p>
+</body>
+</html>

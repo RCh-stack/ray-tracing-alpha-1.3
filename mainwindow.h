@@ -15,6 +15,8 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    void set_window_options();
+
 private slots:
     void on_button_theory_clicked();
 
@@ -25,6 +27,10 @@ private slots:
     void on_button_practic_clicked();
 
     void on_action_about_information_triggered();
+
+    void on_action_user_profile_triggered();
+
+    void on_action_user_option_triggered();
 
 private:
     Ui::MainWindow *ui;

@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Авторизация</string>
+   <string>Авторизация - RayTracing</string>
   </property>
   <widget class="QLabel" name="label_code_admin">
    <property name="geometry">
@@ -63,6 +63,9 @@
     <font>
      <pointsize>10</pointsize>
     </font>
+   </property>
+   <property name="toolTip">
+    <string>Авторизоваться</string>
    </property>
    <property name="styleSheet">
     <string notr="true">QPushButton {
@@ -163,7 +166,7 @@ QPushButton:pressed {
     </font>
    </property>
   </widget>
-  <widget class="QRadioButton" name="radioButton">
+  <widget class="QRadioButton" name="radioButton_user">
    <property name="geometry">
     <rect>
      <x>40</x>
@@ -185,7 +188,7 @@ QPushButton:pressed {
     <string>Пользователь</string>
    </property>
   </widget>
-  <widget class="QRadioButton" name="radioButton_2">
+  <widget class="QRadioButton" name="radioButton_admin">
    <property name="geometry">
     <rect>
      <x>200</x>
@@ -215,6 +218,9 @@ QPushButton:pressed {
      <width>51</width>
      <height>51</height>
     </rect>
+   </property>
+   <property name="toolTip">
+    <string>Выйти из программы</string>
    </property>
    <property name="styleSheet">
     <string notr="true">QPushButton {
@@ -249,6 +255,9 @@ QPushButton:pressed {
      <width>41</width>
      <height>41</height>
     </rect>
+   </property>
+   <property name="toolTip">
+    <string>Получить справку</string>
    </property>
    <property name="styleSheet">
     <string notr="true">QPushButton {

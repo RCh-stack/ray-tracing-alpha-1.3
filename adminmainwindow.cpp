@@ -1,5 +1,9 @@
 #include "adminmainwindow.h"
 #include "ui_adminmainwindow.h"
+#include "aboutwindowinformation.h"
+#include "userprofilewindow.h"
+#include "useroptionwindow.h"
+#include "adminpanelwindow.h"
 
 AdminMainWindow::AdminMainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -35,4 +39,31 @@ AdminMainWindow::AdminMainWindow(QWidget *parent) :
 AdminMainWindow::~AdminMainWindow()
 {
     delete ui;
+}
+
+void AdminMainWindow::on_action_user_profile_triggered()
+{
+    UserProfileWindow *upw = new UserProfileWindow;
+    upw->set_fullname("Администратор");
+    upw->set_group("АСОИУ");
+    upw->set_role("Преподаватель");
+    upw->exec();
+}
+
+void AdminMainWindow::on_action_about_information_triggered()
+{
+    AboutWindowInformation *awi = new AboutWindowInformation;
+    awi->exec();
+}
+
+void AdminMainWindow::on_action_user_option_triggered()
+{
+    UserOptionWindow *uow = new UserOptionWindow;
+    uow->exec();
+}
+
+void AdminMainWindow::on_button_admin_panel_clicked()
+{
+    AdminPanelWindow *apw = new AdminPanelWindow;
+    apw->exec();
 }

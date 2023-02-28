@@ -8,7 +8,19 @@ OptionTestWindow::OptionTestWindow(QWidget *parent) :
     ui(new Ui::OptionTestWindow)
 {
     ui->setupUi(this);
+    ui->datetime_test->setDateTime(QDateTime::currentDateTime());
 
+    set_window_options();
+    ui->label_user->setText("Тест_Студент");
+}
+
+OptionTestWindow::~OptionTestWindow()
+{
+    delete ui;
+}
+
+void OptionTestWindow::set_window_options()
+{
     QPixmap help(":/icons/images/help-button.png");
     QPixmap start(":/icons/images/start-button.png");
     QPixmap cancel(":/icons/images/cancel-button.png");
@@ -28,9 +40,9 @@ OptionTestWindow::OptionTestWindow(QWidget *parent) :
     setPalette(p);
 }
 
-OptionTestWindow::~OptionTestWindow()
+void OptionTestWindow::set_user(QString user)
 {
-    delete ui;
+    ui->label_user->setText(user);
 }
 
 void OptionTestWindow::on_button_start_clicked()
@@ -41,7 +53,7 @@ void OptionTestWindow::on_button_start_clicked()
 
 void OptionTestWindow::on_button_cancel_clicked()
 {
-
+    this->close();
 }
 
 void OptionTestWindow::on_button_help_clicked()

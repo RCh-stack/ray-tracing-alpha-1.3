@@ -22,5 +22,11 @@
         <file>images/admin-demo-button.png</file>
         <file>images/github-button.png</file>
         <file>images/telegram-button.png</file>
+        <file>images/user_icon.png</file>
+        <file>images/option-button.png</file>
+        <file>images/add-user-button.png</file>
+        <file>images/delete-user-button.png</file>
+        <file>images/edit-user-button.png</file>
+        <file>images/edit-lab-button.png</file>
     </qresource>
 </RCC>

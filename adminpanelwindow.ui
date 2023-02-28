@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AdminPanelWindow</class>
+ <widget class="QDialog" name="AdminPanelWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>671</width>
+    <height>277</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Администрирование пользователей | Ray Tracing | Alpha 1.0v</string>
+  </property>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>20</y>
+     <width>71</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Группа:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboBox_users">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>20</y>
+     <width>151</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>Студенты</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Преподаватели</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QPushButton" name="button_add">
+   <property name="geometry">
+    <rect>
+     <x>450</x>
+     <y>50</y>
+     <width>51</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>Добавить нового пользователя</string>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    background-color: rgb(255, 255, 255);
+    border: 2px solid #094065;
+}
+
+QPushButton:pressed {
+    background-color:  rgb(118, 118, 118);
+}
+</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>images/add-user-button.png</normaloff>images/add-user-button.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>36</width>
+     <height>36</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="button_exit">
+   <property name="geometry">
+    <rect>
+     <x>610</x>
+     <y>210</y>
+     <width>51</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>Выйти из панели администратора</string>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    background-color: rgb(255, 255, 255);
+    border: 2px solid #094065;
+}
+
+QPushButton:pressed {
+    background-color:  rgb(118, 118, 118);
+}
+</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>images/exit-button.png</normaloff>images/exit-button.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>36</width>
+     <height>36</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="button_help">
+   <property name="geometry">
+    <rect>
+     <x>620</x>
+     <y>10</y>
+     <width>41</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>Получить справку</string>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    background-color: rgb(255, 255, 255);
+    border: 2px solid #094065;
+}
+
+QPushButton:pressed {
+    background-color:  rgb(118, 118, 118);
+}
+</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>images/help-button.png</normaloff>images/help-button.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>36</width>
+     <height>36</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="button_edit">
+   <property name="geometry">
+    <rect>
+     <x>450</x>
+     <y>130</y>
+     <width>51</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>Изменить информацию о выделенном пользователе</string>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    background-color: rgb(255, 255, 255);
+    border: 2px solid #094065;
+}
+
+QPushButton:pressed {
+    background-color:  rgb(118, 118, 118);
+}
+</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>images/edit-user-button.png</normaloff>images/edit-user-button.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>36</width>
+     <height>36</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="button_delete">
+   <property name="geometry">
+    <rect>
+     <x>450</x>
+     <y>210</y>
+     <width>51</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>Удалить выбранного пользователя</string>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    background-color: rgb(255, 255, 255);
+    border: 2px solid #094065;
+}
+
+QPushButton:pressed {
+    background-color:  rgb(118, 118, 118);
+}
+</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>images/delete-user-button.png</normaloff>images/delete-user-button.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>36</width>
+     <height>36</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QListWidget" name="listWidget">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>50</y>
+     <width>401</width>
+     <height>211</height>
+    </rect>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

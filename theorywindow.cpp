@@ -7,7 +7,18 @@ TheoryWindow::TheoryWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     pages_read = 0;
+    open_file(":/theory_files/files/theory/content.html");
 
+    set_window_options();
+}
+
+TheoryWindow::~TheoryWindow()
+{
+    delete ui;
+}
+
+void TheoryWindow::set_window_options()
+{
     QPixmap leftArrow (":/icons/images/prev-page.png");
     QPixmap rightArrow (":/icons/images/next-page.png");
     QPixmap help(":/icons/images/help-button.png");
@@ -25,13 +36,6 @@ TheoryWindow::TheoryWindow(QWidget *parent) :
     QPalette p = palette();
     p.setBrush(QPalette::Background, bkgnd);
     setPalette(p);
-
-    open_file(":/theory_files/files/theory/content.html");
-}
-
-TheoryWindow::~TheoryWindow()
-{
-    delete ui;
 }
 
 void TheoryWindow::output_table_of_contents(int row_index)
@@ -41,6 +45,10 @@ void TheoryWindow::output_table_of_contents(int row_index)
         open_file(":/theory_files/files/theory/content.html");
     else if(pages_read == 1)
         open_file(":/theory_files/files/theory/first.html");
+    else if(pages_read == 2)
+        open_file(":/theory_files/files/theory/second.html");
+    else if(pages_read == 3)
+        open_file(":/theory_files/files/theory/third.html");
 }
 
 void TheoryWindow::on_button_prev_page_clicked()

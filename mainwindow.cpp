@@ -7,6 +7,8 @@
 #include "practicwindow.h"
 #include "ui_mainwindow.h"
 #include "aboutwindowinformation.h"
+#include "userprofilewindow.h"
+#include "useroptionwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -14,6 +16,16 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    set_window_options();
+}
+
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+
+void MainWindow::set_window_options()
+{
     QPixmap theory (":/icons/images/admin-theory-button.png");
     QPixmap demo(":/icons/images/admin-demo-button.png");
     QPixmap lab (":/icons/images/admin-lab-button.png");
@@ -39,11 +51,6 @@ MainWindow::MainWindow(QWidget *parent) :
     setPalette(p);
 }
 
-MainWindow::~MainWindow()
-{
-    delete ui;
-}
-
 void MainWindow::on_button_theory_clicked()
 {
     TheoryWindow *tw = new TheoryWindow;
@@ -52,7 +59,6 @@ void MainWindow::on_button_theory_clicked()
 
 void MainWindow::on_button_demo_clicked()
 {
-    //DemonstrationWindow *dw = new DemonstrationWindow;
     OptionDemoWindow *dw = new OptionDemoWindow;
     dw->exec();
 }
@@ -60,7 +66,7 @@ void MainWindow::on_button_demo_clicked()
 void MainWindow::on_button_test_clicked()
 {
     OptionTestWindow *tw = new OptionTestWindow;
-    //TestWindow *tw = new TestWindow;
+    tw->set_user("Тест_Студент");
     tw->exec();
 }
 
@@ -74,4 +80,19 @@ void MainWindow::on_action_about_information_triggered()
 {
     AboutWindowInformation *awi = new AboutWindowInformation;
     awi->exec();
+}
+
+void MainWindow::on_action_user_profile_triggered()
+{
+    UserProfileWindow *upw = new UserProfileWindow;
+    upw->set_fullname("Тест_Студент");
+    upw->set_group("ДИПРБ-21/1");
+    upw->set_role("Студент");
+    upw->exec();
+}
+
+void MainWindow::on_action_user_option_triggered()
+{
+    UserOptionWindow *uow = new UserOptionWindow;
+    uow->exec();
 }

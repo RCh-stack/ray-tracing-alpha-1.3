@@ -19,6 +19,8 @@ class AuthorizationWindow : public QDialog
 public:
     explicit AuthorizationWindow(QWidget *parent = 0);
     ~AuthorizationWindow();
+    void user_authorization();
+    void admin_authorization();
 
 private slots:
     void on_button_entry_clicked();
@@ -26,6 +28,10 @@ private slots:
     void on_button_exit_clicked();
 
     void on_button_help_clicked();
+
+    void on_radioButton_user_clicked();
+
+    void on_radioButton_admin_clicked();
 
 private:
     Ui::AuthorizationWindow *ui;

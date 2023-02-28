@@ -17,6 +17,7 @@ class TheoryWindow : public QDialog
 public:
     explicit TheoryWindow(QWidget *parent = 0);
     ~TheoryWindow();
+    void set_window_options();
     void output_table_of_contents(int row_index);
     void open_file(QString path);
 

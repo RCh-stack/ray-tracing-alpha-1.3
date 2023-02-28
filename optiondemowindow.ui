@@ -132,7 +132,7 @@
      <string>Z:</string>
     </property>
    </widget>
-   <widget class="QDoubleSpinBox" name="doubleSpinBox">
+   <widget class="QDoubleSpinBox" name="value1_X">
     <property name="geometry">
      <rect>
       <x>30</x>
@@ -149,8 +149,17 @@
     <property name="styleSheet">
      <string notr="true">color: rgb(0, 0, 0);</string>
     </property>
+    <property name="decimals">
+     <number>1</number>
+    </property>
+    <property name="minimum">
+     <double>-100.000000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>100.000000000000000</double>
+    </property>
    </widget>
-   <widget class="QDoubleSpinBox" name="doubleSpinBox_2">
+   <widget class="QDoubleSpinBox" name="value1_Y">
     <property name="geometry">
      <rect>
       <x>130</x>
@@ -167,8 +176,17 @@
     <property name="styleSheet">
      <string notr="true">color: rgb(0, 0, 0);</string>
     </property>
+    <property name="decimals">
+     <number>1</number>
+    </property>
+    <property name="minimum">
+     <double>-100.000000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>100.000000000000000</double>
+    </property>
    </widget>
-   <widget class="QDoubleSpinBox" name="doubleSpinBox_3">
+   <widget class="QDoubleSpinBox" name="value1_Z">
     <property name="geometry">
      <rect>
       <x>230</x>
@@ -184,6 +202,15 @@
     </property>
     <property name="styleSheet">
      <string notr="true">color: rgb(0, 0, 0);</string>
+    </property>
+    <property name="decimals">
+     <number>1</number>
+    </property>
+    <property name="minimum">
+     <double>-100.000000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>100.000000000000000</double>
     </property>
    </widget>
    <widget class="QLabel" name="label_7">
@@ -204,12 +231,69 @@
      <string>Цвет:</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="comboBox_2">
+   <widget class="QComboBox" name="value1_color">
     <property name="geometry">
      <rect>
       <x>60</x>
       <y>60</y>
-      <width>151</width>
+      <width>131</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(0, 0, 0);
+</string>
+    </property>
+    <item>
+     <property name="text">
+      <string>оливковый</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>красный</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>зеленый</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>синий</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLabel" name="label_27">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>60</y>
+      <width>21</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>R:</string>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="value1_R">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>60</y>
+      <width>62</width>
       <height>22</height>
      </rect>
     </property>
@@ -220,6 +304,9 @@
     </property>
     <property name="styleSheet">
      <string notr="true">color: rgb(0, 0, 0);</string>
+    </property>
+    <property name="decimals">
+     <number>1</number>
     </property>
    </widget>
   </widget>
@@ -297,7 +384,7 @@
      <string>Z:</string>
     </property>
    </widget>
-   <widget class="QDoubleSpinBox" name="doubleSpinBox_4">
+   <widget class="QDoubleSpinBox" name="value2_X">
     <property name="geometry">
      <rect>
       <x>30</x>
@@ -314,8 +401,17 @@
     <property name="styleSheet">
      <string notr="true">color: rgb(0, 0, 0);</string>
     </property>
+    <property name="decimals">
+     <number>1</number>
+    </property>
+    <property name="minimum">
+     <double>-100.000000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>100.000000000000000</double>
+    </property>
    </widget>
-   <widget class="QDoubleSpinBox" name="doubleSpinBox_5">
+   <widget class="QDoubleSpinBox" name="value2_Y">
     <property name="geometry">
      <rect>
       <x>130</x>
@@ -332,8 +428,17 @@
     <property name="styleSheet">
      <string notr="true">color: rgb(0, 0, 0);</string>
     </property>
+    <property name="decimals">
+     <number>1</number>
+    </property>
+    <property name="minimum">
+     <double>-100.000000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>100.000000000000000</double>
+    </property>
    </widget>
-   <widget class="QDoubleSpinBox" name="doubleSpinBox_6">
+   <widget class="QDoubleSpinBox" name="value2_Z">
     <property name="geometry">
      <rect>
       <x>230</x>
@@ -349,6 +454,15 @@
     </property>
     <property name="styleSheet">
      <string notr="true">color: rgb(0, 0, 0);</string>
+    </property>
+    <property name="decimals">
+     <number>1</number>
+    </property>
+    <property name="minimum">
+     <double>-100.000000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>100.000000000000000</double>
     </property>
    </widget>
    <widget class="QLabel" name="label_11">
@@ -369,12 +483,12 @@
      <string>Цвет:</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="comboBox_3">
+   <widget class="QComboBox" name="value2_color">
     <property name="geometry">
      <rect>
       <x>60</x>
       <y>60</y>
-      <width>151</width>
+      <width>131</width>
       <height>22</height>
      </rect>
     </property>
@@ -385,6 +499,65 @@
     </property>
     <property name="styleSheet">
      <string notr="true">color: rgb(0, 0, 0);</string>
+    </property>
+    <item>
+     <property name="text">
+      <string>оливковый</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>красный</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>зеленый </string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>синий</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLabel" name="label_28">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>60</y>
+      <width>21</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>R:</string>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="value2_R">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>60</y>
+      <width>62</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(0, 0, 0);</string>
+    </property>
+    <property name="decimals">
+     <number>1</number>
     </property>
    </widget>
   </widget>
@@ -462,7 +635,7 @@
      <string>Z:</string>
     </property>
    </widget>
-   <widget class="QDoubleSpinBox" name="doubleSpinBox_7">
+   <widget class="QDoubleSpinBox" name="value3_X">
     <property name="geometry">
      <rect>
       <x>30</x>
@@ -479,8 +652,17 @@
     <property name="styleSheet">
      <string notr="true">color: rgb(0, 0, 0);</string>
     </property>
+    <property name="decimals">
+     <number>1</number>
+    </property>
+    <property name="minimum">
+     <double>-100.000000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>100.000000000000000</double>
+    </property>
    </widget>
-   <widget class="QDoubleSpinBox" name="doubleSpinBox_8">
+   <widget class="QDoubleSpinBox" name="value3_Y">
     <property name="geometry">
      <rect>
       <x>130</x>
@@ -497,8 +679,17 @@
     <property name="styleSheet">
      <string notr="true">color: rgb(0, 0, 0);</string>
     </property>
+    <property name="decimals">
+     <number>1</number>
+    </property>
+    <property name="minimum">
+     <double>-100.000000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>100.000000000000000</double>
+    </property>
    </widget>
-   <widget class="QDoubleSpinBox" name="doubleSpinBox_9">
+   <widget class="QDoubleSpinBox" name="value3_Z">
     <property name="geometry">
      <rect>
       <x>230</x>
@@ -514,6 +705,15 @@
     </property>
     <property name="styleSheet">
      <string notr="true">color: rgb(0, 0, 0);</string>
+    </property>
+    <property name="decimals">
+     <number>1</number>
+    </property>
+    <property name="minimum">
+     <double>-100.000000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>100.000000000000000</double>
     </property>
    </widget>
    <widget class="QLabel" name="label_15">
@@ -534,12 +734,12 @@
      <string>Цвет:</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="comboBox_4">
+   <widget class="QComboBox" name="value3_color">
     <property name="geometry">
      <rect>
       <x>60</x>
       <y>60</y>
-      <width>151</width>
+      <width>131</width>
       <height>22</height>
      </rect>
     </property>
@@ -550,6 +750,65 @@
     </property>
     <property name="styleSheet">
      <string notr="true">color: rgb(0, 0, 0);</string>
+    </property>
+    <item>
+     <property name="text">
+      <string>оливковый</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>красный</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>зеленый</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>синий</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLabel" name="label_26">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>60</y>
+      <width>21</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>R:</string>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="value3_R">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>60</y>
+      <width>62</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(0, 0, 0);</string>
+    </property>
+    <property name="decimals">
+     <number>1</number>
     </property>
    </widget>
   </widget>
@@ -627,7 +886,7 @@
      <string>Z:</string>
     </property>
    </widget>
-   <widget class="QDoubleSpinBox" name="doubleSpinBox_10">
+   <widget class="QDoubleSpinBox" name="value4_X">
     <property name="geometry">
      <rect>
       <x>30</x>
@@ -644,8 +903,17 @@
     <property name="styleSheet">
      <string notr="true">color: rgb(0, 0, 0);</string>
     </property>
+    <property name="decimals">
+     <number>1</number>
+    </property>
+    <property name="minimum">
+     <double>-100.000000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>100.000000000000000</double>
+    </property>
    </widget>
-   <widget class="QDoubleSpinBox" name="doubleSpinBox_11">
+   <widget class="QDoubleSpinBox" name="value4_Y">
     <property name="geometry">
      <rect>
       <x>130</x>
@@ -662,8 +930,17 @@
     <property name="styleSheet">
      <string notr="true">color: rgb(0, 0, 0);</string>
     </property>
+    <property name="decimals">
+     <number>1</number>
+    </property>
+    <property name="minimum">
+     <double>-100.000000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>100.000000000000000</double>
+    </property>
    </widget>
-   <widget class="QDoubleSpinBox" name="doubleSpinBox_12">
+   <widget class="QDoubleSpinBox" name="value4_Z">
     <property name="geometry">
      <rect>
       <x>230</x>
@@ -679,6 +956,15 @@
     </property>
     <property name="styleSheet">
      <string notr="true">color: rgb(0, 0, 0);</string>
+    </property>
+    <property name="decimals">
+     <number>1</number>
+    </property>
+    <property name="minimum">
+     <double>-100.000000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>100.000000000000000</double>
     </property>
    </widget>
    <widget class="QLabel" name="label_19">
@@ -699,12 +985,12 @@
      <string>Цвет:</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="comboBox_5">
+   <widget class="QComboBox" name="value4_color">
     <property name="geometry">
      <rect>
       <x>60</x>
       <y>60</y>
-      <width>151</width>
+      <width>131</width>
       <height>22</height>
      </rect>
     </property>
@@ -716,123 +1002,32 @@
     <property name="styleSheet">
      <string notr="true">color: rgb(0, 0, 0);</string>
     </property>
+    <item>
+     <property name="text">
+      <string>оливковый</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>красный</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>зеленый</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>синий</string>
+     </property>
+    </item>
    </widget>
-  </widget>
-  <widget class="QGroupBox" name="groupBox_5">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>300</y>
-     <width>321</width>
-     <height>101</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>8</pointsize>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(255, 255, 255);</string>
-   </property>
-   <property name="title">
-    <string>Сфера 5</string>
-   </property>
-   <widget class="QLabel" name="label_20">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>30</y>
-      <width>21</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>8</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>X:</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_21">
-    <property name="geometry">
-     <rect>
-      <x>110</x>
-      <y>30</y>
-      <width>21</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>8</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Y:</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_22">
-    <property name="geometry">
-     <rect>
-      <x>210</x>
-      <y>30</y>
-      <width>21</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>8</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Z:</string>
-    </property>
-   </widget>
-   <widget class="QDoubleSpinBox" name="doubleSpinBox_13">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>30</y>
-      <width>62</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>8</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(0, 0, 0);</string>
-    </property>
-   </widget>
-   <widget class="QDoubleSpinBox" name="doubleSpinBox_14">
-    <property name="geometry">
-     <rect>
-      <x>130</x>
-      <y>30</y>
-      <width>62</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>8</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(0, 0, 0);</string>
-    </property>
-   </widget>
-   <widget class="QDoubleSpinBox" name="doubleSpinBox_15">
+   <widget class="QDoubleSpinBox" name="value4_R">
     <property name="geometry">
      <rect>
       <x>230</x>
-      <y>30</y>
+      <y>60</y>
       <width>62</width>
       <height>22</height>
      </rect>
@@ -845,13 +1040,16 @@
     <property name="styleSheet">
      <string notr="true">color: rgb(0, 0, 0);</string>
     </property>
+    <property name="decimals">
+     <number>1</number>
+    </property>
    </widget>
-   <widget class="QLabel" name="label_23">
+   <widget class="QLabel" name="label_29">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>210</x>
       <y>60</y>
-      <width>51</width>
+      <width>21</width>
       <height>21</height>
      </rect>
     </property>
@@ -861,25 +1059,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Цвет:</string>
-    </property>
-   </widget>
-   <widget class="QComboBox" name="comboBox_6">
-    <property name="geometry">
-     <rect>
-      <x>60</x>
-      <y>60</y>
-      <width>151</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>8</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(0, 0, 0);</string>
+     <string>R:</string>
     </property>
    </widget>
   </widget>
@@ -939,7 +1119,7 @@
      <string>Формат выводимой информации:</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="comboBox_8">
+   <widget class="QComboBox" name="other_format">
     <property name="geometry">
      <rect>
       <x>220</x>
@@ -956,18 +1136,47 @@
     <property name="styleSheet">
      <string notr="true">color: rgb(0, 0, 0);</string>
     </property>
+    <item>
+     <property name="text">
+      <string>Без пояснений</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Подробное описание с кодом на C++</string>
+     </property>
+    </item>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="other_path">
     <property name="geometry">
      <rect>
       <x>200</x>
       <y>40</y>
-      <width>461</width>
+      <width>434</width>
       <height>22</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true">color: rgb(0, 0, 0);</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="button_path">
+    <property name="geometry">
+     <rect>
+      <x>640</x>
+      <y>40</y>
+      <width>31</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>Выбрать путь для сохранения файла</string>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(0, 0, 0);</string>
+    </property>
+    <property name="text">
+     <string>...</string>
     </property>
    </widget>
   </widget>
@@ -991,7 +1200,7 @@
    <property name="title">
     <string>Общие</string>
    </property>
-   <widget class="QComboBox" name="comboBox">
+   <widget class="QComboBox" name="global_color">
     <property name="geometry">
      <rect>
       <x>90</x>
@@ -1008,6 +1217,31 @@
     <property name="styleSheet">
      <string notr="true">color: rgb(0, 0, 0);</string>
     </property>
+    <item>
+     <property name="text">
+      <string>голубой</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>зеленый (светлый)</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>зеленый (темный)</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>синий (светлый)</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>синий (темный)</string>
+     </property>
+    </item>
    </widget>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
@@ -1042,10 +1276,10 @@
      </font>
     </property>
     <property name="text">
-     <string>Использовать отражения</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Добавлять отражения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkBox_2">
+   <widget class="QCheckBox" name="global_is_reflex">
     <property name="geometry">
      <rect>
       <x>220</x>
@@ -1083,6 +1317,9 @@
     <font>
      <pointsize>9</pointsize>
     </font>
+   </property>
+   <property name="toolTip">
+    <string>Начать демонстрацию</string>
    </property>
    <property name="styleSheet">
     <string notr="true">QPushButton {
@@ -1123,6 +1360,9 @@ QPushButton:pressed {
      <pointsize>9</pointsize>
     </font>
    </property>
+   <property name="toolTip">
+    <string>Закрыть окно</string>
+   </property>
    <property name="styleSheet">
     <string notr="true">QPushButton {
     background-color: rgb(255, 255, 255);
@@ -1143,8 +1383,8 @@ QPushButton:pressed {
    </property>
    <property name="iconSize">
     <size>
-     <width>48</width>
-     <height>48</height>
+     <width>36</width>
+     <height>36</height>
     </size>
    </property>
   </widget>
@@ -1156,6 +1396,9 @@ QPushButton:pressed {
      <width>41</width>
      <height>41</height>
     </rect>
+   </property>
+   <property name="toolTip">
+    <string>Получить справку</string>
    </property>
    <property name="styleSheet">
     <string notr="true">QPushButton {
@@ -1181,6 +1424,183 @@ QPushButton:pressed {
      <height>64</height>
     </size>
    </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_5">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>300</y>
+     <width>321</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>8</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="title">
+    <string>Источник освещения</string>
+   </property>
+   <widget class="QLabel" name="label_20">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>21</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>X:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_21">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>30</y>
+      <width>21</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Y:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_22">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>30</y>
+      <width>21</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Z:</string>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="light1_X">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>30</y>
+      <width>62</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(0, 0, 0);</string>
+    </property>
+    <property name="decimals">
+     <number>1</number>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="light1_Y">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>30</y>
+      <width>62</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(0, 0, 0);</string>
+    </property>
+    <property name="decimals">
+     <number>1</number>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="light1_Z">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>30</y>
+      <width>62</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(0, 0, 0);</string>
+    </property>
+    <property name="decimals">
+     <number>1</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_23">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>60</y>
+      <width>21</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>D:</string>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="light1_D">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>60</y>
+      <width>62</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(0, 0, 0);</string>
+    </property>
+    <property name="decimals">
+     <number>1</number>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>

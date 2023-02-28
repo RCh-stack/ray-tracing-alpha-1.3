@@ -1,0 +1,44 @@
+﻿<html>
+<body>
+<p><font size = '7' face = 'Times New Roman'><strong>Этап 1. Создание и добавление сфер</strong></font></p>
+<p><font size = '5' face = 'Times New Roman'> Для начала создаем трёхмерный вектор с центром сферы и скаляр, описывающий радиус: <br></font></p>
+<p><font size = '4' face = 'Century Gothic'>
+struct Sphere <br>
+{ <br>
+&nbsp;&nbsp;&nbsp; Vec3f center; <br>
+&nbsp;&nbsp;&nbsp; float radius; <br>
+} <br>
+</font></p>
+<p><font size = '5' face = 'Times New Roman'>Далее опишем функцию, которая позволяет проверить, пересекается ли заданный луч
+(исходящий из orig в направлении dir) с нашей сферой: <br> </font></p>
+<p><font size = '4' face = 'Century Gothic'>
+bool rayCrossingTest(const Vec3f &orig, const Vec3f &dir, float &t0) const <br>
+{<br>
+&nbsp;&nbsp;&nbsp;	Vec3f L = center - orig;<br>
+&nbsp;&nbsp;&nbsp;  float tca = L * dir;<br>
+&nbsp;&nbsp;&nbsp;  float d2 = L * L - tca * tca;<br>
+&nbsp;&nbsp;&nbsp;	if (d2 > radius * radius)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		return false;<br>
+&nbsp;&nbsp;&nbsp;	float thc = sqrtf(radius * radius - d2);<br>
+&nbsp;&nbsp;&nbsp;	t0 = tca - thc;<br>
+&nbsp;&nbsp;&nbsp;  float t1 = tca + thc;<br>
+<br>
+&nbsp;&nbsp;&nbsp;  if (t0 &lt; 0) <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		t0 = t1;<br>
+&nbsp;&nbsp;&nbsp;  if (t0 &lt; 0) <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		return false;<br>
+<br>
+&nbsp;&nbsp;&nbsp;  return true;<br>
+}<br>
+</font></p>
+<p><font size = '5' face = 'Times New Roman'> Создадим еще одну структуру для создания материала кастомизации сферы: <br></font></p>
+<p><font size = '4' face = 'Century Gothic'>
+struct Material <br>
+{<br>
+&nbsp;&nbsp;&nbsp;    Material(const Vec3f &color) : diffuse_color(color) {}<br>
+&nbsp;&nbsp;&nbsp;    Material() : diffuse_color() {}<br>
+&nbsp;&nbsp;&nbsp;    Vec3f diffuse_color;<br>
+};<br>
+</font></p>
+</body>
+</html>

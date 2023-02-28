@@ -26,7 +26,14 @@ SOURCES += main.cpp\
     testwindow.cpp \
     practicwindow.cpp \
     adminmainwindow.cpp \
-    aboutwindowinformation.cpp
+    aboutwindowinformation.cpp \
+    userprofilewindow.cpp \
+    useroptionwindow.cpp \
+    adminpanelwindow.cpp \
+    adduserwindow.cpp \
+    edituserwindow.cpp \
+    addpracticwork.cpp \
+    editpracticwork.cpp
 
 HEADERS  += mainwindow.h \
     authorizationwindow.h \
@@ -41,7 +48,14 @@ HEADERS  += mainwindow.h \
     testwindow.h \
     practicwindow.h \
     adminmainwindow.h \
-    aboutwindowinformation.h
+    aboutwindowinformation.h \
+    userprofilewindow.h \
+    useroptionwindow.h \
+    adminpanelwindow.h \
+    adduserwindow.h \
+    edituserwindow.h \
+    addpracticwork.h \
+    editpracticwork.h
 
 FORMS    += mainwindow.ui \
     authorizationwindow.ui \
@@ -52,7 +66,14 @@ FORMS    += mainwindow.ui \
     testwindow.ui \
     practicwindow.ui \
     adminmainwindow.ui \
-    aboutwindowinformation.ui
+    aboutwindowinformation.ui \
+    userprofilewindow.ui \
+    useroptionwindow.ui \
+    adminpanelwindow.ui \
+    adduserwindow.ui \
+    edituserwindow.ui \
+    addpracticwork.ui \
+    editpracticwork.ui
 
 RESOURCES += \
     images.qrc \

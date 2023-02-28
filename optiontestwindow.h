@@ -15,6 +15,9 @@ public:
     explicit OptionTestWindow(QWidget *parent = 0);
     ~OptionTestWindow();
 
+    void set_window_options();
+    void set_user(QString user);
+
 private slots:
     void on_button_start_clicked();
 

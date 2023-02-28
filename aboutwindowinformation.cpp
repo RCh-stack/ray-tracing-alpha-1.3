@@ -39,7 +39,7 @@ void AboutWindowInformation::on_button_close_clicked()
 
 void AboutWindowInformation::on_button_github_clicked()
 {
-    QDesktopServices::openUrl(QUrl("https://github.com/RCh-stack/ray-tracing-mvp-0.1"));
+    QDesktopServices::openUrl(QUrl("https://github.com/RCh-stack/ray-tracing-alpha-1.0"));
 }
 
 void AboutWindowInformation::on_button_telegram_clicked()
