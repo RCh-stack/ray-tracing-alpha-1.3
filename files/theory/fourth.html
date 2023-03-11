@@ -1,0 +1,21 @@
+<html>
+<body>
+<p><font size = '10' face = 'Times New Roman'><strong>Уравнение сферы</strong></font></p>
+<p><font size = '5' face = 'Times New Roman'>Теперь нам нужен объект, чтобы лучам было с чем столкнуться. Для строительных элементов сцен мы можем 
+взять любой геометрический примитив. Для трассировки лучей мы воспользуемся сферами, потому что ими проще управлять через уравнения. <br><br>
+Сфера — это множество точек, пролегающих на равном расстоянии от некоторой заданной точки. Это расстояние называется <i>радиусом</i> сферы. 
+На рис. 2.3 показана сфера, определенная по ее <i>центру C</i> и радиусу <i>r</i>.
+<center><img src = "C:/Program Files (x86)/Qt Project/RayTracing/files/theory/img/2.3.png"></center>
+<p><font size = '5' face = 'Times New Roman'><center><strong>Рис. 2.3.</strong> Сфера, определенная по ее центру и радиусу</center></font></p>
+<p><font size = '5' face = 'Times New Roman'>Согласно вышеприведенному определению, если <i>C</i> будет центром, а <i>r</i> — радиусом сферы, точки <i>P</i> на поверхности 
+этой сферы должны удовлетворять такому уравнению: <br>
+<center>Расстояние(<i>P</i>, <i>C</i>) = <i>r</i>.</center><br>
+Расстояние между <i>P</i> и <i>С</i> — это длина вектора от <i>P</i> к <i>C</i>: <br>
+<center>|<i>P</i> – <i>C</i>| = <i>r</i>.</center><br>
+Длина вектора |V| — это квадратный корень из его скалярного произведения с самим собой (<i>V</i>,<i>V</i>): </font></p>
+<center><img src = "C:/Program Files (x86)/Qt Project/RayTracing/files/theory/img/formula_2.1.png"></center>
+<p><font size = '5' face = 'Times New Roman'>Чтобы избавиться от квадратного корня, возведем обе стороны в квадрат: </font></p>
+<center><img src = "C:/Program Files (x86)/Qt Project/RayTracing/files/theory/img/formula_2.2.png"></center>
+<p><font size = '5' face = 'Times New Roman'>Все эти формулировки уравнения равнозначны, но с последней работать будет удобнее.</font></p>
+</body>
+</html>

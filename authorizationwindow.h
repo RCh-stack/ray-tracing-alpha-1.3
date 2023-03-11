@@ -19,6 +19,8 @@ class AuthorizationWindow : public QDialog
 public:
     explicit AuthorizationWindow(QWidget *parent = 0);
     ~AuthorizationWindow();
+
+    void set_window_options();
     void user_authorization();
     void admin_authorization();
 
@@ -32,6 +34,10 @@ private slots:
     void on_radioButton_user_clicked();
 
     void on_radioButton_admin_clicked();
+
+    void on_button_show_password_pressed();
+
+    void on_button_show_password_released();
 
 private:
     Ui::AuthorizationWindow *ui;

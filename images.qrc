@@ -28,5 +28,6 @@
         <file>images/delete-user-button.png</file>
         <file>images/edit-user-button.png</file>
         <file>images/edit-lab-button.png</file>
+        <file>images/show-password-button.png</file>
     </qresource>
 </RCC>

@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Администрирование пользователей | Ray Tracing | Alpha 1.0v</string>
+   <string>Администрирование пользователей | Ray Tracing | Alpha 1.1v</string>
   </property>
   <widget class="QLabel" name="label">
    <property name="geometry">

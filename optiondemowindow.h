@@ -20,6 +20,11 @@ public:
     void set_default_settings_mode();
     void set_users_settings_mode();
 
+    // 1.1 release
+    void set_default_value();
+    void set_default_color();
+    void set_default_light();
+
 private slots:
     void on_button_start_clicked();
 

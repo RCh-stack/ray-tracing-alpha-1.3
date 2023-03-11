@@ -6,8 +6,19 @@ DemonstrationWindow::DemonstrationWindow(QWidget *parent) :
     ui(new Ui::DemonstrationWindow)
 {
     ui->setupUi(this);
+    set_window_options();
+    step = 0, width = 1048, height = 498;
+    ui->button_next_step->setEnabled(0);
+    ui->button_prev_step->setEnabled(0);
+}
 
-    step = 0;
+DemonstrationWindow::~DemonstrationWindow()
+{
+    delete ui;
+}
+
+void DemonstrationWindow::set_window_options()
+{
     QPixmap start (":/icons/images/start-button.png");
     QPixmap leftArrow (":/icons/images/prev-page.png");
     QPixmap rightArrow (":/icons/images/next-page.png");
@@ -30,9 +41,65 @@ DemonstrationWindow::DemonstrationWindow(QWidget *parent) :
     setPalette(p);
 }
 
-DemonstrationWindow::~DemonstrationWindow()
+// 1.1
+void DemonstrationWindow::open_and_output_image()
 {
-    delete ui;
+    QGraphicsScene *scene = new QGraphicsScene();
+    QPixmap image("C:/Program Files (x86)/Qt Project/RayTracing/out.ppm");
+    scene->addPixmap(image);
+    ui->view_demo->setScene(scene);
+    ui->view_demo->showFullScreen();
+}
+
+// 1.1
+Vec3f DemonstrationWindow::get_background_color()
+{
+    return id_background_color == 0 ? Vec3f(0.2, 0.7, 0.8) :
+              id_background_color == 1 ? Vec3f(0.3, 0.9, 0.7) :
+              id_background_color == 2 ? Vec3f(0.2, 0.7, 0.7) :
+              id_background_color == 3 ? Vec3f(0.2, 0.6, 0.9) : Vec3f(0.2, 0.5, 0.8);
+}
+
+// 1.1
+Vec3f DemonstrationWindow::get_sphere_color(int id_color)
+{
+    return id_color == 0 ? Vec3f(0.4, 0.4, 0.3) :
+              id_color == 1 ? Vec3f(0.3, 0.1, 0.1) : Vec3f(0.2, 0.2, 0.2);
+}
+
+// 1.1
+Vec2f DemonstrationWindow::get_albedo_2f(int id_color)
+{
+    return id_color == 0 ? Vec2f(0.6, 0.3) :
+              id_color == 1 ? Vec2f(0.9, 0.1) : Vec2f(0.5, 0.5);
+}
+
+// 1.1
+Vec3f DemonstrationWindow::get_albedo_3f(int id_color)
+{
+    return id_color == 0 ? Vec3f(0.6, 0.3, 0.1) :
+              id_color == 1 ? Vec3f(0.9, 0.1, 0.0) : Vec3f(0.5, 0.5, 0.2);
+}
+
+// 1.1
+float DemonstrationWindow::get_specular_exponent(int id_color)
+{
+    return id_color == 0 ? 50. :
+              id_color == 1 ? 10. : 60.;
+}
+
+// 1.1
+void DemonstrationWindow::set_enabled_button(int numStep)
+{
+    if(numStep == 1)
+        ui->button_prev_step->setEnabled(0);
+    else
+        ui->button_prev_step->setEnabled(1);
+
+    if(numStep == 5)
+        ui->button_next_step->setEnabled(0);
+    else
+        ui->button_next_step->setEnabled(1);
 }
 
 void DemonstrationWindow::open_and_output_htmlFile(QString path)
@@ -98,23 +165,22 @@ Vec3f reflect(const Vec3f &I, const Vec3f &N)
 // -- Vec3f(0.2, 0.6, 0.9);  - синий светлее
 // -- Vec3f(0.2, 0.7, 0.7);  - зеленый (болотный)
 // -- Vec3f(0.3, 0.9, 0.7);  - зеленый (светлее)
-Vec3f cast_ray(const Vec3f &orig, const Vec3f &dir, const std::vector<Sphere> &spheres)
+Vec3f DemonstrationWindow::cast_ray(const Vec3f &orig, const Vec3f &dir, const std::vector<Sphere> &spheres)
 {
     Vec3f point, N;
     Material material;
     if (!scene_intersect(orig, dir, spheres, point, N, material))
-    {
-        return Vec3f(0.3, 0.9, 0.7); // background color
-    }
+        return get_background_color(); // background color
+
     return material.diffuse_color;
 }
 
-Vec3f cast_ray(const Vec3f &orig, const Vec3f &dir, const std::vector<Sphere> &spheres, const std:: vector<Light> &lights)
+Vec3f DemonstrationWindow::cast_ray(const Vec3f &orig, const Vec3f &dir, const std::vector<Sphere> &spheres, const std:: vector<Light> &lights)
 {
     Vec3f point, N;
     Material material;
     if (!scene_intersect(orig, dir, spheres, point, N, material))
-        return Vec3f(0.3, 0.9, 0.7); // background color
+        return get_background_color(); // background color
 
     float diffuse_light_intensity = 0;
     for (size_t i = 0; i < lights.size(); i++)
@@ -126,12 +192,12 @@ Vec3f cast_ray(const Vec3f &orig, const Vec3f &dir, const std::vector<Sphere> &s
     return material.diffuse_color * diffuse_light_intensity;
 }
 
-Vec3f cast_ray_light(const Vec3f &orig, const Vec3f &dir, const std:: vector<Sphere> &spheres, const std::vector<Light> &lights)
+Vec3f DemonstrationWindow::cast_ray_light(const Vec3f &orig, const Vec3f &dir, const std:: vector<Sphere> &spheres, const std::vector<Light> &lights)
 {
     Vec3f point, N;
     Material material;
     if (!scene_intersect(orig, dir, spheres, point, N, material))
-        return Vec3f(0.3, 0.9, 0.7); // background color
+        return get_background_color(); // background color
 
     float diffuse_light_intensity = 0, specular_light_intensity = 0;
     for (size_t i = 0; i < lights.size(); i++)
@@ -144,12 +210,12 @@ Vec3f cast_ray_light(const Vec3f &orig, const Vec3f &dir, const std:: vector<Sph
     return material.diffuse_color * diffuse_light_intensity * material.albedo[0] + Vec3f(1., 1., 1.) * specular_light_intensity * material.albedo[1];
 }
 
-Vec3f cast_ray_light2(const Vec3f &orig, const Vec3f &dir, const std::vector<Sphere> &spheres, const std:: vector<Light> &lights)
+Vec3f DemonstrationWindow::cast_ray_light2(const Vec3f &orig, const Vec3f &dir, const std::vector<Sphere> &spheres, const std:: vector<Light> &lights)
 {
     Vec3f point, N;
     Material material;
     if (!scene_intersect(orig, dir, spheres, point, N, material))
-        return Vec3f(0.3, 0.9, 0.7); // background color
+        return get_background_color(); // background color
 
     float diffuse_light_intensity = 0, specular_light_intensity = 0;
     for (size_t i = 0; i < lights.size(); i++)
@@ -169,12 +235,12 @@ Vec3f cast_ray_light2(const Vec3f &orig, const Vec3f &dir, const std::vector<Sph
     return material.diffuse_color * diffuse_light_intensity * material.albedo[0] + Vec3f(1., 1., 1.) * specular_light_intensity * material.albedo[1];
 }
 
-Vec3f cast_ray_light3(const Vec3f &orig, const Vec3f &dir, const std:: vector<Sphere> &spheres, const std::vector<Light> &lights, size_t depth = 0)
+Vec3f DemonstrationWindow::cast_ray_light3(const Vec3f &orig, const Vec3f &dir, const std:: vector<Sphere> &spheres, const std::vector<Light> &lights, size_t depth)
 {
     Vec3f point, N;
     Material3f material;
     if (depth > 4 || !scene_intersect3f(orig, dir, spheres, point, N, material))
-        return Vec3f(0.3, 0.9, 0.7); // background color
+        return get_background_color(); // background color
 
     Vec3f reflect_dir = reflect(dir, N).normalize();
     Vec3f reflect_orig = reflect_dir * N < 0 ? point - N * 1e-3 : point + N * 1e-3;
@@ -202,8 +268,6 @@ Vec3f cast_ray_light3(const Vec3f &orig, const Vec3f &dir, const std:: vector<Sp
 
 void DemonstrationWindow::start_render(const std::vector<Sphere> &spheres)
 {
-    const int width = 800;
-    const int height = 600;
     const int fov = 1.5;
 
     std::vector<Vec3f> framebuffer(width * height);
@@ -233,8 +297,6 @@ void DemonstrationWindow::start_render(const std::vector<Sphere> &spheres)
 
 void DemonstrationWindow::start_render(const std:: vector<Sphere> &spheres, const std::vector<Light> &lights)
 {
-    const int width = 800;
-    const int height = 600;
     const int fov = 1.5;
 
     std::vector<Vec3f> framebuffer(width * height);
@@ -264,8 +326,6 @@ void DemonstrationWindow::start_render(const std:: vector<Sphere> &spheres, cons
 
 void DemonstrationWindow::start_render_light(const std:: vector<Sphere> &spheres, const std::vector<Light> &lights)
 {
-    const int width = 800;
-    const int height = 600;
     const int fov = 1.5;
 
     std::vector<Vec3f> framebuffer(width * height);
@@ -289,7 +349,7 @@ void DemonstrationWindow::start_render_light(const std:: vector<Sphere> &spheres
         float max = std:: max(c[0], std:: max(c[1], c[2]));
         if (max > 1) c = c * (1./max);
         for (size_t j = 0; j < 3; j++)
-        ofs << (char)(255 * std:: max(0.f, std:: min(1.f, framebuffer[i][j])));
+            ofs << (char)(255 * std:: max(0.f, std:: min(1.f, framebuffer[i][j])));
     }
 
     ofs.close();
@@ -297,8 +357,6 @@ void DemonstrationWindow::start_render_light(const std:: vector<Sphere> &spheres
 
 void DemonstrationWindow::start_render_light2(const std:: vector<Sphere> &spheres, const std::vector<Light> &lights)
 {
-    const int width = 800;
-    const int height = 600;
     const int fov = 1.5;
 
     std::vector<Vec3f> framebuffer(width * height);
@@ -331,8 +389,6 @@ void DemonstrationWindow::start_render_light2(const std:: vector<Sphere> &sphere
 
 void DemonstrationWindow::start_render_light3(const std::vector<Sphere> &spheres, const std::vector<Light> &lights)
 {
-    const int width = 800;
-    const int height = 600;
     const int fov = 1.5;
 
     std::vector<Vec3f> framebuffer(width * height);
@@ -363,211 +419,160 @@ void DemonstrationWindow::start_render_light3(const std::vector<Sphere> &spheres
     ofs. close();
 }
 
+// 1.1
+void DemonstrationWindow::initialize_scene_elements()
+{
+    spheres.clear();
+    lights.clear();
+
+    if(step == 1 || step == 2)
+        initialize_standard_objects();
+    else if(step == 3 || step == 4)
+        initialize_objects_with_albedo2f();
+    else
+        initialize_objects_with_albedo3f();
+}
+
+// 1.1
+void DemonstrationWindow::initialize_standard_objects()
+{
+    Material firstSphere(get_sphere_color(idFirstSphereColor));
+    Material secondSphere(get_sphere_color(idSecondSphereColor));
+    Material thirdSphere(get_sphere_color(idThirdSphereColor));
+    Material fourthSphere(get_sphere_color(idFourthSphereColor));
+
+    spheres.push_back(Sphere(Vec3f(get_x(0), get_y(0), get_z(0)), get_radius(0), firstSphere));
+    spheres.push_back(Sphere(Vec3f(get_x(1), get_y(1), get_z(1)), get_radius(1), secondSphere));
+    spheres.push_back(Sphere(Vec3f(get_x(2), get_y(2), get_z(2)), get_radius(2), thirdSphere));
+    spheres.push_back(Sphere(Vec3f(get_x(3), get_y(3), get_z(3)), get_radius(3), fourthSphere));
+
+    lights.push_back(Light(Vec3f(get_x_ligth(0), get_y_ligth(0), get_z_ligth(0)), get_d_ligth(0)));
+}
+
+// 1.1
+void DemonstrationWindow::initialize_objects_with_albedo2f()
+{
+    Material firstSphere(get_albedo_2f(idFirstSphereColor), get_sphere_color(idFirstSphereColor), get_specular_exponent(idFirstSphereColor));
+    Material secondSphere(get_albedo_2f(idSecondSphereColor), get_sphere_color(idSecondSphereColor), get_specular_exponent(idSecondSphereColor));
+    Material thirdSphere(get_albedo_2f(idThirdSphereColor), get_sphere_color(idThirdSphereColor), get_specular_exponent(idThirdSphereColor));
+    Material fourthSphere(get_albedo_2f(idFourthSphereColor), get_sphere_color(idFourthSphereColor), get_specular_exponent(idFourthSphereColor));
+
+    spheres.push_back(Sphere(Vec3f(get_x(0), get_y(0), get_z(0)), get_radius(0), firstSphere));
+    spheres.push_back(Sphere(Vec3f(get_x(1), get_y(1), get_z(1)), get_radius(1), secondSphere));
+    spheres.push_back(Sphere(Vec3f(get_x(2), get_y(2), get_z(2)), get_radius(2), thirdSphere));
+    spheres.push_back(Sphere(Vec3f(get_x(3), get_y(3), get_z(3)), get_radius(3), fourthSphere));
+
+    lights.push_back(Light(Vec3f(get_x_ligth(0), get_y_ligth(0), get_z_ligth(0)), get_d_ligth(0)));
+    lights.push_back(Light(Vec3f(get_x_ligth(1), get_y_ligth(1), get_z_ligth(1)), get_d_ligth(1)));
+    lights.push_back(Light(Vec3f(get_x_ligth(2), get_y_ligth(2), get_z_ligth(2)), get_d_ligth(2)));
+}
+
+// 1.1
+void DemonstrationWindow::initialize_objects_with_albedo3f()
+{
+    Material3f firstSphere(get_albedo_3f(idFirstSphereColor), get_sphere_color(idFirstSphereColor), get_specular_exponent(idFirstSphereColor));
+    Material3f thirdSphere(get_albedo_3f(idThirdSphereColor), get_sphere_color(idThirdSphereColor), get_specular_exponent(idThirdSphereColor));
+    Material3f mirror(Vec3f(0.0, 10.0, 0.8), Vec3f(1.0, 1.0, 1.0), 1425.); // 2 and 4 - зеркальные
+
+    spheres.push_back(Sphere(Vec3f(get_x(0), get_y(0), get_z(0)), get_radius(0), firstSphere));
+    spheres.push_back(Sphere(Vec3f(get_x(1), get_y(1), get_z(1)), get_radius(1), mirror));
+    spheres.push_back(Sphere(Vec3f(get_x(2), get_y(2), get_z(2)), get_radius(2), thirdSphere));
+    spheres.push_back(Sphere(Vec3f(get_x(3), get_y(3), get_z(3)), get_radius(3), mirror));
+
+    lights.push_back(Light(Vec3f(get_x_ligth(0), get_y_ligth(0), get_z_ligth(0)), get_d_ligth(0)));
+    lights.push_back(Light(Vec3f(get_x_ligth(1), get_y_ligth(1), get_z_ligth(1)), get_d_ligth(1)));
+    lights.push_back(Light(Vec3f(get_x_ligth(2), get_y_ligth(2), get_z_ligth(2)), get_d_ligth(2)));
+}
+
 void DemonstrationWindow::on_button_start_demo_clicked()
 {
     step = 1; // -- номер шага --
+    // -- вызов функции --
     open_and_output_htmlFile(":/demo_files/files/demo/step_first.html");
-
-    Material ivory(Vec3f(0.4, 0.4, 0.3));
-    Material red_rubber(Vec3f(0.3, 0.1, 0.1));
-
-    std::vector<Sphere> spheres;
-    spheres.push_back(Sphere(Vec3f(-3, 0, -16), 2, ivory));
-    spheres.push_back(Sphere(Vec3f(-1.0, -1.5, -12), 2, red_rubber));
-    spheres.push_back(Sphere(Vec3f( 1.5, -0.5, -18), 3, red_rubber));
-    spheres.push_back(Sphere(Vec3f( 7, 5, -18), 4, ivory));
-
+    initialize_scene_elements();
     start_render(spheres);
-
-    QGraphicsScene *scene = new QGraphicsScene();
-    QPixmap image("C:/Program Files (x86)/Qt Project/RayTracing/out.ppm");
-    scene->addPixmap(image);
-    ui->view_demo->setScene(scene);
-    ui->view_demo->showFullScreen(); // -- отобразить на экране --
+    open_and_output_image();
+    set_enabled_button(step);
 }
 
 void DemonstrationWindow::on_button_next_step_clicked()
 {
-    if(step > 0)
+    if(step >= 1 && step < 5)
         step++;
 
+    // func выполнить_шаг(int номер_шага) { .... }
     if(step == 2)
     {
         open_and_output_htmlFile(":/demo_files/files/demo/step_second.html");
-        Material ivory(Vec3f(0.4, 0.4, 0.3));
-        Material red_rubber(Vec3f(0.3, 0.1, 0.1));
+        initialize_scene_elements();
+        start_render(spheres, lights);
+    }
+    if(step == 3)
+    {
+        open_and_output_htmlFile(":/demo_files/files/demo/step_third.html");
+        initialize_scene_elements();
+        start_render_light(spheres, lights);
+    }
+    if(step == 4)
+    {
+        open_and_output_htmlFile(":/demo_files/files/demo/step_four.html");
+        initialize_scene_elements();
+        start_render_light2(spheres, lights);
+    }
+    if(step == 5)
+    {
+        open_and_output_htmlFile(":/demo_files/files/demo/step_fifth.html");
+        initialize_scene_elements();
+        start_render_light3(spheres, lights);
+    }
 
-        std::vector<Sphere> spheres;
-        spheres.push_back(Sphere(Vec3f(-3, 0, -16), 2, ivory));
-        spheres.push_back(Sphere(Vec3f(-1.0, -1.5, -12), 2, red_rubber));
-        spheres.push_back(Sphere(Vec3f( 1.5, -0.5, -18), 3, red_rubber));
-        spheres.push_back(Sphere(Vec3f( 7, 5, -18), 4, ivory));
+    if(step > 0)
+        open_and_output_image();
 
-        std::vector<Light> lights;
-        lights.push_back(Light(Vec3f(-20, 20, 20), 1.5));
+    set_enabled_button(step);
+}
 
+void DemonstrationWindow::on_button_prev_step_clicked()
+{
+    if(step > 1 && step <= 5)
+        step--;
+
+    if(step == 1)
+    {
+        open_and_output_htmlFile(":/demo_files/files/demo/step_first.html");
+        initialize_scene_elements();
+        start_render(spheres);
+    }
+    if(step == 2)
+    {
+        open_and_output_htmlFile(":/demo_files/files/demo/step_second.html");
+        initialize_scene_elements();
         start_render(spheres, lights);
     }
 
     if(step == 3)
     {
         open_and_output_htmlFile(":/demo_files/files/demo/step_third.html");
-        Material ivory(Vec2f(0.6, 0.3), Vec3f(0.4, 0.4, 0.3), 50.);
-        Material red_rubber(Vec2f(0.9, 0.1), Vec3f(0.3, 0.1, 0.1), 10.);
-
-        std::vector<Sphere> spheres;
-        spheres.push_back(Sphere(Vec3f(-3, 0, -16), 2, ivory));
-        spheres.push_back(Sphere(Vec3f(-1.0, -1.5, -12), 2, red_rubber));
-        spheres.push_back(Sphere(Vec3f( 1.5, -0.5, -18), 3, red_rubber));
-        spheres.push_back(Sphere(Vec3f( 7, 5, -18), 4, ivory));
-
-        std::vector<Light> lights;
-        lights.push_back(Light(Vec3f(-20, 20, 20), 1.5));
-        lights.push_back(Light(Vec3f( 30, 50, -25), 1.8));
-        lights.push_back(Light(Vec3f( 30, 20, 30), 1.7));
-
+        initialize_scene_elements();
         start_render_light(spheres, lights);
     }
     if(step == 4)
     {
         open_and_output_htmlFile(":/demo_files/files/demo/step_four.html");
-        Material ivory(Vec2f(0.6, 0.3), Vec3f(0.4, 0.4, 0.3), 50.);
-        Material red_rubber(Vec2f(0.9, 0.1), Vec3f(0.3, 0.1, 0.1), 10.);
-
-        std::vector<Sphere> spheres;
-        spheres.push_back(Sphere(Vec3f(-3, 0, -16), 2, ivory));
-        spheres.push_back(Sphere(Vec3f(-1.0, -1.5, -12), 2, red_rubber));
-        spheres.push_back(Sphere(Vec3f( 1.5, -0.5, -18), 3, red_rubber));
-        spheres.push_back(Sphere(Vec3f( 7, 5, -18), 4, ivory));
-
-        std::vector<Light> lights;
-        lights.push_back(Light(Vec3f(-20, 20, 20), 1.5));
-        lights.push_back(Light(Vec3f( 30, 50, -25), 1.8));
-        lights.push_back(Light(Vec3f( 30, 20, 30), 1.7));
-
+        initialize_scene_elements();
         start_render_light2(spheres, lights);
     }
     if(step == 5)
     {
         open_and_output_htmlFile(":/demo_files/files/demo/step_fifth.html");
-        Material3f ivory(Vec3f(0.6, 0.3, 0.1), Vec3f(0.4, 0.4, 0.3), 50.);
-        Material3f red_rubber(Vec3f(0.9, 0.1, 0.0), Vec3f(0.3, 0.1, 0.1), 10.);
-        Material3f mirror(Vec3f(0.0, 10.0, 0.8), Vec3f(1.0, 1.0, 1.0), 1425.);
-
-        std::vector<Sphere> spheres;
-        spheres.push_back(Sphere(Vec3f(-3, 0, -16), 2,  ivory));
-        spheres.push_back(Sphere(Vec3f(-1.0, -1.5, -12), 2, mirror));
-        spheres.push_back(Sphere(Vec3f( 1.5, -0.5, -18), 3, red_rubber));
-        spheres.push_back(Sphere(Vec3f( 7, 5, -18), 4, mirror));
-
-        std::vector<Light> lights;
-        lights.push_back(Light(Vec3f(-20, 20, 20), 1.5));
-        lights.push_back(Light(Vec3f( 30, 50, -25), 1.8));
-        lights.push_back(Light(Vec3f( 30, 20, 30), 1.7));
-
+        initialize_scene_elements();
         start_render_light3(spheres, lights);
     }
 
     if(step > 0)
-    {
-        QGraphicsScene *scene = new QGraphicsScene();
-        QPixmap image("C:/Program Files (x86)/Qt Project/RayTracing/out.ppm");
-        scene->addPixmap(image);
-        ui->view_demo->setScene(scene);
-        ui->view_demo->showFullScreen();
-    }
-}
+        open_and_output_image();
 
-void DemonstrationWindow::on_button_prev_step_clicked()
-{
-    if(step >= 0)
-        step--;
-
-    if(step == 2)
-    {
-        open_and_output_htmlFile(":/demo_files/files/step_second.html");
-        Material ivory(Vec3f(0.4, 0.4, 0.3));
-        Material red_rubber(Vec3f(0.3, 0.1, 0.1));
-
-        std::vector<Sphere> spheres;
-        spheres.push_back(Sphere(Vec3f(-3, 0, -16), 2, ivory));
-        spheres.push_back(Sphere(Vec3f(-1.0, -1.5, -12), 2, red_rubber));
-        spheres.push_back(Sphere(Vec3f( 1.5, -0.5, -18), 3, red_rubber));
-        spheres.push_back(Sphere(Vec3f( 7, 5, -18), 4, ivory));
-
-        std::vector<Light> lights;
-        lights.push_back(Light(Vec3f(-20, 20, 20), 1.5));
-
-        start_render(spheres, lights);
-    }
-
-    if(step == 3)
-    {
-        open_and_output_htmlFile(":/demo_files/files/step_third.html");
-        Material ivory(Vec2f(0.6, 0.3), Vec3f(0.4, 0.4, 0.3), 50.);
-        Material red_rubber(Vec2f(0.9, 0.1), Vec3f(0.3, 0.1, 0.1), 10.);
-
-        std::vector<Sphere> spheres;
-        spheres.push_back(Sphere(Vec3f(-3, 0, -16), 2, ivory));
-        spheres.push_back(Sphere(Vec3f(-1.0, -1.5, -12), 2, red_rubber));
-        spheres.push_back(Sphere(Vec3f( 1.5, -0.5, -18), 3, red_rubber));
-        spheres.push_back(Sphere(Vec3f( 7, 5, -18), 4, ivory));
-
-        std:: vector<Light> lights;
-        lights.push_back(Light(Vec3f(-20, 20, 20), 1.5));
-        lights.push_back(Light(Vec3f( 30, 50, -25), 1.8));
-        lights.push_back(Light(Vec3f( 30, 20, 30), 1.7));
-
-        start_render_light(spheres, lights);
-    }
-    if(step == 4)
-    {
-        open_and_output_htmlFile(":/demo_files/files/step_four.html");
-        Material ivory(Vec2f(0.6, 0.3), Vec3f(0.4, 0.4, 0.3), 50.);
-        Material red_rubber(Vec2f(0.9, 0.1), Vec3f(0.3, 0.1, 0.1), 10.);
-
-        std::vector<Sphere> spheres;
-        spheres.push_back(Sphere(Vec3f(-3, 0, -16), 2, ivory));
-        spheres.push_back(Sphere(Vec3f(-1.0, -1.5, -12), 2, red_rubber));
-        spheres.push_back(Sphere(Vec3f( 1.5, -0.5, -18), 3, red_rubber));
-        spheres.push_back(Sphere(Vec3f( 7, 5, -18), 4, ivory));
-
-        std::vector<Light> lights;
-        lights.push_back(Light(Vec3f(-20, 20, 20), 1.5));
-        lights.push_back(Light(Vec3f( 30, 50, -25), 1.8));
-        lights.push_back(Light(Vec3f( 30, 20, 30), 1.7));
-
-        start_render_light2(spheres, lights);
-    }
-    if(step == 5)
-    {
-        open_and_output_htmlFile(":/demo_files/files/step_fifth.html");
-        Material3f ivory(Vec3f(0.6, 0.3, 0.1), Vec3f(0.4, 0.4, 0.3), 50.);
-        Material3f red_rubber(Vec3f(0.9, 0.1, 0.0), Vec3f(0.3, 0.1, 0.1), 10.);
-        Material3f mirror(Vec3f(0.0, 10.0, 0.8), Vec3f(1.0, 1.0, 1.0), 1425.);
-
-        std::vector<Sphere> spheres;
-        spheres.push_back(Sphere(Vec3f(-3, 0, -16), 2,  ivory));
-        spheres.push_back(Sphere(Vec3f(-1.0, -1.5, -12), 2, mirror));
-        spheres.push_back(Sphere(Vec3f( 1.5, -0.5, -18), 3, red_rubber));
-        spheres.push_back(Sphere(Vec3f( 7, 5, -18), 4, mirror));
-
-        std::vector<Light> lights;
-        lights.push_back(Light(Vec3f(-20, 20, 20), 1.5));
-        lights.push_back(Light(Vec3f( 30, 50, -25), 1.8));
-        lights.push_back(Light(Vec3f( 30, 20, 30), 1.7));
-
-        start_render_light3(spheres, lights);
-    }
-
-    if(step > 0)
-    {
-        QGraphicsScene *scene = new QGraphicsScene();
-        QPixmap image("C:/Program Files (x86)/Qt Project/RayTracing/out.ppm");
-        scene->addPixmap(image);
-        ui->view_demo->setScene(scene);
-        ui->view_demo->showFullScreen();
-    }
+    set_enabled_button(step);
 }
 
 void DemonstrationWindow::on_button_help_clicked()

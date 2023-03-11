@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Теория | Ray Tracing | Alpha 1.0v</string>
+   <string>Теория | Ray Tracing | Alpha 1.1v</string>
   </property>
   <widget class="QTextBrowser" name="text_theory">
    <property name="geometry">
@@ -63,7 +63,7 @@
     </item>
     <item>
      <property name="text">
-      <string>Луч встречается со сферой</string>
+      <string>Пересечение луча со сферой</string>
      </property>
     </item>
    </item>

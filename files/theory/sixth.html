@@ -1,0 +1,120 @@
+<html>
+<body>
+<p><font size = '10' face = 'Times New Roman'><strong>Рендеринг первых сфер</strong></font></p>
+<p><font size = '5' face = 'Times New Roman'>Для каждого пикселя холста мы можем вычислить соответствующую точку окна просмотра. 
+С учетом позиции камеры можно выразить уравнение исходящего от камеры луча и проходящего через эту точку окна просмотра. С помощью сферы можно вычислить точки, 
+в которых ее пересекает луч. <br><br>
+Все, что нужно сделать, — вычислить пересечения луча с каждой сферой, оставить из них самое близкое к камере и закрасить пиксель на холсте соответствующим 
+цветом. Теперь мы почти готовы к рендерингу наших первых сфер, но параметр <i>t</i> заслуживает больше внимания. Вернемся к уравнению луча:
+<center><i>P</i> = <i>O</i> + <i>t</i>(<i>V</i> – <i>O</i>)</center><br>
+Исходная точка и направление луча фиксированы, поэтому изменение <i>t</i> в диапазоне вещественных чисел будет давать каждую точку <i>P</i> на этом луче. 
+Обратите внимание, что для <i>t</i> = 0 мы получаем <i>P</i> = <i>O</i>, а для <i>t</i> = 1 получаем <i>P</i> = <i>V</i>. Отрицательные значения <i>t</i> 
+дают точки в противоположном направлении — позади камеры. Поэтому мы можем разделить пространство на три части, как показано в табл. 3.1. 
+На рис. 3.1 оно представлено схематически. <br><br>
+<strong>Табл. 3.1. </strong>Подразделение параметрического пространства <br>
+<img src = "C:/Program Files (x86)/Qt Project/RayTracing/files/theory/img/table_3.1.png"><br><br>
+<center><img src = "C:/Program Files (x86)/Qt Project/RayTracing/files/theory/img/3.1.png"></center>
+<center><strong>Рис. 3.1.</strong> Несколько точек в параметрическом пространстве</center><br>
+Заметьте, ничто в уравнении пересечения не заставляет сферу находиться именно перед камерой, и оно без проблем может произвести решения для пересечений 
+позади нее. Такой вариант нам не подходит, значит, нужно проигнорировать решения с <i>t</i> &lt; 0. Чтобы дальше у нас не возникло проблем, мы ограничим 
+решения диапазоном <i>t</i> > 1 — будем отрисовывать все, что находится за плоскостью проекции. <br><br>
+Не нужно устанавливать верхний порог значения <i>t</i> с другой стороны, потому что мы хотим видеть все объекты перед камерой, независимо от их удаленности. 
+Но на последующих этапах нам нужно будет сократить лучи, поэтому мы введем эту формальность сейчас, установив значение +&#8734; верхним порогом <i>t</i> (в языках, 
+которые не могут представлять бесконечность, можно использовать просто очень большое число). <br><br>
+Теперь оформим все проделанное в виде псевдокода. Возьмем за общее правило, что у кода есть доступ к любым нужным данным, чтобы нам не беспокоиться о передаче 
+таких параметров, как холст, а сосредоточиться только на важных. <br><br>
+Основной метод показан в листинге 3.1. <br><br>
+<strong>Листинг 3.1.</strong> Основной метод </font></p>
+<p><font size = '4' face = 'Century Gothic'>
+O = (0, 0, 0) <br>
+for x = -Cw/2 to Cw/2 { <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for y = -Ch/2 to Ch/2 {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;D = CanvasToViewport(x, y) color = TraceRay(O, D, 1, inf)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;canvas.PutPixel(x, y, color)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}</font></p>
+<p><font size = '5' face = 'Times New Roman'>Функции </font> 
+<font size = '4' face = 'Century Gothic'>CanvasToViewport </font> 
+<font size = '5' face = 'Times New Roman'>из листинга 3.2 очень просты. Константа <i>d</i> — это расстояние между камерой и плоскостью проекции. <br><br>
+<strong>Листинг 3.2.</strong> Функция CanvasToViewport </font></p>
+<p><font size = '4' face = 'Century Gothic'>
+CanvasToViewport(x, y) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return (x*Vw/Cw, y*Vh/Ch, d)<br>
+}</font></p>
+<p><font size = '5' face = 'Times New Roman'>Метод </font> 
+<font size = '4' face = 'Century Gothic'>TraceRay </font> 
+<font size = '5' face = 'Times New Roman'>(листинг 3.3) вычисляет пересечения луча с каждой сферой и возвращает ее цвет в ближайшем пересечении 
+в запрашиваемом диапазоне <i>t</i>.<br><br>
+<strong>Листинг 3.3.</strong> Метод TraceRay </font></p>
+<p><font size = '4' face = 'Century Gothic'>
+TraceRay(O, D, t_min, t_max) { <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;closest_t = inf <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;closest_sphere = NULL <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for sphere in scene.spheres { <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t1, t2 = IntersectRaySphere(O, D, sphere) <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if t1 in [t_min, t_max] and t1 &lt; closest_t { <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;closest_t = t1 <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;closest_sphere = sphere <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if t2 in [t_min, t_max] and t2 &lt; closest_t { <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;closest_t = t2 <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;closest_sphere = sphere <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if closest_sphere == NULL { <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return BACKGROUND_COLOR <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return closest_sphere.color <br>
+}</font></p>
+<p><font size = '5' face = 'Times New Roman'>В листинге 3.3 <i>O</i> — это исходная точка луча. Несмотря на то что мы трассируем его 
+от камеры, размещенной в исходной точке, дальше это не обязательно будет так, значит, он должен быть параметром. То же касается <i>t_min</i> и <i>t_max</i>. <br><br>
+Обратите внимание, что, когда луч не пересекает никакую сферу, нам все равно нужно возвращать какой-то цвет. Допустим, что в нашем случае он будет белый. <br><br>
+В завершение </font> <font size = '4' face = 'Century Gothic'>IntersectRaySphere </font> 
+<font size = '5' face = 'Times New Roman'>(листинг 3.4) просто решает квадратичное уравнение. <br><br>
+<strong>Листинг 3.4.</strong> Метод IntersectRaySphere</font></p>
+<p><font size = '4' face = 'Century Gothic'>
+IntersectRaySphere(O, D, sphere) { <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;r = sphere.radius <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CO = O - sphere.center <br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a = dot(D, D) <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b = 2*dot(CO, D) <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c = dot(CO, CO) - r*r <br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;discriminant = b*b - 4*a*c <br> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if discriminant &lt; 0 { <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return inf, inf <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t1 = (-b + sqrt(discriminant)) / (2*a) <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t2 = (-b - sqrt(discriminant)) / (2*a) <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return t1, t2 <br>
+}</font></p>
+<p><font size = '5' face = 'Times New Roman'>Чтобы применить все это на практике, определим очень простую сцену (рис. 3.2).
+<center><img src = "C:/Program Files (x86)/Qt Project/RayTracing/files/theory/img/3.2.png"></center>
+<center><strong>Рис. 3.2.</strong> Очень простая сцена, вид сверху (<i>слева</i>) и вид сбоку (<i>справа</i>)</center><br>
+На языке псевдокода это выглядит так:</font></p>
+<p><font size = '4' face = 'Century Gothic'>
+viewport_size = 1 x 1 <br>
+projection_plane_d = 1 <br><br>
+sphere { <br>
+&nbsp;&nbsp;&nbsp;&nbsp;center = (0, -1, 3) <br>
+&nbsp;&nbsp;&nbsp;&nbsp;radius = 1 <br>
+&nbsp;&nbsp;&nbsp;&nbsp;color = (255, 0, 0) # Красный <br>
+} <br>
+sphere { <br>
+&nbsp;&nbsp;&nbsp;&nbsp;center = (2, 0, 4) <br>
+&nbsp;&nbsp;&nbsp;&nbsp;radius = 1 <br>
+&nbsp;&nbsp;&nbsp;&nbsp;color = (0, 0, 255) # Синий <br>
+} <br>
+sphere { <br>
+&nbsp;&nbsp;&nbsp;&nbsp;center = (-2, 0, 4) <br>
+&nbsp;&nbsp;&nbsp;&nbsp;radius = 1 <br>
+&nbsp;&nbsp;&nbsp;&nbsp;color = (0, 255, 0) # Зеленый <br>
+}</font></p>
+<p><font size = '5' face = 'Times New Roman'>Выполнив наш алгоритм для этой сцены, мы получаем невероятную картинку на основе трассировки лучей (рис. 3.3).
+<center><img src = "C:/Program Files (x86)/Qt Project/RayTracing/files/theory/img/3.3.png"></center>
+<center><strong>Рис. 3.3.</strong> Превосходная сцена на основе трассировки лучей</center><br>
+Выглядит несколько разочаровывающе. Где здесь отражения, тени и изящный вид? Не беспокойтесь, все это будет. Мы сделали отличный первый шаг. 
+Сферы выглядят как круги, и это лучше, чем если бы они были похожи на кошек. От настоящих сфер их отличает то, что здесь не хватает взаимодействия со светом. 
+Эту тему мы разберем далее.
+</font></p>
+</body>
+</html>

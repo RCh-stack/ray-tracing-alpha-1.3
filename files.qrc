@@ -11,6 +11,11 @@
         <file>files/theory/first.html</file>
         <file>files/theory/second.html</file>
         <file>files/theory/third.html</file>
+        <file>files/theory/fourth.html</file>
+        <file>files/theory/fifth.html</file>
+        <file>files/theory/sixth.html</file>
+        <file>files/theory/seventh.html</file>
+        <file>files/theory/eighth.html</file>
     </qresource>
     <qresource prefix="/lab_files">
         <file>files/lab/first_lab.html</file>

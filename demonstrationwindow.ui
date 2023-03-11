@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1071</width>
-    <height>746</height>
+    <width>1074</width>
+    <height>760</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Демонстрация | Ray Tracing | Alpha 1.0v</string>
+   <string>Демонстрация | Ray Tracing | Alpha 1.1v</string>
   </property>
   <widget class="QTextBrowser" name="text_description">
    <property name="geometry">
@@ -19,7 +19,7 @@
      <x>10</x>
      <y>520</y>
      <width>991</width>
-     <height>211</height>
+     <height>231</height>
     </rect>
    </property>
   </widget>
@@ -28,8 +28,8 @@
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>821</width>
-     <height>501</height>
+     <width>1050</width>
+     <height>500</height>
     </rect>
    </property>
   </widget>
@@ -37,7 +37,7 @@
    <property name="geometry">
     <rect>
      <x>1010</x>
-     <y>460</y>
+     <y>520</y>
      <width>51</width>
      <height>51</height>
     </rect>
@@ -77,7 +77,7 @@ QPushButton:pressed {
    <property name="geometry">
     <rect>
      <x>1020</x>
-     <y>690</y>
+     <y>710</y>
      <width>41</width>
      <height>41</height>
     </rect>
@@ -116,8 +116,8 @@ QPushButton:pressed {
   <widget class="QPushButton" name="button_prev_step">
    <property name="geometry">
     <rect>
-     <x>840</x>
-     <y>460</y>
+     <x>1010</x>
+     <y>640</y>
      <width>51</width>
      <height>51</height>
     </rect>
@@ -156,8 +156,8 @@ QPushButton:pressed {
   <widget class="QPushButton" name="button_next_step">
    <property name="geometry">
     <rect>
-     <x>900</x>
-     <y>460</y>
+     <x>1010</x>
+     <y>580</y>
      <width>51</width>
      <height>51</height>
     </rect>
@@ -191,16 +191,6 @@ QPushButton:pressed {
    </property>
    <property name="flat">
     <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QTextBrowser" name="text_option">
-   <property name="geometry">
-    <rect>
-     <x>840</x>
-     <y>10</y>
-     <width>221</width>
-     <height>421</height>
-    </rect>
    </property>
   </widget>
  </widget>
