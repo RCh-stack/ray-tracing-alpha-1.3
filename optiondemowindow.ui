@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>706</width>
-    <height>664</height>
+    <height>676</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -1164,7 +1164,7 @@ color: rgb(0, 0, 0);
      <x>10</x>
      <y>420</y>
      <width>681</width>
-     <height>151</height>
+     <height>171</height>
     </rect>
    </property>
    <property name="font">
@@ -1182,7 +1182,7 @@ color: rgb(0, 0, 0);
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>70</y>
+      <y>90</y>
       <width>181</width>
       <height>21</height>
      </rect>
@@ -1203,7 +1203,7 @@ color: rgb(0, 0, 0);
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>100</y>
+      <y>130</y>
       <width>211</width>
       <height>21</height>
      </rect>
@@ -1223,8 +1223,8 @@ color: rgb(0, 0, 0);
    <widget class="QComboBox" name="other_format">
     <property name="geometry">
      <rect>
-      <x>220</x>
-      <y>100</y>
+      <x>210</x>
+      <y>130</y>
       <width>331</width>
       <height>22</height>
      </rect>
@@ -1241,7 +1241,12 @@ color: rgb(0, 0, 0);
     </property>
     <item>
      <property name="text">
-      <string>Без пояснений</string>
+      <string>Без описания</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Краткое описание каждого шага</string>
      </property>
     </item>
     <item>
@@ -1254,7 +1259,7 @@ color: rgb(0, 0, 0);
     <property name="geometry">
      <rect>
       <x>200</x>
-      <y>70</y>
+      <y>90</y>
       <width>434</width>
       <height>22</height>
      </rect>
@@ -1267,7 +1272,7 @@ color: rgb(0, 0, 0);
     <property name="geometry">
      <rect>
       <x>640</x>
-      <y>70</y>
+      <y>90</y>
       <width>31</width>
       <height>22</height>
      </rect>
@@ -1401,12 +1406,57 @@ color: rgb(0, 0, 0);
      </size>
     </property>
    </widget>
+   <widget class="QLabel" name="label_38">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>60</y>
+      <width>191</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Использовать освещение&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="global_is_light">
+    <property name="geometry">
+     <rect>
+      <x>630</x>
+      <y>60</y>
+      <width>20</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>50</width>
+      <height>50</height>
+     </size>
+    </property>
+   </widget>
   </widget>
   <widget class="QPushButton" name="button_start">
    <property name="geometry">
     <rect>
      <x>290</x>
-     <y>590</y>
+     <y>600</y>
      <width>51</width>
      <height>51</height>
     </rect>
@@ -1448,7 +1498,7 @@ QPushButton:pressed {
    <property name="geometry">
     <rect>
      <x>360</x>
-     <y>590</y>
+     <y>600</y>
      <width>51</width>
      <height>51</height>
     </rect>
@@ -1490,7 +1540,7 @@ QPushButton:pressed {
    <property name="geometry">
     <rect>
      <x>660</x>
-     <y>620</y>
+     <y>630</y>
      <width>41</width>
      <height>41</height>
     </rect>

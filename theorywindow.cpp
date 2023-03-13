@@ -7,11 +7,11 @@ TheoryWindow::TheoryWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    db = QSqlDatabase::addDatabase("QSQLITE");  // -- подключение базы данных --
-    db.setDatabaseName("C:/Program Files (x86)/Qt Project/RayTracing/EducationSystem.sqlite"); // -- путь к базе данных --
+    db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName("C:/Program Files (x86)/Qt Project/RayTracing/EducationSystem.sqlite");
 
     if (!db.open())
-        QMessageBox::critical(NULL, QObject::tr("Ошибка!"), db.lastError().text()); // -- выводим ошибку --
+        QMessageBox::critical(NULL, QObject::tr("Ошибка!"), db.lastError().text());
 
     set_window_options();
     pages_read = 0;
@@ -96,8 +96,8 @@ void TheoryWindow::open_file_by_code(int row_index)
     QSqlQuery query;
     query.prepare("SELECT * FROM TheoryPage WHERE ID_Page = :id");
     query.bindValue(":id",  row_index);
-    query.exec();   // -- выполнение запроса к БД --
-    if(!query.next())   // -- если запрос пустой --
+    query.exec();
+    if(!query.next())
         QMessageBox::warning(this, "Теоретический материал", "Страница не найдена!");
     else
         output_table_of_contents(query.value("Path").toString());
@@ -109,8 +109,8 @@ void TheoryWindow::open_file_by_name(QString name)
     QSqlQuery query;
     query.prepare("SELECT * FROM TheoryPage WHERE Name_Theme = :name");
     query.bindValue(":name",  name);
-    query.exec();   // -- выполнение запроса к БД --
-    if(!query.next())   // -- если запрос пустой --
+    query.exec();
+    if(!query.next())
         QMessageBox::warning(this, "Теоретический материал", "Страница не найдена!");
     else
     {

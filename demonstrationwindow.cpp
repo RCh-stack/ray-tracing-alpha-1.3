@@ -6,8 +6,15 @@ DemonstrationWindow::DemonstrationWindow(QWidget *parent) :
     ui(new Ui::DemonstrationWindow)
 {
     ui->setupUi(this);
+
+    db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName("C:/Program Files (x86)/Qt Project/RayTracing/EducationSystem.sqlite");
+
+    if (!db.open())
+        QMessageBox::critical(NULL, QObject::tr("Ошибка!"), db.lastError().text());
+
     set_window_options();
-    step = 0, width = 1048, height = 498;
+    step = 0, width = 1048, height = 498, fov = 1.5;
     ui->button_next_step->setEnabled(0);
     ui->button_prev_step->setEnabled(0);
 }
@@ -41,11 +48,11 @@ void DemonstrationWindow::set_window_options()
     setPalette(p);
 }
 
-// 1.1
+// 1.1 + 1.2
 void DemonstrationWindow::open_and_output_image()
 {
     QGraphicsScene *scene = new QGraphicsScene();
-    QPixmap image("C:/Program Files (x86)/Qt Project/RayTracing/out.ppm");
+    QPixmap image(QString::fromStdString(get_path_to_image() + "/out.ppm"));
     scene->addPixmap(image);
     ui->view_demo->setScene(scene);
     ui->view_demo->showFullScreen();
@@ -88,7 +95,7 @@ float DemonstrationWindow::get_specular_exponent(int id_color)
               id_color == 1 ? 10. : 60.;
 }
 
-// 1.1
+// 1.1 + 1.2
 void DemonstrationWindow::set_enabled_button(int numStep)
 {
     if(numStep == 1)
@@ -100,9 +107,43 @@ void DemonstrationWindow::set_enabled_button(int numStep)
         ui->button_next_step->setEnabled(0);
     else
         ui->button_next_step->setEnabled(1);
+
+    if((numStep == 2 && !get_lighting_flag()) || (numStep == 4 && !get_reflection_flag()))
+        ui->button_next_step->setEnabled(0);
 }
 
-void DemonstrationWindow::open_and_output_htmlFile(QString path)
+// 1.2
+void DemonstrationWindow::open_file_by_code(int code)
+{
+    QSqlQuery query;
+    query.prepare("SELECT * FROM DemoPage WHERE Number_Page = :number AND ID_Type = :type");
+    query.bindValue(":number",  code);
+    query.bindValue(":type", get_code_format_output() + 1);
+    query.exec();
+    if(!query.next())
+        QMessageBox::warning(this, "Демонстрационный материал", "Файл не найден!");
+    else
+    {
+        if(query.value("ID_Type").toInt() == 1)
+            output_step_information(query.value("Name_Step").toString());
+        else
+            output_table_of_contents(query.value("Path").toString());
+    }
+}
+
+// 1.2
+void DemonstrationWindow::output_step_information(QString string)
+{
+    ui->text_description->clear();
+
+    QFont font = ui->text_description->font();
+    font.setPointSize(19);
+    ui->text_description->setFont(font);
+    ui->text_description->setText("<B>" + string + "</B>");
+}
+
+// 1.2
+void DemonstrationWindow::output_table_of_contents(QString path)
 {
     ui->text_description->clear();
     QFile file(path);
@@ -266,10 +307,39 @@ Vec3f DemonstrationWindow::cast_ray_light3(const Vec3f &orig, const Vec3f &dir, 
     return material.diffuse_color * diffuse_light_intensity * material.albedo[0] + Vec3f(1., 1., 1.) * specular_light_intensity * material.albedo[1] + reflect_color * material.albedo[2];
 }
 
+// 1.2
+void DemonstrationWindow::save_image_in_framebuffer(std::vector<Vec3f> &framebuffer)
+{
+    std::ofstream ofs;
+    ofs.open(get_path_to_image() + "/out.ppm", std::ios::binary);
+    ofs << "P6\n" << width << " " << height << "\n 255\n";
+    for (size_t i = 0; i < height * width; ++i)
+        for (size_t j = 0; j < 3; j++)
+            ofs << (char)(255 * std::max(0.f, std::min(1.f, framebuffer[i][j])));
+
+    ofs.close();
+}
+
+// 1.2
+void DemonstrationWindow::save_image_in_framebuffer_with_lighting(std::vector<Vec3f> &framebuffer)
+{
+    std:: ofstream ofs;
+    ofs.open(get_path_to_image() + "/out.ppm", std::ios::binary);
+    ofs << "P6\n" << width << " " << height << "\n 255\n";
+    for (size_t i = 0; i < height * width; ++i)
+    {
+        Vec3f &c = framebuffer[i];
+        float max = std:: max(c[0], std:: max(c[1], c[2]));
+        if (max > 1) c = c * (1./max);
+        for (size_t j = 0; j < 3; j++)
+            ofs << (char)(255 * std:: max(0.f, std:: min(1.f, framebuffer[i][j])));
+    }
+
+    ofs.close();
+}
+
 void DemonstrationWindow::start_render(const std::vector<Sphere> &spheres)
 {
-    const int fov = 1.5;
-
     std::vector<Vec3f> framebuffer(width * height);
     for (size_t j = 0; j < height; j++)
     {
@@ -282,23 +352,11 @@ void DemonstrationWindow::start_render(const std::vector<Sphere> &spheres)
         }
     }
 
-    std::ofstream ofs; // save the framebuffer to file
-    ofs.open("C:/Program Files (x86)/Qt Project/RayTracing/out.ppm", std::ios::binary);
-    ofs << "P6\n" << width << " " << height << "\n 255\n";
-    for (size_t i = 0; i < height * width; ++i)
-    {
-        for (size_t j = 0; j < 3; j++)
-        {
-            ofs << (char)(255 * std::max(0.f, std::min(1.f, framebuffer[i][j])));
-        }
-    }
-    ofs.close();
+    save_image_in_framebuffer(framebuffer);
 }
 
 void DemonstrationWindow::start_render(const std:: vector<Sphere> &spheres, const std::vector<Light> &lights)
 {
-    const int fov = 1.5;
-
     std::vector<Vec3f> framebuffer(width * height);
     for (size_t j = 0; j < height; j++)
     {
@@ -307,116 +365,18 @@ void DemonstrationWindow::start_render(const std:: vector<Sphere> &spheres, cons
             float x = (2 * (i + 0.5)/(float)width - 1) * tan(fov/2.) * width/(float)height;
             float y = -(2 * (j + 0.5)/(float)height - 1) * tan(fov/2.);
             Vec3f dir = Vec3f(x, y, -1).normalize();
-            framebuffer[i + j * width] = cast_ray(Vec3f (0,0,0), dir, spheres, lights);
+            if(step == 2)
+                framebuffer[i + j * width] = cast_ray(Vec3f (0,0,0), dir, spheres, lights);
+            else if(step == 3)
+                framebuffer[i + j * width] = cast_ray_light(Vec3f(0,0,0), dir, spheres, lights);
+            else if(step == 4)
+                framebuffer[i + j * width] = cast_ray_light2(Vec3f(0,0,0), dir, spheres, lights);
+            else if(step == 5)
+                framebuffer[i + j * width] = cast_ray_light3(Vec3f(0,0,0), dir, spheres, lights);
         }
     }
 
-    std:: ofstream ofs; // save the framebuffer to file
-    ofs.open("C:/Program Files (x86)/Qt Project/RayTracing/out.ppm", std::ios::binary);
-    ofs << "P6\n" << width << " " << height << "\n 255\n";
-    for (size_t i = 0; i < height * width; ++i)
-    {
-        for (size_t j = 0; j < 3; j++)
-        {
-            ofs << (char)(255 * std::max(0.f, std:: min(1.f, framebuffer[i][j])));
-        }
-    }
-    ofs.close();
-}
-
-void DemonstrationWindow::start_render_light(const std:: vector<Sphere> &spheres, const std::vector<Light> &lights)
-{
-    const int fov = 1.5;
-
-    std::vector<Vec3f> framebuffer(width * height);
-    for (size_t j = 0; j < height; j++)
-    {
-        for (size_t i = 0; i < width; i++)
-        {
-            float x = (2 * (i + 0.5)/(float)width - 1) * tan(fov/2.)*width/(float)height;
-            float y = -(2 * (j + 0.5)/(float)height - 1) * tan(fov/2.);
-            Vec3f dir = Vec3f(x, y, -1).normalize();
-            framebuffer[i + j * width] = cast_ray_light(Vec3f(0,0,0), dir, spheres, lights);
-        }
-    }
-
-    std:: ofstream ofs; // save the framebuffer to file
-    ofs.open("C:/Program Files (x86)/Qt Project/RayTracing/out.ppm", std::ios:: binary);
-    ofs << "P6\n" << width << " " << height << "\n 255\n";
-    for (size_t i = 0; i < height * width; ++i) \
-    {
-        Vec3f &c = framebuffer[i];
-        float max = std:: max(c[0], std:: max(c[1], c[2]));
-        if (max > 1) c = c * (1./max);
-        for (size_t j = 0; j < 3; j++)
-            ofs << (char)(255 * std:: max(0.f, std:: min(1.f, framebuffer[i][j])));
-    }
-
-    ofs.close();
-}
-
-void DemonstrationWindow::start_render_light2(const std:: vector<Sphere> &spheres, const std::vector<Light> &lights)
-{
-    const int fov = 1.5;
-
-    std::vector<Vec3f> framebuffer(width * height);
-    for (size_t j = 0; j < height; j++)
-    {
-        for (size_t i = 0; i < width; i++)
-        {
-            float x = (2 * (i + 0.5)/(float)width - 1) * tan(fov/2.)*width/(float)height;
-            float y = -(2 * (j + 0.5)/(float)height - 1) * tan(fov/2.);
-            Vec3f dir = Vec3f(x, y, -1).normalize();
-            framebuffer[i + j * width] = cast_ray_light2(Vec3f(0,0,0), dir, spheres, lights);
-        }
-    }
-
-    std:: ofstream ofs; // save the framebuffer to file
-    ofs.open("C:/Program Files (x86)/Qt Project/RayTracing/out.ppm", std::ios::binary);
-    ofs << "P6\n" << width << " " << height << "\n255\n";
-
-    for (size_t i = 0; i < height * width; ++i)
-    {
-        Vec3f &c = framebuffer[i];
-        float max = std:: max(c[0], std::max(c[1], c[2]));
-        if (max > 1) c = c * (1./max);
-        for (size_t j = 0; j < 3; j++)
-            ofs << (char)(255 * std:: max(0.f, std:: min(1.f, framebuffer[i][j])));
-    }
-
-    ofs. close();
-}
-
-void DemonstrationWindow::start_render_light3(const std::vector<Sphere> &spheres, const std::vector<Light> &lights)
-{
-    const int fov = 1.5;
-
-    std::vector<Vec3f> framebuffer(width * height);
-    for (size_t j = 0; j < height; j++)
-    {
-        for (size_t i = 0; i < width; i++)
-        {
-            float x = (2 * (i + 0.5)/(float)width - 1) * tan(fov/2.)*width/(float)height;
-            float y = -(2 * (j + 0.5)/(float)height - 1) * tan(fov/2.);
-            Vec3f dir = Vec3f(x, y, -1).normalize();
-            framebuffer[i + j * width] = cast_ray_light3(Vec3f(0,0,0), dir, spheres, lights);
-        }
-    }
-
-    std:: ofstream ofs; // save the framebuffer to file
-    ofs.open("C:/Program Files (x86)/Qt Project/RayTracing/out.ppm", std::ios::binary);
-    ofs << "P6\n" << width << " " << height << "\n255\n";
-
-    for (size_t i = 0; i < height * width; ++i)
-    {
-        Vec3f &c = framebuffer[i];
-        float max = std:: max(c[0], std::max(c[1], c[2]));
-        if (max > 1) c = c * (1./max);
-        for (size_t j = 0; j < 3; j++)
-            ofs << (char)(255 * std:: max(0.f, std:: min(1.f, framebuffer[i][j])));
-    }
-
-    ofs. close();
+    save_image_in_framebuffer_with_lighting(framebuffer);
 }
 
 // 1.1
@@ -436,10 +396,10 @@ void DemonstrationWindow::initialize_scene_elements()
 // 1.1
 void DemonstrationWindow::initialize_standard_objects()
 {
-    Material firstSphere(get_sphere_color(idFirstSphereColor));
-    Material secondSphere(get_sphere_color(idSecondSphereColor));
-    Material thirdSphere(get_sphere_color(idThirdSphereColor));
-    Material fourthSphere(get_sphere_color(idFourthSphereColor));
+    Material firstSphere      (get_sphere_color(get_id_color(0)));
+    Material secondSphere (get_sphere_color(get_id_color(1)));
+    Material thirdSphere     (get_sphere_color(get_id_color(2)));
+    Material fourthSphere   (get_sphere_color(get_id_color(3)));
 
     spheres.push_back(Sphere(Vec3f(get_x(0), get_y(0), get_z(0)), get_radius(0), firstSphere));
     spheres.push_back(Sphere(Vec3f(get_x(1), get_y(1), get_z(1)), get_radius(1), secondSphere));
@@ -452,10 +412,10 @@ void DemonstrationWindow::initialize_standard_objects()
 // 1.1
 void DemonstrationWindow::initialize_objects_with_albedo2f()
 {
-    Material firstSphere(get_albedo_2f(idFirstSphereColor), get_sphere_color(idFirstSphereColor), get_specular_exponent(idFirstSphereColor));
-    Material secondSphere(get_albedo_2f(idSecondSphereColor), get_sphere_color(idSecondSphereColor), get_specular_exponent(idSecondSphereColor));
-    Material thirdSphere(get_albedo_2f(idThirdSphereColor), get_sphere_color(idThirdSphereColor), get_specular_exponent(idThirdSphereColor));
-    Material fourthSphere(get_albedo_2f(idFourthSphereColor), get_sphere_color(idFourthSphereColor), get_specular_exponent(idFourthSphereColor));
+    Material firstSphere         (get_albedo_2f(get_id_color(0)), get_sphere_color(get_id_color(0)), get_specular_exponent(get_id_color(0)));
+    Material secondSphere    (get_albedo_2f(get_id_color(1)), get_sphere_color(get_id_color(1)), get_specular_exponent(get_id_color(2)));
+    Material thirdSphere        (get_albedo_2f(get_id_color(2)), get_sphere_color(get_id_color(2)), get_specular_exponent(get_id_color(3)));
+    Material fourthSphere      (get_albedo_2f(get_id_color(3)), get_sphere_color(get_id_color(3)), get_specular_exponent(get_id_color(4)));
 
     spheres.push_back(Sphere(Vec3f(get_x(0), get_y(0), get_z(0)), get_radius(0), firstSphere));
     spheres.push_back(Sphere(Vec3f(get_x(1), get_y(1), get_z(1)), get_radius(1), secondSphere));
@@ -470,9 +430,9 @@ void DemonstrationWindow::initialize_objects_with_albedo2f()
 // 1.1
 void DemonstrationWindow::initialize_objects_with_albedo3f()
 {
-    Material3f firstSphere(get_albedo_3f(idFirstSphereColor), get_sphere_color(idFirstSphereColor), get_specular_exponent(idFirstSphereColor));
-    Material3f thirdSphere(get_albedo_3f(idThirdSphereColor), get_sphere_color(idThirdSphereColor), get_specular_exponent(idThirdSphereColor));
-    Material3f mirror(Vec3f(0.0, 10.0, 0.8), Vec3f(1.0, 1.0, 1.0), 1425.); // 2 and 4 - зеркальные
+    Material3f firstSphere  (get_albedo_3f(get_id_color(0)), get_sphere_color(get_id_color(0)), get_specular_exponent(get_id_color(0)));
+    Material3f thirdSphere (get_albedo_3f(get_id_color(2)), get_sphere_color(get_id_color(2)), get_specular_exponent(get_id_color(2)));
+    Material3f mirror         (Vec3f(0.0, 10.0, 0.8), Vec3f(1.0, 1.0, 1.0), 1425.); // 2 and 4 - зеркальные
 
     spheres.push_back(Sphere(Vec3f(get_x(0), get_y(0), get_z(0)), get_radius(0), firstSphere));
     spheres.push_back(Sphere(Vec3f(get_x(1), get_y(1), get_z(1)), get_radius(1), mirror));
@@ -484,14 +444,24 @@ void DemonstrationWindow::initialize_objects_with_albedo3f()
     lights.push_back(Light(Vec3f(get_x_ligth(2), get_y_ligth(2), get_z_ligth(2)), get_d_ligth(2)));
 }
 
+void DemonstrationWindow::execute_step_algorithm(int num_step)
+{
+    initialize_scene_elements();
+
+    if(num_step == 1)
+        start_render(spheres);
+    else
+        start_render(spheres, lights);
+
+    open_file_by_code(step);
+    open_and_output_image();
+    set_enabled_button(step);
+}
+
 void DemonstrationWindow::on_button_start_demo_clicked()
 {
-    step = 1; // -- номер шага --
-    // -- вызов функции --
-    open_and_output_htmlFile(":/demo_files/files/demo/step_first.html");
-    initialize_scene_elements();
-    start_render(spheres);
-    open_and_output_image();
+    step = 1;
+    execute_step_algorithm(step);
     set_enabled_button(step);
 }
 
@@ -499,80 +469,14 @@ void DemonstrationWindow::on_button_next_step_clicked()
 {
     if(step >= 1 && step < 5)
         step++;
-
-    // func выполнить_шаг(int номер_шага) { .... }
-    if(step == 2)
-    {
-        open_and_output_htmlFile(":/demo_files/files/demo/step_second.html");
-        initialize_scene_elements();
-        start_render(spheres, lights);
-    }
-    if(step == 3)
-    {
-        open_and_output_htmlFile(":/demo_files/files/demo/step_third.html");
-        initialize_scene_elements();
-        start_render_light(spheres, lights);
-    }
-    if(step == 4)
-    {
-        open_and_output_htmlFile(":/demo_files/files/demo/step_four.html");
-        initialize_scene_elements();
-        start_render_light2(spheres, lights);
-    }
-    if(step == 5)
-    {
-        open_and_output_htmlFile(":/demo_files/files/demo/step_fifth.html");
-        initialize_scene_elements();
-        start_render_light3(spheres, lights);
-    }
-
-    if(step > 0)
-        open_and_output_image();
-
-    set_enabled_button(step);
+    execute_step_algorithm(step);
 }
 
 void DemonstrationWindow::on_button_prev_step_clicked()
 {
     if(step > 1 && step <= 5)
         step--;
-
-    if(step == 1)
-    {
-        open_and_output_htmlFile(":/demo_files/files/demo/step_first.html");
-        initialize_scene_elements();
-        start_render(spheres);
-    }
-    if(step == 2)
-    {
-        open_and_output_htmlFile(":/demo_files/files/demo/step_second.html");
-        initialize_scene_elements();
-        start_render(spheres, lights);
-    }
-
-    if(step == 3)
-    {
-        open_and_output_htmlFile(":/demo_files/files/demo/step_third.html");
-        initialize_scene_elements();
-        start_render_light(spheres, lights);
-    }
-    if(step == 4)
-    {
-        open_and_output_htmlFile(":/demo_files/files/demo/step_four.html");
-        initialize_scene_elements();
-        start_render_light2(spheres, lights);
-    }
-    if(step == 5)
-    {
-        open_and_output_htmlFile(":/demo_files/files/demo/step_fifth.html");
-        initialize_scene_elements();
-        start_render_light3(spheres, lights);
-    }
-
-    if(step > 0)
-        open_and_output_image();
-
-    set_enabled_button(step);
+    execute_step_algorithm(step);
 }
 
 void DemonstrationWindow::on_button_help_clicked()

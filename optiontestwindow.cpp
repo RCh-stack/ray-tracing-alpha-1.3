@@ -45,9 +45,15 @@ void OptionTestWindow::set_user(QString user)
     ui->label_user->setText(user);
 }
 
+// 1.2
 void OptionTestWindow::on_button_start_clicked()
 {
     TestWindow *tw = new TestWindow;
+
+    tw->set_mode_test(ui->comboBox_modes->currentIndex());
+    tw->set_theme_test(ui->comboBox_topics->currentIndex() + 1);
+
+    tw->start_test();
     tw->exec();
 }
 

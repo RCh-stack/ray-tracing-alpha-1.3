@@ -53,9 +53,10 @@ void OptionDemoWindow::set_default_settings_mode()
     set_default_light();
 
     ui->global_color->setCurrentIndex(1);
-    ui->other_format->setCurrentIndex(1);
+    ui->other_format->setCurrentIndex(2);
     ui->global_is_reflex->setChecked(1);
-    ui->other_path->setText("C:/Program Files (x86)/Qt Project/RayTracing/");
+    ui->global_is_light->setChecked(1);
+    ui->other_path->setText("C:/Program Files (x86)/Qt Project/RayTracing");
 }
 
 void OptionDemoWindow::set_users_settings_mode()
@@ -128,17 +129,14 @@ OptionDemoWindow::~OptionDemoWindow()
     delete ui;
 }
 
-// 1.1
+// 1.1 + 1.2
 void OptionDemoWindow::on_button_start_clicked()
 {
     DemonstrationWindow *dw = new DemonstrationWindow;
 
     // -- установка цветовых характеристик (фон, сферы) --
     dw->set_background_color(ui->global_color->currentIndex());
-    dw->set_first_sphere_color(ui->value1_color->currentIndex());
-    dw->set_second_sphere_color(ui->value2_color->currentIndex());
-    dw->set_third_sphere_color(ui->value3_color->currentIndex());
-    dw->set_fourth_sphere_color(ui->value4_color->currentIndex());
+    dw->set_sphere_color(ui->value1_color->currentIndex(), ui->value2_color->currentIndex(), ui->value3_color->currentIndex(), ui->value4_color->currentIndex());
 
     // -- установка числовых характеристик (координаты, радиусы, интенсивность и т.д) --
     dw->set_radius(ui->value1_R->value(), ui->value2_R->value(), ui->value3_R->value(), ui->value4_R->value());
@@ -149,6 +147,12 @@ void OptionDemoWindow::on_button_start_clicked()
     dw->set_y_light(ui->light1_Y->value(), ui->light2_Y->value(), ui->light3_Y->value());
     dw->set_z_light(ui->light1_Z->value(), ui->light2_Z->value(), ui->light3_Z->value());
     dw->set_d_light(ui->light1_D->value(), ui->light2_D->value(), ui->light3_D->value());
+
+    // -- установка дополнительных параметров --
+    dw->set_path_to_image(ui->other_path->text().simplified().toStdString());
+    dw->set_reflection_flag(ui->global_is_reflex->isChecked());
+    dw->set_lighting_flag(ui->global_is_light->isChecked());
+    dw->set_code_format_output(ui->other_format->currentIndex());
 
     dw->exec(); // -- запуск демонстрации --
 }

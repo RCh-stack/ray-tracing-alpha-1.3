@@ -6,18 +6,14 @@ TestWindow::TestWindow(QWidget *parent) :
     ui(new Ui::TestWindow)
 {
     ui->setupUi(this);
-    set_window_options();
-    num_question = 1;
-    // -- ДЛЯ ТЕСТА (ДЕМО) --
-    QFont font("Century Gothic", 14);
-    ui->text_question->setFont(font);
 
-    ui->text_question->setText("1. Что понимают под термином визуализация(рендеринг)");
-    ui->first_answer->setText("получение изображения по модели");
-    ui->second_answer->setText("отражение объекта от света");
-    ui->third_answer->setText("программа для моделирования");
-    ui->fourth_answer->setText("процесс взаимодействия двух систем");
-    // -- --
+    db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName("C:/Program Files (x86)/Qt Project/RayTracing/EducationSystem.sqlite");
+
+    if (!db.open())
+        QMessageBox::critical(NULL, QObject::tr("Ошибка!"), db.lastError().text());
+
+    set_window_options();
 }
 
 TestWindow::~TestWindow()
@@ -47,6 +43,30 @@ void TestWindow::set_window_options()
     QPalette p = palette();
     p.setBrush(QPalette::Background, bkgnd);
     setPalette(p);
+
+    QFont font("Century Gothic", 14);
+    ui->text_question->setFont(font);
+}
+
+// 1.2
+void TestWindow::start_test()
+{
+    num_question = 1;
+    get_question(num_question);
+}
+
+// 1.2
+void TestWindow::set_enabled_button(int id_question)
+{
+    if(id_question == 1)
+        ui->button_prev_question->setEnabled(0);
+    else
+        ui->button_prev_question->setEnabled(1);
+
+    if(id_question == 5)
+        ui->button_next_question->setEnabled(0);
+    else
+        ui->button_next_question->setEnabled(1);
 }
 
 void TestWindow::reset_answers()
@@ -57,93 +77,90 @@ void TestWindow::reset_answers()
     ui->fourth_answer->setChecked(0);
 }
 
+// 1.2
+void TestWindow::get_question(int id_question)
+{
+    QSqlQuery query;
+    query.prepare("SELECT * FROM Question WHERE ID_Question = :id_question AND ID_Theme = :id_theme");
+    query.bindValue(":id_question",  id_question);
+    query.bindValue(":id_theme",     get_theme_test());
+    query.exec();
+    if(!query.next())
+        QMessageBox::warning(this, "Теcтирование", "Вопрос не найден!");
+    else
+        output_question(id_question, query.value("Text_Question").toString(), query.value("Answer_1").toString(), query.value("Answer_2").toString(),
+                        query.value("Answer_3").toString(), query.value("Answer_4").toString(), query.value("Right_Answer").toInt());
+}
+
+// 1.2
+void TestWindow::output_question(int id_question, QString question, QString answer1, QString answer2, QString answer3, QString answer4, int correct_answer)
+{
+    ui->text_question->setText(QString::number(id_question) + ". " + question);
+    ui->first_answer->setText(answer1);
+    ui->second_answer->setText(answer2);
+    ui->third_answer->setText(answer3);
+    ui->fourth_answer->setText(answer4);
+    add_correct_answer(id_question - 1, correct_answer);
+    set_enabled_button(id_question);
+}
+
+// 1.2
+void TestWindow::save_marked_answer(int id_question)
+{
+    int index = id_question - 1;
+    if(ui->first_answer->isChecked())
+        add_saved_answer(index, 1);
+    else if(ui->second_answer->isChecked())
+        add_saved_answer(index, 2);
+    else if(ui->third_answer->isChecked())
+        add_saved_answer(index, 3);
+    else if(ui->fourth_answer->isChecked())
+        add_saved_answer(index, 4);
+    else
+        add_saved_answer(index, 0);
+}
+
+// 1.2
+void TestWindow::get_marked_answer(int id_question, bool next_question)
+{
+    int last_answer;
+    if(next_question)
+        last_answer = get_saved_answer(id_question);
+    else
+        last_answer = get_saved_answer(id_question - 1);
+
+    if(last_answer == 1)
+        ui->first_answer->setChecked(1);
+    else if(last_answer == 2)
+        ui->second_answer->setChecked(1);
+    else if(last_answer == 3)
+        ui->third_answer->setChecked(1);
+    else if(last_answer == 4)
+        ui->fourth_answer->setChecked(1);
+    else
+        reset_answers();
+}
+
+// 1.2
 void TestWindow::on_button_prev_question_clicked()
 {
-    // -- ДЛЯ ДЕМО --
-    QFont font("Century Gothic", 12);
-    ui->text_question->setFont(font);
-
-    if(num_question > 0)
+    if(num_question > 1 && num_question <= 5)
         num_question--;
 
-    if(num_question == 1)
-    {
-        ui->first_answer->setChecked(1);
-        ui->text_question->setText("1. Что понимают под термином визуализация(рендеринг)");
-        ui->first_answer->setText("получение изображения по модели");
-        ui->second_answer->setText("отражение объекта от света");
-        ui->third_answer->setText("программа для моделирования");
-        ui->fourth_answer->setText("процесс взаимодействия двух систем");
-    }
-    else if(num_question == 2)
-    {
-        ui->text_question->setText("2. Что относится к методам визуализации");
-        ui->first_answer->setText("трассировка модели");
-        ui->second_answer->setText("трассировка света");
-        ui->third_answer->setText("трассировка кода");
-        ui->fourth_answer->setText("трассировка пути");
-    }
-    else if(num_question == 3)
-    {
-        ui->text_question->setText("3. Где используется трассировка лучей?");
-        ui->first_answer->setText("программирование процессоров");
-        ui->second_answer->setText("разработка систем учета");
-        ui->third_answer->setText("создание веб-приложений");
-        ui->fourth_answer->setText("компьютерные игры");
-    }
-    else if(num_question == 4)
-    {
-        ui->text_question->setText("4. Где было получено первое изображение с трассировкой лучей?");
-        ui->first_answer->setText("Университет Мэриленда");
-        ui->second_answer->setText("Стэнфордский университет");
-        ui->third_answer->setText("Оксфорд");
-        ui->fourth_answer->setText("Йельский университет");
-    }
-    // -- --
+    get_question(num_question);
+    get_marked_answer(num_question, false);
 }
 
 void TestWindow::on_button_next_question_clicked()
 {
-    // -- ДЛЯ ДЕМО --
-    QFont font("Century Gothic", 12);
-    ui->text_question->setFont(font);
+    save_marked_answer(num_question);
+    reset_answers();
 
-    if(num_question > 0 && num_question < 5)
+    if(num_question >= 1 && num_question < 5)
         num_question++;
 
-    if(num_question == 2)
-    {
-        ui->text_question->setText("2. Что относится к методам визуализации?");
-        ui->first_answer->setText("трассировка модели");
-        ui->second_answer->setText("трассировка света");
-        ui->third_answer->setText("трассировка кода");
-        ui->fourth_answer->setText("трассировка пути");
-    }
-    else if(num_question == 3)
-    {
-        ui->text_question->setText("3. Где используется трассировка лучей?");
-        ui->first_answer->setText("программирование процессоров");
-        ui->second_answer->setText("разработка систем учета");
-        ui->third_answer->setText("создание веб-приложений");
-        ui->fourth_answer->setText("компьютерные игры");
-    }
-    else if(num_question == 4)
-    {
-        ui->text_question->setText("4. Где было получено первое изображение с трассировкой лучей?");
-        ui->first_answer->setText("Университет Мэриленда");
-        ui->second_answer->setText("Стэнфордский университет");
-        ui->third_answer->setText("Оксфорд");
-        ui->fourth_answer->setText("Йельский университет");
-    }
-    else
-    {
-        ui->text_question->setText("5. Какой главный недостаток у алгоритма трассировки лучей?");
-        ui->first_answer->setText("отсечение невидимых поверхностей");
-        ui->second_answer->setText("распараллеливаемость вычислений");
-        ui->third_answer->setText("производительность");
-        ui->fourth_answer->setText("вычислительная сложность");
-    }
-    // -- --
+    get_question(num_question);
+    get_marked_answer(num_question, true);
 }
 
 void TestWindow::on_button_complete_test_clicked()

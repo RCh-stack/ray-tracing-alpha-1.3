@@ -3,11 +3,16 @@
 
 #include <QDialog>
 #include <QMessageBox>
+#include <QDateTime>
+#include <QSqlDatabase>
+#include <QSqlError>
+#include <QSqlQuery>
 
 namespace Ui {
 class TestWindow;
 }
 
+// 1.2
 class TestWindow : public QDialog
 {
     Q_OBJECT
@@ -16,8 +21,33 @@ public:
     explicit TestWindow(QWidget *parent = 0);
     ~TestWindow();
 
+    // 1.2
+    // Rus:
+    //      ...
+    void set_theme_test(int id_theme) { theme_test = id_theme; }
+    int get_theme_test() { return theme_test; }
+
+    void set_mode_test(int id_mode) { mode_test = id_mode; }
+    int get_mode_test() { return mode_test; }
+
+    void add_correct_answer(int index, int number) { correct_answers[index] = number; }
+    int get_correct_answer(int index) { return correct_answers[index]; }
+
+    void add_saved_answer(int index, int answer) { current_responses[index] = answer; }
+    int get_saved_answer(int index) { return current_responses[index]; }
+    //      ...
+
+    // Rus:
+    //      ...
     void set_window_options();
+    void set_enabled_button(int id_question);
+    void start_test();
+    void get_question(int id_question);
+    void output_question(int id_question, QString question, QString answer1, QString answer2, QString answer3, QString answer4, int correct_answer);
     void reset_answers();
+    void save_marked_answer(int id_question);
+    void get_marked_answer(int id_question, bool next_question);
+    //      ....
 
 private slots:
     void on_button_prev_question_clicked();
@@ -30,7 +60,14 @@ private slots:
 
 private:
     Ui::TestWindow *ui;
-    int num_question;
+    QSqlDatabase db;
+    QString code_user; // идентификатор пользователя
+    int theme_test;  // тема тестирования
+    int mode_test; // режим тестирования
+    QDateTime datetime_test; // дата/время прохождения тестирования
+    int num_question; // номер вопроса
+    int current_responses[10]; // текущие ответы на вопросы
+    int correct_answers[10]; // корректные ответы на выданные вопросы
 };
 
 #endif // TESTWINDOW_H
