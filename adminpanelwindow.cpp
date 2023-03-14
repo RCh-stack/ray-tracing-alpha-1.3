@@ -10,8 +10,14 @@ AdminPanelWindow::AdminPanelWindow(QWidget *parent) :
 {
     ui->setupUi(this);    
 
+    db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName("C:/Program Files (x86)/Qt Project/RayTracing/EducationSystem.sqlite");
+
+    if (!db.open())
+        QMessageBox::critical(NULL, QObject::tr("Ошибка!"), db.lastError().text());
+
     set_window_options();
-    ui->listWidget->addItem("20190731 | Тест_Студент | ДИПРБ-21/1");
+    output_list_users(0);
 }
 
 AdminPanelWindow::~AdminPanelWindow()
@@ -46,48 +52,63 @@ void AdminPanelWindow::set_window_options()
     setPalette(p);
 }
 
-void AdminPanelWindow::on_listWidget_doubleClicked(const QModelIndex &index)
+// 1.2
+void AdminPanelWindow::on_listWidget_doubleClicked(const QModelIndex &)
 {
     // -- ПОД ТЕКУЩИХ ЮЗЕРОВ СДЕЛАТЬ!!! --
     UserProfileWindow *upw = new UserProfileWindow;
-    if(ui->comboBox_users->currentIndex() == 0)
-    {
-        upw->set_fullname("Тест_Студент");
-        upw->set_role("Студент");
-        upw->set_group("ДИПРБ-21/1");
-    }
-    else
-    {
-        upw->set_fullname("Администратор");
-        upw->set_role("Преподаватель");
-        upw->set_group("АСОИУ");
-    }
+
+    QListWidgetItem *item = ui->listWidget->currentItem();
+    QMessageBox::information(this, "a", item->text());
+
+   // upw->set_group();
+   // upw->set_fullname();
+    upw->set_role(ui->comboBox_users->currentText());
     upw->exec();
 }
 
+// 1.2
 void AdminPanelWindow::on_comboBox_users_currentIndexChanged(int index)
 {
-    // -- ПОДПРАВИТЬ! --
     ui->listWidget->clear();
-    if(index == 0)
-    {
-        ui->listWidget->addItem("20190731 | Тест_Студент | ДИПРБ-21/1");
-    }
-    if(index == 1)
-    {
-        ui->listWidget->addItem("10000000 | Администратор | АСОИУ");
-    }
+    output_list_users(index);
 }
 
+// 1.2
+QString AdminPanelWindow::get_group(int id_group)
+{
+    return id_group == 1 ? "ДИПРБ_21/1" :
+              id_group == 2 ? "ДИПРБ_21/2" : "АСОИУ";
+}
+
+// 1.2
+void AdminPanelWindow::output_list_users(int id_role)
+{
+    QSqlQuery query;
+    query.prepare("SELECT * FROM User WHERE Role = :id_role");
+    query.bindValue(":id_role", id_role + 1);
+    query.exec();
+
+    while(query.next())
+        ui->listWidget->addItem(query.value("ID_User").toString() + " | " + query.value("Fullname").toString()
+                                + " | " + get_group(query.value("ID_Group").toInt()));
+}
+
+// 1.2
 void AdminPanelWindow::on_button_add_clicked()
 {
     AddUserWindow *auw = new AddUserWindow;
     auw->exec();
 }
 
+
+// 1.3 (?)
 void AdminPanelWindow::on_button_edit_clicked()
 {
     EditUserWindow *euw = new EditUserWindow;
+
+    // передаваемые параметры ...
+
     euw->exec();
 }
 

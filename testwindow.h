@@ -33,8 +33,8 @@ public:
     void add_correct_answer(int index, int number) { correct_answers[index] = number; }
     int get_correct_answer(int index) { return correct_answers[index]; }
 
-    void add_saved_answer(int index, int answer) { current_responses[index] = answer; }
-    int get_saved_answer(int index) { return current_responses[index]; }
+    void add_saved_answer(int index, int answer) { current_answers[index] = answer; }
+    int get_saved_answer(int index) { return current_answers[index]; }
     //      ...
 
     // Rus:
@@ -47,6 +47,8 @@ public:
     void reset_answers();
     void save_marked_answer(int id_question);
     void get_marked_answer(int id_question, bool next_question);
+    void determine_test_result();
+    int get_rating();
     //      ....
 
 private slots:
@@ -66,8 +68,9 @@ private:
     int mode_test; // режим тестирования
     QDateTime datetime_test; // дата/время прохождения тестирования
     int num_question; // номер вопроса
-    int current_responses[10]; // текущие ответы на вопросы
+    int current_answers[10]; // текущие ответы на вопросы
     int correct_answers[10]; // корректные ответы на выданные вопросы
+    int num_correct_answers, num_wrong_answers;
 };
 
 #endif // TESTWINDOW_H

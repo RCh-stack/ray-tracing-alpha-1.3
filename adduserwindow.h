@@ -2,6 +2,10 @@
 #define ADDUSERWINDOW_H
 
 #include <QDialog>
+#include <QMessageBox>
+#include <QSqlDatabase>
+#include <QSqlError>
+#include <QSqlQuery>
 
 namespace Ui {
 class AddUserWindow;
@@ -16,6 +20,12 @@ public:
     ~AddUserWindow();
 
     void set_window_options();
+    void list_available_groups(int id_role);
+    bool code_is_number(const std::string& s);
+    bool input_validation();
+    void add_new_user();
+    //void add_new_admin();
+    void clear_input_fields();
 
 private slots:
     void on_comboBox_roles_currentIndexChanged(int index);
@@ -28,6 +38,7 @@ private slots:
 
 private:
     Ui::AddUserWindow *ui;
+    QSqlDatabase db;
 };
 
 #endif // ADDUSERWINDOW_H

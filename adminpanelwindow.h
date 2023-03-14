@@ -2,6 +2,9 @@
 #define ADMINPANELWINDOW_H
 
 #include <QDialog>
+#include <QSqlDatabase>
+#include <QSqlError>
+#include <QSqlQuery>
 
 namespace Ui {
 class AdminPanelWindow;
@@ -16,9 +19,11 @@ public:
     ~AdminPanelWindow();
 
     void set_window_options();
+    void output_list_users(int id_role);
+    QString get_group(int id_group);
 
 private slots:
-    void on_listWidget_doubleClicked(const QModelIndex &index);
+    void on_listWidget_doubleClicked(const QModelIndex &);
 
     void on_comboBox_users_currentIndexChanged(int index);
 
@@ -34,6 +39,7 @@ private slots:
 
 private:
     Ui::AdminPanelWindow *ui;
+    QSqlDatabase db;
 };
 
 #endif // ADMINPANELWINDOW_H

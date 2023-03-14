@@ -38,6 +38,8 @@ void TestWindow::set_window_options()
     ui->button_prev_question->setIcon(ButtonPrevQues);
     ui->button_help->setIcon(ButtonInformation);
 
+    ui->radiobutton_null->setVisible(0);
+
     QPixmap bkgnd(":/icons/images/mainwindow_background.jpg");
     bkgnd = bkgnd.scaled(size(), Qt::IgnoreAspectRatio);
     QPalette p = palette();
@@ -63,7 +65,7 @@ void TestWindow::set_enabled_button(int id_question)
     else
         ui->button_prev_question->setEnabled(1);
 
-    if(id_question == 5)
+    if(id_question == 10)
         ui->button_next_question->setEnabled(0);
     else
         ui->button_next_question->setEnabled(1);
@@ -71,10 +73,7 @@ void TestWindow::set_enabled_button(int id_question)
 
 void TestWindow::reset_answers()
 {
-    ui->first_answer->setChecked(0);
-    ui->second_answer->setChecked(0);
-    ui->third_answer->setChecked(0);
-    ui->fourth_answer->setChecked(0);
+    ui->radiobutton_null->setChecked(1);
 }
 
 // 1.2
@@ -124,9 +123,9 @@ void TestWindow::save_marked_answer(int id_question)
 void TestWindow::get_marked_answer(int id_question, bool next_question)
 {
     int last_answer;
-    if(next_question)
-        last_answer = get_saved_answer(id_question);
-    else
+    //if(next_question)
+       // last_answer = get_saved_answer(id_question);
+    //else
         last_answer = get_saved_answer(id_question - 1);
 
     if(last_answer == 1)
@@ -144,7 +143,7 @@ void TestWindow::get_marked_answer(int id_question, bool next_question)
 // 1.2
 void TestWindow::on_button_prev_question_clicked()
 {
-    if(num_question > 1 && num_question <= 5)
+    if(num_question > 1 && num_question <= 10)
         num_question--;
 
     get_question(num_question);
@@ -156,21 +155,50 @@ void TestWindow::on_button_next_question_clicked()
     save_marked_answer(num_question);
     reset_answers();
 
-    if(num_question >= 1 && num_question < 5)
+    if(num_question >= 1 && num_question < 10)
         num_question++;
 
     get_question(num_question);
-    get_marked_answer(num_question, true);
+    //get_marked_answer(num_question, true);
 }
 
+// 1.2
 void TestWindow::on_button_complete_test_clicked()
 {
+    save_marked_answer(num_question);
     QMessageBox::StandardButton reply;
     reply = QMessageBox::question(this, "Завершить тестирование", "Вы уверены, что хотите завершить тестирование?", QMessageBox::Yes|QMessageBox::No);
     if (reply == QMessageBox::Yes)
-        QMessageBox::information(this, "Результат тестирования", "Тестирование завершено!\nВсего вопросов: 5\nПравильных ответов: 5\nИтоговая оценка: 5",
+    {
+        determine_test_result();
+        QMessageBox::information(this, "Результат тестирования", "Тестирование завершено!\nВсего вопросов: 5\n"
+                                                                 "Правильных ответов: "     + QString::number(num_correct_answers) + "\n" +
+                                                                 "Неправильных ответов: " + QString::number(num_wrong_answers) + "\n\n" +
+                                                                 "Итоговая оценка: "           + QString::number(get_rating()),
                                        QMessageBox::Ok);
+    }
     this->close();
+}
+
+// 1.2
+void TestWindow::determine_test_result()
+{
+    num_correct_answers = 0, num_wrong_answers = 0;
+    for(int i = 0; i < 10; i++)
+    {
+        if(current_answers[i] == correct_answers[i])
+            num_correct_answers++;
+        else
+            num_wrong_answers++;
+    }
+}
+
+// 1.2
+int TestWindow::get_rating()
+{
+    return num_correct_answers < 5 ? 2 :
+              num_correct_answers >= 5 && num_correct_answers < 6 ? 3 :
+              num_correct_answers >= 6 && num_correct_answers < 8 ? 4 : 5;
 }
 
 void TestWindow::on_button_help_clicked()

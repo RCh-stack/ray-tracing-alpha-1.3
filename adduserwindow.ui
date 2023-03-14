@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>484</width>
-    <height>213</height>
+    <height>247</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -70,11 +70,11 @@
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Пароль:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_role">
+  <widget class="QLabel" name="label_group">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>130</y>
+     <y>170</y>
      <width>55</width>
      <height>21</height>
     </rect>
@@ -85,14 +85,14 @@
     </font>
    </property>
    <property name="text">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Роль:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Группа:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_code">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>170</y>
+     <y>210</y>
      <width>55</width>
      <height>21</height>
     </rect>
@@ -140,31 +140,26 @@
    <property name="geometry">
     <rect>
      <x>90</x>
-     <y>170</y>
+     <y>210</y>
      <width>111</width>
      <height>22</height>
     </rect>
    </property>
   </widget>
-  <widget class="QComboBox" name="comboBox_roles">
+  <widget class="QComboBox" name="comboBox_groups">
    <property name="geometry">
     <rect>
      <x>90</x>
-     <y>130</y>
+     <y>170</y>
      <width>211</width>
      <height>22</height>
     </rect>
    </property>
-   <item>
-    <property name="text">
-     <string>Студент</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Преподаватель</string>
-    </property>
-   </item>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);
+</string>
+   </property>
   </widget>
   <widget class="QPushButton" name="button_help">
    <property name="geometry">
@@ -207,7 +202,7 @@ QPushButton:pressed {
    <property name="geometry">
     <rect>
      <x>420</x>
-     <y>90</y>
+     <y>130</y>
      <width>51</width>
      <height>51</height>
     </rect>
@@ -244,7 +239,7 @@ QPushButton:pressed {
    <property name="geometry">
     <rect>
      <x>420</x>
-     <y>150</y>
+     <y>190</y>
      <width>51</width>
      <height>51</height>
     </rect>
@@ -276,6 +271,49 @@ QPushButton:pressed {
      <height>36</height>
     </size>
    </property>
+  </widget>
+  <widget class="QLabel" name="label_role">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>130</y>
+     <width>55</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Роль:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboBox_roles">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>130</y>
+     <width>211</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);
+</string>
+   </property>
+   <item>
+    <property name="text">
+     <string>Студент</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Преподаватель</string>
+    </property>
+   </item>
   </widget>
  </widget>
  <resources/>
