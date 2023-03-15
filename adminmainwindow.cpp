@@ -11,6 +11,17 @@ AdminMainWindow::AdminMainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    set_window_options();
+}
+
+AdminMainWindow::~AdminMainWindow()
+{
+    delete ui;
+}
+
+// 1.3
+void AdminMainWindow::set_window_options()
+{
     QPixmap panel (":/icons/images/admin-panel-button.png");
     QPixmap theory (":/icons/images/admin-theory-button.png");
     QPixmap lab (":/icons/images/admin-lab-button.png");
@@ -34,11 +45,6 @@ AdminMainWindow::AdminMainWindow(QWidget *parent) :
     QPalette p = palette();
     p.setBrush(QPalette::Background, bkgnd);
     setPalette(p);
-}
-
-AdminMainWindow::~AdminMainWindow()
-{
-    delete ui;
 }
 
 void AdminMainWindow::on_action_user_profile_triggered()

@@ -7,6 +7,7 @@
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QSqlQuery>
+#include "sql_requests.h"
 
 namespace Ui {
 class TestWindow;

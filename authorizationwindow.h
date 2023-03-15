@@ -17,6 +17,7 @@
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QSqlQuery>
+#include "sql_requests.h"
 
 namespace Ui {
 class AuthorizationWindow;
@@ -65,6 +66,10 @@ private slots:
  *  Eng:
  *      Variable declaration scope
 */
+    void on_button_show_code_pressed();
+
+    void on_button_show_code_released();
+
 private:
     Ui::AuthorizationWindow *ui;
     QSqlDatabase db;

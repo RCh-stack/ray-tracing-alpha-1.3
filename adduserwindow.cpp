@@ -13,7 +13,7 @@ AddUserWindow::AddUserWindow(QWidget *parent) :
     db.setDatabaseName("C:/Program Files (x86)/Qt Project/RayTracing/EducationSystem.sqlite");
 
     if (!db.open())
-        QMessageBox::critical(NULL, "Ошибка", db.lastError().text());
+        QMessageBox::critical(this, "Ошибка", db.lastError().text());
 
     ui->text_code->setEnabled(0);
 }
@@ -33,7 +33,7 @@ void AddUserWindow::set_window_options()
     QIcon ButtonClose(close);
     QIcon ButtonInformation(help);
 
-    ui->buttod_add->setIcon(ButtonAdd);
+    ui->button_add->setIcon(ButtonAdd);
     ui->button_exit->setIcon(ButtonClose);
     ui->button_help->setIcon(ButtonInformation);
 
@@ -73,7 +73,7 @@ void AddUserWindow::list_available_groups(int id_role)
         ui->comboBox_groups->addItem("АСОИУ");
 }
 
-// 1.2
+// 1.2 + 1.3
 bool AddUserWindow::input_validation()
 {
     if(ui->text_login->text().length() != 8)
@@ -88,12 +88,12 @@ bool AddUserWindow::input_validation()
     }
     else if(ui->text_password->text().length() < 10 || ui->text_password->text().length() > 20)
     {
-        QMessageBox::critical(this, "Ошибка", "Пароль должен быть не меньше 10 и не более 20 символов!");
+        QMessageBox::critical(this, "Ошибка", "Пароль должен состоять из не менее 10 символов");
         return false;
     }
     else if(ui->comboBox_roles->currentIndex() == 1 && ui->text_code->text().length() != 6)
     {
-        QMessageBox::critical(this, "Ошибка", "Код доступа должен состоять из 6 цифр!");
+        QMessageBox::critical(this, "Ошибка", "Код доступа должен состоять из 6 чисел!");
         return false;
     }
     else if(ui->comboBox_roles->currentIndex() == 1 && !code_is_number(ui->text_code->text().simplified().toStdString()))
@@ -106,32 +106,33 @@ bool AddUserWindow::input_validation()
 }
 
 // 1.2
-void AddUserWindow::on_buttod_add_clicked()
+void AddUserWindow::on_button_add_clicked()
 {
     if(input_validation())
         add_new_user();
 }
 
-// 1.2
+// 1.3
 void AddUserWindow::add_new_user()
 {
     QSqlQuery query;
-    query.prepare("INSERT INTO User (ID_User, Fullname, ID_Group, Role, Password, Code) VALUES (:id_user, :fullname, :group, :role, :password, :code)");
+    query.prepare(insert_user());
     query.bindValue(":id_user",         ui->text_login->text().simplified());
     query.bindValue(":fullname",       ui->text_fullname->text().simplified());
-    query.bindValue(":group",           ui->comboBox_groups->currentIndex() + 1);
+    query.bindValue(":group",           get_id_group());
     query.bindValue(":role",              ui->comboBox_roles->currentIndex() + 1);
     query.bindValue(":password",     ui->text_password->text().simplified());
     query.bindValue(":code",            ui->text_code->text().simplified());
     query.exec();
 
-    if(query.isValid())
-    {
-        QMessageBox::information(this, "Уведомление", "Новый пользователь добавлен!");
-        clear_input_fields();
-    }
-    else
-        QMessageBox::critical(this, "Ошибка", query.lastError().text());
+    QMessageBox::information(this, "Уведомление", "Новый пользователь добавлен!");
+    clear_input_fields();
+}
+
+// 1.3
+int AddUserWindow::get_id_group()
+{
+    return ui->comboBox_roles->currentIndex() == 3 ? 0 : ui->comboBox_groups->currentIndex() + 1;
 }
 
 // 1.2

@@ -80,7 +80,7 @@ void TestWindow::reset_answers()
 void TestWindow::get_question(int id_question)
 {
     QSqlQuery query;
-    query.prepare("SELECT * FROM Question WHERE ID_Question = :id_question AND ID_Theme = :id_theme");
+    query.prepare(select_question());
     query.bindValue(":id_question",  id_question);
     query.bindValue(":id_theme",     get_theme_test());
     query.exec();
@@ -171,7 +171,7 @@ void TestWindow::on_button_complete_test_clicked()
     if (reply == QMessageBox::Yes)
     {
         determine_test_result();
-        QMessageBox::information(this, "Результат тестирования", "Тестирование завершено!\nВсего вопросов: 5\n"
+        QMessageBox::information(this, "Результат тестирования", "Тестирование завершено!\nВсего вопросов: 10\n"
                                                                  "Правильных ответов: "     + QString::number(num_correct_answers) + "\n" +
                                                                  "Неправильных ответов: " + QString::number(num_wrong_answers) + "\n\n" +
                                                                  "Итоговая оценка: "           + QString::number(get_rating()),

@@ -116,7 +116,7 @@ void DemonstrationWindow::set_enabled_button(int numStep)
 void DemonstrationWindow::open_file_by_code(int code)
 {
     QSqlQuery query;
-    query.prepare("SELECT * FROM DemoPage WHERE Number_Page = :number AND ID_Type = :type");
+    query.prepare(select_demopage());
     query.bindValue(":number",  code);
     query.bindValue(":type", get_code_format_output() + 1);
     query.exec();

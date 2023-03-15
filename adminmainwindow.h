@@ -15,6 +15,8 @@ public:
     explicit AdminMainWindow(QWidget *parent = 0);
     ~AdminMainWindow();
 
+    void set_window_options();
+
 private slots:
     void on_action_user_profile_triggered();
 

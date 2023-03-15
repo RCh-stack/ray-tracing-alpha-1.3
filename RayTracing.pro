@@ -55,7 +55,8 @@ HEADERS  += mainwindow.h \
     adduserwindow.h \
     edituserwindow.h \
     addpracticwork.h \
-    editpracticwork.h
+    editpracticwork.h \
+    sql_requests.h
 
 FORMS    += mainwindow.ui \
     authorizationwindow.ui \

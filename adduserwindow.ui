@@ -115,6 +115,9 @@
      <height>22</height>
     </rect>
    </property>
+   <property name="maxLength">
+    <number>8</number>
+   </property>
   </widget>
   <widget class="QLineEdit" name="text_fullname">
    <property name="geometry">
@@ -124,6 +127,9 @@
      <width>211</width>
      <height>22</height>
     </rect>
+   </property>
+   <property name="maxLength">
+    <number>100</number>
    </property>
   </widget>
   <widget class="QLineEdit" name="text_password">
@@ -135,6 +141,9 @@
      <height>22</height>
     </rect>
    </property>
+   <property name="maxLength">
+    <number>20</number>
+   </property>
   </widget>
   <widget class="QLineEdit" name="text_code">
    <property name="geometry">
@@ -144,6 +153,9 @@
      <width>111</width>
      <height>22</height>
     </rect>
+   </property>
+   <property name="maxLength">
+    <number>6</number>
    </property>
   </widget>
   <widget class="QComboBox" name="comboBox_groups">
@@ -198,7 +210,7 @@ QPushButton:pressed {
     </size>
    </property>
   </widget>
-  <widget class="QPushButton" name="buttod_add">
+  <widget class="QPushButton" name="button_add">
    <property name="geometry">
     <rect>
      <x>420</x>

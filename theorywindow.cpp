@@ -11,7 +11,7 @@ TheoryWindow::TheoryWindow(QWidget *parent) :
     db.setDatabaseName("C:/Program Files (x86)/Qt Project/RayTracing/EducationSystem.sqlite");
 
     if (!db.open())
-        QMessageBox::critical(NULL, QObject::tr("Ошибка!"), db.lastError().text());
+        QMessageBox::critical(this, "Ошибка", db.lastError().text());
 
     set_window_options();
     pages_read = 0;
@@ -94,7 +94,7 @@ void TheoryWindow::on_button_next_page_clicked()
 void TheoryWindow::open_file_by_code(int row_index)
 {
     QSqlQuery query;
-    query.prepare("SELECT * FROM TheoryPage WHERE ID_Page = :id");
+    query.prepare(select_theorypage_by_id());
     query.bindValue(":id",  row_index);
     query.exec();
     if(!query.next())
@@ -107,7 +107,7 @@ void TheoryWindow::open_file_by_code(int row_index)
 void TheoryWindow::open_file_by_name(QString name)
 {
     QSqlQuery query;
-    query.prepare("SELECT * FROM TheoryPage WHERE Name_Theme = :name");
+    query.prepare(select_theorypage_by_name());
     query.bindValue(":name",  name);
     query.exec();
     if(!query.next())

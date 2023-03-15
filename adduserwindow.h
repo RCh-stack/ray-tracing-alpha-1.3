@@ -6,6 +6,7 @@
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QSqlQuery>
+#include "sql_requests.h"
 
 namespace Ui {
 class AddUserWindow;
@@ -23,14 +24,14 @@ public:
     void list_available_groups(int id_role);
     bool code_is_number(const std::string& s);
     bool input_validation();
+    int get_id_group();
     void add_new_user();
-    //void add_new_admin();
     void clear_input_fields();
 
 private slots:
     void on_comboBox_roles_currentIndexChanged(int index);
 
-    void on_buttod_add_clicked();
+    void on_button_add_clicked();
 
     void on_button_exit_clicked();
 

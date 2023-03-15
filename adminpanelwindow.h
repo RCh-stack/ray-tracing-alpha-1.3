@@ -5,6 +5,7 @@
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QSqlQuery>
+#include "sql_requests.h"
 
 namespace Ui {
 class AdminPanelWindow;
@@ -19,13 +20,14 @@ public:
     ~AdminPanelWindow();
 
     void set_window_options();
-    void output_list_users(int id_role);
+    void output_list_users(int id_role, int id_group);
     QString get_group(int id_group);
+    void clear_table();
 
 private slots:
     void on_listWidget_doubleClicked(const QModelIndex &);
 
-    void on_comboBox_users_currentIndexChanged(int index);
+    void on_comboBox_roles_currentIndexChanged(int index);
 
     void on_button_add_clicked();
 
@@ -36,6 +38,10 @@ private slots:
     void on_button_help_clicked();
 
     void on_button_exit_clicked();
+
+    void on_comboBox_groups_currentIndexChanged(int index);
+
+    void on_button_update_clicked();
 
 private:
     Ui::AdminPanelWindow *ui;

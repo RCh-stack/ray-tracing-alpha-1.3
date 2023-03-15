@@ -16,7 +16,7 @@
   <widget class="QLabel" name="label_code_admin">
    <property name="geometry">
     <rect>
-     <x>80</x>
+     <x>90</x>
      <y>160</y>
      <width>71</width>
      <height>21</height>
@@ -38,7 +38,7 @@
   <widget class="QLineEdit" name="text_code_admin">
    <property name="geometry">
     <rect>
-     <x>160</x>
+     <x>170</x>
      <y>160</y>
      <width>141</width>
      <height>22</height>
@@ -48,6 +48,9 @@
     <font>
      <pointsize>8</pointsize>
     </font>
+   </property>
+   <property name="maxLength">
+    <number>6</number>
    </property>
   </widget>
   <widget class="QPushButton" name="button_entry">
@@ -128,6 +131,9 @@ QPushButton:pressed {
      <pointsize>8</pointsize>
     </font>
    </property>
+   <property name="maxLength">
+    <number>8</number>
+   </property>
   </widget>
   <widget class="QLabel" name="label_password_user">
    <property name="geometry">
@@ -165,11 +171,14 @@ QPushButton:pressed {
      <pointsize>8</pointsize>
     </font>
    </property>
+   <property name="maxLength">
+    <number>20</number>
+   </property>
   </widget>
   <widget class="QRadioButton" name="radioButton_user">
    <property name="geometry">
     <rect>
-     <x>40</x>
+     <x>50</x>
      <y>120</y>
      <width>141</width>
      <height>20</height>
@@ -191,7 +200,7 @@ QPushButton:pressed {
   <widget class="QRadioButton" name="radioButton_admin">
    <property name="geometry">
     <rect>
-     <x>200</x>
+     <x>210</x>
      <y>120</y>
      <width>151</width>
      <height>20</height>
@@ -289,6 +298,43 @@ QPushButton:pressed {
     <rect>
      <x>330</x>
      <y>70</y>
+     <width>22</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>Показать пароль</string>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    background-color: rgb(255, 255, 255);
+    border: 2px solid #094065;
+}
+
+QPushButton:pressed {
+    background-color:  rgb(118, 118, 118);
+}
+</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>images/show-password-button.png</normaloff>images/show-password-button.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>18</width>
+     <height>18</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="button_show_code">
+   <property name="geometry">
+    <rect>
+     <x>320</x>
+     <y>160</y>
      <width>22</width>
      <height>22</height>
     </rect>

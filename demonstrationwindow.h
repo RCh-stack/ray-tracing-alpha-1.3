@@ -20,6 +20,7 @@
 #include "sphere.h"
 #include "light.h"
 #include "material.h"
+#include "sql_requests.h"
 
 namespace Ui {
 class DemonstrationWindow;

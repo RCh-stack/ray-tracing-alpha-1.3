@@ -68,16 +68,19 @@ void AuthorizationWindow::set_window_options()
     QPixmap exit (":/icons/images/exit-button.png");
     QPixmap help(":/icons/images/help-button.png");
     QPixmap show_password(":/icons/images/show-password-button.png");
+    QPixmap show_code(":/icons/images/show-password-button.png");
 
     QIcon ButtonEntry(entry);
     QIcon ButtonExit(exit);
     QIcon ButtonInformation(help);
-    QIcon ButtonShow(show_password);
+    QIcon ButtonShowPassword(show_password);
+    QIcon ButtonShowCode(show_code);
 
     ui->button_entry->setIcon(ButtonEntry);
     ui->button_exit->setIcon(ButtonExit);
     ui->button_help->setIcon(ButtonInformation);
-    ui->button_show_password->setIcon(ButtonShow);
+    ui->button_show_password->setIcon(ButtonShowPassword);
+    ui->button_show_code->setIcon(ButtonShowCode);
 
     QPixmap bkgnd(":/icons/images/mainwindow_background.jpg");
     bkgnd = bkgnd.scaled(size(), Qt::IgnoreAspectRatio);
@@ -128,7 +131,7 @@ void AuthorizationWindow::on_button_entry_clicked()
 void AuthorizationWindow::user_authorization()
 {
     QSqlQuery query;
-    query.prepare("SELECT * FROM User WHERE ID_User = :login AND Password = :password");
+    query.prepare(select_user());
     query.bindValue(":login",        ui->text_login_user->text().simplified());
     query.bindValue(":password", ui->text_password_user->text().simplified());
     query.exec();
@@ -156,7 +159,7 @@ void AuthorizationWindow::user_authorization()
 void AuthorizationWindow::admin_authorization()
 {
     QSqlQuery query;
-    query.prepare("SELECT * FROM User WHERE ID_User = :login AND Password = :password AND Code = :code");
+    query.prepare(select_admin());
     query.bindValue(":login",        ui->text_login_user->text().simplified());
     query.bindValue(":password", ui->text_password_user->text().simplified());
     query.bindValue(":code",        ui->text_code_admin->text().simplified());
@@ -211,7 +214,10 @@ void AuthorizationWindow::on_button_help_clicked()
 void AuthorizationWindow::on_radioButton_user_clicked()
 {
     if(ui->radioButton_user->isChecked())
+    {
+        ui->text_code_admin->clear();
         ui->text_code_admin->setEnabled(0);
+    }
 }
 
 /*
@@ -252,4 +258,16 @@ void AuthorizationWindow::on_button_show_password_pressed()
 void AuthorizationWindow::on_button_show_password_released()
 {
     ui->text_password_user->setEchoMode(QLineEdit::Password);
+}
+
+// 1.3
+void AuthorizationWindow::on_button_show_code_pressed()
+{
+    ui->text_code_admin->setEchoMode(QLineEdit::Normal);
+}
+
+// 1.3
+void AuthorizationWindow::on_button_show_code_released()
+{
+    ui->text_code_admin->setEchoMode(QLineEdit::Password);
 }
