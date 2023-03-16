@@ -31,6 +31,12 @@ public:
     void set_mode_test(int id_mode) { mode_test = id_mode; }
     int get_mode_test() { return mode_test; }
 
+    void set_id_user(QString id_user) { code_user = id_user; }
+    QString get_id_user() { return code_user; }
+
+    void set_date_test(QDateTime dt) { datetime_test = dt; }
+    QDateTime get_date_test() { return datetime_test; }
+
     void add_correct_answer(int index, int number) { correct_answers[index] = number; }
     int get_correct_answer(int index) { return correct_answers[index]; }
 
@@ -48,8 +54,9 @@ public:
     void reset_answers();
     void save_marked_answer(int id_question);
     void get_marked_answer(int id_question, bool next_question);
-    void determine_test_result();
-    int get_rating();
+    int determine_test_result();
+    int get_rating(int num_correct_answers);
+    void save_test_result(int rating_test);
     //      ....
 
 private slots:
@@ -61,6 +68,8 @@ private slots:
 
     void on_button_help_clicked();
 
+    void on_button_clue_clicked();
+
 private:
     Ui::TestWindow *ui;
     QSqlDatabase db;
@@ -71,7 +80,6 @@ private:
     int num_question; // номер вопроса
     int current_answers[10]; // текущие ответы на вопросы
     int correct_answers[10]; // корректные ответы на выданные вопросы
-    int num_correct_answers, num_wrong_answers;
 };
 
 #endif // TESTWINDOW_H

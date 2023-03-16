@@ -64,7 +64,9 @@ void MainWindow::on_button_demo_clicked()
 void MainWindow::on_button_test_clicked()
 {
     OptionTestWindow *tw = new OptionTestWindow;
-    tw->set_user("Тест_Студент");
+    tw->set_id_user(get_id_user());
+    tw->set_fullname_user(get_fullname_user());
+    tw->set_visible_name_user();
     tw->exec();
 }
 
@@ -83,7 +85,7 @@ void MainWindow::on_action_about_information_triggered()
 void MainWindow::on_action_user_profile_triggered()
 {
     UserProfileWindow *upw = new UserProfileWindow;
-    upw->set_fullname("Тест_Студент");
+    upw->set_fullname(get_fullname_user());
     upw->set_group("ДИПРБ-21/1");
     upw->set_role("Студент");
     upw->exec();

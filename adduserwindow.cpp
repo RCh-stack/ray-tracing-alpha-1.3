@@ -132,7 +132,7 @@ void AddUserWindow::add_new_user()
 // 1.3
 int AddUserWindow::get_id_group()
 {
-    return ui->comboBox_roles->currentIndex() == 3 ? 0 : ui->comboBox_groups->currentIndex() + 1;
+    return ui->comboBox_roles->currentIndex() == 1 ? 3 : ui->comboBox_groups->currentIndex() + 1;
 }
 
 // 1.2

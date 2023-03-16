@@ -2,6 +2,7 @@
 #define ADMINPANELWINDOW_H
 
 #include <QDialog>
+#include <QTableWidgetItem>
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QSqlQuery>
@@ -20,12 +21,17 @@ public:
     ~AdminPanelWindow();
 
     void set_window_options();
-    void output_list_users(int id_role, int id_group);
+    void set_enabled_combobox(bool status);
+    void output_list_users_with_selection(int id_role, int id_group, int id_status);
+    void output_list_users();
     QString get_group(int id_group);
+    QString get_status(int id_status);
     void clear_table();
+    QString get_selected_id_user();
+    int get_status_by_id_user(QString id_user);
+    void mark_unmark_user_for_deletion(int id_status, QString id_user);
 
 private slots:
-    void on_listWidget_doubleClicked(const QModelIndex &);
 
     void on_comboBox_roles_currentIndexChanged(int index);
 
@@ -42,6 +48,12 @@ private slots:
     void on_comboBox_groups_currentIndexChanged(int index);
 
     void on_button_update_clicked();
+
+    void on_table_users_cellDoubleClicked(int row, int column);
+
+    void on_comboBox_status_currentIndexChanged(int index);
+
+    void on_use_selection_clicked();
 
 private:
     Ui::AdminPanelWindow *ui;

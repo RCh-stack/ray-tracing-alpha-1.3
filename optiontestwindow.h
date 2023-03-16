@@ -16,7 +16,13 @@ public:
     ~OptionTestWindow();
 
     void set_window_options();
-    void set_user(QString user);
+    void set_visible_name_user();
+
+    void set_id_user(QString user) { id_user = user; }
+    QString get_id_user() { return id_user; }
+
+    void set_fullname_user(QString fullname) { fullname_user = fullname; }
+    QString get_fullname_user() { return fullname_user; }
 
 private slots:
     void on_button_start_clicked();
@@ -27,6 +33,8 @@ private slots:
 
 private:
     Ui::OptionTestWindow *ui;
+    QString id_user;
+    QString fullname_user;
 };
 
 #endif // OPTIONTESTWINDOW_H

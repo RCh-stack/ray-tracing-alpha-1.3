@@ -44,6 +44,11 @@
      <height>22</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);
+</string>
+   </property>
    <item>
     <property name="text">
      <string>1. Уравнение траектории луча</string>

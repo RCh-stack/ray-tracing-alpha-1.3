@@ -134,6 +134,7 @@ void AuthorizationWindow::user_authorization()
     query.prepare(select_user());
     query.bindValue(":login",        ui->text_login_user->text().simplified());
     query.bindValue(":password", ui->text_password_user->text().simplified());
+    query.bindValue(":id_status",  1);
     query.exec();
     if(!query.next())
         QMessageBox::warning(this, "Авторизация", "Пользователь не найден!");
@@ -143,6 +144,8 @@ void AuthorizationWindow::user_authorization()
         {
             MainWindow *mw = new MainWindow;
             mw->setWindowFlags(Qt::Dialog);
+            mw->set_id_user(query.value("ID_User").toString());
+            mw->set_fullname_user(query.value("Fullname").toString());
             mw->show();
         }
     }
@@ -163,6 +166,7 @@ void AuthorizationWindow::admin_authorization()
     query.bindValue(":login",        ui->text_login_user->text().simplified());
     query.bindValue(":password", ui->text_password_user->text().simplified());
     query.bindValue(":code",        ui->text_code_admin->text().simplified());
+    query.bindValue(":id_status", 1);
     query.exec();
     if(!query.next())
         QMessageBox::warning(this, "Авторизация", "Пользователь не найден!");

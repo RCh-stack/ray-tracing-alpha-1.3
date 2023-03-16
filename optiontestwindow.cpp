@@ -11,7 +11,6 @@ OptionTestWindow::OptionTestWindow(QWidget *parent) :
     ui->datetime_test->setDateTime(QDateTime::currentDateTime());
 
     set_window_options();
-    ui->label_user->setText("Тест_Студент");
 }
 
 OptionTestWindow::~OptionTestWindow()
@@ -40,16 +39,19 @@ void OptionTestWindow::set_window_options()
     setPalette(p);
 }
 
-void OptionTestWindow::set_user(QString user)
+// 1.3
+void OptionTestWindow::set_visible_name_user()
 {
-    ui->label_user->setText(user);
+    ui->label_user->setText(get_fullname_user());
 }
 
-// 1.2
+// 1.2 + 1.3
 void OptionTestWindow::on_button_start_clicked()
 {
     TestWindow *tw = new TestWindow;
 
+    tw->set_id_user(get_id_user());
+    tw->set_date_test(ui->datetime_test->dateTime());
     tw->set_mode_test(ui->comboBox_modes->currentIndex());
     tw->set_theme_test(ui->comboBox_topics->currentIndex() + 1);
 

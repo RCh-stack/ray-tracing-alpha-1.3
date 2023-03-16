@@ -114,6 +114,11 @@ QPushButton:pressed {
      <height>22</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);
+</string>
+   </property>
    <item>
     <property name="text">
      <string>Русский</string>
@@ -146,6 +151,11 @@ QPushButton:pressed {
      <width>151</width>
      <height>22</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);
+</string>
    </property>
    <item>
     <property name="text">

@@ -21,24 +21,29 @@ TestWindow::~TestWindow()
     delete ui;
 }
 
+// 1.3
 void TestWindow::set_window_options()
 {
     QPixmap complete (":/icons/images/complete-button.png");
     QPixmap prevQuestion (":/icons/images/prev-page.png");
     QPixmap nextQuestion (":/icons/images/next-page.png");
     QPixmap help(":/icons/images/help-button.png");
+    QPixmap clue(":/icons/images/clue-button.png");
 
     QIcon ButtonComplete(complete);
     QIcon ButtonNextQues(nextQuestion);
     QIcon ButtonPrevQues(prevQuestion);
     QIcon ButtonInformation(help);
+    QIcon ButtonClue(clue);
 
     ui->button_complete_test->setIcon(ButtonComplete);
     ui->button_next_question->setIcon(ButtonNextQues);
     ui->button_prev_question->setIcon(ButtonPrevQues);
     ui->button_help->setIcon(ButtonInformation);
+    ui->button_clue->setIcon(ButtonClue);
 
     ui->radiobutton_null->setVisible(0);
+    ui->button_clue->setVisible(0);
 
     QPixmap bkgnd(":/icons/images/mainwindow_background.jpg");
     bkgnd = bkgnd.scaled(size(), Qt::IgnoreAspectRatio);
@@ -50,10 +55,12 @@ void TestWindow::set_window_options()
     ui->text_question->setFont(font);
 }
 
-// 1.2
+// 1.2 + 1.3
 void TestWindow::start_test()
 {
     num_question = 1;
+    if(get_mode_test() == 0)
+        ui->button_clue->setVisible(1);
     get_question(num_question);
 }
 
@@ -162,7 +169,7 @@ void TestWindow::on_button_next_question_clicked()
     //get_marked_answer(num_question, true);
 }
 
-// 1.2
+// 1.3
 void TestWindow::on_button_complete_test_clicked()
 {
     save_marked_answer(num_question);
@@ -170,38 +177,61 @@ void TestWindow::on_button_complete_test_clicked()
     reply = QMessageBox::question(this, "Завершить тестирование", "Вы уверены, что хотите завершить тестирование?", QMessageBox::Yes|QMessageBox::No);
     if (reply == QMessageBox::Yes)
     {
-        determine_test_result();
+        int num_correct_answers = determine_test_result();
+        int rating_test = get_rating(num_correct_answers);
         QMessageBox::information(this, "Результат тестирования", "Тестирование завершено!\nВсего вопросов: 10\n"
                                                                  "Правильных ответов: "     + QString::number(num_correct_answers) + "\n" +
-                                                                 "Неправильных ответов: " + QString::number(num_wrong_answers) + "\n\n" +
-                                                                 "Итоговая оценка: "           + QString::number(get_rating()),
+                                                                 "Неправильных ответов: " + QString::number(10 - num_correct_answers) + "\n\n" +
+                                                                 "Итоговая оценка: "           + QString::number(rating_test),
                                        QMessageBox::Ok);
+        if(get_mode_test() == 1)
+            save_test_result(rating_test);
     }
+
     this->close();
 }
 
-// 1.2
-void TestWindow::determine_test_result()
+// 1.3
+int TestWindow::determine_test_result()
 {
-    num_correct_answers = 0, num_wrong_answers = 0;
+    int num_correct_answers = 0;
     for(int i = 0; i < 10; i++)
-    {
-        if(current_answers[i] == correct_answers[i])
+        if(get_saved_answer(i) == get_correct_answer(i))
             num_correct_answers++;
-        else
-            num_wrong_answers++;
-    }
+
+    return num_correct_answers;
 }
 
-// 1.2
-int TestWindow::get_rating()
+// 1.3
+int TestWindow::get_rating(int num_correct_answers)
 {
     return num_correct_answers < 5 ? 2 :
               num_correct_answers >= 5 && num_correct_answers < 6 ? 3 :
               num_correct_answers >= 6 && num_correct_answers < 8 ? 4 : 5;
 }
 
+// 1.3
+void TestWindow::save_test_result(int rating_test)
+{
+    QSqlQuery query;
+    query.prepare(insert_test_result());
+    query.bindValue(":id_user",        get_id_user());
+    query.bindValue(":id_theme",     get_theme_test());
+    query.bindValue(":grade",          rating_test);
+    query.bindValue(":date",            get_date_test());
+    query.exec();
+
+    QMessageBox::information(this, "Уведомление", "Результат пройденного теста записан!");
+}
+
 void TestWindow::on_button_help_clicked()
 {
 
+}
+
+// 1.3
+void TestWindow::on_button_clue_clicked()
+{
+    int correct_answer = get_correct_answer(num_question - 1);
+    QMessageBox::information(this, "Подсказка", "Правильный ответ на вопрос: " + QString::number(correct_answer));
 }

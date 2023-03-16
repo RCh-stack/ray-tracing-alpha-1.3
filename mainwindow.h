@@ -17,6 +17,12 @@ public:
 
     void set_window_options();
 
+    void set_id_user(QString id) { id_user = id; }
+    QString get_id_user() { return id_user; }
+
+    void set_fullname_user(QString fullname) { fullname_user = fullname; }
+    QString get_fullname_user() { return fullname_user; }
+
 private slots:
     void on_button_theory_clicked();
 
@@ -34,6 +40,8 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    QString id_user;
+    QString fullname_user;
 };
 
 #endif // MAINWINDOW_H
