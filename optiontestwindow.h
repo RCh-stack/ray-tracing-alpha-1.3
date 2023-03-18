@@ -31,6 +31,8 @@ private slots:
 
     void on_button_help_clicked();
 
+    void on_button_stats_clicked();
+
 private:
     Ui::OptionTestWindow *ui;
     QString id_user;

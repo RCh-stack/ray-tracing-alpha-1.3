@@ -53,23 +53,27 @@ void AdminMainWindow::on_action_user_profile_triggered()
     upw->set_fullname("Администратор");
     upw->set_group("АСОИУ");
     upw->set_role("Преподаватель");
+    upw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
     upw->exec();
 }
 
 void AdminMainWindow::on_action_about_information_triggered()
 {
     AboutWindowInformation *awi = new AboutWindowInformation;
+    awi->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
     awi->exec();
 }
 
 void AdminMainWindow::on_action_user_option_triggered()
 {
     UserOptionWindow *uow = new UserOptionWindow;
+    uow->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
     uow->exec();
 }
 
 void AdminMainWindow::on_button_admin_panel_clicked()
 {
     AdminPanelWindow *apw = new AdminPanelWindow;
+    apw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
     apw->exec();
 }

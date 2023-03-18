@@ -25,6 +25,8 @@ public:
     // 1.2
     // Rus:
     //      ...
+    int get_number_of_questions(int id_theme);
+
     void set_theme_test(int id_theme) { theme_test = id_theme; }
     int get_theme_test() { return theme_test; }
 
@@ -77,9 +79,11 @@ private:
     int theme_test;  // тема тестирования
     int mode_test; // режим тестирования
     QDateTime datetime_test; // дата/время прохождения тестирования
+    int number_of_questuions; // кол-во вопросов в тесте
     int num_question; // номер вопроса
-    int current_answers[10]; // текущие ответы на вопросы
-    int correct_answers[10]; // корректные ответы на выданные вопросы
+    int num_hints; // кол-во подсказок
+    int *current_answers; // текущие ответы на вопросы
+    int *correct_answers; // корректные ответы на выданные вопросы
 };
 
 #endif // TESTWINDOW_H

@@ -33,7 +33,8 @@ SOURCES += main.cpp\
     adduserwindow.cpp \
     edituserwindow.cpp \
     addpracticwork.cpp \
-    editpracticwork.cpp
+    editpracticwork.cpp \
+    userteststatswindow.cpp
 
 HEADERS  += mainwindow.h \
     authorizationwindow.h \
@@ -56,7 +57,8 @@ HEADERS  += mainwindow.h \
     edituserwindow.h \
     addpracticwork.h \
     editpracticwork.h \
-    sql_requests.h
+    sql_requests.h \
+    userteststatswindow.h
 
 FORMS    += mainwindow.ui \
     authorizationwindow.ui \
@@ -74,7 +76,8 @@ FORMS    += mainwindow.ui \
     adduserwindow.ui \
     edituserwindow.ui \
     addpracticwork.ui \
-    editpracticwork.ui
+    editpracticwork.ui \
+    userteststatswindow.ui
 
 RESOURCES += \
     images.qrc \

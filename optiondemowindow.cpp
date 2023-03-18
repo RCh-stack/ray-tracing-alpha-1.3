@@ -20,13 +20,31 @@ void OptionDemoWindow::set_window_options()
     QPixmap start(":/icons/images/start-button.png");
     QPixmap cancel(":/icons/images/cancel-button.png");
 
+    QPixmap blue_ground(":/icons/images/blue_ground_icons.png");
+    QPixmap eucalypt_ground(":/icons/images/eucalyptus_ground_icons.png");
+    QPixmap verdigris_ground(":/icons/images/verdigris_ground_icons.png");
+    QPixmap light_blue_ground(":/icons/images/light_blue_ground_icons.png");
+    QPixmap dark_blue_ground(":/icons/images/dark_blue_ground_icons.png");
+
     QIcon ButtonInformation(help);
     QIcon ButtonStart(start);
     QIcon ButtonCancel(cancel);
 
+    QIcon BlueGround(blue_ground);
+    QIcon EucalyptGround(eucalypt_ground);
+    QIcon VerdigrisGround(verdigris_ground);
+    QIcon LightBlueGround(light_blue_ground);
+    QIcon DarkBlueGround(dark_blue_ground);
+
     ui->button_help->setIcon(ButtonInformation);
     ui->button_start->setIcon(ButtonStart);
     ui->button_cancel->setIcon(ButtonCancel);
+
+    ui->global_color->setItemIcon(0, BlueGround);
+    ui->global_color->setItemIcon(1, EucalyptGround);
+    ui->global_color->setItemIcon(2, VerdigrisGround);
+    ui->global_color->setItemIcon(3, LightBlueGround);
+    ui->global_color->setItemIcon(4, DarkBlueGround);
 
     QPixmap bkgnd(":/icons/images/mainwindow_background.jpg");
     bkgnd = bkgnd.scaled(size(), Qt::IgnoreAspectRatio);
@@ -35,18 +53,17 @@ void OptionDemoWindow::set_window_options()
     setPalette(p);
 }
 
-// 1.1
+// 1.1 + 1.3
 void OptionDemoWindow::set_default_settings_mode()
 {
-    ui->groupBox->setEnabled(0);
-    ui->groupBox_2->setEnabled(0);
-    ui->groupBox_3->setEnabled(0);
-    ui->groupBox_4->setEnabled(0);
-    ui->groupBox_5->setEnabled(0);
-    ui->groupBox_6->setEnabled(0);
-    ui->groupBox_7->setEnabled(0);
-    ui->groupBox_8->setEnabled(0);
-    ui->groupBox_9->setEnabled(0);
+    ui->group_sphere_1->setEnabled(0);
+    ui->group_sphere_2->setEnabled(0);
+    ui->group_sphere_3->setEnabled(0);
+    ui->group_sphere_4->setEnabled(0);
+    ui->group_lights->setEnabled(0);
+    ui->group_demo->setEnabled(0);
+    ui->group_other->setEnabled(0);
+    ui->group_scene->setEnabled(0);
 
     set_default_color();
     set_default_value();
@@ -56,20 +73,23 @@ void OptionDemoWindow::set_default_settings_mode()
     ui->other_format->setCurrentIndex(2);
     ui->global_is_reflex->setChecked(1);
     ui->global_is_light->setChecked(1);
+    ui->global_is_refraction->setChecked(1);
+    ui->global_display_scene->setChecked(0);
+
     ui->other_path->setText("C:/Program Files (x86)/Qt Project/RayTracing");
 }
 
+// 1.3
 void OptionDemoWindow::set_users_settings_mode()
 {
-    ui->groupBox->setEnabled(1);
-    ui->groupBox_2->setEnabled(1);
-    ui->groupBox_3->setEnabled(1);
-    ui->groupBox_4->setEnabled(1);
-    ui->groupBox_5->setEnabled(1);
-    ui->groupBox_6->setEnabled(1);
-    ui->groupBox_7->setEnabled(1);
-    ui->groupBox_8->setEnabled(1);
-    ui->groupBox_9->setEnabled(1);
+    ui->group_sphere_1->setEnabled(1);
+    ui->group_sphere_2->setEnabled(1);
+    ui->group_sphere_3->setEnabled(1);
+    ui->group_sphere_4->setEnabled(1);
+    ui->group_lights->setEnabled(1);
+    ui->group_demo->setEnabled(1);
+    ui->group_other->setEnabled(1);
+    ui->group_scene->setEnabled(1);
 }
 
 // 1.1
@@ -81,7 +101,7 @@ void OptionDemoWindow::set_default_color()
     ui->value4_color->setCurrentIndex(0);
 }
 
-// 1.1
+// 1.1 + 1.3
 void OptionDemoWindow::set_default_value()
 {
     ui->value1_R->setValue(2);
@@ -103,6 +123,11 @@ void OptionDemoWindow::set_default_value()
     ui->value4_X->setValue(7);
     ui->value4_Y->setValue(5);
     ui->value4_Z->setValue(-18);
+
+    ui->value1_P->setValue(1.0);
+    ui->value2_P->setValue(1.5);
+    ui->value3_P->setValue(1.0);
+    ui->value4_P->setValue(1.0);
 }
 
 // 1.1
@@ -129,7 +154,7 @@ OptionDemoWindow::~OptionDemoWindow()
     delete ui;
 }
 
-// 1.1 + 1.2
+// 1.1 + 1.2 + 1.3
 void OptionDemoWindow::on_button_start_clicked()
 {
     DemonstrationWindow *dw = new DemonstrationWindow;
@@ -143,6 +168,7 @@ void OptionDemoWindow::on_button_start_clicked()
     dw->set_x(ui->value1_X->value(), ui->value2_X->value(), ui->value3_X->value(), ui->value4_X->value());
     dw->set_y(ui->value1_Y->value(), ui->value2_Y->value(), ui->value3_Y->value(), ui->value4_Y->value());
     dw->set_z(ui->value1_Z->value(), ui->value2_Z->value(), ui->value3_Z->value(), ui->value4_Z->value());
+    dw->set_refraction_index(ui->value1_P->value(), ui->value2_P->value(), ui->value3_P->value(), ui->value4_P->value());
     dw->set_x_light(ui->light1_X->value(), ui->light2_X->value(), ui->light3_X->value());
     dw->set_y_light(ui->light1_Y->value(), ui->light2_Y->value(), ui->light3_Y->value());
     dw->set_z_light(ui->light1_Z->value(), ui->light2_Z->value(), ui->light3_Z->value());
@@ -150,10 +176,13 @@ void OptionDemoWindow::on_button_start_clicked()
 
     // -- установка дополнительных параметров --
     dw->set_path_to_image(ui->other_path->text().simplified().toStdString());
+    dw->set_flag_output_scene(ui->global_display_scene->isChecked());
     dw->set_reflection_flag(ui->global_is_reflex->isChecked());
     dw->set_lighting_flag(ui->global_is_light->isChecked());
+    dw->set_refraction_flag(ui->global_is_refraction->isChecked());
     dw->set_code_format_output(ui->other_format->currentIndex());
 
+    dw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
     dw->exec(); // -- запуск демонстрации --
 }
 

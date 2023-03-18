@@ -7,6 +7,17 @@ UserOptionWindow::UserOptionWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    set_window_options();
+}
+
+UserOptionWindow::~UserOptionWindow()
+{
+    delete ui;
+}
+
+// 1.3
+void UserOptionWindow::set_window_options()
+{
     QPixmap save(":/icons/images/option-button.png");
     QPixmap cancel(":/icons/images/cancel-button.png");
 
@@ -21,9 +32,4 @@ UserOptionWindow::UserOptionWindow(QWidget *parent) :
     QPalette p = palette();
     p.setBrush(QPalette::Background, bkgnd);
     setPalette(p);
-}
-
-UserOptionWindow::~UserOptionWindow()
-{
-    delete ui;
 }

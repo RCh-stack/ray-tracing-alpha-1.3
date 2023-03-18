@@ -5,6 +5,7 @@
         <file>files/demo/step_third.html</file>
         <file>files/demo/step_fifth.html</file>
         <file>files/demo/step_fourth.html</file>
+        <file>files/demo/step_sixth.html</file>
     </qresource>
     <qresource prefix="/theory_files">
         <file>files/theory/content.html</file>

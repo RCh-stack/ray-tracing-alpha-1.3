@@ -55,14 +55,22 @@ public:
 
     void set_reflection_flag(bool flag) { flag_reflections = flag; }
     void set_lighting_flag(bool flag) { flag_lighting = flag; }
+    void set_refraction_flag(bool flag) { flag_refraction = flag; }
+    void set_flag_output_scene(bool flag) { flag_output_scene = flag; }
+
     bool get_reflection_flag() { return flag_reflections; }
     bool get_lighting_flag() { return flag_lighting; }
+    bool get_refraction_flag() { return flag_refraction; }
+    bool get_flag_output_scene() { return flag_output_scene; }
     //      Конец области дополнительных функций
 
     // Rus:
     //      Область работы с числовыми параметрами
     void set_radius(float r_1, float r_2, float r_3, float r_4) { radius[0] = r_1; radius[1] = r_2; radius[2] = r_3; radius[3] = r_4; }
     float get_radius(int index) { return radius[index]; }
+
+    void set_refraction_index(float r_1, float r_2, float r_3, float r_4) { refraction[0] = r_1; refraction[1] = r_2; refraction[2] = r_3; refraction[3] = r_4;}
+    float get_refraction_index(int index) { return refraction[index]; }
 
     void set_x(float x_1, float x_2, float x_3, float x_4) { x[0] = x_1 ; x[1] = x_2; x[2] = x_3; x[3] = x_4;}
     void set_y(float y_1, float y_2, float y_3, float y_4) { y[0] = y_1 ; y[1] = y_2; y[2] = y_3; y[3] = y_4;}
@@ -94,16 +102,27 @@ public:
 
     Vec2f get_albedo_2f(int id_color);
     Vec3f get_albedo_3f(int id_color);
+    Vec4f get_albedo_4f(int id_color);
     float get_specular_exponent(int id_color);
     //      Конец области работы с цветовыми характеристиками
 
     // Rus:
     //      Область реализации алгоритма
+
+    bool scene_intersect(const Vec3f &orig, const Vec3f &dir, const std:: vector<Sphere> &spheres, Vec3f &hit, Vec3f&N, Material &material);
+    bool scene_intersect(const Vec3f &orig, const Vec3f&dir, const std:: vector<Sphere> &spheres, Vec3f &hit, Vec3f &N, Material3f &material);
+    bool scene_intersect(const Vec3f &orig, const Vec3f&dir, const std:: vector<Sphere> &spheres, Vec3f &hit, Vec3f &N, Material4f &material);
+
+    bool generate_scene(const Vec3f &orig, const Vec3f &dir, Vec3f &hit, float spheres_dist, Vec3f &N, Material &material);
+    bool generate_scene(const Vec3f &orig, const Vec3f &dir, Vec3f &hit, float spheres_dist, Vec3f &N, Material3f &material);
+    bool generate_scene(const Vec3f &orig, const Vec3f &dir, Vec3f &hit, float spheres_dist, Vec3f &N, Material4f &material);
+
     Vec3f cast_ray(const Vec3f &orig, const Vec3f &dir, const std::vector<Sphere> &spheres);
     Vec3f cast_ray(const Vec3f &orig, const Vec3f &dir, const std::vector<Sphere> &spheres, const std:: vector<Light> &lights);
     Vec3f cast_ray_light(const Vec3f &orig, const Vec3f &dir, const std:: vector<Sphere> &spheres, const std::vector<Light> &lights);
     Vec3f cast_ray_light2(const Vec3f &orig, const Vec3f &dir, const std::vector<Sphere> &spheres, const std:: vector<Light> &lights);
     Vec3f cast_ray_light3(const Vec3f &orig, const Vec3f &dir, const std:: vector<Sphere> &spheres, const std::vector<Light> &lights, size_t depth = 0);
+    Vec3f cast_ray_light4(const Vec3f &orig, const Vec3f &dir, const std:: vector<Sphere> &spheres, const std::vector<Light> &lights, size_t depth = 0);
     //      Конец области реализации алгоритма
 
     // Rus:
@@ -112,6 +131,7 @@ public:
     void initialize_standard_objects();
     void initialize_objects_with_albedo2f();
     void initialize_objects_with_albedo3f();
+    void initialize_objects_with_albedo4f();
 
     void execute_step_algorithm(int num_step);
     void start_render(const std::vector<Sphere> &spheres);
@@ -137,10 +157,11 @@ private:
     std::vector<Sphere> spheres; // -- сферы --
     std::vector<Light> lights; // -- источники освещения --
     int color[4]; // -- коды цветов сфер --
-    float radius[4], x[4], y[4], z[4];  // -- параметры сфер --
+    float radius[4], x[4], y[4], z[4], refraction[4];  // -- параметры сфер --
     float xLigth[3], yLigth[3], zLigth[3], d[3]; // -- параметры источников освещения --
     int id_format_output; // -- код формата вывода поясняющей информации к алгоритму --
-    bool flag_reflections, flag_lighting; // -- флаги использования отражений и освещения --
+    bool flag_reflections, flag_lighting, flag_refraction; // -- флаги использования отражений и освещения + преломления --
+    bool flag_output_scene; // отображать сцену или нет
 };
 
 #endif // DEMONSTRATIONWINDOW_H

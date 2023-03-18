@@ -88,6 +88,13 @@ Vec3f DemonstrationWindow::get_albedo_3f(int id_color)
               id_color == 1 ? Vec3f(0.9, 0.1, 0.0) : Vec3f(0.5, 0.5, 0.2);
 }
 
+// 1.3
+Vec4f DemonstrationWindow::get_albedo_4f(int id_color)
+{
+    return id_color == 0 ? Vec4f(0.6, 0.3, 0.1, 0.0) :
+              id_color == 1 ? Vec4f(0.9, 0.1, 0.0, 0.0) : Vec4f(0.5, 0.5, 0.2, 0.0);
+}
+
 // 1.1
 float DemonstrationWindow::get_specular_exponent(int id_color)
 {
@@ -103,12 +110,12 @@ void DemonstrationWindow::set_enabled_button(int numStep)
     else
         ui->button_prev_step->setEnabled(1);
 
-    if(numStep == 5)
+    if(numStep == 6)
         ui->button_next_step->setEnabled(0);
     else
         ui->button_next_step->setEnabled(1);
 
-    if((numStep == 2 && !get_lighting_flag()) || (numStep == 4 && !get_reflection_flag()))
+    if((numStep == 2 && !get_lighting_flag()) || (numStep == 4 && !get_reflection_flag()) || (numStep == 5 && !get_refraction_flag()))
         ui->button_next_step->setEnabled(0);
 }
 
@@ -158,7 +165,71 @@ void DemonstrationWindow::output_table_of_contents(QString path)
     }
 }
 
-bool scene_intersect(const Vec3f &orig, const Vec3f &dir, const std:: vector<Sphere> &spheres, Vec3f &hit, Vec3f&N, Material &material)
+// 1.3
+bool DemonstrationWindow::generate_scene(const Vec3f &orig, const Vec3f &dir, Vec3f &hit, float spheres_dist, Vec3f &N, Material &material)
+{
+    float checkerboard_dist = std::numeric_limits<float>::max();
+    if (fabs(dir.y) > 1e-3)
+    {
+        float d = -(orig.y + 4) / dir.y;
+        Vec3f pt = orig + dir * d;
+
+        if (d > 0 && fabs(pt.x) < 10 && pt.z < -10 && pt.z > -30 && d < spheres_dist)
+        {
+            checkerboard_dist = d;
+            hit = pt;
+            N = Vec3f(0,1,0);
+            material.diffuse_color = (int(.5 * hit.x + 1000) + int(.5 * hit.z)) & 1 ? Vec3f(.3, .3, .3) : Vec3f(.1, .1, .1);
+        }
+    }
+
+    return std::min(spheres_dist, checkerboard_dist) < 1000;
+}
+
+// 1.3
+bool DemonstrationWindow::generate_scene(const Vec3f &orig, const Vec3f &dir, Vec3f &hit, float spheres_dist, Vec3f &N, Material3f &material)
+{
+    float checkerboard_dist = std::numeric_limits<float>::max();
+    if (fabs(dir.y) > 1e-3)
+    {
+        float d = -(orig.y + 4) / dir.y;
+        Vec3f pt = orig + dir * d;
+
+        if (d > 0 && fabs(pt.x) < 10 && pt.z < -10 && pt.z > -30 && d < spheres_dist)
+        {
+            checkerboard_dist = d;
+            hit = pt;
+            N = Vec3f(0,1,0);
+            material.diffuse_color = (int(.5 * hit.x + 1000) + int(.5 * hit.z)) & 1 ? Vec3f(.3, .3, .3) : Vec3f(.1, .1, .1);
+        }
+    }
+
+    return std::min(spheres_dist, checkerboard_dist) < 1000;
+}
+
+// 1.3
+bool DemonstrationWindow::generate_scene(const Vec3f &orig, const Vec3f &dir, Vec3f &hit, float spheres_dist, Vec3f &N, Material4f &material)
+{
+    float checkerboard_dist = std::numeric_limits<float>::max();
+    if (fabs(dir.y) > 1e-3)
+    {
+        float d = -(orig.y + 4) / dir.y;
+        Vec3f pt = orig + dir * d;
+
+        if (d > 0 && fabs(pt.x) < 10 && pt.z < -10 && pt.z > -30 && d < spheres_dist)
+        {
+            checkerboard_dist = d;
+            hit = pt;
+            N = Vec3f(0,1,0);
+            material.diffuse_color = (int(.5 * hit.x + 1000) + int(.5 * hit.z)) & 1 ? Vec3f(.3, .3, .3) : Vec3f(.1, .1, .1);
+        }
+    }
+
+    return std::min(spheres_dist, checkerboard_dist) < 1000;
+}
+
+// 1.3
+bool DemonstrationWindow::scene_intersect(const Vec3f &orig, const Vec3f &dir, const std:: vector<Sphere> &spheres, Vec3f &hit, Vec3f&N, Material &material)
 {
     float spheres_dist = std::numeric_limits<float>:: max();
     for (size_t i = 0; i < spheres.size(); i++)
@@ -173,10 +244,14 @@ bool scene_intersect(const Vec3f &orig, const Vec3f &dir, const std:: vector<Sph
         }
     }
 
-    return spheres_dist < 1000;
+    if(get_flag_output_scene())
+        return generate_scene(orig, dir, hit, spheres_dist, N, material);
+    else
+        return spheres_dist < 1000;
 }
 
-bool scene_intersect3f(const Vec3f &orig, const Vec3f&dir, const std:: vector<Sphere> &spheres, Vec3f &hit, Vec3f &N, Material3f &material)
+// 1.3
+bool DemonstrationWindow::scene_intersect(const Vec3f &orig, const Vec3f&dir, const std:: vector<Sphere> &spheres, Vec3f &hit, Vec3f &N, Material3f &material)
 {
     float spheres_dist = std:: numeric_limits<float>:: max();
     for (size_t i = 0; i < spheres.size(); i++)
@@ -191,13 +266,54 @@ bool scene_intersect3f(const Vec3f &orig, const Vec3f&dir, const std:: vector<Sp
         }
     }
 
-    return spheres_dist < 1000;
+    if(get_flag_output_scene())
+        return generate_scene(orig, dir, hit, spheres_dist, N, material);
+    else
+        return spheres_dist < 1000;
 }
 
+// 1.3
+bool DemonstrationWindow::scene_intersect(const Vec3f &orig, const Vec3f&dir, const std:: vector<Sphere> &spheres, Vec3f &hit, Vec3f &N, Material4f &material)
+{
+    float spheres_dist = std:: numeric_limits<float>:: max();
+    for (size_t i = 0; i < spheres.size(); i++)
+    {
+        float dist_i;
+        if (spheres[i].rayCrossingTest(orig, dir, dist_i) && dist_i < spheres_dist)
+        {
+            spheres_dist = dist_i;
+            hit = orig + dir * dist_i;
+            N = (hit - spheres[i].center).normalize();
+            material = spheres[i].material4f;
+        }
+    }
+
+    if(get_flag_output_scene())
+        return generate_scene(orig, dir, hit, spheres_dist, N, material);
+    else
+        return spheres_dist < 1000;
+}
 
 Vec3f reflect(const Vec3f &I, const Vec3f &N)
 {
     return I - N * 2.f * (I * N);
+}
+
+// 1.3
+Vec3f refract(const Vec3f &I, const Vec3f &N, const float &refractive_index)
+{
+    float cosi = - std::max(-1.f, std::min(1.f, I*N));
+    float etai = 1, etat = refractive_index;
+    Vec3f n = N;
+    if (cosi < 0)
+    {
+        cosi = -cosi;
+        std::swap(etai, etat); n = -N;
+    }
+
+    float eta = etai / etat;
+    float k = 1 - eta*eta*(1 - cosi*cosi);
+    return k < 0 ? Vec3f(0,0,0) : I*eta + n*(eta * cosi - sqrtf(k));
 }
 
 // -- ПЕРВЫЙ ШАГ --
@@ -280,7 +396,7 @@ Vec3f DemonstrationWindow::cast_ray_light3(const Vec3f &orig, const Vec3f &dir, 
 {
     Vec3f point, N;
     Material3f material;
-    if (depth > 4 || !scene_intersect3f(orig, dir, spheres, point, N, material))
+    if (depth > 4 || !scene_intersect(orig, dir, spheres, point, N, material))
         return get_background_color(); // background color
 
     Vec3f reflect_dir = reflect(dir, N).normalize();
@@ -297,7 +413,7 @@ Vec3f DemonstrationWindow::cast_ray_light3(const Vec3f &orig, const Vec3f &dir, 
         Vec3f shadow_pt, shadow_N;
         Material3f tmpmaterial;
 
-        if(scene_intersect3f(shadow_orig, light_dir, spheres, shadow_pt, shadow_N, tmpmaterial) && (shadow_pt - shadow_orig).norm() < light_distance)
+        if(scene_intersect(shadow_orig, light_dir, spheres, shadow_pt, shadow_N, tmpmaterial) && (shadow_pt - shadow_orig).norm() < light_distance)
             continue;
 
         diffuse_light_intensity += lights[i].depth * std::max(0.f, light_dir * N);
@@ -305,6 +421,44 @@ Vec3f DemonstrationWindow::cast_ray_light3(const Vec3f &orig, const Vec3f &dir, 
     }
 
     return material.diffuse_color * diffuse_light_intensity * material.albedo[0] + Vec3f(1., 1., 1.) * specular_light_intensity * material.albedo[1] + reflect_color * material.albedo[2];
+}
+
+// 1.3
+Vec3f DemonstrationWindow::cast_ray_light4(const Vec3f &orig, const Vec3f &dir, const std::vector<Sphere> &spheres, const std::vector<Light> &lights, size_t depth)
+{
+    Vec3f point, N;
+    Material4f material;
+    if (depth > 4 || !scene_intersect(orig, dir, spheres, point, N, material)) {
+        return get_background_color(); // background color
+    }
+
+    Vec3f reflect_dir = reflect(dir, N).normalize();
+    Vec3f refract_dir = refract(dir, N, material.refractive_index).normalize();
+
+    Vec3f reflect_orig = reflect_dir * N < 0 ? point - N * 1e-3 : point + N * 1e-3;
+    Vec3f refract_orig = refract_dir * N < 0 ? point - N * 1e-3 : point + N * 1e-3;
+
+    Vec3f reflect_color = cast_ray_light3(reflect_orig, reflect_dir, spheres, lights, depth + 1);
+    Vec3f refract_color = cast_ray_light4(refract_orig, refract_dir, spheres, lights, depth + 1);
+
+    float diffuse_light_intensity = 0, specular_light_intensity = 0;
+    for (size_t  i= 0; i < lights.size(); i++)
+    {
+        Vec3f light_dir      = (lights[i].stand - point).normalize();
+        float light_distance = (lights[i].stand - point).norm();
+        Vec3f shadow_orig = light_dir * N < 0 ? point - N * 1e-3 : point + N * 1e-3;
+
+        Vec3f shadow_pt, shadow_N;
+        Material tmpmaterial;
+        if (scene_intersect(shadow_orig, light_dir, spheres, shadow_pt, shadow_N, tmpmaterial) && (shadow_pt-shadow_orig).norm() < light_distance)
+            continue;
+
+        diffuse_light_intensity  += lights[i].depth * std::max(0.f, light_dir * N);
+        specular_light_intensity += powf(std::max(0.f, -reflect(-light_dir, N) * dir), material.specular_exponent) * lights[i].depth;
+    }
+
+    return material.diffuse_color * diffuse_light_intensity * material.albedo[0] + Vec3f(1., 1., 1.)*specular_light_intensity * material.albedo[1] +
+            reflect_color*material.albedo[2] + refract_color*material.albedo[3];
 }
 
 // 1.2
@@ -355,6 +509,7 @@ void DemonstrationWindow::start_render(const std::vector<Sphere> &spheres)
     save_image_in_framebuffer(framebuffer);
 }
 
+// 1.2 + 1.3
 void DemonstrationWindow::start_render(const std:: vector<Sphere> &spheres, const std::vector<Light> &lights)
 {
     std::vector<Vec3f> framebuffer(width * height);
@@ -366,20 +521,22 @@ void DemonstrationWindow::start_render(const std:: vector<Sphere> &spheres, cons
             float y = -(2 * (j + 0.5)/(float)height - 1) * tan(fov/2.);
             Vec3f dir = Vec3f(x, y, -1).normalize();
             if(step == 2)
-                framebuffer[i + j * width] = cast_ray(Vec3f (0,0,0), dir, spheres, lights);
+                framebuffer[i + j * width] = cast_ray(Vec3f (0, 0 ,0), dir, spheres, lights);
             else if(step == 3)
-                framebuffer[i + j * width] = cast_ray_light(Vec3f(0,0,0), dir, spheres, lights);
+                framebuffer[i + j * width] = cast_ray_light(Vec3f(0, 0, 0), dir, spheres, lights);
             else if(step == 4)
-                framebuffer[i + j * width] = cast_ray_light2(Vec3f(0,0,0), dir, spheres, lights);
+                framebuffer[i + j * width] = cast_ray_light2(Vec3f(0, 0, 0), dir, spheres, lights);
             else if(step == 5)
-                framebuffer[i + j * width] = cast_ray_light3(Vec3f(0,0,0), dir, spheres, lights);
+                framebuffer[i + j * width] = cast_ray_light3(Vec3f(0, 0, 0), dir, spheres, lights);
+            else if(step == 6)
+                framebuffer[i + j * width] = cast_ray_light4(Vec3f(0, 0, 0), dir, spheres, lights);
         }
     }
 
     save_image_in_framebuffer_with_lighting(framebuffer);
 }
 
-// 1.1
+// 1.1 + 1.3
 void DemonstrationWindow::initialize_scene_elements()
 {
     spheres.clear();
@@ -389,8 +546,10 @@ void DemonstrationWindow::initialize_scene_elements()
         initialize_standard_objects();
     else if(step == 3 || step == 4)
         initialize_objects_with_albedo2f();
-    else
+    else if(step == 5)
         initialize_objects_with_albedo3f();
+    else
+        initialize_objects_with_albedo4f();
 }
 
 // 1.1
@@ -444,6 +603,24 @@ void DemonstrationWindow::initialize_objects_with_albedo3f()
     lights.push_back(Light(Vec3f(get_x_ligth(2), get_y_ligth(2), get_z_ligth(2)), get_d_ligth(2)));
 }
 
+// 1.3
+void DemonstrationWindow::initialize_objects_with_albedo4f()
+{
+    Material4f firstSphere     (get_refraction_index(0), get_albedo_4f(get_id_color(0)), get_sphere_color(get_id_color(0)),  get_specular_exponent(get_id_color(0)));
+    Material4f glass             (get_refraction_index(1), Vec4f(0.0,  0.5, 0.1, 0.8), Vec3f(0.6, 0.7, 0.8),  125.);
+    Material4f thirdSphere    (get_refraction_index(2), get_albedo_4f(get_id_color(2)), get_sphere_color(get_id_color(2)), get_specular_exponent(get_id_color(2)));
+    Material4f mirror            (get_refraction_index(3), Vec4f(0.0, 10.0, 0.8, 0.0), Vec3f(1.0, 1.0, 1.0), 1425.);
+
+    spheres.push_back(Sphere(Vec3f(get_x(0), get_y(0), get_z(0)), get_radius(0), firstSphere));
+    spheres.push_back(Sphere(Vec3f(get_x(1), get_y(1), get_z(1)), get_radius(1), glass));
+    spheres.push_back(Sphere(Vec3f(get_x(2), get_y(2), get_z(2)), get_radius(2), thirdSphere));
+    spheres.push_back(Sphere(Vec3f(get_x(3), get_y(3), get_z(3)), get_radius(3), mirror));
+
+    lights.push_back(Light(Vec3f(get_x_ligth(0), get_y_ligth(0), get_z_ligth(0)), get_d_ligth(0)));
+    lights.push_back(Light(Vec3f(get_x_ligth(1), get_y_ligth(1), get_z_ligth(1)), get_d_ligth(1)));
+    lights.push_back(Light(Vec3f(get_x_ligth(2), get_y_ligth(2), get_z_ligth(2)), get_d_ligth(2)));
+}
+
 void DemonstrationWindow::execute_step_algorithm(int num_step)
 {
     initialize_scene_elements();
@@ -467,14 +644,14 @@ void DemonstrationWindow::on_button_start_demo_clicked()
 
 void DemonstrationWindow::on_button_next_step_clicked()
 {
-    if(step >= 1 && step < 5)
+    if(step >= 1 && step < 6)
         step++;
     execute_step_algorithm(step);
 }
 
 void DemonstrationWindow::on_button_prev_step_clicked()
 {
-    if(step > 1 && step <= 5)
+    if(step > 1 && step <= 6)
         step--;
     execute_step_algorithm(step);
 }

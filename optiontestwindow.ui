@@ -6,17 +6,17 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>443</width>
-    <height>302</height>
+    <width>490</width>
+    <height>293</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Настройки тестирования | Ray Tracing | Alpha 1.2v</string>
+   <string>Настройки тестирования | Ray Tracing | Alpha 1.3v</string>
   </property>
   <widget class="QPushButton" name="button_start">
    <property name="geometry">
     <rect>
-     <x>160</x>
+     <x>190</x>
      <y>220</y>
      <width>51</width>
      <height>51</height>
@@ -55,7 +55,7 @@ QPushButton:pressed {
     <rect>
      <x>210</x>
      <y>70</y>
-     <width>221</width>
+     <width>261</width>
      <height>22</height>
     </rect>
    </property>
@@ -170,7 +170,7 @@ color: rgb(0, 0, 0);
     <rect>
      <x>210</x>
      <y>120</y>
-     <width>221</width>
+     <width>231</width>
      <height>22</height>
     </rect>
    </property>
@@ -195,7 +195,7 @@ color: rgb(0, 0, 0);
     <rect>
      <x>310</x>
      <y>170</y>
-     <width>121</width>
+     <width>131</width>
      <height>22</height>
     </rect>
    </property>
@@ -224,8 +224,8 @@ color: rgb(0, 0, 0);
   <widget class="QPushButton" name="button_help">
    <property name="geometry">
     <rect>
-     <x>390</x>
-     <y>250</y>
+     <x>440</x>
+     <y>240</y>
      <width>41</width>
      <height>41</height>
     </rect>
@@ -264,7 +264,7 @@ QPushButton:pressed {
   <widget class="QPushButton" name="button_cancel">
    <property name="geometry">
     <rect>
-     <x>230</x>
+     <x>260</x>
      <y>220</y>
      <width>51</width>
      <height>51</height>
@@ -317,6 +317,43 @@ QPushButton:pressed {
    </property>
    <property name="text">
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="button_stats">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>220</y>
+     <width>51</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>Просмотреть статистику по пройденным тестам</string>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    background-color: rgb(255, 255, 255);
+    border: 2px solid #094065;
+}
+
+QPushButton:pressed {
+    background-color:  rgb(118, 118, 118);
+}
+</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>images/stats-users-button.png</normaloff>images/stats-users-button.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>36</width>
+     <height>48</height>
+    </size>
    </property>
   </widget>
  </widget>

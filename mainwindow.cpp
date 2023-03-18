@@ -52,33 +52,38 @@ void MainWindow::set_window_options()
 void MainWindow::on_button_theory_clicked()
 {
     TheoryWindow *tw = new TheoryWindow;
+    tw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
     tw->exec();
 }
 
 void MainWindow::on_button_demo_clicked()
 {
-    OptionDemoWindow *dw = new OptionDemoWindow;
-    dw->exec();
+    OptionDemoWindow *odw = new OptionDemoWindow;
+    odw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+    odw->exec();
 }
 
 void MainWindow::on_button_test_clicked()
 {
-    OptionTestWindow *tw = new OptionTestWindow;
-    tw->set_id_user(get_id_user());
-    tw->set_fullname_user(get_fullname_user());
-    tw->set_visible_name_user();
-    tw->exec();
+    OptionTestWindow *otw = new OptionTestWindow;
+    otw->set_id_user(get_id_user());
+    otw->set_fullname_user(get_fullname_user());
+    otw->set_visible_name_user();
+    otw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+    otw->exec();
 }
 
 void MainWindow::on_button_practic_clicked()
 {
     PracticWindow *pw = new PracticWindow;
+    pw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
     pw->exec();
 }
 
 void MainWindow::on_action_about_information_triggered()
 {
     AboutWindowInformation *awi = new AboutWindowInformation;
+    awi->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
     awi->exec();
 }
 
@@ -88,11 +93,13 @@ void MainWindow::on_action_user_profile_triggered()
     upw->set_fullname(get_fullname_user());
     upw->set_group("ДИПРБ-21/1");
     upw->set_role("Студент");
+    upw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
     upw->exec();
 }
 
 void MainWindow::on_action_user_option_triggered()
 {
     UserOptionWindow *uow = new UserOptionWindow;
+    uow->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
     uow->exec();
 }

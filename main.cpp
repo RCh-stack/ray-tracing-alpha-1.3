@@ -7,6 +7,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     a.addLibraryPath("plugins");
     AuthorizationWindow aw;
+    aw.setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
     aw.show();
 
     a.setWindowIcon(QIcon(":/icons/images/main_icon.ico"));

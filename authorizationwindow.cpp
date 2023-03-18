@@ -143,7 +143,7 @@ void AuthorizationWindow::user_authorization()
         if(query.value("Role").toInt() == 1)
         {
             MainWindow *mw = new MainWindow;
-            mw->setWindowFlags(Qt::Dialog);
+            mw->setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint) ;
             mw->set_id_user(query.value("ID_User").toString());
             mw->set_fullname_user(query.value("Fullname").toString());
             mw->show();
@@ -175,7 +175,7 @@ void AuthorizationWindow::admin_authorization()
         if(query.value("Role").toInt() == 2)
         {
             AdminMainWindow *amw = new AdminMainWindow;
-            amw->setWindowFlags(Qt::Dialog);
+            amw->setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
             amw->show();
         }
     }

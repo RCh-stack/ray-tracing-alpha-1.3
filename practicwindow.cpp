@@ -72,12 +72,14 @@ void PracticWindow::on_comboBox_works_currentIndexChanged(int index)
 void PracticWindow::on_button_send_work_clicked()
 {
     AddPracticWork *apw = new AddPracticWork;
+    apw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
     apw->exec();
 }
 
 void PracticWindow::on_button_edit_work_clicked()
 {
     EditPracticWork *epw = new EditPracticWork;
+    epw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
     epw->exec();
 }
 

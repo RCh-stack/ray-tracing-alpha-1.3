@@ -55,12 +55,32 @@ void TestWindow::set_window_options()
     ui->text_question->setFont(font);
 }
 
-// 1.2 + 1.3
+// 1.3
+int TestWindow::get_number_of_questions(int id_theme)
+{
+    QSqlQuery query;
+    query.prepare(select_number_of_questions());
+    query.bindValue(":id_theme",  id_theme);
+    query.exec();
+
+    if(query.next())
+        return query.value("NumberOfQuestions").toInt();
+
+    return 10;
+}
+
+// 1.3
 void TestWindow::start_test()
 {
+    number_of_questuions = get_number_of_questions(get_theme_test());
+    current_answers = new int[number_of_questuions];
+    correct_answers = new int[number_of_questuions];
     num_question = 1;
     if(get_mode_test() == 0)
+    {
+        num_hints = 0;
         ui->button_clue->setVisible(1);
+    }
     get_question(num_question);
 }
 
@@ -72,7 +92,7 @@ void TestWindow::set_enabled_button(int id_question)
     else
         ui->button_prev_question->setEnabled(1);
 
-    if(id_question == 10)
+    if(id_question == number_of_questuions)
         ui->button_next_question->setEnabled(0);
     else
         ui->button_next_question->setEnabled(1);
@@ -150,7 +170,7 @@ void TestWindow::get_marked_answer(int id_question, bool next_question)
 // 1.2
 void TestWindow::on_button_prev_question_clicked()
 {
-    if(num_question > 1 && num_question <= 10)
+    if(num_question > 1 && num_question <= number_of_questuions)
         num_question--;
 
     get_question(num_question);
@@ -162,7 +182,7 @@ void TestWindow::on_button_next_question_clicked()
     save_marked_answer(num_question);
     reset_answers();
 
-    if(num_question >= 1 && num_question < 10)
+    if(num_question >= 1 && num_question < number_of_questuions)
         num_question++;
 
     get_question(num_question);
@@ -195,7 +215,7 @@ void TestWindow::on_button_complete_test_clicked()
 int TestWindow::determine_test_result()
 {
     int num_correct_answers = 0;
-    for(int i = 0; i < 10; i++)
+    for(int i = 0; i < number_of_questuions; i++)
         if(get_saved_answer(i) == get_correct_answer(i))
             num_correct_answers++;
 
@@ -232,6 +252,12 @@ void TestWindow::on_button_help_clicked()
 // 1.3
 void TestWindow::on_button_clue_clicked()
 {
-    int correct_answer = get_correct_answer(num_question - 1);
-    QMessageBox::information(this, "Подсказка", "Правильный ответ на вопрос: " + QString::number(correct_answer));
+    if(num_hints != 3)
+    {
+        int correct_answer = get_correct_answer(num_question - 1);
+        QMessageBox::information(this, "Подсказка", "Правильный ответ на вопрос: " + QString::number(correct_answer));
+        num_hints++;
+    }
+    else
+        QMessageBox::warning(this, "Уведомление", "Количество подсказок ограничено.");
 }

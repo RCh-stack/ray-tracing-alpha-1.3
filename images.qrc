@@ -31,5 +31,11 @@
         <file>images/show-password-button.png</file>
         <file>images/update-button.png</file>
         <file>images/clue-button.png</file>
+        <file>images/stats-users-button.png</file>
+        <file>images/blue_ground_icons.png</file>
+        <file>images/eucalyptus_ground_icons.png</file>
+        <file>images/verdigris_ground_icons.png</file>
+        <file>images/light_blue_ground_icons.png</file>
+        <file>images/dark_blue_ground_icons.png</file>
     </qresource>
 </RCC>

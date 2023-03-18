@@ -175,6 +175,7 @@ void AdminPanelWindow::on_comboBox_status_currentIndexChanged(int index)
 void AdminPanelWindow::on_button_add_clicked()
 {
     AddUserWindow *auw = new AddUserWindow;
+    auw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
     auw->exec();
 }
 
@@ -235,6 +236,7 @@ void AdminPanelWindow::on_button_edit_clicked()
         EditUserWindow *euw = new EditUserWindow;
         euw->set_current_id(get_selected_id_user());
         euw->set_user_data_by_id();
+        euw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
         euw->exec();
     }
 }

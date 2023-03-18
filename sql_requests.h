@@ -70,6 +70,16 @@ inline QString select_demopage()
     return "SELECT * FROM DemoPage WHERE Number_Page = :number AND ID_Type = :type";
 }
 
+inline QString select_number_of_questions()
+{
+    return "SELECT NumberOfQuestions FROM ThemeTest WHERE ID_Theme = :id_theme";
+}
+
+inline QString select_name_test()
+{
+    return "SELECT Name FROM ThemeTest WHERE ID_Theme = :id_theme";
+}
+
 inline QString select_question()
 {
     return "SELECT * FROM Question WHERE ID_Question = :id_question AND ID_Theme = :id_theme";
@@ -78,6 +88,11 @@ inline QString select_question()
 inline QString insert_test_result()
 {
     return "INSERT INTO ResultTest (ID_User, ID_Theme, Grade, Date) VALUES (:id_user, :id_theme, :grade, :date)";
+}
+
+inline QString select_test_results_for_user()
+{
+    return "SELECT * FROM ResultTest WHERE ID_User = :id_user";
 }
 
 #endif // SQL_REQUESTS

@@ -15,6 +15,8 @@ public:
     explicit UserOptionWindow(QWidget *parent = 0);
     ~UserOptionWindow();
 
+    void set_window_options();
+
 private:
     Ui::UserOptionWindow *ui;
 };
