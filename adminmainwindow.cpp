@@ -50,7 +50,7 @@ void AdminMainWindow::set_window_options()
 void AdminMainWindow::on_action_user_profile_triggered()
 {
     UserProfileWindow *upw = new UserProfileWindow;
-    upw->set_fullname("Администратор");
+    upw->set_fullname(get_fullname_user());
     upw->set_group("АСОИУ");
     upw->set_role("Преподаватель");
     upw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
@@ -76,4 +76,25 @@ void AdminMainWindow::on_button_admin_panel_clicked()
     AdminPanelWindow *apw = new AdminPanelWindow;
     apw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
     apw->exec();
+}
+
+// 1.4
+void AdminMainWindow::on_action_exit_triggered()
+{
+    this->close();
+}
+
+void AdminMainWindow::on_action_help_triggered()
+{
+
+}
+
+void AdminMainWindow::on_action_manual_triggered()
+{
+
+}
+
+void AdminMainWindow::on_button_help_clicked()
+{
+
 }

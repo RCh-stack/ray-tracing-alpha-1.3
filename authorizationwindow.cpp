@@ -176,6 +176,8 @@ void AuthorizationWindow::admin_authorization()
         {
             AdminMainWindow *amw = new AdminMainWindow;
             amw->setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
+            amw->set_id_user(query.value("ID_User").toString());
+            amw->set_fullname_user(query.value("Fullname").toString());
             amw->show();
         }
     }

@@ -11,7 +11,7 @@ DemonstrationWindow::DemonstrationWindow(QWidget *parent) :
     db.setDatabaseName("C:/Program Files (x86)/Qt Project/RayTracing/EducationSystem.sqlite");
 
     if (!db.open())
-        QMessageBox::critical(NULL, QObject::tr("Ошибка!"), db.lastError().text());
+        QMessageBox::critical(this, "Ошибка", db.lastError().text());
 
     set_window_options();
     step = 0, width = 1048, height = 498, fov = 1.5;
@@ -67,11 +67,19 @@ Vec3f DemonstrationWindow::get_background_color()
               id_background_color == 3 ? Vec3f(0.2, 0.6, 0.9) : Vec3f(0.2, 0.5, 0.8);
 }
 
-// 1.1
+// 1.4
+// 0.5 0.5 0.5 - светло-серый
+// 0.7 0.5 0.5 - розовый
+// 0.8 0.5 0.3 - оранжевый (мандариновый)
+// 0.8 0.7 0.1 - желтый
 Vec3f DemonstrationWindow::get_sphere_color(int id_color)
 {
     return id_color == 0 ? Vec3f(0.4, 0.4, 0.3) :
-              id_color == 1 ? Vec3f(0.3, 0.1, 0.1) : Vec3f(0.2, 0.2, 0.2);
+              id_color == 1 ? Vec3f(0.3, 0.1, 0.1) :
+              id_color == 2 ? Vec3f(0.2, 0.2, 0.2) :
+              id_color == 3 ? Vec3f(0.5, 0.5, 0.5) :
+              id_color == 4 ? Vec3f(0.7, 0.5, 0.5) :
+              id_color == 5 ? Vec3f(0.8, 0.5, 0.3) : Vec3f(0.8, 0.7, 0.1);
 }
 
 // 1.1
@@ -312,8 +320,8 @@ Vec3f refract(const Vec3f &I, const Vec3f &N, const float &refractive_index)
     }
 
     float eta = etai / etat;
-    float k = 1 - eta*eta*(1 - cosi*cosi);
-    return k < 0 ? Vec3f(0,0,0) : I*eta + n*(eta * cosi - sqrtf(k));
+    float k = 1 - eta * eta * (1 - cosi * cosi);
+    return k < 0 ? Vec3f(0, 0, 0) : I * eta + n * (eta * cosi - sqrtf(k));
 }
 
 // -- ПЕРВЫЙ ШАГ --
@@ -458,7 +466,7 @@ Vec3f DemonstrationWindow::cast_ray_light4(const Vec3f &orig, const Vec3f &dir, 
     }
 
     return material.diffuse_color * diffuse_light_intensity * material.albedo[0] + Vec3f(1., 1., 1.)*specular_light_intensity * material.albedo[1] +
-            reflect_color*material.albedo[2] + refract_color*material.albedo[3];
+            reflect_color * material.albedo[2] + refract_color * material.albedo[3];
 }
 
 // 1.2
@@ -608,7 +616,7 @@ void DemonstrationWindow::initialize_objects_with_albedo4f()
 {
     Material4f firstSphere     (get_refraction_index(0), get_albedo_4f(get_id_color(0)), get_sphere_color(get_id_color(0)),  get_specular_exponent(get_id_color(0)));
     Material4f glass             (get_refraction_index(1), Vec4f(0.0,  0.5, 0.1, 0.8), Vec3f(0.6, 0.7, 0.8),  125.);
-    Material4f thirdSphere    (get_refraction_index(2), get_albedo_4f(get_id_color(2)), get_sphere_color(get_id_color(2)), get_specular_exponent(get_id_color(2)));
+    Material4f thirdSphere    (get_refraction_index(2), get_albedo_4f(get_id_color(2)), get_sphere_color(get_id_color(2)),  get_specular_exponent(get_id_color(1)));
     Material4f mirror            (get_refraction_index(3), Vec4f(0.0, 10.0, 0.8, 0.0), Vec3f(1.0, 1.0, 1.0), 1425.);
 
     spheres.push_back(Sphere(Vec3f(get_x(0), get_y(0), get_z(0)), get_radius(0), firstSphere));

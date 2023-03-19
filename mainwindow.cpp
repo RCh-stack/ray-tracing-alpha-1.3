@@ -73,9 +73,13 @@ void MainWindow::on_button_test_clicked()
     otw->exec();
 }
 
+// 1.4
 void MainWindow::on_button_practic_clicked()
 {
     PracticWindow *pw = new PracticWindow;
+    pw->set_id_user(get_id_user());
+    pw->set_fullname_user(get_fullname_user());
+    pw->output_table_of_contents(0);
     pw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
     pw->exec();
 }
@@ -102,4 +106,25 @@ void MainWindow::on_action_user_option_triggered()
     UserOptionWindow *uow = new UserOptionWindow;
     uow->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
     uow->exec();
+}
+
+// 1.4
+void MainWindow::on_action_exit_triggered()
+{
+    this->close();
+}
+
+void MainWindow::on_action_help_triggered()
+{
+
+}
+
+void MainWindow::on_action_manual_triggered()
+{
+
+}
+
+void MainWindow::on_button_help_clicked()
+{
+
 }

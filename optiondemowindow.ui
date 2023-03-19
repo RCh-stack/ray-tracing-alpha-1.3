@@ -275,15 +275,63 @@ color: rgb(0, 0, 0);
      <property name="text">
       <string>оливковый</string>
      </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>images/olive_sphere_icon.png</normaloff>images/olive_sphere_icon.png</iconset>
+     </property>
     </item>
     <item>
      <property name="text">
       <string>темно-красный</string>
      </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>images/dark_red_sphere_icon.png</normaloff>images/dark_red_sphere_icon.png</iconset>
+     </property>
     </item>
     <item>
      <property name="text">
       <string>серый</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>images/grey_sphere_icon.png</normaloff>images/grey_sphere_icon.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>светло-серый</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>images/light_grey_sphere_icon.png</normaloff>images/light_grey_sphere_icon.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>розовый</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>images/pink_sphere_icon.png</normaloff>images/pink_sphere_icon.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>оранжевый</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>images/orange_sphere_icon.png</normaloff>images/orange_sphere_icon.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>желтый</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>images/yellow_sphere_icon.png</normaloff>images/yellow_sphere_icon.png</iconset>
      </property>
     </item>
    </widget>
@@ -595,15 +643,63 @@ color: rgb(0, 0, 0);
      <property name="text">
       <string>оливковый</string>
      </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>images/olive_sphere_icon.png</normaloff>images/olive_sphere_icon.png</iconset>
+     </property>
     </item>
     <item>
      <property name="text">
       <string>темно-красный</string>
      </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>images/dark_red_sphere_icon.png</normaloff>images/dark_red_sphere_icon.png</iconset>
+     </property>
     </item>
     <item>
      <property name="text">
       <string>серый</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>images/grey_sphere_icon.png</normaloff>images/grey_sphere_icon.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>светло-серый</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>images/light_grey_sphere_icon.png</normaloff>images/light_grey_sphere_icon.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>розовый</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>images/pink_sphere_icon.png</normaloff>images/pink_sphere_icon.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>оранжевый</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>images/orange_sphere_icon.png</normaloff>images/orange_sphere_icon.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>желтый</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>images/yellow_sphere_icon.png</normaloff>images/yellow_sphere_icon.png</iconset>
      </property>
     </item>
    </widget>
@@ -915,15 +1011,63 @@ color: rgb(0, 0, 0);
      <property name="text">
       <string>оливковый</string>
      </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>images/olive_sphere_icon.png</normaloff>images/olive_sphere_icon.png</iconset>
+     </property>
     </item>
     <item>
      <property name="text">
       <string>темно-красный</string>
      </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>images/dark_red_sphere_icon.png</normaloff>images/dark_red_sphere_icon.png</iconset>
+     </property>
     </item>
     <item>
      <property name="text">
       <string>серый</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>images/grey_sphere_icon.png</normaloff>images/grey_sphere_icon.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>светло-серый</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>images/light_grey_sphere_icon.png</normaloff>images/light_grey_sphere_icon.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>розовый</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>images/pink_sphere_icon.png</normaloff>images/pink_sphere_icon.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>оранжевый</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>images/orange_sphere_icon.png</normaloff>images/orange_sphere_icon.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>желтый</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>images/yellow_sphere_icon.png</normaloff>images/yellow_sphere_icon.png</iconset>
      </property>
     </item>
    </widget>
@@ -1235,15 +1379,63 @@ color: rgb(0, 0, 0);
      <property name="text">
       <string>оливковый</string>
      </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>images/olive_sphere_icon.png</normaloff>images/olive_sphere_icon.png</iconset>
+     </property>
     </item>
     <item>
      <property name="text">
       <string>темно-красный</string>
      </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>images/dark_red_sphere_icon.png</normaloff>images/dark_red_sphere_icon.png</iconset>
+     </property>
     </item>
     <item>
      <property name="text">
       <string>серый</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>images/grey_sphere_icon.png</normaloff>images/grey_sphere_icon.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>светло-серый</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>images/light_grey_sphere_icon.png</normaloff>images/light_grey_sphere_icon.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>розовый</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>images/pink_sphere_icon.png</normaloff>images/pink_sphere_icon.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>оранжевый</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>images/orange_sphere_icon.png</normaloff>images/orange_sphere_icon.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>желтый</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>images/yellow_sphere_icon.png</normaloff>images/yellow_sphere_icon.png</iconset>
      </property>
     </item>
    </widget>
@@ -2446,7 +2638,7 @@ color: rgb(0, 0, 0);
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>images/blue_ground_icons.png</normaloff>images/blue_ground_icons.png</iconset>
+       <normaloff>images/blue_ground_icon.png</normaloff>images/blue_ground_icon.png</iconset>
      </property>
     </item>
     <item>
@@ -2455,7 +2647,7 @@ color: rgb(0, 0, 0);
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>images/eucalyptus_ground_icons.png</normaloff>images/eucalyptus_ground_icons.png</iconset>
+       <normaloff>images/eucalyptus_ground_icon.png</normaloff>images/eucalyptus_ground_icon.png</iconset>
      </property>
     </item>
     <item>
@@ -2464,7 +2656,7 @@ color: rgb(0, 0, 0);
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>images/verdigris_ground_icons.png</normaloff>images/verdigris_ground_icons.png</iconset>
+       <normaloff>images/verdigris_ground_icon.png</normaloff>images/verdigris_ground_icon.png</iconset>
      </property>
     </item>
     <item>
@@ -2473,7 +2665,7 @@ color: rgb(0, 0, 0);
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>images/light_blue_ground_icons.png</normaloff>images/light_blue_ground_icons.png</iconset>
+       <normaloff>images/light_blue_ground_icon.png</normaloff>images/light_blue_ground_icon.png</iconset>
      </property>
     </item>
     <item>
@@ -2482,7 +2674,7 @@ color: rgb(0, 0, 0);
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>images/dark_blue_ground_icons.png</normaloff>images/dark_blue_ground_icons.png</iconset>
+       <normaloff>images/dark_blue_ground_icon.png</normaloff>images/dark_blue_ground_icon.png</iconset>
      </property>
     </item>
    </widget>

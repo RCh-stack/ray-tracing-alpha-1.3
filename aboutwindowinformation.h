@@ -17,6 +17,8 @@ public:
     explicit AboutWindowInformation(QWidget *parent = 0);
     ~AboutWindowInformation();
 
+    void set_window_options();
+
 private slots:
     void on_button_close_clicked();
 

@@ -322,10 +322,10 @@ QPushButton:pressed {
   <widget class="QPushButton" name="button_stats">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>220</y>
-     <width>51</width>
-     <height>51</height>
+     <x>10</x>
+     <y>240</y>
+     <width>41</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="toolTip">

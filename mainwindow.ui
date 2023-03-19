@@ -260,14 +260,14 @@ QPushButton:pressed {
     </property>
     <addaction name="action_user_profile"/>
     <addaction name="action_user_option"/>
-    <addaction name="action_3"/>
+    <addaction name="action_exit"/>
    </widget>
    <widget class="QMenu" name="menu_2">
     <property name="title">
      <string>Справка</string>
     </property>
-    <addaction name="action_4"/>
-    <addaction name="action_5"/>
+    <addaction name="action_help"/>
+    <addaction name="action_manual"/>
     <addaction name="action_about_information"/>
    </widget>
    <addaction name="menu"/>
@@ -292,17 +292,17 @@ QPushButton:pressed {
     <string>Настройки</string>
    </property>
   </action>
-  <action name="action_3">
+  <action name="action_exit">
    <property name="text">
     <string>Выход из профиля</string>
    </property>
   </action>
-  <action name="action_4">
+  <action name="action_help">
    <property name="text">
     <string>Контекстная справка</string>
    </property>
   </action>
-  <action name="action_5">
+  <action name="action_manual">
    <property name="text">
     <string>Руководство пользователя</string>
    </property>

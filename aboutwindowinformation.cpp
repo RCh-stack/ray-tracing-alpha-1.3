@@ -7,6 +7,17 @@ AboutWindowInformation::AboutWindowInformation(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    set_window_options();
+}
+
+AboutWindowInformation::~AboutWindowInformation()
+{
+    delete ui;
+}
+
+// 1.4
+void AboutWindowInformation::set_window_options()
+{
     QPixmap github(":/icons/images/github-button.png");
     QPixmap telegram(":/icons/images/telegram-button.png");
 
@@ -27,11 +38,6 @@ AboutWindowInformation::AboutWindowInformation(QWidget *parent) :
     setPalette(p);
 }
 
-AboutWindowInformation::~AboutWindowInformation()
-{
-    delete ui;
-}
-
 void AboutWindowInformation::on_button_close_clicked()
 {
     this->close();
@@ -39,7 +45,7 @@ void AboutWindowInformation::on_button_close_clicked()
 
 void AboutWindowInformation::on_button_github_clicked()
 {
-    QDesktopServices::openUrl(QUrl("https://github.com/RCh-stack/ray-tracing-alpha-1.2"));
+    QDesktopServices::openUrl(QUrl("https://github.com/RCh-stack/ray-tracing-alpha-1.3"));
 }
 
 void AboutWindowInformation::on_button_telegram_clicked()

@@ -95,5 +95,20 @@ inline QString select_test_results_for_user()
     return "SELECT * FROM ResultTest WHERE ID_User = :id_user";
 }
 
+inline QString select_lab_work()
+{
+    return "SELECT * FROM ThemeWork WHERE ID_Theme = :id_theme";
+}
+
+inline QString select_id_status_work()
+{
+    return "SELECT Status FROM LabWork WHERE ID_User = :id_user AND ID_Work = :id_work";
+}
+
+inline QString select_status_work()
+{
+    return "SELECT (SELECT Name FROM WorkStatus WHERE ID_Status = Status) AS Status FROM LabWork WHERE ID_User = :id_user AND ID_Work = :id_work";
+}
+
 #endif // SQL_REQUESTS
 

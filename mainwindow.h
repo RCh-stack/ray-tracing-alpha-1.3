@@ -38,6 +38,14 @@ private slots:
 
     void on_action_user_option_triggered();
 
+    void on_action_exit_triggered();
+
+    void on_action_help_triggered();
+
+    void on_action_manual_triggered();
+
+    void on_button_help_clicked();
+
 private:
     Ui::MainWindow *ui;
     QString id_user;

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>835</width>
+    <width>833</width>
     <height>432</height>
    </rect>
   </property>
@@ -117,7 +117,7 @@ p, li { white-space: pre-wrap; }
   <widget class="QLabel" name="label_status">
    <property name="geometry">
     <rect>
-     <x>150</x>
+     <x>190</x>
      <y>370</y>
      <width>271</width>
      <height>21</height>
@@ -176,10 +176,10 @@ QPushButton:pressed {
   <widget class="QPushButton" name="button_send_work">
    <property name="geometry">
     <rect>
-     <x>550</x>
-     <y>360</y>
-     <width>51</width>
-     <height>51</height>
+     <x>610</x>
+     <y>380</y>
+     <width>41</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="toolTip">
@@ -205,18 +205,18 @@ QPushButton:pressed {
    </property>
    <property name="iconSize">
     <size>
-     <width>36</width>
-     <height>36</height>
+     <width>32</width>
+     <height>32</height>
     </size>
    </property>
   </widget>
   <widget class="QPushButton" name="button_edit_work">
    <property name="geometry">
     <rect>
-     <x>620</x>
-     <y>360</y>
-     <width>51</width>
-     <height>51</height>
+     <x>660</x>
+     <y>380</y>
+     <width>41</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="toolTip">
@@ -242,8 +242,8 @@ QPushButton:pressed {
    </property>
    <property name="iconSize">
     <size>
-     <width>36</width>
-     <height>36</height>
+     <width>32</width>
+     <height>32</height>
     </size>
    </property>
   </widget>
@@ -288,16 +288,16 @@ QPushButton:pressed {
 </string>
    </property>
    <property name="text">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Тест_Студент&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
   <widget class="QPushButton" name="button_exit">
    <property name="geometry">
     <rect>
-     <x>770</x>
-     <y>360</y>
-     <width>51</width>
-     <height>51</height>
+     <x>780</x>
+     <y>380</y>
+     <width>41</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="toolTip">
@@ -323,8 +323,8 @@ QPushButton:pressed {
    </property>
    <property name="iconSize">
     <size>
-     <width>36</width>
-     <height>36</height>
+     <width>32</width>
+     <height>32</height>
     </size>
    </property>
   </widget>

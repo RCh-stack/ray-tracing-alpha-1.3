@@ -11,7 +11,7 @@ TestWindow::TestWindow(QWidget *parent) :
     db.setDatabaseName("C:/Program Files (x86)/Qt Project/RayTracing/EducationSystem.sqlite");
 
     if (!db.open())
-        QMessageBox::critical(NULL, QObject::tr("Ошибка!"), db.lastError().text());
+        QMessageBox::critical(this, "Ошибка", db.lastError().text());
 
     set_window_options();
 }

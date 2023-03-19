@@ -14,21 +14,39 @@ OptionDemoWindow::OptionDemoWindow(QWidget *parent) :
     set_default_settings_mode();
 }
 
+// 1.4
 void OptionDemoWindow::set_window_options()
 {
     QPixmap help(":/icons/images/help-button.png");
     QPixmap start(":/icons/images/start-button.png");
     QPixmap cancel(":/icons/images/cancel-button.png");
 
-    QPixmap blue_ground(":/icons/images/blue_ground_icons.png");
-    QPixmap eucalypt_ground(":/icons/images/eucalyptus_ground_icons.png");
-    QPixmap verdigris_ground(":/icons/images/verdigris_ground_icons.png");
-    QPixmap light_blue_ground(":/icons/images/light_blue_ground_icons.png");
-    QPixmap dark_blue_ground(":/icons/images/dark_blue_ground_icons.png");
-
     QIcon ButtonInformation(help);
     QIcon ButtonStart(start);
     QIcon ButtonCancel(cancel);
+
+    ui->button_help->setIcon(ButtonInformation);
+    ui->button_start->setIcon(ButtonStart);
+    ui->button_cancel->setIcon(ButtonCancel);
+
+    set_list_of_background_colors();
+    set_list_of_sphere_colors();
+
+    QPixmap bkgnd(":/icons/images/mainwindow_background.jpg");
+    bkgnd = bkgnd.scaled(size(), Qt::IgnoreAspectRatio);
+    QPalette p = palette();
+    p.setBrush(QPalette::Background, bkgnd);
+    setPalette(p);
+}
+
+// 1.4
+void OptionDemoWindow::set_list_of_background_colors()
+{
+    QPixmap blue_ground(":/icons/images/blue_ground_icon.png");
+    QPixmap eucalypt_ground(":/icons/images/eucalyptus_ground_icon.png");
+    QPixmap verdigris_ground(":/icons/images/verdigris_ground_icon.png");
+    QPixmap light_blue_ground(":/icons/images/light_blue_ground_icon.png");
+    QPixmap dark_blue_ground(":/icons/images/dark_blue_ground_icon.png");
 
     QIcon BlueGround(blue_ground);
     QIcon EucalyptGround(eucalypt_ground);
@@ -36,21 +54,69 @@ void OptionDemoWindow::set_window_options()
     QIcon LightBlueGround(light_blue_ground);
     QIcon DarkBlueGround(dark_blue_ground);
 
-    ui->button_help->setIcon(ButtonInformation);
-    ui->button_start->setIcon(ButtonStart);
-    ui->button_cancel->setIcon(ButtonCancel);
-
     ui->global_color->setItemIcon(0, BlueGround);
     ui->global_color->setItemIcon(1, EucalyptGround);
     ui->global_color->setItemIcon(2, VerdigrisGround);
     ui->global_color->setItemIcon(3, LightBlueGround);
     ui->global_color->setItemIcon(4, DarkBlueGround);
+}
 
-    QPixmap bkgnd(":/icons/images/mainwindow_background.jpg");
-    bkgnd = bkgnd.scaled(size(), Qt::IgnoreAspectRatio);
-    QPalette p = palette();
-    p.setBrush(QPalette::Background, bkgnd);
-    setPalette(p);
+// 1.4
+void OptionDemoWindow::set_list_of_sphere_colors()
+{
+    QPixmap olive_color(":/icons/images/olive_sphere_icon.png");
+    QPixmap dark_red_color(":/icons/images/dark_red_sphere_icon.png");
+    QPixmap grey_color(":/icons/images/grey_sphere_icon.png");
+    QPixmap light_grey_color(":/icons/images/light_grey_sphere_icon.png");
+    QPixmap pink_color(":/icons/images/pink_sphere_icon.png");
+    QPixmap orange_color(":/icons/images/orange_sphere_icon.png");
+    QPixmap yellow_color(":/icons/images/yellow_sphere_icon.png");
+
+    QIcon OliveSphere(olive_color);
+    QIcon DarkRedSphere(dark_red_color);
+    QIcon GreySphere(grey_color);
+    QIcon LightGreySphere(light_grey_color);
+    QIcon PinkSphere(pink_color);
+    QIcon OrangeSphere(orange_color);
+    QIcon YellowSphere(yellow_color);
+
+    set_sphere_colors_to_lists(OliveSphere, DarkRedSphere, GreySphere, LightGreySphere, PinkSphere, OrangeSphere, YellowSphere);
+}
+
+// 1.4
+void OptionDemoWindow::set_sphere_colors_to_lists(QIcon olive, QIcon dark_red, QIcon grey, QIcon light_grey, QIcon pink, QIcon orange, QIcon yellow)
+{
+    ui->value1_color->setItemIcon(0, olive);
+    ui->value1_color->setItemIcon(1, dark_red);
+    ui->value1_color->setItemIcon(2, grey);
+    ui->value1_color->setItemIcon(3, light_grey);
+    ui->value1_color->setItemIcon(4, pink);
+    ui->value1_color->setItemIcon(5, orange);
+    ui->value1_color->setItemIcon(6, yellow);
+
+    ui->value2_color->setItemIcon(0, olive);
+    ui->value2_color->setItemIcon(1, dark_red);
+    ui->value2_color->setItemIcon(2, grey);
+    ui->value2_color->setItemIcon(3, light_grey);
+    ui->value2_color->setItemIcon(4, pink);
+    ui->value2_color->setItemIcon(5, orange);
+    ui->value2_color->setItemIcon(6, yellow);
+
+    ui->value3_color->setItemIcon(0, olive);
+    ui->value3_color->setItemIcon(1, dark_red);
+    ui->value3_color->setItemIcon(2, grey);
+    ui->value3_color->setItemIcon(3, light_grey);
+    ui->value3_color->setItemIcon(4, pink);
+    ui->value3_color->setItemIcon(5, orange);
+    ui->value3_color->setItemIcon(6, yellow);
+
+    ui->value4_color->setItemIcon(0, olive);
+    ui->value4_color->setItemIcon(1, dark_red);
+    ui->value4_color->setItemIcon(2, grey);
+    ui->value4_color->setItemIcon(3, light_grey);
+    ui->value4_color->setItemIcon(4, pink);
+    ui->value4_color->setItemIcon(5, orange);
+    ui->value4_color->setItemIcon(6, yellow);
 }
 
 // 1.1 + 1.3
