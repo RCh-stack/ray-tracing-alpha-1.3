@@ -25,10 +25,13 @@ public:
 
     void set_window_options();
     void set_enabled_button(int id_status);
+    void update_status_work();
 
     void output_table_of_contents(int row_index);
     void open_file(QString path);
+
     QString get_lab_work(int id_work);
+
     int get_id_status(QString id_user, int id_work);
     QString get_status_work(QString id_user, int id_work);
 
@@ -48,6 +51,11 @@ private slots:
     void on_button_help_clicked();
 
     void on_button_exit_clicked();
+
+    void on_button_update_clicked();
+
+public slots:
+    void close_add_edit_window(int result);
 
 private:
     Ui::PracticWindow *ui;

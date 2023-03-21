@@ -29,16 +29,19 @@ void PracticWindow::set_window_options()
     QPixmap edit (":/icons/images/edit-lab-button.png");
     QPixmap help(":/icons/images/help-button.png");
     QPixmap close(":/icons/images/exit-button.png");
+    QPixmap update(":/icons/images/update-button.png");
 
     QIcon ButtonAttach(attach);
     QIcon ButtonEdit(edit);
     QIcon ButtonInformation(help);
     QIcon ButtonClose(close);
+    QIcon ButtonUpdate(update);
 
     ui->button_send_work->setIcon(ButtonAttach);
     ui->button_edit_work->setIcon(ButtonEdit);
     ui->button_help->setIcon(ButtonInformation);
     ui->button_exit->setIcon(ButtonClose);
+    ui->button_update->setIcon(ButtonUpdate);
 
     QPixmap bkgnd(":/icons/images/mainwindow_background.jpg");
     bkgnd = bkgnd.scaled(size(), Qt::IgnoreAspectRatio);
@@ -53,7 +56,7 @@ void PracticWindow::set_enabled_button(int id_status)
     if(id_status == 1)
     {
         ui->button_send_work->setEnabled(1);
-        ui->button_edit_work->setEnabled(1);
+        ui->button_edit_work->setEnabled(0);
     }
     else if(id_status == 2 || id_status == 4)
     {
@@ -87,8 +90,7 @@ void PracticWindow::output_table_of_contents(int row_index)
 {
     open_file(get_lab_work(row_index + 1));
     ui->label_student->setText(get_fullname_user());
-    ui->label_status->setText(get_status_work(get_id_user(), row_index + 1));
-    set_enabled_button(get_id_status(get_id_user(), row_index + 1));
+    update_status_work();
 }
 
 // 1.4
@@ -141,14 +143,46 @@ void PracticWindow::on_button_send_work_clicked()
 {
     AddPracticWork *apw = new AddPracticWork;
     apw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
-    apw->exec();
+    apw->set_id_user(get_id_user());
+    apw->set_name_work(ui->comboBox_works->currentText());
+    apw->set_id_work(ui->comboBox_works->currentIndex() + 1);
+    apw->set_visible_information();
+
+    apw->setModal(true);
+    apw->show();
+
+    connect(apw, SIGNAL(finished(int)), SLOT(close_add_edit_window(int)));
 }
 
+// 1.4
+void PracticWindow::close_add_edit_window(int result)
+{
+    if(result == 0)
+        update_status_work();
+}
+
+// 1.4
+void PracticWindow::update_status_work()
+{
+    int current_lab = ui->comboBox_works->currentIndex() + 1;
+    ui->label_status->setText(get_status_work(get_id_user(), current_lab));
+    set_enabled_button(get_id_status(get_id_user(), current_lab));
+}
+
+// 1.4
 void PracticWindow::on_button_edit_work_clicked()
 {
     EditPracticWork *epw = new EditPracticWork;
     epw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
-    epw->exec();
+    epw->set_id_user(get_id_user());
+    epw->set_name_work(ui->comboBox_works->currentText());
+    epw->set_id_work(ui->comboBox_works->currentIndex() + 1);
+    epw->set_visible_information();
+
+    epw->setModal(true);
+    epw->show();
+
+    connect(epw, SIGNAL(finished(int)), SLOT(close_add_edit_window(int)));
 }
 
 void PracticWindow::on_button_help_clicked()
@@ -159,4 +193,10 @@ void PracticWindow::on_button_help_clicked()
 void PracticWindow::on_button_exit_clicked()
 {
     this->close();
+}
+
+// 1.4
+void PracticWindow::on_button_update_clicked()
+{
+    update_status_work();
 }

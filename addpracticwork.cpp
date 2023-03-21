@@ -54,6 +54,35 @@ void AddPracticWork::on_button_path_clicked()
     ui->text_path->setText(filePath);
 }
 
+// 1.4
+QString AddPracticWork::read_text_work_from_file(QString path)
+{
+    QFile file(path);
+    QTextStream text(&file);
+    QString text_work;
+    if ((file.exists())&&(file.open(QIODevice::ReadOnly | QIODevice::Text)))
+    {
+        text_work = text.readAll();
+        file.close();
+    }
+
+    return text_work;
+}
+
+// 1.4
+void AddPracticWork::insert_new_work()
+{
+    QSqlQuery query;
+    query.prepare(insert_lab_work());
+    query.bindValue(":id_user",      get_id_user());
+    query.bindValue(":id_work",     get_id_work());
+    query.bindValue(":text_work",  read_text_work_from_file(get_path_to_file()));
+    query.bindValue(":id_status",   2);
+    query.exec();
+
+    QMessageBox::information(this, "Прикрепление работы", "Лабораторная работа успешно прикреплена.");
+}
+
 void AddPracticWork::on_button_help_clicked()
 {
 
@@ -63,13 +92,27 @@ void AddPracticWork::on_button_help_clicked()
 void AddPracticWork::on_button_add_clicked()
 {
     QMessageBox::StandardButton reply;
-    reply = QMessageBox::question(this, "Добавление лабораторной работы", "Вы уверены, что хотите прикрепить работу к сдаче?", QMessageBox::Yes|QMessageBox::No);
+    reply = QMessageBox::question(this, "Прикрепление работы", "Вы уверены, что хотите прикрепить работу к сдаче?", QMessageBox::Yes|QMessageBox::No);
     if (reply == QMessageBox::Yes)
-        // sql func...
-        return; // del
+    {
+        set_path_to_file(ui->text_path->text());
+        insert_new_work();
+        ui->button_path->setEnabled(0);
+        ui->text_path->setEnabled(0);
+    }
 }
 
+// 1.4
 void AddPracticWork::on_button_exit_clicked()
 {
-    this->close();
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(this, "Закрытие формы", "Вы уверены, что хотите закрыть окно?\nНесохраненные данные будут удалены.",
+                                  QMessageBox::Yes|QMessageBox::No);
+    if (reply == QMessageBox::Yes)
+        this->close();
+}
+
+void AddPracticWork::on_AddPracticWork_finished(int result)
+{
+
 }

@@ -37,6 +37,8 @@ private slots:
 
     void on_button_help_clicked();
 
+    void on_AddUserWindow_finished(int result);
+
 private:
     Ui::AddUserWindow *ui;
     QSqlDatabase db;

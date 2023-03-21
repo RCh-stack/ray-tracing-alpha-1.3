@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QFileDialog>
+#include <QTextStream>
 #include <QMessageBox>
 #include <QSqlDatabase>
 #include <QSqlError>
@@ -33,6 +34,9 @@ public:
     void set_id_work(int id) { id_work = id; }
     int get_id_work() { return id_work; }
 
+    void set_path_to_file(QString path) { path_to_file = path; }
+    QString get_path_to_file() { return path_to_file; }
+
     void insert_new_work();
     QString read_text_work_from_file(QString path);
 
@@ -45,12 +49,15 @@ private slots:
 
     void on_button_exit_clicked();
 
+    void on_AddPracticWork_finished(int result);
+
 private:
     Ui::AddPracticWork *ui;
     QSqlDatabase db;
     QString id_user;
     QString name_work;
     int id_work;
+    QString path_to_file;
 };
 
 #endif // ADDPRACTICWORK_H

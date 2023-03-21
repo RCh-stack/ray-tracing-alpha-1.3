@@ -41,6 +41,8 @@ private slots:
 
     void on_button_help_clicked();
 
+    void on_EditUserWindow_finished(int result);
+
 private:
     Ui::EditUserWindow *ui;
     QSqlDatabase db;

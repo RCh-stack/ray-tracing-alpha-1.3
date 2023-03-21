@@ -22,13 +22,16 @@ public:
 
     void set_window_options();
     void set_enabled_combobox(bool status);
+
     void output_list_users_with_selection(int id_role, int id_group, int id_status);
     void output_list_users();
+    void clear_table();
+
     QString get_group(int id_group);
     QString get_status(int id_status);
-    void clear_table();
     QString get_selected_id_user();
     int get_status_by_id_user(QString id_user);
+
     void mark_unmark_user_for_deletion(int id_status, QString id_user);
 
 private slots:
@@ -54,6 +57,9 @@ private slots:
     void on_comboBox_status_currentIndexChanged(int index);
 
     void on_use_selection_clicked();
+
+public slots:
+    void close_add_edit_window(int result);
 
 private:
     Ui::AdminPanelWindow *ui;

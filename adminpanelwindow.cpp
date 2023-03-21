@@ -176,7 +176,11 @@ void AdminPanelWindow::on_button_add_clicked()
 {
     AddUserWindow *auw = new AddUserWindow;
     auw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
-    auw->exec();
+
+    auw->setModal(true);
+    auw->show();
+
+    connect(auw, SIGNAL(finished(int)), SLOT(close_add_edit_window(int)));
 }
 
 // 1.3
@@ -237,7 +241,11 @@ void AdminPanelWindow::on_button_edit_clicked()
         euw->set_current_id(get_selected_id_user());
         euw->set_user_data_by_id();
         euw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
-        euw->exec();
+
+        euw->setModal(true);
+        euw->show();
+
+        connect(euw, SIGNAL(finished(int)), SLOT(close_add_edit_window(int)));
     }
 }
 
@@ -261,6 +269,16 @@ void AdminPanelWindow::on_button_delete_clicked()
             if (reply == QMessageBox::Yes)
                 mark_unmark_user_for_deletion(id_status, id_user);
         }
+    }
+}
+
+// 1.4
+void AdminPanelWindow::close_add_edit_window(int result)
+{
+    if(result == 0)
+    {
+        clear_table();
+        output_list_users_with_selection(ui->comboBox_roles->currentIndex(), ui->comboBox_groups->currentIndex(), ui->comboBox_status->currentIndex());
     }
 }
 

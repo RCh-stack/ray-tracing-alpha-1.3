@@ -159,3 +159,8 @@ bool AddUserWindow::code_is_number(const std::string& s)
 {
     return !s.empty() && (s.find_first_not_of("0123456789") == s.npos);
 }
+
+void AddUserWindow::on_AddUserWindow_finished(int result)
+{
+
+}

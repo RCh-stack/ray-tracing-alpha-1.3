@@ -110,5 +110,15 @@ inline QString select_status_work()
     return "SELECT (SELECT Name FROM WorkStatus WHERE ID_Status = Status) AS Status FROM LabWork WHERE ID_User = :id_user AND ID_Work = :id_work";
 }
 
+inline QString insert_lab_work()
+{
+    return "INSERT INTO LabWork (ID_User, ID_Work, TextWork, Status) VALUES (:id_user, :id_work, :text_work, :id_status)";
+}
+
+inline QString update_lab_work()
+{
+    return "UPDATE LabWork SET TextWork = :text_work, Status = :id_status WHERE ID_User = :id_user AND ID_Work = :id_work";
+}
+
 #endif // SQL_REQUESTS
 
