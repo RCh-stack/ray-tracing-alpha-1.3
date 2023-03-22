@@ -55,6 +55,11 @@ inline QString mark_unmark_for_delete()
 
 
 // -------------------------------------------------------
+inline QString select_all_theory_pages()
+{
+    return "SELECT * FROM TheoryPage";
+}
+
 inline QString select_theorypage_by_id()
 {
     return "SELECT * FROM TheoryPage WHERE ID_Page = :id";
@@ -118,6 +123,11 @@ inline QString insert_lab_work()
 inline QString update_lab_work()
 {
     return "UPDATE LabWork SET TextWork = :text_work, Status = :id_status WHERE ID_User = :id_user AND ID_Work = :id_work";
+}
+
+inline QString select_last_num_page()
+{
+    return "SELECT MAX(ID_Page) AS LastNum FROM TheoryPage";
 }
 
 #endif // SQL_REQUESTS

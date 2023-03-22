@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>OpenTheoryFile</class>
+ <widget class="QDialog" name="OpenTheoryFile">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>552</width>
+    <height>296</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Открыть файл теории из ресурсов - RayTracing</string>
+  </property>
+  <widget class="QTableWidget" name="table_themes">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>531</width>
+     <height>271</height>
+    </rect>
+   </property>
+   <property name="editTriggers">
+    <set>QAbstractItemView::NoEditTriggers</set>
+   </property>
+   <attribute name="horizontalHeaderDefaultSectionSize">
+    <number>174</number>
+   </attribute>
+   <column>
+    <property name="text">
+     <string>№ страницы</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Наименование темы</string>
+    </property>
+   </column>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

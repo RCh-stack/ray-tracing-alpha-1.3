@@ -44,5 +44,7 @@
         <file>images/light_grey_sphere_icon.png</file>
         <file>images/grey_sphere_icon.png</file>
         <file>images/pink_sphere_icon.png</file>
+        <file>images/add-file-button.png</file>
+        <file>images/generation-attributes-button.png</file>
     </qresource>
 </RCC>

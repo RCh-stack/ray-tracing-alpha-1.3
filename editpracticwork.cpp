@@ -108,7 +108,7 @@ void EditPracticWork::on_button_edit_clicked()
 void EditPracticWork::on_button_exit_clicked()
 {
     QMessageBox::StandardButton reply;
-    reply = QMessageBox::question(this, "Закрытие формы", "Вы уверены, что хотите закрыть окно?\nНесохраненные данные будут удалены.",
+    reply = QMessageBox::question(this, "Закрытие формы", "Вы уверены, что хотите закрыть окно?\nНесохраненные данные будут потеряны.",
                                   QMessageBox::Yes|QMessageBox::No);
     if (reply == QMessageBox::Yes)
         this->close();

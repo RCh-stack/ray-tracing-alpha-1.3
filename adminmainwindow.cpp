@@ -4,6 +4,7 @@
 #include "userprofilewindow.h"
 #include "useroptionwindow.h"
 #include "adminpanelwindow.h"
+#include "admintheorywindow.h"
 
 AdminMainWindow::AdminMainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -76,6 +77,20 @@ void AdminMainWindow::on_button_admin_panel_clicked()
     AdminPanelWindow *apw = new AdminPanelWindow;
     apw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
     apw->exec();
+}
+
+// 1.5
+void AdminMainWindow::on_button_admin_theory_clicked()
+{
+    AdminTheoryWindow *atw = new AdminTheoryWindow;
+    atw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+
+    atw->setMinimumHeight(747);
+    atw->setMaximumHeight(747);
+    atw->setMinimumWidth(1286);
+    atw->setMaximumWidth(1286);
+
+    atw->show();
 }
 
 // 1.4
