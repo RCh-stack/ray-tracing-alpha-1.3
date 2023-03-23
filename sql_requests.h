@@ -130,5 +130,10 @@ inline QString select_last_num_page()
     return "SELECT MAX(ID_Page) AS LastNum FROM TheoryPage";
 }
 
+inline QString inser_theory_page()
+{
+    return "INSERT INTO TheoryPage (ID_Page, Name_Page, Name_Theme, Path) VALUES (:id_page, :name_page, :name_theme, :path)";
+}
+
 #endif // SQL_REQUESTS
 

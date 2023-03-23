@@ -5,6 +5,8 @@
 #include "useroptionwindow.h"
 #include "adminpanelwindow.h"
 #include "admintheorywindow.h"
+#include "adminpracticwindow.h"
+#include "admintestwindow.h"
 
 AdminMainWindow::AdminMainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -91,6 +93,26 @@ void AdminMainWindow::on_button_admin_theory_clicked()
     atw->setMaximumWidth(1286);
 
     atw->show();
+}
+
+// 1.n
+void AdminMainWindow::on_button_admin_lab_clicked()
+{
+    AdminPracticWindow *apw = new AdminPracticWindow;
+    apw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+    apw->exec();
+
+    apw->deleteLater();
+}
+
+// 1.n
+void AdminMainWindow::on_button_admin_test_clicked()
+{
+    AdminTestWindow *atw = new AdminTestWindow;
+    atw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+    atw->exec();
+
+    atw->deleteLater();
 }
 
 // 1.4

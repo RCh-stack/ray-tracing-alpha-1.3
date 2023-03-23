@@ -36,7 +36,10 @@ SOURCES += main.cpp\
     editpracticwork.cpp \
     userteststatswindow.cpp \
     admintheorywindow.cpp \
-    opentheoryfile.cpp
+    opentheoryfile.cpp \
+    editingtoolswindow.cpp \
+    adminpracticwindow.cpp \
+    admintestwindow.cpp
 
 HEADERS  += mainwindow.h \
     authorizationwindow.h \
@@ -62,7 +65,10 @@ HEADERS  += mainwindow.h \
     sql_requests.h \
     userteststatswindow.h \
     admintheorywindow.h \
-    opentheoryfile.h
+    opentheoryfile.h \
+    editingtoolswindow.h \
+    adminpracticwindow.h \
+    admintestwindow.h
 
 FORMS    += mainwindow.ui \
     authorizationwindow.ui \
@@ -83,7 +89,10 @@ FORMS    += mainwindow.ui \
     editpracticwork.ui \
     userteststatswindow.ui \
     admintheorywindow.ui \
-    opentheoryfile.ui
+    opentheoryfile.ui \
+    editingtoolswindow.ui \
+    adminpracticwindow.ui \
+    admintestwindow.ui
 
 RESOURCES += \
     images.qrc \

@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>RayTracing | Подсистема «Администратор» | Alpha 1.4v</string>
+   <string>RayTracing | Подсистема «Администратор» | Alpha 1.5v</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="label">
@@ -177,7 +177,7 @@ QPushButton:pressed {
      </font>
     </property>
     <property name="toolTip">
-     <string>Доступ к лабораторным работам</string>
+     <string>Доступ к администрированию лабораторных работ</string>
     </property>
     <property name="styleSheet">
      <string notr="true">QPushButton {

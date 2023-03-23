@@ -26,7 +26,7 @@
     <set>QAbstractItemView::NoEditTriggers</set>
    </property>
    <attribute name="horizontalHeaderDefaultSectionSize">
-    <number>174</number>
+    <number>250</number>
    </attribute>
    <column>
     <property name="text">

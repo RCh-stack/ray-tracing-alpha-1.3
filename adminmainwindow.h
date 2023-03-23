@@ -42,6 +42,10 @@ private slots:
 
     void on_button_admin_theory_clicked();
 
+    void on_button_admin_lab_clicked();
+
+    void on_button_admin_test_clicked();
+
 private:
     Ui::AdminMainWindow *ui;
     QString id_user;

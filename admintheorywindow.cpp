@@ -1,6 +1,7 @@
 #include "admintheorywindow.h"
 #include "ui_admintheorywindow.h"
 #include "opentheoryfile.h"
+#include "editingtoolswindow.h"
 
 AdminTheoryWindow::AdminTheoryWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -15,6 +16,7 @@ AdminTheoryWindow::AdminTheoryWindow(QWidget *parent) :
         QMessageBox::critical(this, "Ошибка", db.lastError().text());
 
     set_window_options();
+    set_default_options();
 }
 
 AdminTheoryWindow::~AdminTheoryWindow()
@@ -53,6 +55,12 @@ void AdminTheoryWindow::set_window_options()
 }
 
 // 1.5
+void AdminTheoryWindow::set_default_options()
+{
+    ui->text_theory->setFont(QFont("Times New Roman", 12));
+}
+
+// 1.5
 int AdminTheoryWindow::get_num_page()
 {
     QSqlQuery query;
@@ -83,7 +91,6 @@ void AdminTheoryWindow::open_and_output_file(QString path)
 // 1.5
 void AdminTheoryWindow::on_action_create_triggered()
 {
-    ui->text_num->setText(QString::number(get_num_page()));
     ui->text_name_file->clear();
     ui->text_name_theme->clear();
     ui->text_theory->clear();
@@ -104,22 +111,46 @@ void AdminTheoryWindow::on_text_theory_textChanged()
 }
 
 // 1.5
+void AdminTheoryWindow::add_file_in_database()
+{
+    QSqlQuery query;
+    query.prepare(inser_theory_page());
+    query.bindValue(":id_page",          get_id_page());
+    query.bindValue(":name_page",    ui->text_name_file->text().simplified());
+    query.bindValue(":name_theme",  ui->text_name_theme->text().simplified());
+    query.bindValue(":path",                ""); // qdir + folder_files + name_file + .html!
+    query.exec();
+}
+
+// 1.5
 void AdminTheoryWindow::on_button_generation_clicked()
 {
+    //QMessageBox::information(this, "title", QString(QDir().absolutePath()));
 
+    QString id_num_page = QString::number(get_num_page());
+    ui->text_num->setText(id_num_page);
+    ui->text_name_file->setText("filename.html");
+    ui->text_name_theme->setText("Тема материала по теоретической странице №" + id_num_page);
 }
 
 // 1.5
 void AdminTheoryWindow::on_button_add_clicked()
 {
-
+    if(ui->text_name_file->text().length() == 0)
+        QMessageBox::critical(this, "Уведомление", "Не заполнено поле с наименованием файла!");
+    else if(ui->text_name_theme->text().length() == 0)
+        QMessageBox::critical(this, "Уведомление", "Не заполнено поле с наименованием темы!");
+    else if(ui->text_num->text().length() == 0)
+        QMessageBox::critical(this, "Уведомление", "Не заполнено поле с номером страницы!");
+    else
+        add_file_in_database();
 }
 
 // 1.5
 void AdminTheoryWindow::on_button_exit_clicked()
 {
     QMessageBox::StandardButton reply;
-    reply = QMessageBox::question(this, "Закрытие формы", "Вы уверены, что хотите закрыть окно?\nНесохраненные данные будут потеряны.",
+    reply = QMessageBox::question(this, "Уведомление", "Вы уверены, что хотите закрыть окно?\nНесохраненные данные будут потеряны.",
                                   QMessageBox::Yes|QMessageBox::No);
     if (reply == QMessageBox::Yes)
         this->close();
@@ -129,13 +160,6 @@ void AdminTheoryWindow::on_button_help_clicked()
 {
 
 }
-
-// 1.5
-//void AdminTheoryWindow::on_comboBox_fonts_currentIndexChanged(const QString &arg1)
-//{
-//    QFont font(arg1, 14);
-//    ui->text_theory->setFont(font);
-//}
 
 // 1.5
 void AdminTheoryWindow::set_options_for_file(int id_page)
@@ -189,7 +213,24 @@ void AdminTheoryWindow::on_action_open_directory_triggered()
 }
 
 // 1.5
+void AdminTheoryWindow::set_font_options()
+{
+    ui->text_theory->setFont(QFont(get_name_font(), get_size_font()));
+    ui->text_theory->setTextColor(QColor::fromRgb(255, 255, 255));
+}
+
+// 1.5
 void AdminTheoryWindow::on_button_options_clicked()
 {
+    EditingToolsWindow *etw = new EditingToolsWindow;
+    etw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+    etw->exec();
 
+    set_name_font(etw->get_name_font());
+    set_id_font_color(etw->get_id_font_color());
+    set_size_font(etw->get_size_font());
+
+    etw->deleteLater();
+
+    set_font_options();
 }

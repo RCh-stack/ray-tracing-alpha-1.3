@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AdminPracticWindow</class>
+ <widget class="QDialog" name="AdminPracticWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>779</width>
+    <height>438</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Администрирование модуля &quot;Практика&quot; | RayTracing | Alpha 1.5v</string>
+  </property>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

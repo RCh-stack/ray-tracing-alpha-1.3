@@ -23,8 +23,10 @@ public:
     ~AdminTheoryWindow();
 
     void set_window_options();
-
     void set_options_for_file(int id_page);
+    void set_default_options();
+    void set_font_options();
+
     QString get_path_file(int id_page);
     int get_num_page();
 
@@ -36,6 +38,15 @@ public:
 
     void set_name_file(QString name) { name_file = name; }
     QString get_name_fiile() { return name_file; }
+
+    void set_name_font(QString name) { name_font = name; }
+    QString get_name_font() { return name_font; }
+
+    void set_size_font(int size) { size_font = size; }
+    int get_size_font() { return size_font; }
+
+    void set_id_font_color(int id) { id_font_color = id; }
+    int get_id_font_color() { return id_font_color; }
 
     void open_and_output_file(QString path);
     void add_file_in_database();
@@ -64,8 +75,8 @@ private slots:
 private:
     Ui::AdminTheoryWindow *ui;
     QSqlDatabase db;
-    int id_page;
-    QString name_file, name_theme;
+    int id_page, id_font_color, size_font;
+    QString name_file, name_theme, name_font;
 };
 
 #endif // ADMINTHEORYWINDOW_H
