@@ -146,6 +146,7 @@ void AuthorizationWindow::user_authorization()
             mw->setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint) ;
             mw->set_id_user(query.value("ID_User").toString());
             mw->set_fullname_user(query.value("Fullname").toString());
+            mw->set_id_group(query.value("ID_Group").toInt());
             mw->show();
         }
     }

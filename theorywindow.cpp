@@ -45,6 +45,17 @@ void TheoryWindow::set_window_options()
     setPalette(p);
 }
 
+// 1.6
+void TheoryWindow::set_list_themes()
+{
+    QSqlQuery query;
+    query.prepare(select_more_theory_pages());
+    query.exec();
+
+    while(query.next())
+        ui->list_of_contents->addTopLevelItem(new QTreeWidgetItem(QStringList(query.value("Name_Theme").toString())));
+}
+
 // 1.1
 void TheoryWindow::set_enabled_button(int id_page)
 {

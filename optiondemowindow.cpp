@@ -250,6 +250,7 @@ void OptionDemoWindow::on_button_start_clicked()
 
     dw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
     dw->exec(); // -- запуск демонстрации --
+    dw->deleteLater();
 }
 
 void OptionDemoWindow::on_button_cancel_clicked()

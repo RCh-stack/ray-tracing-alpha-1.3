@@ -46,5 +46,8 @@
         <file>images/pink_sphere_icon.png</file>
         <file>images/add-file-button.png</file>
         <file>images/generation-attributes-button.png</file>
+        <file>images/add-work-button.png</file>
+        <file>images/edit-work-button.png</file>
+        <file>images/check-work-button.png</file>
     </qresource>
 </RCC>

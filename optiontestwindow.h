@@ -16,6 +16,7 @@ public:
     ~OptionTestWindow();
 
     void set_window_options();
+    void set_list_tests();
     void set_visible_name_user();
 
     void set_id_user(QString user) { id_user = user; }

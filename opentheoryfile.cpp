@@ -14,6 +14,7 @@ OpenTheoryFile::OpenTheoryFile(QWidget *parent) :
         QMessageBox::critical(this, "Ошибка", db.lastError().text());
 
     set_window_options();
+    set_id_page(-1);
 }
 
 OpenTheoryFile::~OpenTheoryFile()
@@ -30,8 +31,8 @@ void OpenTheoryFile::set_window_options()
     p.setBrush(QPalette::Background, bkgnd);
     setPalette(p);
 
-    ui->table_themes->setColumnWidth(0, 100);
-    ui->table_themes->setColumnWidth(1, 320);
+    ui->table_themes->setColumnWidth(0, 80);
+    ui->table_themes->setColumnWidth(1, 360);
 }
 
 // 1.5

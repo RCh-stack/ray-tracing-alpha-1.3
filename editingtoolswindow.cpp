@@ -59,9 +59,12 @@ void EditingToolsWindow::enabled_elements_in_form(bool enable)
 // 1.5
 void EditingToolsWindow::set_default_edit_options()
 {
-    ui->comboBox->setCurrentIndex(0);
-    ui->spinBox->setValue(12);
-    ui->fontComboBox->setCurrentFont(QFont("Times New Roman", ui->spinBox->value()));
+    set_size_font(12);
+    set_name_font("Times New Roman");
+    set_id_font_color(0);
+    // -----------------------------------------------
+    ui->comboBox->setCurrentIndex(get_id_font_color());
+    ui->fontComboBox->setCurrentFont(QFont(get_name_font(), get_size_font()));
     enabled_elements_in_form(false);
 }
 

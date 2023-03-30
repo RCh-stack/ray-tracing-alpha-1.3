@@ -2,10 +2,12 @@
 #include "ui_admintestwindow.h"
 
 AdminTestWindow::AdminTestWindow(QWidget *parent) :
-    QDialog(parent),
+    QMainWindow(parent),
     ui(new Ui::AdminTestWindow)
 {
     ui->setupUi(this);
+
+    set_window_options();
 }
 
 AdminTestWindow::~AdminTestWindow()
@@ -13,7 +15,7 @@ AdminTestWindow::~AdminTestWindow()
     delete ui;
 }
 
-// 1.n
+// 1.6
 void AdminTestWindow::set_window_options()
 {
     QPixmap bkgnd(":/icons/images/mainwindow_background.jpg");

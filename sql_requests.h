@@ -22,6 +22,16 @@ inline QString select_admin()
     return "SELECT * FROM User WHERE ID_User = :login AND Password = :password AND Code = :code AND Status = :id_status";
 }
 
+inline QString select_group()
+{
+    return "SELECT Name_Group FROM 'Group' WHERE ID_Group = :id_group";
+}
+
+inline QString select_all_groups()
+{
+    return "SELECT * FROM 'Group'";
+}
+
 inline QString select_status_user_by_id()
 {
     return "SELECT Status FROM User WHERE ID_User = :id_user";
@@ -60,6 +70,11 @@ inline QString select_all_theory_pages()
     return "SELECT * FROM TheoryPage";
 }
 
+inline QString select_more_theory_pages()
+{
+    return "SELECT * FROM TheoryPage WHERE ID_Page > 14";
+}
+
 inline QString select_theorypage_by_id()
 {
     return "SELECT * FROM TheoryPage WHERE ID_Page = :id";
@@ -85,6 +100,11 @@ inline QString select_name_test()
     return "SELECT Name FROM ThemeTest WHERE ID_Theme = :id_theme";
 }
 
+inline QString select_all_tests()
+{
+    return "SELECT * FROM ThemeTest";
+}
+
 inline QString select_question()
 {
     return "SELECT * FROM Question WHERE ID_Question = :id_question AND ID_Theme = :id_theme";
@@ -103,6 +123,16 @@ inline QString select_test_results_for_user()
 inline QString select_lab_work()
 {
     return "SELECT * FROM ThemeWork WHERE ID_Theme = :id_theme";
+}
+
+inline QString select_all_lab_works()
+{
+    return "SELECT * FROM ThemeWork";
+}
+
+inline QString select_all_statuses_works()
+{
+    return "SELECT * FROM WorkStatus";
 }
 
 inline QString select_id_status_work()

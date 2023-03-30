@@ -53,14 +53,18 @@ void MainWindow::on_button_theory_clicked()
 {
     TheoryWindow *tw = new TheoryWindow;
     tw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+    tw->set_list_themes();
     tw->exec();
+    tw->deleteLater();
 }
 
 void MainWindow::on_button_demo_clicked()
 {
     OptionDemoWindow *odw = new OptionDemoWindow;
     odw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+
     odw->exec();
+    odw->deleteLater();
 }
 
 void MainWindow::on_button_test_clicked()
@@ -69,43 +73,69 @@ void MainWindow::on_button_test_clicked()
     otw->set_id_user(get_id_user());
     otw->set_fullname_user(get_fullname_user());
     otw->set_visible_name_user();
+    otw->set_list_tests();
     otw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+
     otw->exec();
+    otw->deleteLater();
 }
 
-// 1.4
+// 1.4 + 1.6
 void MainWindow::on_button_practic_clicked()
 {
     PracticWindow *pw = new PracticWindow;
     pw->set_id_user(get_id_user());
     pw->set_fullname_user(get_fullname_user());
+    pw->set_list_works();
     pw->output_table_of_contents(0);
     pw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+
     pw->exec();
+    pw->deleteLater();
 }
 
 void MainWindow::on_action_about_information_triggered()
 {
     AboutWindowInformation *awi = new AboutWindowInformation;
     awi->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+
     awi->exec();
+    awi->deleteLater();
+}
+
+// 1.6
+QString MainWindow::get_name_group(int id)
+{
+    QSqlQuery query;
+    query.prepare(select_group());
+    query.bindValue(":id_group",    id);
+    query.exec();
+
+    if(query.next())
+        return query.value("Name_Group").toString().simplified();
+
+    return "АСОИУ";
 }
 
 void MainWindow::on_action_user_profile_triggered()
 {
     UserProfileWindow *upw = new UserProfileWindow;
     upw->set_fullname(get_fullname_user());
-    upw->set_group("ДИПРБ-21/1");
+    upw->set_group(get_name_group(get_id_group()));
     upw->set_role("Студент");
     upw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+
     upw->exec();
+    upw->deleteLater();
 }
 
 void MainWindow::on_action_user_option_triggered()
 {
     UserOptionWindow *uow = new UserOptionWindow;
     uow->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+
     uow->exec();
+    uow->deleteLater();
 }
 
 // 1.4

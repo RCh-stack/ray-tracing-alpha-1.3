@@ -111,6 +111,12 @@ void AdminTheoryWindow::on_text_theory_textChanged()
 }
 
 // 1.5
+QString AdminTheoryWindow::generate_path_file(QString filename)
+{
+    return "/files/theory/" + filename + ".html";
+}
+
+// 1.5
 void AdminTheoryWindow::add_file_in_database()
 {
     QSqlQuery query;
@@ -118,7 +124,7 @@ void AdminTheoryWindow::add_file_in_database()
     query.bindValue(":id_page",          get_id_page());
     query.bindValue(":name_page",    ui->text_name_file->text().simplified());
     query.bindValue(":name_theme",  ui->text_name_theme->text().simplified());
-    query.bindValue(":path",                ""); // qdir + folder_files + name_file + .html!
+    query.bindValue(":path",               generate_path_file(ui->text_name_file->text().simplified()));
     query.exec();
 }
 
@@ -129,7 +135,7 @@ void AdminTheoryWindow::on_button_generation_clicked()
 
     QString id_num_page = QString::number(get_num_page());
     ui->text_num->setText(id_num_page);
-    ui->text_name_file->setText("filename.html");
+    ui->text_name_file->setText("filename");
     ui->text_name_theme->setText("Тема материала по теоретической странице №" + id_num_page);
 }
 

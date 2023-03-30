@@ -24,6 +24,7 @@ public:
     ~PracticWindow();
 
     void set_window_options();
+    void set_list_works();
     void set_enabled_button(int id_status);
     void update_status_work();
 

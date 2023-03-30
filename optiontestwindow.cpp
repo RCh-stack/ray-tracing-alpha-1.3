@@ -44,6 +44,19 @@ void OptionTestWindow::set_window_options()
     setPalette(p);
 }
 
+// 1.6
+void OptionTestWindow::set_list_tests()
+{
+    ui->comboBox_topics->clear();
+
+    QSqlQuery query;
+    query.prepare(select_all_tests());
+    query.exec();
+
+    while(query.next())
+        ui->comboBox_topics->addItem(query.value("Name").toString().simplified());
+}
+
 // 1.3
 void OptionTestWindow::set_visible_name_user()
 {
@@ -62,7 +75,9 @@ void OptionTestWindow::on_button_start_clicked()
     tw->set_theme_test(ui->comboBox_topics->currentIndex() + 1);
 
     tw->start_test();
+
     tw->exec();
+    tw->deleteLater();
 }
 
 void OptionTestWindow::on_button_cancel_clicked()
@@ -84,5 +99,7 @@ void OptionTestWindow::on_button_stats_clicked()
     utsw->set_user_name(get_fullname_user());
     utsw->set_title_information();
     utsw->output_table_information();
+
     utsw->exec();
+    utsw->deleteLater();
 }

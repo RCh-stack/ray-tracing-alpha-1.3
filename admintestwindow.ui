@@ -1,18 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>AdminTestWindow</class>
- <widget class="QDialog" name="AdminTestWindow">
+ <widget class="QMainWindow" name="AdminTestWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>769</width>
-    <height>402</height>
+    <width>800</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Администрирование модуля &quot;Тестирование&quot; | RayTracing | Alpha 1.5v</string>
   </property>
+  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>Файл</string>
+    </property>
+    <addaction name="action"/>
+    <addaction name="action_2"/>
+    <addaction name="action_3"/>
+   </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>Информация</string>
+    </property>
+    <addaction name="action_4"/>
+    <addaction name="action_5"/>
+   </widget>
+   <addaction name="menu"/>
+   <addaction name="menu_2"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="action">
+   <property name="text">
+    <string>Создать</string>
+   </property>
+  </action>
+  <action name="action_2">
+   <property name="text">
+    <string>Открыть</string>
+   </property>
+  </action>
+  <action name="action_3">
+   <property name="text">
+    <string>Сохранить</string>
+   </property>
+  </action>
+  <action name="action_4">
+   <property name="text">
+    <string>Справка</string>
+   </property>
+  </action>
+  <action name="action_5">
+   <property name="text">
+    <string>Руководство по созданию тестов</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

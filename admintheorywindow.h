@@ -28,6 +28,7 @@ public:
     void set_font_options();
 
     QString get_path_file(int id_page);
+    QString generate_path_file(QString filename);
     int get_num_page();
 
     void set_id_page(int id) { id_page = id; }

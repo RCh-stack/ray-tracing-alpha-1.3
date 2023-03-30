@@ -50,6 +50,19 @@ void PracticWindow::set_window_options()
     setPalette(p);
 }
 
+// 1.6
+void PracticWindow::set_list_works()
+{
+    ui->comboBox_works->clear();
+
+    QSqlQuery query;
+    query.prepare(select_all_lab_works());
+    query.exec();
+
+    while(query.next())
+        ui->comboBox_works->addItem(query.value("Name").toString().simplified());
+}
+
 // 1.4
 void PracticWindow::set_enabled_button(int id_status)
 {

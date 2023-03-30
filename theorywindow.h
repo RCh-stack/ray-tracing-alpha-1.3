@@ -22,8 +22,11 @@ class TheoryWindow : public QDialog
 public:
     explicit TheoryWindow(QWidget *parent = 0);
     ~TheoryWindow();
+
     void set_window_options();
     void set_enabled_button(int id_page);
+    void set_list_themes();
+
     void open_file_by_code(int row_index);
     void open_file_by_name(QString name);
     void output_table_of_contents(QString path);

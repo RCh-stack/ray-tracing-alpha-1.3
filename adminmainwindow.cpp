@@ -53,39 +53,48 @@ void AdminMainWindow::set_window_options()
 void AdminMainWindow::on_action_user_profile_triggered()
 {
     UserProfileWindow *upw = new UserProfileWindow;
+
     upw->set_fullname(get_fullname_user());
     upw->set_group("АСОИУ");
     upw->set_role("Преподаватель");
+
     upw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
     upw->exec();
+    upw->deleteLater();
 }
 
 void AdminMainWindow::on_action_about_information_triggered()
 {
     AboutWindowInformation *awi = new AboutWindowInformation;
     awi->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+
     awi->exec();
+    awi->deleteLater();
 }
 
 void AdminMainWindow::on_action_user_option_triggered()
 {
     UserOptionWindow *uow = new UserOptionWindow;
     uow->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+
     uow->exec();
+    uow->deleteLater();
 }
 
 void AdminMainWindow::on_button_admin_panel_clicked()
 {
     AdminPanelWindow *apw = new AdminPanelWindow;
     apw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+
     apw->exec();
+    apw->deleteLater();
 }
 
 // 1.5
 void AdminMainWindow::on_button_admin_theory_clicked()
 {
     AdminTheoryWindow *atw = new AdminTheoryWindow;
-    atw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+    atw->setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
 
     atw->setMinimumHeight(747);
     atw->setMaximumHeight(747);
@@ -95,24 +104,32 @@ void AdminMainWindow::on_button_admin_theory_clicked()
     atw->show();
 }
 
-// 1.n
+// 1.6
 void AdminMainWindow::on_button_admin_lab_clicked()
 {
     AdminPracticWindow *apw = new AdminPracticWindow;
-    apw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
-    apw->exec();
+    apw->setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
 
-    apw->deleteLater();
+    apw->setMinimumHeight(221);
+    apw->setMaximumHeight(221);
+    apw->setMinimumWidth(556);
+    apw->setMaximumWidth(556);
+
+    apw->show();
 }
 
-// 1.n
+// 1.6
 void AdminMainWindow::on_button_admin_test_clicked()
 {
     AdminTestWindow *atw = new AdminTestWindow;
-    atw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
-    atw->exec();
+    atw->setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
 
-    atw->deleteLater();
+    atw->setMinimumHeight(747);
+    atw->setMaximumHeight(747);
+    atw->setMinimumWidth(1286);
+    atw->setMaximumWidth(1286);
+
+    atw->show();
 }
 
 // 1.4

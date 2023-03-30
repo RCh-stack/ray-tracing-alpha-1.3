@@ -1,13 +1,13 @@
 #ifndef ADMINTESTWINDOW_H
 #define ADMINTESTWINDOW_H
 
-#include <QDialog>
+#include <QMainWindow>
 
 namespace Ui {
 class AdminTestWindow;
 }
 
-class AdminTestWindow : public QDialog
+class AdminTestWindow : public QMainWindow
 {
     Q_OBJECT
 

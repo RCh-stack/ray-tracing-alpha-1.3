@@ -66,7 +66,9 @@ void AdminPanelWindow::on_table_users_cellDoubleClicked(int row, int column)
     upw->set_fullname(item->text());
     upw->set_group(ui->comboBox_groups->currentText());
     upw->set_role(ui->comboBox_roles->currentText());
+
     upw->exec();
+    upw->deleteLater();
 }
 
 // 1.3

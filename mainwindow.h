@@ -23,6 +23,10 @@ public:
     void set_fullname_user(QString fullname) { fullname_user = fullname; }
     QString get_fullname_user() { return fullname_user; }
 
+    void set_id_group(int id) { id_group = id; }
+    int get_id_group() { return id_group; }
+    QString get_name_group(int id);
+
 private slots:
     void on_button_theory_clicked();
 
@@ -50,6 +54,7 @@ private:
     Ui::MainWindow *ui;
     QString id_user;
     QString fullname_user;
+    int id_group;
 };
 
 #endif // MAINWINDOW_H
