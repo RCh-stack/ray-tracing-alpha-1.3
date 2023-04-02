@@ -120,12 +120,12 @@ inline QString select_test_results_for_user()
     return "SELECT * FROM ResultTest WHERE ID_User = :id_user";
 }
 
-inline QString select_lab_work()
+inline QString select_theme_lab_work()
 {
     return "SELECT * FROM ThemeWork WHERE ID_Theme = :id_theme";
 }
 
-inline QString select_all_lab_works()
+inline QString select_all_themes_lab_works()
 {
     return "SELECT * FROM ThemeWork";
 }
@@ -145,6 +145,11 @@ inline QString select_status_work()
     return "SELECT (SELECT Name FROM WorkStatus WHERE ID_Status = Status) AS Status FROM LabWork WHERE ID_User = :id_user AND ID_Work = :id_work";
 }
 
+inline QString select_lab_work()
+{
+    return "SELECT * FROM LabWork WHERE ID_User = :id_user AND ID_Work = :id_work";
+}
+
 inline QString insert_lab_work()
 {
     return "INSERT INTO LabWork (ID_User, ID_Work, TextWork, Status) VALUES (:id_user, :id_work, :text_work, :id_status)";
@@ -155,14 +160,29 @@ inline QString update_lab_work()
     return "UPDATE LabWork SET TextWork = :text_work, Status = :id_status WHERE ID_User = :id_user AND ID_Work = :id_work";
 }
 
+inline QString select_last_num_work()
+{
+    return "SELECT MAX(ID_Theme) AS LastNum FROM ThemeWork";
+}
+
 inline QString select_last_num_page()
 {
     return "SELECT MAX(ID_Page) AS LastNum FROM TheoryPage";
 }
 
-inline QString inser_theory_page()
+inline QString insert_theory_page()
 {
     return "INSERT INTO TheoryPage (ID_Page, Name_Page, Name_Theme, Path) VALUES (:id_page, :name_page, :name_theme, :path)";
+}
+
+inline QString insert_theme_work()
+{
+    return "INSERT INTO ThemeWork (ID_Theme, Name, Path) VALUES (:id_theme, :name_theme, :path)";
+}
+
+inline QString update_theme_work()
+{
+    return "UPDATE ThemeWork SET Name = :name_theme AND Path = :path WHERE ID_Theme = :id_theme";
 }
 
 #endif // SQL_REQUESTS

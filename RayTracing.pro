@@ -40,7 +40,11 @@ SOURCES += main.cpp\
     editingtoolswindow.cpp \
     adminpracticwindow.cpp \
     admintestwindow.cpp \
-    checkpracticworkwindow.cpp
+    checkpracticworkwindow.cpp \
+    formatnotewindow.cpp \
+    createpracticwindow.cpp \
+    openpracticfile.cpp \
+    changepracticwindow.cpp
 
 HEADERS  += mainwindow.h \
     authorizationwindow.h \
@@ -70,7 +74,11 @@ HEADERS  += mainwindow.h \
     editingtoolswindow.h \
     adminpracticwindow.h \
     admintestwindow.h \
-    checkpracticworkwindow.h
+    checkpracticworkwindow.h \
+    formatnotewindow.h \
+    createpracticwindow.h \
+    openpracticfile.h \
+    changepracticwindow.h
 
 FORMS    += mainwindow.ui \
     authorizationwindow.ui \
@@ -95,7 +103,11 @@ FORMS    += mainwindow.ui \
     editingtoolswindow.ui \
     adminpracticwindow.ui \
     admintestwindow.ui \
-    checkpracticworkwindow.ui
+    checkpracticworkwindow.ui \
+    formatnotewindow.ui \
+    createpracticwindow.ui \
+    openpracticfile.ui \
+    changepracticwindow.ui
 
 RESOURCES += \
     images.qrc \

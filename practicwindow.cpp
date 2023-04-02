@@ -56,7 +56,7 @@ void PracticWindow::set_list_works()
     ui->comboBox_works->clear();
 
     QSqlQuery query;
-    query.prepare(select_all_lab_works());
+    query.prepare(select_all_themes_lab_works());
     query.exec();
 
     while(query.next())
@@ -110,7 +110,7 @@ void PracticWindow::output_table_of_contents(int row_index)
 QString PracticWindow::get_lab_work(int id_work)
 {
     QSqlQuery query;
-    query.prepare(select_lab_work());
+    query.prepare(select_theme_lab_work());
     query.bindValue(":id_theme",  id_work);
     query.exec();
 

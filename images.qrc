@@ -49,5 +49,8 @@
         <file>images/add-work-button.png</file>
         <file>images/edit-work-button.png</file>
         <file>images/check-work-button.png</file>
+        <file>images/format-note-button.png</file>
+        <file>images/insert-note-button.png</file>
+        <file>images/clear-text-button.png</file>
     </qresource>
 </RCC>

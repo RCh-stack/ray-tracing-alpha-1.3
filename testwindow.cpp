@@ -110,7 +110,9 @@ void TestWindow::get_question(int id_question)
     query.prepare(select_question());
     query.bindValue(":id_question",  id_question);
     query.bindValue(":id_theme",     get_theme_test());
+
     query.exec();
+
     if(!query.next())
         QMessageBox::warning(this, "Теcтирование", "Вопрос не найден!");
     else

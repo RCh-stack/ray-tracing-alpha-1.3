@@ -49,6 +49,9 @@ public:
     void set_id_font_color(int id) { id_font_color = id; }
     int get_id_font_color() { return id_font_color; }
 
+    void set_path_file(QString path) { file_path = path; }
+    QString get_path() { return file_path; }
+
     void open_and_output_file(QString path);
     void add_file_in_database();
 
@@ -78,6 +81,7 @@ private:
     QSqlDatabase db;
     int id_page, id_font_color, size_font;
     QString name_file, name_theme, name_font;
+    QString file_path;
 };
 
 #endif // ADMINTHEORYWINDOW_H

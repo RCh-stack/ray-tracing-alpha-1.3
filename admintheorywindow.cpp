@@ -17,6 +17,8 @@ AdminTheoryWindow::AdminTheoryWindow(QWidget *parent) :
 
     set_window_options();
     set_default_options();
+
+    ui->text_num->setEnabled(0);
 }
 
 AdminTheoryWindow::~AdminTheoryWindow()
@@ -44,8 +46,6 @@ void AdminTheoryWindow::set_window_options()
     ui->button_exit->setIcon(ButtonClose);
     ui->button_help->setIcon(ButtonInformation);
     ui->button_options->setIcon(ButtonOptions);
-
-    ui->text_num->setEnabled(0);
 
     QPixmap bkgnd(":/icons/images/mainwindow_background.jpg");
     bkgnd = bkgnd.scaled(size(), Qt::IgnoreAspectRatio);
@@ -97,10 +97,10 @@ void AdminTheoryWindow::on_action_create_triggered()
     ui->html_theory->clear();
 }
 
-// 1.5
+// 1.6
 void AdminTheoryWindow::on_action_save_triggered()
 {
-
+    QFileDialog::getSaveFileName(this, "Сохранить файл", get_path(), "*.html");
 }
 
 // 1.5
@@ -120,12 +120,15 @@ QString AdminTheoryWindow::generate_path_file(QString filename)
 void AdminTheoryWindow::add_file_in_database()
 {
     QSqlQuery query;
-    query.prepare(inser_theory_page());
+    query.prepare(insert_theory_page());
     query.bindValue(":id_page",          get_id_page());
     query.bindValue(":name_page",    ui->text_name_file->text().simplified());
     query.bindValue(":name_theme",  ui->text_name_theme->text().simplified());
     query.bindValue(":path",               generate_path_file(ui->text_name_file->text().simplified()));
+
     query.exec();
+
+    QMessageBox::information(this, "Уведомление", "Теоретический файл добавлен в базу данных.");
 }
 
 // 1.5
@@ -187,6 +190,7 @@ void AdminTheoryWindow::set_options_for_file(int id_page)
 void AdminTheoryWindow::on_action_open_resource_triggered()
 {
     OpenTheoryFile *otw = new OpenTheoryFile;
+    otw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
     otw->output_data();
     otw->exec();
 
@@ -215,6 +219,7 @@ QString AdminTheoryWindow::get_path_file(int id_page)
 void AdminTheoryWindow::on_action_open_directory_triggered()
 {
     QString filePath = QFileDialog::getOpenFileName(this, "Открыть файл", QString(), "*.html ");
+    set_path_file(filePath);
     open_and_output_file(filePath);
 }
 

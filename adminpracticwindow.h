@@ -17,6 +17,9 @@ public:
 
     void set_window_options();
 
+    void set_id_work(int id) { id_work = id; }
+    int get_id_work() { return id_work; }
+
 private slots:
     void on_button_add_work_clicked();
 
@@ -38,6 +41,7 @@ private slots:
 
 private:
     Ui::AdminPracticWindow *ui;
+    int id_work;
 };
 
 #endif // ADMINPRACTICWINDOW_H
