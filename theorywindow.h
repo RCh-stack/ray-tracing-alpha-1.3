@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QFile>
+#include <QDir>
 #include <QTextStream>
 #include <QTreeWidgetItem>
 #include <QMessageBox>

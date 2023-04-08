@@ -52,6 +52,13 @@ void ChangePracticWindow::set_window_options()
 }
 
 // 1.6
+void ChangePracticWindow::set_font_options()
+{
+    ui->text_work->setFont(QFont(get_name_font(), get_size_font()));
+    ui->text_work->setTextColor(QColor::fromRgb(255, 255, 255));
+}
+
+// 1.6
 void ChangePracticWindow::set_default_options()
 {
     ui->text_number->setEnabled(0);
@@ -66,7 +73,7 @@ void ChangePracticWindow::set_default_options()
 void ChangePracticWindow::get_data_from_db()
 {
     QSqlQuery query;
-    query.prepare("");
+    query.prepare(select_theme_lab_work());
     query.bindValue(":id_theme",    get_id_work());
 
     query.exec();
@@ -74,20 +81,58 @@ void ChangePracticWindow::get_data_from_db()
     if(query.next())
     {
         set_name_theme(query.value("Name").toString());
-        //set_name_file...
-        set_path_file(query.value("Path").toString());
+        split_string_with_path(query.value("Path").toString());
     }
 
     output_data();
 }
 
 // 1.6
+void ChangePracticWindow::split_string_with_path(QString path)
+{
+    QString part_path, filename;
+    if(path[0] == ':')
+    {
+        part_path = path.section('/', 0, 3) + "/";
+        filename = path.section('/', 4, 4);
+        filename.remove(".html");
+    }
+    else
+    {
+        part_path = path.section('/', 0, 2) + "/";
+        filename = path.section('/', 3, 3);
+        filename.remove(".html");
+    }
+
+    set_name_file(filename);
+    set_path_file(part_path);
+}
+
+// 1.6
 void ChangePracticWindow::output_data()
 {
-    ui->text_name_file->setText(""); // !!!
+    ui->text_name_file->setText(get_name_file());
     ui->text_name_work->setText(get_name_theme());
     ui->text_number->setText(QString::number(get_id_work()));
     ui->text_path->setText(get_path_file());
+
+    open_and_output_file(get_path_file() + get_name_file() + ".html");
+}
+
+// 1.6
+void ChangePracticWindow::open_and_output_file(QString path)
+{
+    if(path[0] != ':')
+        path = QDir().absolutePath() + path;
+    QFile file(path);
+    QTextStream html(&file);
+    if ((file.exists()) && (file.open(QIODevice::ReadOnly | QIODevice::Text)))
+    {
+        QString text_file = html.readAll();
+        ui->html_work->setText(text_file);
+        ui->text_work->setPlainText(text_file);
+        file.close();
+    }
 }
 
 // 1.6
@@ -98,8 +143,30 @@ void ChangePracticWindow::on_text_work_textChanged()
 }
 
 // 1.6
+QString ChangePracticWindow::generate_path_file(QString filename)
+{
+    return "/files/lab/" + filename + ".html";
+}
+
+// 1.6
+void ChangePracticWindow::save_text_in_file()
+{
+    QString full_path_to_file = QDir().absolutePath() + generate_path_file(ui->text_name_file->text().simplified());
+
+    QFile file(full_path_to_file);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+        return;
+
+    QTextStream out(&file);
+    out << ui->text_work->toPlainText() << "\n";
+    file.close();
+}
+
+// 1.6
 void ChangePracticWindow::edit_file_in_database()
 {
+    save_text_in_file();
+
     QSqlQuery query;
     query.prepare(update_theme_work());
     query.bindValue(":id_theme",        ui->text_number->text().simplified());
@@ -138,19 +205,20 @@ void ChangePracticWindow::on_button_edit_clicked()
         edit_file_in_database();
 }
 
+// 1.6
 void ChangePracticWindow::on_button_options_clicked()
 {
     EditingToolsWindow *etw = new EditingToolsWindow;
     etw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
     etw->exec();
 
-    //set_name_font(etw->get_name_font());
-    //set_id_font_color(etw->get_id_font_color());
-    //set_size_font(etw->get_size_font());
+    set_name_font(etw->get_name_font());
+    set_id_font_color(etw->get_id_font_color());
+    set_size_font(etw->get_size_font());
 
     etw->deleteLater();
 
-    //set_font_options();
+    set_font_options();
 }
 
 void ChangePracticWindow::on_button_help_clicked()

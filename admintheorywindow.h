@@ -53,6 +53,7 @@ public:
     QString get_path() { return file_path; }
 
     void open_and_output_file(QString path);
+    void save_text_in_file();
     void add_file_in_database();
 
 private slots:

@@ -150,14 +150,54 @@ inline QString select_lab_work()
     return "SELECT * FROM LabWork WHERE ID_User = :id_user AND ID_Work = :id_work";
 }
 
+inline QString select_all_lab_works()
+{
+    return "SELECT 'Group'.Name_Group AS GroupName, User.ID_User, User.Fullname, "
+           "TW.Name AS NameWork, WS.Name AS StatusWork FROM LabWork "
+           "JOIN User ON LabWork.ID_User = User.ID_User "
+           "JOIN 'Group' ON User.ID_Group = 'Group'.ID_Group "
+           "JOIN ThemeWork TW on LabWork.ID_Work = TW.ID_Theme "
+           "JOIN WorkStatus WS on LabWork.Status = WS.ID_Status";
+}
+
+inline QString select_all_lab_works_with_selections()
+{
+    return "SELECT 'Group'.Name_Group AS GroupName, User.ID_User, User.Fullname, "
+           "TW.Name AS NameWork, WS.Name AS StatusWork FROM LabWork "
+           "JOIN User ON LabWork.ID_User = User.ID_User "
+           "JOIN 'Group' ON User.ID_Group = 'Group'.ID_Group "
+           "JOIN ThemeWork TW on LabWork.ID_Work = TW.ID_Theme "
+           "JOIN WorkStatus WS on LabWork.Status = WS.ID_Status "
+           "WHERE 'Group'.ID_Group = :id_group AND LabWork.ID_Work = :id_work AND WS.ID_Status = :id_status";
+}
+
+inline QString select_all_tests_results()
+{
+    return "SELECT 'Group'.Name_Group AS GroupName, User.ID_User, User.Fullname, "
+            "TT.Name AS NameTest, Grade FROM ResultTest "
+            "JOIN User ON ResultTest.ID_User = User.ID_User "
+            "JOIN 'Group' ON User.ID_Group = 'Group'.ID_Group "
+            "JOIN ThemeTest TT on ResultTest.ID_Theme = TT.ID_Theme";
+}
+
+inline QString select_all_tests_results_with_selections()
+{
+    return "SELECT 'Group'.Name_Group AS GroupName, User.ID_User, User.Fullname, "
+           "TT.Name AS NameTest, Grade FROM ResultTest "
+           "JOIN User ON ResultTest.ID_User = User.ID_User "
+           "JOIN 'Group' ON User.ID_Group = 'Group'.ID_Group "
+           "JOIN ThemeTest TT on ResultTest.ID_Theme = TT.ID_Theme "
+           "WHERE 'Group'.ID_Group = :id_group AND TT.ID_Theme = :id_test AND Grade = :grade";
+}
+
 inline QString insert_lab_work()
 {
-    return "INSERT INTO LabWork (ID_User, ID_Work, TextWork, Status) VALUES (:id_user, :id_work, :text_work, :id_status)";
+    return "INSERT INTO LabWork (ID_User, ID_Work, TextWork, Status, Note) VALUES (:id_user, :id_work, :text_work, :id_status, :note)";
 }
 
 inline QString update_lab_work()
 {
-    return "UPDATE LabWork SET TextWork = :text_work, Status = :id_status WHERE ID_User = :id_user AND ID_Work = :id_work";
+    return "UPDATE LabWork SET TextWork = :text_work, Status = :id_status, Note = :note WHERE ID_User = :id_user AND ID_Work = :id_work";
 }
 
 inline QString select_last_num_work()

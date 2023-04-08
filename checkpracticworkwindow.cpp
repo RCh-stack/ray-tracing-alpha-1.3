@@ -143,8 +143,6 @@ void CheckPracticWorkWindow::output_data_to_form()
     set_list_statuses();
     set_list_users(ui->comboBox_groups->currentIndex() + 1);
     set_list_works();
-
-    set_id_status(0);
 }
 
 // 1.6
@@ -162,7 +160,9 @@ void CheckPracticWorkWindow::output_text_work(QString id_user, int id_work)
     if(query.next())
     {
         ui->text_work->setText(query.value("TextWork").toString());
+        set_id_status(query.value("Status").toInt());
         ui->comboBox_statuses->setCurrentIndex(query.value("Status").toInt() - 1);
+        ui->text_notes->setText(query.value("Note").toString());
     }
     else
         ui->comboBox_statuses->setCurrentIndex(0);
@@ -208,7 +208,7 @@ void CheckPracticWorkWindow::on_button_save_clicked()
         query.bindValue(":text_work",      ui->text_work->toPlainText());
         query.bindValue(":id_work",         get_id_work());
         query.bindValue(":id_status",       get_id_status());
-        //query.binValue(":примечание, ui->text_notes....)
+        query.bindValue(":note",              ui->text_notes->toPlainText());
         query.exec();
 
         QMessageBox::information(this, "Уведомление", "Статус проверенной работы изменен.");

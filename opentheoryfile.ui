@@ -30,7 +30,7 @@
    </attribute>
    <column>
     <property name="text">
-     <string>№ страницы</string>
+     <string>Код страницы</string>
     </property>
    </column>
    <column>

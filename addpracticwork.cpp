@@ -78,6 +78,7 @@ void AddPracticWork::insert_new_work()
     query.bindValue(":id_work",     get_id_work());
     query.bindValue(":text_work",  read_text_work_from_file(get_path_to_file()));
     query.bindValue(":id_status",   2);
+    query.bindValue(":note",         "");
     query.exec();
 
     QMessageBox::information(this, "Прикрепление работы", "Лабораторная работа успешно прикреплена.");

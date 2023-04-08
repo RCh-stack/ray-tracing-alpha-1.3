@@ -52,5 +52,7 @@
         <file>images/format-note-button.png</file>
         <file>images/insert-note-button.png</file>
         <file>images/clear-text-button.png</file>
+        <file>images/add-test-button.png</file>
+        <file>images/edit-test-button.png</file>
     </qresource>
 </RCC>

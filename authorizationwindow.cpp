@@ -147,6 +147,12 @@ void AuthorizationWindow::user_authorization()
             mw->set_id_user(query.value("ID_User").toString());
             mw->set_fullname_user(query.value("Fullname").toString());
             mw->set_id_group(query.value("ID_Group").toInt());
+
+            mw->setMinimumHeight(292);
+            mw->setMaximumHeight(292);
+            mw->setMinimumWidth(540);
+            mw->setMaximumWidth(540);
+
             mw->show();
         }
     }
@@ -179,6 +185,12 @@ void AuthorizationWindow::admin_authorization()
             amw->setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
             amw->set_id_user(query.value("ID_User").toString());
             amw->set_fullname_user(query.value("Fullname").toString());
+
+            amw->setMinimumHeight(292);
+            amw->setMaximumHeight(292);
+            amw->setMinimumWidth(540);
+            amw->setMaximumWidth(540);
+
             amw->show();
         }
     }

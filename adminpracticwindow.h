@@ -31,13 +31,9 @@ private slots:
 
     void on_button_help_clicked();
 
-    void on_action_current_statuses_triggered();
-
     void on_action_help_triggered();
 
     void on_action_manual_triggered();
-
-    void on_action_list_works_triggered();
 
 private:
     Ui::AdminPracticWindow *ui;

@@ -4,6 +4,7 @@
 #include "createpracticwindow.h"
 #include "changepracticwindow.h"
 #include "openpracticfile.h"
+#include "userpracticstatswindow.h"
 
 AdminPracticWindow::AdminPracticWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -69,8 +70,8 @@ void AdminPracticWindow::on_button_edit_work_clicked()
 
     ChangePracticWindow *cpw = new ChangePracticWindow;
     cpw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
-    //cpw->set_id_work(get_id_work());
-    //cpw->output_data_in_file...
+    cpw->set_id_work(get_id_work());
+    cpw->get_data_from_db();
     cpw->exec();
 
     cpw->deleteLater();
@@ -87,17 +88,19 @@ void AdminPracticWindow::on_button_check_work_clicked()
     cpww->deleteLater();
 }
 
+// 1.6
 void AdminPracticWindow::on_button_statistics_clicked()
 {
+    UserPracticStatsWindow *upsw = new UserPracticStatsWindow;
+    upsw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+    upsw->output_data_in_lists_to_form();
+    upsw->output_list_works();
 
+    upsw->exec();
+    upsw->deleteLater();
 }
 
 void AdminPracticWindow::on_button_help_clicked()
-{
-
-}
-
-void AdminPracticWindow::on_action_current_statuses_triggered()
 {
 
 }
@@ -109,18 +112,5 @@ void AdminPracticWindow::on_action_help_triggered()
 
 void AdminPracticWindow::on_action_manual_triggered()
 {
-
-}
-
-// 1.6
-void AdminPracticWindow::on_action_list_works_triggered()
-{
-    OpenPracticFile *opf = new OpenPracticFile;
-    opf->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
-    opf->exec();
-
-    // dont selected ...
-
-    opf->deleteLater();
 
 }

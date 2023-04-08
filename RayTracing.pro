@@ -44,7 +44,9 @@ SOURCES += main.cpp\
     formatnotewindow.cpp \
     createpracticwindow.cpp \
     openpracticfile.cpp \
-    changepracticwindow.cpp
+    changepracticwindow.cpp \
+    userpracticstatswindow.cpp \
+    usersteststatswindow.cpp
 
 HEADERS  += mainwindow.h \
     authorizationwindow.h \
@@ -78,7 +80,9 @@ HEADERS  += mainwindow.h \
     formatnotewindow.h \
     createpracticwindow.h \
     openpracticfile.h \
-    changepracticwindow.h
+    changepracticwindow.h \
+    userpracticstatswindow.h \
+    usersteststatswindow.h
 
 FORMS    += mainwindow.ui \
     authorizationwindow.ui \
@@ -107,7 +111,9 @@ FORMS    += mainwindow.ui \
     formatnotewindow.ui \
     createpracticwindow.ui \
     openpracticfile.ui \
-    changepracticwindow.ui
+    changepracticwindow.ui \
+    userpracticstatswindow.ui \
+    usersteststatswindow.ui
 
 RESOURCES += \
     images.qrc \

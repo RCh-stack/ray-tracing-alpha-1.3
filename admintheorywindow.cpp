@@ -76,12 +76,13 @@ int AdminTheoryWindow::get_num_page()
 // 1.5
 void AdminTheoryWindow::open_and_output_file(QString path)
 {
+    if(path[0] != ':')
+        path = QDir().absolutePath() + path;
     QFile file(path);
     QTextStream html(&file);
-    QString text_file;
     if ((file.exists()) && (file.open(QIODevice::ReadOnly | QIODevice::Text)))
     {
-        text_file = html.readAll();
+        QString text_file = html.readAll();
         ui->html_theory->setText(text_file);
         ui->text_theory->setPlainText(text_file);
         file.close();
@@ -116,9 +117,25 @@ QString AdminTheoryWindow::generate_path_file(QString filename)
     return "/files/theory/" + filename + ".html";
 }
 
+// 1.6
+void AdminTheoryWindow::save_text_in_file()
+{
+    QString full_path_to_file = QDir().absolutePath() + generate_path_file(ui->text_name_file->text().simplified());
+
+    QFile file(full_path_to_file);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+        return;
+
+    QTextStream out(&file);
+    out << ui->text_theory->toPlainText() << "\n";
+    file.close();
+}
+
 // 1.5
 void AdminTheoryWindow::add_file_in_database()
 {
+    save_text_in_file();
+
     QSqlQuery query;
     query.prepare(insert_theory_page());
     query.bindValue(":id_page",          get_id_page());
@@ -134,8 +151,6 @@ void AdminTheoryWindow::add_file_in_database()
 // 1.5
 void AdminTheoryWindow::on_button_generation_clicked()
 {
-    //QMessageBox::information(this, "title", QString(QDir().absolutePath()));
-
     QString id_num_page = QString::number(get_num_page());
     ui->text_num->setText(id_num_page);
     ui->text_name_file->setText("filename");

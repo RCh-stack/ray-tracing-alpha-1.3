@@ -31,8 +31,8 @@ void OpenTheoryFile::set_window_options()
     p.setBrush(QPalette::Background, bkgnd);
     setPalette(p);
 
-    ui->table_themes->setColumnWidth(0, 80);
-    ui->table_themes->setColumnWidth(1, 360);
+    ui->table_themes->setColumnWidth(0, 90);
+    ui->table_themes->setColumnWidth(1, 340);
 }
 
 // 1.5

@@ -32,6 +32,7 @@ public:
     void open_file(QString path);
 
     QString get_lab_work(int id_work);
+    QString get_note(QString id_user, int id_work);
 
     int get_id_status(QString id_user, int id_work);
     QString get_status_work(QString id_user, int id_work);
@@ -63,6 +64,7 @@ private:
     QSqlDatabase db;
     QString id_user;
     QString fullname_user;
+    QString note;
 };
 
 #endif // PRACTICWINDOW_H

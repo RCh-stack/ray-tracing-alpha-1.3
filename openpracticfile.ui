@@ -30,7 +30,7 @@
    </attribute>
    <column>
     <property name="text">
-     <string>№ лаб. работы</string>
+     <string>Код работы</string>
     </property>
    </column>
    <column>

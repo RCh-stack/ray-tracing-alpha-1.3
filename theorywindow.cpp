@@ -73,6 +73,8 @@ void TheoryWindow::set_enabled_button(int id_page)
 // 1.1
 void TheoryWindow::output_table_of_contents(QString path)
 {
+    if(path[0] != ':')
+        path = QDir().absolutePath() + path;
     QFile file(path);
     QTextStream html(&file);
     if ((file.exists())&&(file.open(QIODevice::ReadOnly | QIODevice::Text)))

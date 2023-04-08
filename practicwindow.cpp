@@ -16,6 +16,9 @@ PracticWindow::PracticWindow(QWidget *parent) :
         QMessageBox::critical(this, "Ошибка", db.lastError().text());
 
     set_window_options();
+
+    QFont font("Century Gothic", 10);
+    ui->text_note->setFont(font);
 }
 
 PracticWindow::~PracticWindow()
@@ -135,8 +138,26 @@ QString PracticWindow::get_status_work(QString id_user, int id_work)
     return "Не сдано";
 }
 
+// 1.6
+QString PracticWindow::get_note(QString id_user, int id_work)
+{
+    QSqlQuery query;
+    query.prepare(select_lab_work());
+    query.bindValue(":id_user",     id_user);
+    query.bindValue(":id_work",    id_work);
+
+    query.exec();
+
+    if(query.next())
+        return query.value("Note").toString();
+
+    return "";
+}
+
 void PracticWindow::open_file(QString path)
 {
+    if(path[0] != ':')
+        path = QDir().absolutePath() + path;
     QFile file(path);
     QTextStream html(&file);
     if ((file.exists())&&(file.open(QIODevice::ReadOnly | QIODevice::Text)))
@@ -174,11 +195,12 @@ void PracticWindow::close_add_edit_window(int result)
         update_status_work();
 }
 
-// 1.4
+// 1.6
 void PracticWindow::update_status_work()
 {
     int current_lab = ui->comboBox_works->currentIndex() + 1;
     ui->label_status->setText(get_status_work(get_id_user(), current_lab));
+    ui->text_note->setText(get_note(get_id_user(), current_lab));
     set_enabled_button(get_id_status(get_id_user(), current_lab));
 }
 

@@ -124,10 +124,10 @@ void AdminMainWindow::on_button_admin_test_clicked()
     AdminTestWindow *atw = new AdminTestWindow;
     atw->setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
 
-    atw->setMinimumHeight(747);
-    atw->setMaximumHeight(747);
-    atw->setMinimumWidth(1286);
-    atw->setMaximumWidth(1286);
+    atw->setMinimumHeight(165);
+    atw->setMaximumHeight(165);
+    atw->setMinimumWidth(410);
+    atw->setMaximumWidth(410);
 
     atw->show();
 }

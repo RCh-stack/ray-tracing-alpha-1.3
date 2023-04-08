@@ -52,6 +52,13 @@ void CreatePracticWindow::set_window_options()
 }
 
 // 1.6
+void CreatePracticWindow::set_font_options()
+{
+    ui->text_work->setFont(QFont(get_name_font(), get_size_font()));
+    ui->text_work->setTextColor(QColor::fromRgb(255, 255, 255));
+}
+
+// 1.6
 int CreatePracticWindow::get_num_work()
 {
     QSqlQuery query;
@@ -103,6 +110,20 @@ QString CreatePracticWindow::generate_path_file(QString filename)
 }
 
 // 1.6
+void CreatePracticWindow::save_text_in_file()
+{
+    QString full_path_to_file = QDir().absolutePath() + generate_path_file(ui->text_name_file->text().simplified());
+
+    QFile file(full_path_to_file);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+        return;
+
+    QTextStream out(&file);
+    out << ui->text_work->toPlainText() << "\n";
+    file.close();
+}
+
+// 1.6
 void CreatePracticWindow::on_button_add_clicked()
 {
     if(ui->text_name_file->text().length() == 0)
@@ -118,6 +139,8 @@ void CreatePracticWindow::on_button_add_clicked()
 // 1.6
 void CreatePracticWindow::add_file_in_database()
 {
+    save_text_in_file();
+
     QSqlQuery query;
     query.prepare(insert_theme_work());
     query.bindValue(":id_theme",        ui->text_number->text().simplified());
@@ -136,13 +159,13 @@ void CreatePracticWindow::on_button_options_clicked()
     etw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
     etw->exec();
 
-    //set_name_font(etw->get_name_font());
-    //set_id_font_color(etw->get_id_font_color());
-    //set_size_font(etw->get_size_font());
+    set_name_font(etw->get_name_font());
+    set_id_font_color(etw->get_id_font_color());
+    set_size_font(etw->get_size_font());
 
     etw->deleteLater();
 
-    //set_font_options();
+    set_font_options();
 }
 
 void CreatePracticWindow::on_button_help_clicked()
