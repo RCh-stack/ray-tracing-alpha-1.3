@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>UserHelpWindow</class>
+ <widget class="QDialog" name="UserHelpWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1120</width>
+    <height>520</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Руководство пользователя - RayTracing</string>
+  </property>
+  <widget class="QPushButton" name="button_prev_page">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>460</y>
+     <width>51</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    background-color: rgb(255, 255, 255);
+    border: 2px solid #094065;
+}
+
+QPushButton:pressed {
+    background-color:  rgb(118, 118, 118);
+}
+</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>images/prev-page.png</normaloff>images/prev-page.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>32</width>
+     <height>32</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QTextBrowser" name="text_help">
+   <property name="geometry">
+    <rect>
+     <x>360</x>
+     <y>10</y>
+     <width>751</width>
+     <height>501</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="button_next_page">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>460</y>
+     <width>51</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    background-color: rgb(255, 255, 255);
+    border: 2px solid #094065;
+}
+
+QPushButton:pressed {
+    background-color:  rgb(118, 118, 118);
+}
+</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>images/next-page.png</normaloff>images/next-page.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>32</width>
+     <height>32</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QTreeWidget" name="list_of_contents">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>341</width>
+     <height>431</height>
+    </rect>
+   </property>
+   <column>
+    <property name="text">
+     <string>Содержание</string>
+    </property>
+   </column>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

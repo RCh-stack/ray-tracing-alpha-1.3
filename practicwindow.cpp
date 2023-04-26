@@ -63,7 +63,7 @@ void PracticWindow::set_list_works()
     query.exec();
 
     while(query.next())
-        ui->comboBox_works->addItem(query.value("Name").toString().simplified());
+        ui->comboBox_works->addItem(query.value("ID_Theme").toString() + ". " + query.value("Name").toString().simplified());
 }
 
 // 1.4

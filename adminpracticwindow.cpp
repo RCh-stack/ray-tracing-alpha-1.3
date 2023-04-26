@@ -68,13 +68,16 @@ void AdminPracticWindow::on_button_edit_work_clicked()
     set_id_work(opf->get_id_work());
     opf->deleteLater();
 
-    ChangePracticWindow *cpw = new ChangePracticWindow;
-    cpw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
-    cpw->set_id_work(get_id_work());
-    cpw->get_data_from_db();
-    cpw->exec();
+    if(get_id_work() != 0)
+    {
+        ChangePracticWindow *cpw = new ChangePracticWindow;
+        cpw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+        cpw->set_id_work(get_id_work());
+        cpw->get_data_from_db();
+        cpw->exec();
 
-    cpw->deleteLater();
+        cpw->deleteLater();
+    }
 }
 
 // 1.6

@@ -105,6 +105,11 @@ inline QString select_all_tests()
     return "SELECT * FROM ThemeTest";
 }
 
+inline QString select_theme_test()
+{
+    return "SELECT * FROM ThemeTest WHERE ID_Theme = :id_theme";
+}
+
 inline QString select_question()
 {
     return "SELECT * FROM Question WHERE ID_Question = :id_question AND ID_Theme = :id_theme";
@@ -205,9 +210,19 @@ inline QString select_last_num_work()
     return "SELECT MAX(ID_Theme) AS LastNum FROM ThemeWork";
 }
 
-inline QString select_last_num_page()
+inline QString select_last_num_theory_page()
 {
     return "SELECT MAX(ID_Page) AS LastNum FROM TheoryPage";
+}
+
+inline QString select_last_num_test()
+{
+    return "SELECT MAX(ID_Theme) AS LastNum FROM ThemeTest";
+}
+
+inline QString select_last_num_help_page()
+{
+    return "SELECT MAX(ID_Page) AS LastNum FROM HelpPage";
 }
 
 inline QString insert_theory_page()
@@ -223,6 +238,43 @@ inline QString insert_theme_work()
 inline QString update_theme_work()
 {
     return "UPDATE ThemeWork SET Name = :name_theme AND Path = :path WHERE ID_Theme = :id_theme";
+}
+
+inline QString insert_theme_test()
+{
+    return "INSERT INTO ThemeTest (ID_Theme, Name, NumberOfQuestions) VALUES (:id_theme, :name_theme, :number_questions)";
+}
+
+inline QString update_theme_test()
+{
+    return "UPDATE ThemeTest SET Name = :name_theme, NumberOfQuestions = :number_questions WHERE ID_Theme = :id_theme";
+}
+
+inline QString insert_question()
+{
+    return "INSERT INTO Question (ID_Theme, ID_Question, Text_Question, Answer_1, Answer_2, Answer_3, Answer_4, Right_Answer) "
+           "VALUES (:id_theme, :id_question, :text_question, :answer_1, :answer_2, :answer_3, :answer_4, :right_answer)";
+}
+
+inline QString update_question()
+{
+    return "UPDATE Question SET Text_Question = :text_question, Answer_1 = :answer_1,  Answer_2 = :answer_2, Answer_3 = :answer_3, "
+           "Answer_4 = :answer_4, Right_Answer = :right_answer WHERE ID_Theme = :id_theme AND ID_Question = :id_question";
+}
+
+inline QString select_help_file()
+{
+    return "SELECT * FROM HelpPage WHERE ID_Page = :id_page";
+}
+
+inline QString select_help_page_by_id()
+{
+    return "SELECT * FROM HelpPage WHERE ID_Page = :id";
+}
+
+inline QString select_help_page_by_name()
+{
+    return "SELECT * FROM HelpPage WHERE Name_Theme = :name";
 }
 
 #endif // SQL_REQUESTS

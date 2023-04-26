@@ -23,4 +23,7 @@
         <file>files/lab/second_lab.html</file>
         <file>files/lab/third_lab.html</file>
     </qresource>
+    <qresource prefix="/help_files">
+        <file>files/help/authorization.html</file>
+    </qresource>
 </RCC>

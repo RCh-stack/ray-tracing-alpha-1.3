@@ -9,6 +9,7 @@
 */
 
 #include "authorizationwindow.h"
+#include "instructionwindow.h"
 #include "mainwindow.h"
 #include "adminmainwindow.h"
 #include "ui_authorizationwindow.h"
@@ -206,7 +207,11 @@ void AuthorizationWindow::admin_authorization()
 */
 void AuthorizationWindow::on_button_exit_clicked()
 {
-    this->close();
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(this, "Уведомление", "Вы уверены, что хотите выйти?",
+                                  QMessageBox::Yes|QMessageBox::No);
+    if (reply == QMessageBox::Yes)
+        this->close();
 }
 
 /*
@@ -219,7 +224,12 @@ void AuthorizationWindow::on_button_exit_clicked()
 */
 void AuthorizationWindow::on_button_help_clicked()
 {
+    InstructionWindow *iw = new InstructionWindow;
+    iw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+    iw->open_file(0);
 
+    iw->exec();
+    iw->deleteLater();
 }
 
 /*

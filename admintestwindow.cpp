@@ -1,6 +1,9 @@
 #include "admintestwindow.h"
 #include "ui_admintestwindow.h"
+#include "createtestwindow.h"
 #include "usersteststatswindow.h"
+#include "opentestfile.h"
+#include "changetestwindow.h"
 
 AdminTestWindow::AdminTestWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -63,14 +66,37 @@ void AdminTestWindow::on_button_stats_clicked()
     utsw->deleteLater();
 }
 
+// 1.7
 void AdminTestWindow::on_button_create_clicked()
 {
+    CreateTestWindow *ctw = new CreateTestWindow;
+    ctw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
 
+    ctw->exec();
+    ctw->deleteLater();
 }
 
+// 1.7
 void AdminTestWindow::on_button_edit_clicked()
 {
+    OpenTestFile *otf = new OpenTestFile;
+    otf->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+    otf->output_data();
+    otf->exec();
 
+    set_id_theme(otf->get_id_theme());
+    otf->deleteLater();
+
+    if(get_id_theme() != 0)
+    {
+        ChangeTestWindow *ctw = new ChangeTestWindow;
+        ctw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+        ctw->set_id_theme(get_id_theme());
+        ctw->get_data_from_db();
+        ctw->exec();
+
+        ctw->deleteLater();
+    }
 }
 
 void AdminTestWindow::on_button_help_clicked()

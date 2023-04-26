@@ -46,7 +46,13 @@ SOURCES += main.cpp\
     openpracticfile.cpp \
     changepracticwindow.cpp \
     userpracticstatswindow.cpp \
-    usersteststatswindow.cpp
+    usersteststatswindow.cpp \
+    createtestwindow.cpp \
+    opentestfile.cpp \
+    changetestwindow.cpp \
+    userhelpwindow.cpp \
+    adminhelpwindow.cpp \
+    instructionwindow.cpp
 
 HEADERS  += mainwindow.h \
     authorizationwindow.h \
@@ -82,7 +88,13 @@ HEADERS  += mainwindow.h \
     openpracticfile.h \
     changepracticwindow.h \
     userpracticstatswindow.h \
-    usersteststatswindow.h
+    usersteststatswindow.h \
+    createtestwindow.h \
+    opentestfile.h \
+    changetestwindow.h \
+    userhelpwindow.h \
+    adminhelpwindow.h \
+    instructionwindow.h
 
 FORMS    += mainwindow.ui \
     authorizationwindow.ui \
@@ -113,7 +125,13 @@ FORMS    += mainwindow.ui \
     openpracticfile.ui \
     changepracticwindow.ui \
     userpracticstatswindow.ui \
-    usersteststatswindow.ui
+    usersteststatswindow.ui \
+    createtestwindow.ui \
+    opentestfile.ui \
+    changetestwindow.ui \
+    userhelpwindow.ui \
+    adminhelpwindow.ui \
+    instructionwindow.ui
 
 RESOURCES += \
     images.qrc \

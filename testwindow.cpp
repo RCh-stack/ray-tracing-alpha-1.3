@@ -227,9 +227,14 @@ int TestWindow::determine_test_result()
 // 1.3
 int TestWindow::get_rating(int num_correct_answers)
 {
-    return num_correct_answers < 5 ? 2 :
-              num_correct_answers >= 5 && num_correct_answers < 6 ? 3 :
-              num_correct_answers >= 6 && num_correct_answers < 8 ? 4 : 5;
+    if(number_of_questuions == 10)
+        return num_correct_answers < 5 ? 2 :
+                num_correct_answers >= 5 && num_correct_answers < 6 ? 3 :
+                num_correct_answers >= 6 && num_correct_answers < 8 ? 4 : 5;
+    else
+        return num_correct_answers < 10 ? 2 :
+                num_correct_answers >= 10 && num_correct_answers < 14 ? 3 :
+                num_correct_answers >= 14 && num_correct_answers < 18 ? 4 : 5;
 }
 
 // 1.3

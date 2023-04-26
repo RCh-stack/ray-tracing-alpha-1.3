@@ -64,7 +64,7 @@ void AdminTheoryWindow::set_default_options()
 int AdminTheoryWindow::get_num_page()
 {
     QSqlQuery query;
-    query.prepare(select_last_num_page());
+    query.prepare(select_last_num_theory_page());
     query.exec();
 
     if(query.next())

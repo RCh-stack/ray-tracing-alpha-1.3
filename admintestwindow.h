@@ -17,6 +17,9 @@ public:
 
     void set_window_options();
 
+    void set_id_theme(int id) { id_theme = id; }
+    int get_id_theme() { return id_theme; }
+
 private slots:
     void on_action_help_triggered();
 
@@ -32,6 +35,7 @@ private slots:
 
 private:
     Ui::AdminTestWindow *ui;
+    int id_theme;
 };
 
 #endif // ADMINTESTWINDOW_H

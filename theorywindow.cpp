@@ -45,6 +45,17 @@ void TheoryWindow::set_window_options()
     setPalette(p);
 }
 
+int TheoryWindow::get_max_num()
+{
+    QSqlQuery query;
+    query.prepare(select_last_num_theory_page());
+    query.exec();
+
+    if(query.next())
+        return query.value("LastNum").toInt() - 1;
+    return 1;
+}
+
 // 1.6
 void TheoryWindow::set_list_themes()
 {
@@ -64,7 +75,7 @@ void TheoryWindow::set_enabled_button(int id_page)
     else
         ui->button_prev_page->setEnabled(1);
 
-    if(id_page == 8)
+    if(id_page == get_max_num())
         ui->button_next_page->setEnabled(0);
     else
         ui->button_next_page->setEnabled(1);
@@ -88,7 +99,7 @@ void TheoryWindow::output_table_of_contents(QString path)
 // 1.1
 void TheoryWindow::on_button_prev_page_clicked()
 {
-    if(pages_read > 0 && pages_read <= 8)
+    if(pages_read > 0 && pages_read <= get_max_num())
         pages_read--;
     open_file_by_code(pages_read);
     set_enabled_button(pages_read);
@@ -97,7 +108,7 @@ void TheoryWindow::on_button_prev_page_clicked()
 // 1.1
 void TheoryWindow::on_button_next_page_clicked()
 {
-    if(pages_read >= 0 && pages_read < 8)
+    if(pages_read >= 0 && pages_read < get_max_num())
         pages_read++;
     open_file_by_code(pages_read);
     set_enabled_button(pages_read);

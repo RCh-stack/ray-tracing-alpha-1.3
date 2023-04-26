@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ChangeTestWindow</class>
+ <widget class="QDialog" name="ChangeTestWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>731</width>
+    <height>495</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Редактирование выбранного теста - RayTracing</string>
+  </property>
+  <widget class="QLabel" name="label_answer_2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>370</y>
+     <width>81</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; color:#ffffff;&quot;&gt;Ответ 2:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="right_2">
+   <property name="geometry">
+    <rect>
+     <x>510</x>
+     <y>370</y>
+     <width>21</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_num_question">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>60</y>
+     <width>181</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; color:#ffffff;&quot;&gt;Количество вопросов:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="button_generation">
+   <property name="geometry">
+    <rect>
+     <x>620</x>
+     <y>60</y>
+     <width>41</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>Сгенерировать атрибуты теста</string>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    background-color: rgb(255, 255, 255);
+    border: 2px solid #094065;
+}
+
+QPushButton:pressed {
+    background-color:  rgb(118, 118, 118);
+}
+</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>images/generation-attributes-button.png</normaloff>images/generation-attributes-button.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>32</width>
+     <height>32</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboBox_numbers">
+   <property name="geometry">
+    <rect>
+     <x>640</x>
+     <y>120</y>
+     <width>73</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);
+</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_number">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>20</y>
+     <width>111</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; color:#ffffff;&quot;&gt;Номер теста:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="right_1">
+   <property name="geometry">
+    <rect>
+     <x>510</x>
+     <y>330</y>
+     <width>21</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_theme">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>20</y>
+     <width>101</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; color:#ffffff;&quot;&gt;Тема теста:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_type">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>60</y>
+     <width>91</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; color:#ffffff;&quot;&gt;Тип теста:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="text_number">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>20</y>
+     <width>51</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="text_answer_3">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>410</y>
+     <width>351</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_answer_3">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>410</y>
+     <width>81</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; color:#ffffff;&quot;&gt;Ответ 3:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboBox_types">
+   <property name="geometry">
+    <rect>
+     <x>380</x>
+     <y>60</y>
+     <width>161</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);
+</string>
+   </property>
+   <item>
+    <property name="text">
+     <string>По теме</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>По разделу</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QRadioButton" name="right_4">
+   <property name="geometry">
+    <rect>
+     <x>510</x>
+     <y>450</y>
+     <width>21</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="text_answer_2">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>370</y>
+     <width>351</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_answer_1">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>330</y>
+     <width>81</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; color:#ffffff;&quot;&gt;Ответ 1:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_answer_4">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>450</y>
+     <width>81</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; color:#ffffff;&quot;&gt;Ответ 4:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="button_edit_test">
+   <property name="geometry">
+    <rect>
+     <x>670</x>
+     <y>60</y>
+     <width>41</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>Добавить тему теста в базу</string>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    background-color: rgb(255, 255, 255);
+    border: 2px solid #094065;
+}
+
+QPushButton:pressed {
+    background-color:  rgb(118, 118, 118);
+}
+</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>images/edit-test-button.png</normaloff>images/edit-test-button.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>32</width>
+     <height>32</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="text_answer_4">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>450</y>
+     <width>351</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="answer_null">
+   <property name="geometry">
+    <rect>
+     <x>600</x>
+     <y>370</y>
+     <width>95</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_num_question_2">
+   <property name="geometry">
+    <rect>
+     <x>500</x>
+     <y>120</y>
+     <width>131</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; color:#ffffff;&quot;&gt;Номер вопроса:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="button_help">
+   <property name="geometry">
+    <rect>
+     <x>680</x>
+     <y>440</y>
+     <width>41</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>Получить справку</string>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    background-color: rgb(255, 255, 255);
+    border: 2px solid #094065;
+}
+
+QPushButton:pressed {
+    background-color:  rgb(118, 118, 118);
+}
+</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>images/help-button.png</normaloff>images/help-button.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>32</width>
+     <height>32</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="text_theme">
+   <property name="geometry">
+    <rect>
+     <x>380</x>
+     <y>20</y>
+     <width>331</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_answer_5">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>300</y>
+     <width>101</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; color:#ffffff;&quot;&gt;Правильный&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="text_question">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>150</y>
+     <width>711</width>
+     <height>141</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_text_question">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>120</y>
+     <width>131</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; color:#ffffff;&quot;&gt;Текст вопроса:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="button_edit_question">
+   <property name="geometry">
+    <rect>
+     <x>690</x>
+     <y>300</y>
+     <width>31</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>Добавить вопрос в базу</string>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    background-color: rgb(255, 255, 255);
+    border: 2px solid #094065;
+}
+
+QPushButton:pressed {
+    background-color:  rgb(118, 118, 118);
+}
+</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>images/complete-button.png</normaloff>images/complete-button.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>40</width>
+     <height>25</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="text_answer_1">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>330</y>
+     <width>351</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="right_3">
+   <property name="geometry">
+    <rect>
+     <x>510</x>
+     <y>410</y>
+     <width>21</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="text_num_question">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>60</y>
+     <width>51</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="button_exit">
+   <property name="geometry">
+    <rect>
+     <x>630</x>
+     <y>440</y>
+     <width>41</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>Выйти из режима создания теста</string>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    background-color: rgb(255, 255, 255);
+    border: 2px solid #094065;
+}
+
+QPushButton:pressed {
+    background-color:  rgb(118, 118, 118);
+}
+</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>images/exit-button.png</normaloff>images/exit-button.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>32</width>
+     <height>32</height>
+    </size>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

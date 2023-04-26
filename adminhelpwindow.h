@@ -1,9 +1,8 @@
-#ifndef THEORYWINDOW_H
-#define THEORYWINDOW_H
+#ifndef ADMINHELPWINDOW_H
+#define ADMINHELPWINDOW_H
 
 #include <QDialog>
 #include <QFile>
-#include <QDir>
 #include <QTextStream>
 #include <QTreeWidgetItem>
 #include <QMessageBox>
@@ -13,22 +12,19 @@
 #include "sql_requests.h"
 
 namespace Ui {
-class TheoryWindow;
+class AdminHelpWindow;
 }
 
-class TheoryWindow : public QDialog
+class AdminHelpWindow : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit TheoryWindow(QWidget *parent = 0);
-    ~TheoryWindow();
+    explicit AdminHelpWindow(QWidget *parent = 0);
+    ~AdminHelpWindow();
 
     void set_window_options();
     void set_enabled_button(int id_page);
-    void set_list_themes();
-
-    int get_max_num();
 
     void open_file_by_code(int row_index);
     void open_file_by_name(QString name);
@@ -42,9 +38,9 @@ private slots:
     void on_list_of_contents_itemClicked(QTreeWidgetItem *item);
 
 private:
-    Ui::TheoryWindow *ui;
+    Ui::AdminHelpWindow *ui;
     QSqlDatabase db;
     int pages_read;
 };
 
-#endif // THEORYWINDOW_H
+#endif // ADMINHELPWINDOW_H
