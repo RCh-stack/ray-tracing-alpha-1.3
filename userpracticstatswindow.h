@@ -49,7 +49,6 @@ private slots:
 
 private:
     Ui::UserPracticStatsWindow *ui;
-    QSqlDatabase db;
 };
 
 #endif // USERPRACTICSTATSWINDOW_H

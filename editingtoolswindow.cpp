@@ -70,7 +70,7 @@ void EditingToolsWindow::set_default_edit_options()
 
 void EditingToolsWindow::on_button_help_clicked()
 {
-
+    // instruction - хватит
 }
 
 // 1.5

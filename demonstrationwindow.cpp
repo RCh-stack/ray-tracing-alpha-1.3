@@ -1,5 +1,6 @@
 #include "demonstrationwindow.h"
 #include "ui_demonstrationwindow.h"
+#include "userhelpwindow.h"
 
 DemonstrationWindow::DemonstrationWindow(QWidget *parent) :
     QDialog(parent),
@@ -7,13 +8,8 @@ DemonstrationWindow::DemonstrationWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("C:/Program Files (x86)/Qt Project/RayTracing/EducationSystem.sqlite");
-
-    if (!db.open())
-        QMessageBox::critical(this, "Ошибка", db.lastError().text());
-
     set_window_options();
+
     step = 0, width = 1048, height = 498, fov = 1.5;
     ui->button_next_step->setEnabled(0);
     ui->button_prev_step->setEnabled(0);
@@ -666,5 +662,10 @@ void DemonstrationWindow::on_button_prev_step_clicked()
 
 void DemonstrationWindow::on_button_help_clicked()
 {
+    UserHelpWindow *uhw = new UserHelpWindow;
+    uhw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+    uhw->open_file_by_code(0); // -- УКАЗАТЬ НУЖНЫЙ --
 
+    uhw->exec();
+    uhw->deleteLater();
 }

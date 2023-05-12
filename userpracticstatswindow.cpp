@@ -1,17 +1,12 @@
 #include "userpracticstatswindow.h"
 #include "ui_userpracticstatswindow.h"
+#include "adminhelpwindow.h"
 
 UserPracticStatsWindow::UserPracticStatsWindow(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::UserPracticStatsWindow)
 {
     ui->setupUi(this);
-
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("C:/Program Files (x86)/Qt Project/RayTracing/EducationSystem.sqlite");
-
-    if (!db.open())
-        QMessageBox::critical(this, "Ошибка", db.lastError().text());
 
     set_window_options();
     set_enabled_combobox(false);
@@ -207,5 +202,10 @@ void UserPracticStatsWindow::on_button_exit_clicked()
 
 void UserPracticStatsWindow::on_button_help_clicked()
 {
+    AdminHelpWindow *ahw = new AdminHelpWindow;
+    ahw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+    ahw->open_file_by_code(0); // -- УКАЗАТЬ НУЖНЫЙ --
 
+    ahw->exec();
+    ahw->deleteLater();
 }

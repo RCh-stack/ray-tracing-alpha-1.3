@@ -3,8 +3,6 @@
 
 #include <QDialog>
 #include <QTableWidgetItem>
-#include <QSqlDatabase>
-#include <QSqlError>
 #include <QSqlQuery>
 #include "sql_requests.h"
 
@@ -63,7 +61,6 @@ public slots:
 
 private:
     Ui::AdminPanelWindow *ui;
-    QSqlDatabase db;
 };
 
 #endif // ADMINPANELWINDOW_H

@@ -1,19 +1,17 @@
 #include "edituserwindow.h"
 #include "ui_edituserwindow.h"
+#include "adminhelpwindow.h"
+
+#define UNUSED(x) [&x]{}()
 
 EditUserWindow::EditUserWindow(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::EditUserWindow)
 {
     ui->setupUi(this);
+
     set_window_options();
     list_available_groups(0);
-
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("C:/Program Files (x86)/Qt Project/RayTracing/EducationSystem.sqlite");
-
-    if (!db.open())
-        QMessageBox::critical(this, "Ошибка", db.lastError().text());
 
     ui->text_code->setEnabled(0);
 }
@@ -145,22 +143,13 @@ void EditUserWindow::edit_current_user()
     query.exec();
 
     QMessageBox::information(this, "Уведомление", "Данные о пользователе изменены!");
-    clear_input_fields();
+    this->close();
 }
 
 // 1.3
 int EditUserWindow::get_id_group()
 {
     return ui->comboBox_roles->currentIndex() == 3 ? 0 : ui->comboBox_groups->currentIndex() + 1;
-}
-
-// 1.3
-void EditUserWindow::clear_input_fields()
-{
-    ui->text_login->clear();
-    ui->text_fullname->clear();
-    ui->text_password->clear();
-    ui->text_code->clear();
 }
 
 void EditUserWindow::on_button_exit_clicked()
@@ -170,7 +159,12 @@ void EditUserWindow::on_button_exit_clicked()
 
 void EditUserWindow::on_button_help_clicked()
 {
+    AdminHelpWindow *ahw = new AdminHelpWindow;
+    ahw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+    ahw->open_file_by_code(0); // -- УКАЗАТЬ НУЖНЫЙ --
 
+    ahw->exec();
+    ahw->deleteLater();
 }
 
 // 1.3
@@ -181,5 +175,5 @@ bool EditUserWindow::code_is_number(const std::string& s)
 
 void EditUserWindow::on_EditUserWindow_finished(int result)
 {
-
+    UNUSED(result);
 }

@@ -1,11 +1,13 @@
 #include "userprofilewindow.h"
 #include "ui_userprofilewindow.h"
+#include "instructionwindow.h"
 
 UserProfileWindow::UserProfileWindow(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::UserProfileWindow)
 {
     ui->setupUi(this);
+
     set_window_options();
 }
 
@@ -53,5 +55,10 @@ void UserProfileWindow::on_button_close_clicked()
 
 void UserProfileWindow::on_button_help_clicked()
 {
+    InstructionWindow *iw = new InstructionWindow;
+    iw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+    iw->open_file(0); // -- ВСТАВИТЬ НУЖНЫЙ --
 
+    iw->exec();
+    iw->deleteLater();
 }

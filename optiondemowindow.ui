@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>853</width>
-    <height>748</height>
+    <height>737</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -1671,10 +1671,10 @@ QPushButton:pressed {
   <widget class="QPushButton" name="button_start">
    <property name="geometry">
     <rect>
-     <x>380</x>
+     <x>390</x>
      <y>670</y>
-     <width>51</width>
-     <height>51</height>
+     <width>41</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="font">
@@ -1705,18 +1705,18 @@ QPushButton:pressed {
    </property>
    <property name="iconSize">
     <size>
-     <width>96</width>
-     <height>96</height>
+     <width>80</width>
+     <height>80</height>
     </size>
    </property>
   </widget>
   <widget class="QPushButton" name="button_cancel">
    <property name="geometry">
     <rect>
-     <x>450</x>
+     <x>440</x>
      <y>670</y>
-     <width>51</width>
-     <height>51</height>
+     <width>41</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="font">
@@ -1747,8 +1747,8 @@ QPushButton:pressed {
    </property>
    <property name="iconSize">
     <size>
-     <width>36</width>
-     <height>36</height>
+     <width>32</width>
+     <height>32</height>
     </size>
    </property>
   </widget>
@@ -1756,7 +1756,7 @@ QPushButton:pressed {
    <property name="geometry">
     <rect>
      <x>800</x>
-     <y>700</y>
+     <y>690</y>
      <width>41</width>
      <height>41</height>
     </rect>

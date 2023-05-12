@@ -3,8 +3,6 @@
 
 #include <QDialog>
 #include <QMessageBox>
-#include <QSqlDatabase>
-#include <QSqlError>
 #include <QSqlQuery>
 #include "sql_requests.h"
 
@@ -26,7 +24,6 @@ public:
     bool input_validation();
     int get_id_group();
     void edit_current_user();
-    void clear_input_fields();
 
     void set_user_data_by_id();
     void set_current_id(QString id_user) { current_id_user = id_user; }
@@ -45,7 +42,6 @@ private slots:
 
 private:
     Ui::EditUserWindow *ui;
-    QSqlDatabase db;
     QString current_id_user;
 };
 

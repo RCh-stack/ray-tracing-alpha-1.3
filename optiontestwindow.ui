@@ -16,10 +16,10 @@
   <widget class="QPushButton" name="button_start">
    <property name="geometry">
     <rect>
-     <x>190</x>
+     <x>210</x>
      <y>220</y>
-     <width>51</width>
-     <height>51</height>
+     <width>41</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="toolTip">
@@ -45,8 +45,8 @@ QPushButton:pressed {
    </property>
    <property name="iconSize">
     <size>
-     <width>96</width>
-     <height>96</height>
+     <width>90</width>
+     <height>90</height>
     </size>
    </property>
   </widget>
@@ -199,6 +199,12 @@ color: rgb(0, 0, 0);
      <height>22</height>
     </rect>
    </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
+   <property name="displayFormat">
+    <string>dd.MM.yyyy</string>
+   </property>
   </widget>
   <widget class="QLabel" name="label_4">
    <property name="geometry">
@@ -266,8 +272,8 @@ QPushButton:pressed {
     <rect>
      <x>260</x>
      <y>220</y>
-     <width>51</width>
-     <height>51</height>
+     <width>41</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="toolTip">
@@ -293,8 +299,8 @@ QPushButton:pressed {
    </property>
    <property name="iconSize">
     <size>
-     <width>36</width>
-     <height>36</height>
+     <width>32</width>
+     <height>32</height>
     </size>
    </property>
   </widget>

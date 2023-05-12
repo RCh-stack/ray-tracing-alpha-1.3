@@ -253,10 +253,10 @@ QPushButton:pressed {
    </property>
    <widget class="QMenu" name="menu">
     <property name="title">
-     <string>Пользователь</string>
+     <string>Администратор</string>
     </property>
     <addaction name="action_user_profile"/>
-    <addaction name="action_user_option"/>
+    <addaction name="action_admin_option"/>
     <addaction name="action_exit"/>
    </widget>
    <widget class="QMenu" name="menu_2">
@@ -276,9 +276,9 @@ QPushButton:pressed {
     <string>Профиль</string>
    </property>
   </action>
-  <action name="action_user_option">
+  <action name="action_admin_option">
    <property name="text">
-    <string>Настройки</string>
+    <string>Настройки системы</string>
    </property>
   </action>
   <action name="action_exit">
@@ -288,7 +288,7 @@ QPushButton:pressed {
   </action>
   <action name="action_help">
    <property name="text">
-    <string>Контекстная подсказка</string>
+    <string>Справочная система</string>
    </property>
   </action>
   <action name="action_manual">

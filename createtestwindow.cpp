@@ -1,17 +1,12 @@
 #include "createtestwindow.h"
 #include "ui_createtestwindow.h"
+#include "adminhelpwindow.h"
 
 CreateTestWindow::CreateTestWindow(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::CreateTestWindow)
 {
     ui->setupUi(this);
-
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("C:/Program Files (x86)/Qt Project/RayTracing/EducationSystem.sqlite");
-
-    if (!db.open())
-        QMessageBox::critical(this, "Ошибка", db.lastError().text());
 
     set_window_options();
     set_default_options();
@@ -70,12 +65,6 @@ void CreateTestWindow::set_default_options()
 
     QFont font("Times New Roman", 12);
     ui->text_question->setFont(font);
-}
-
-// 1.7
-void CreateTestWindow::set_font_options()
-{
-
 }
 
 // 1.7
@@ -326,5 +315,10 @@ void CreateTestWindow::on_button_exit_clicked()
 
 void CreateTestWindow::on_button_help_clicked()
 {
+    AdminHelpWindow *ahw = new AdminHelpWindow;
+    ahw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+    ahw->open_file_by_code(0); // -- УКАЗАТЬ НУЖНЫЙ --
 
+    ahw->exec();
+    ahw->deleteLater();
 }

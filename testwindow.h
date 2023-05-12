@@ -2,10 +2,10 @@
 #define TESTWINDOW_H
 
 #include <QDialog>
+#include <QTimer>
+#include <QKeyEvent>
 #include <QMessageBox>
 #include <QDateTime>
-#include <QSqlDatabase>
-#include <QSqlError>
 #include <QSqlQuery>
 #include "sql_requests.h"
 
@@ -33,29 +33,42 @@ public:
     void set_mode_test(int id_mode) { mode_test = id_mode; }
     int get_mode_test() { return mode_test; }
 
-    void set_id_user(QString id_user) { code_user = id_user; }
-    QString get_id_user() { return code_user; }
+    void set_id_user(QString id) { id_user = id; }
+    QString get_id_user() { return id_user; }
 
     void set_date_test(QDateTime dt) { datetime_test = dt; }
     QDateTime get_date_test() { return datetime_test; }
 
-    void add_correct_answer(int index, int number) { correct_answers[index] = number; }
-    int get_correct_answer(int index) { return correct_answers[index]; }
+    void set_max_num_hints(int num) { max_num_hints = num; }
+    int get_max_num_hints() { return max_num_hints; }
 
-    void add_saved_answer(int index, int answer) { current_answers[index] = answer; }
-    int get_saved_answer(int index) { return current_answers[index]; }
-    //      ...
+    void set_use_timer(bool use) { use_timer = use; }
+    bool get_use_timer() { return use_timer; }
+
+    void run_timer();
 
     // Rus:
     //      ...
     void set_window_options();
+    void set_system_options();
     void set_enabled_button(int id_question);
+
     void start_test();
     void get_question(int id_question);
-    void output_question(int id_question, QString question, QString answer1, QString answer2, QString answer3, QString answer4, int correct_answer);
+    void output_question(int id_question, QString question, QString answer1, QString answer2, QString answer3, QString answer4);
     void reset_answers();
-    void save_marked_answer(int id_question);
-    void get_marked_answer(int id_question, bool next_question);
+
+    void save_answer_of_question();
+    int get_saved_answer(int id_question);
+    int get_correct_answer(int id_question);
+
+    void add_marked_answer(int id_question, int id_answer);
+    void edit_saved_answer(int id_question, int id_answer);
+    int get_marked_answer();
+    void set_marked_answer(int answer);
+
+    bool check_result_test();
+    void end_of_test();
     int determine_test_result();
     int get_rating(int num_correct_answers);
     void save_test_result(int rating_test);
@@ -74,16 +87,20 @@ private slots:
 
 private:
     Ui::TestWindow *ui;
-    QSqlDatabase db;
-    QString code_user; // идентификатор пользователя
+    QString id_user; // идентификатор пользователя
     int theme_test;  // тема тестирования
     int mode_test; // режим тестирования
     QDateTime datetime_test; // дата/время прохождения тестирования
-    int number_of_questuions; // кол-во вопросов в тесте
+    int number_of_questions; // кол-во вопросов в тесте
     int num_question; // номер вопроса
     int num_hints; // кол-во подсказок
-    int *current_answers; // текущие ответы на вопросы
-    int *correct_answers; // корректные ответы на выданные вопросы
+    int max_num_hints;
+    bool use_timer;
+    QTime time;
+
+protected:
+    void closeEvent(QCloseEvent *event) override;
+    void keyPressEvent(QKeyEvent *event);
 };
 
 #endif // TESTWINDOW_H

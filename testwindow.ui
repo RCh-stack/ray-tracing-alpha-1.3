@@ -124,8 +124,8 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>450</x>
      <y>250</y>
-     <width>51</width>
-     <height>51</height>
+     <width>41</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="toolTip">
@@ -159,10 +159,10 @@ QPushButton:pressed {
   <widget class="QPushButton" name="button_prev_question">
    <property name="geometry">
     <rect>
-     <x>390</x>
+     <x>400</x>
      <y>250</y>
-     <width>51</width>
-     <height>51</height>
+     <width>41</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="toolTip">
@@ -196,10 +196,10 @@ QPushButton:pressed {
   <widget class="QPushButton" name="button_complete_test">
    <property name="geometry">
     <rect>
-     <x>550</x>
+     <x>560</x>
      <y>250</y>
-     <width>51</width>
-     <height>51</height>
+     <width>41</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="toolTip">
@@ -309,6 +309,32 @@ QPushButton:pressed {
    <property name="icon">
     <iconset>
      <normaloff>images/clue-button.png</normaloff>images/clue-button.png</iconset>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_timer">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>380</y>
+     <width>61</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; color:#ffffff;&quot;&gt;Время:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QTimeEdit" name="timer_test">
+   <property name="geometry">
+    <rect>
+     <x>430</x>
+     <y>380</y>
+     <width>71</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="displayFormat">
+    <string>H:mm:ss</string>
    </property>
   </widget>
  </widget>

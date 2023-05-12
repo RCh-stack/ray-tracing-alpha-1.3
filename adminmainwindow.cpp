@@ -2,11 +2,12 @@
 #include "ui_adminmainwindow.h"
 #include "aboutwindowinformation.h"
 #include "userprofilewindow.h"
-#include "useroptionwindow.h"
+#include "adminoptionwindow.h"
 #include "adminpanelwindow.h"
 #include "admintheorywindow.h"
 #include "adminpracticwindow.h"
 #include "admintestwindow.h"
+#include "adminhelpwindow.h"
 
 AdminMainWindow::AdminMainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -72,13 +73,14 @@ void AdminMainWindow::on_action_about_information_triggered()
     awi->deleteLater();
 }
 
-void AdminMainWindow::on_action_user_option_triggered()
+void AdminMainWindow::on_action_admin_option_triggered()
 {
-    UserOptionWindow *uow = new UserOptionWindow;
-    uow->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+    AdminOptionWindow *aow = new AdminOptionWindow;
+    aow->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+    aow->set_default_options();
 
-    uow->exec();
-    uow->deleteLater();
+    aow->exec();
+    aow->deleteLater();
 }
 
 void AdminMainWindow::on_button_admin_panel_clicked()
@@ -140,7 +142,12 @@ void AdminMainWindow::on_action_exit_triggered()
 
 void AdminMainWindow::on_action_help_triggered()
 {
+    AdminHelpWindow *ahw = new AdminHelpWindow;
+    ahw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+    ahw->open_file_by_code(0); // -- УКАЗАТЬ НУЖНЫЙ --
 
+    ahw->exec();
+    ahw->deleteLater();
 }
 
 void AdminMainWindow::on_action_manual_triggered()
@@ -150,5 +157,10 @@ void AdminMainWindow::on_action_manual_triggered()
 
 void AdminMainWindow::on_button_help_clicked()
 {
+    AdminHelpWindow *ahw = new AdminHelpWindow;
+    ahw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+    ahw->open_file_by_code(0); // -- УКАЗАТЬ НУЖНЫЙ --
 
+    ahw->exec();
+    ahw->deleteLater();
 }

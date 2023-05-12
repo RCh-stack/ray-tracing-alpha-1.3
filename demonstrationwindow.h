@@ -5,8 +5,6 @@
 #include <QFile>
 #include <QTextStream>
 #include <QTextCodec>
-#include <QSqlDatabase>
-#include <QSqlError>
 #include <QSqlQuery>
 #include <QMessageBox>
 
@@ -149,7 +147,6 @@ private slots:
 
 private:
     Ui::DemonstrationWindow *ui;
-    QSqlDatabase db;
     int step; // -- шаг алгоритма --
     std::string path_to_image; // -- путь к изображению --
     int id_background_color; // -- цвет фона --

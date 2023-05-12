@@ -7,16 +7,10 @@ UserHelpWindow::UserHelpWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("C:/Program Files (x86)/Qt Project/RayTracing/EducationSystem.sqlite");
-
-    if (!db.open())
-        QMessageBox::critical(this, "Ошибка", db.lastError().text());
-
     set_window_options();
-    pages_read = 0;
-    open_file_by_code(pages_read);
-    set_enabled_button(pages_read);
+    //pages_read = 0;
+    //open_file_by_code(pages_read);
+    //set_enabled_button(pages_read); // записать при open_file_by_code при открытии формы
 }
 
 UserHelpWindow::~UserHelpWindow()
@@ -49,7 +43,7 @@ void UserHelpWindow::set_enabled_button(int id_page)
     else
         ui->button_prev_page->setEnabled(1);
 
-    if(id_page == 10) // ?
+    if(id_page == 10) // get last from DB
         ui->button_next_page->setEnabled(0);
     else
         ui->button_next_page->setEnabled(1);
@@ -58,7 +52,7 @@ void UserHelpWindow::set_enabled_button(int id_page)
 void UserHelpWindow::open_file_by_code(int row_index)
 {
     QSqlQuery query;
-    query.prepare(select_help_page_by_id());
+    query.prepare(select_user_help_page_by_id());
     query.bindValue(":id",  row_index);
     query.exec();
     if(!query.next())
@@ -70,7 +64,7 @@ void UserHelpWindow::open_file_by_code(int row_index)
 void UserHelpWindow::open_file_by_name(QString name)
 {
     QSqlQuery query;
-    query.prepare(select_help_page_by_name());
+    query.prepare(select_user_help_page_by_name());
     query.bindValue(":name",  name);
     query.exec();
     if(!query.next())
@@ -97,7 +91,7 @@ void UserHelpWindow::output_table_of_contents(QString path)
 
 void UserHelpWindow::on_button_prev_page_clicked()
 {
-    if(pages_read > 0 && pages_read <= 10) // ?
+    if(pages_read > 0 && pages_read <= 10) // get last from DB
         pages_read--;
     open_file_by_code(pages_read);
     set_enabled_button(pages_read);
@@ -105,7 +99,7 @@ void UserHelpWindow::on_button_prev_page_clicked()
 
 void UserHelpWindow::on_button_next_page_clicked()
 {
-    if(pages_read >= 0 && pages_read < 10) // ?
+    if(pages_read >= 0 && pages_read < 10) // get last from DB
         pages_read++;
     open_file_by_code(pages_read);
     set_enabled_button(pages_read);

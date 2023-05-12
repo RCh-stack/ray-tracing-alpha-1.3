@@ -5,6 +5,7 @@
 #include "changepracticwindow.h"
 #include "openpracticfile.h"
 #include "userpracticstatswindow.h"
+#include "adminhelpwindow.h"
 
 AdminPracticWindow::AdminPracticWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -105,12 +106,22 @@ void AdminPracticWindow::on_button_statistics_clicked()
 
 void AdminPracticWindow::on_button_help_clicked()
 {
+    AdminHelpWindow *ahw = new AdminHelpWindow;
+    ahw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+    ahw->open_file_by_code(0); // -- УКАЗАТЬ НУЖНЫЙ --
 
+    ahw->exec();
+    ahw->deleteLater();
 }
 
 void AdminPracticWindow::on_action_help_triggered()
 {
+    AdminHelpWindow *ahw = new AdminHelpWindow;
+    ahw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+    ahw->open_file_by_code(0); // -- УКАЗАТЬ НУЖНЫЙ --
 
+    ahw->exec();
+    ahw->deleteLater();
 }
 
 void AdminPracticWindow::on_action_manual_triggered()

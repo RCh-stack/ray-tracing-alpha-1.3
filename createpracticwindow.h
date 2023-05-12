@@ -6,8 +6,6 @@
 #include <QMessageBox>
 #include <QTextStream>
 #include <QFileDialog>
-#include <QSqlDatabase>
-#include <QSqlError>
 #include <QSqlQuery>
 #include "sql_requests.h"
 
@@ -25,6 +23,7 @@ public:
 
     void set_window_options();
     void set_default_options();
+    void set_system_options();
     void set_font_options();
 
     void set_name_font(QString name) { name_font = name; }
@@ -35,6 +34,9 @@ public:
 
     void set_id_font_color(int id) { id_font_color = id; }
     int get_id_font_color() { return id_font_color; }
+
+    void set_use_deadline(bool use) { use_deadline = use; }
+    bool get_use_deadline() { return use_deadline; }
 
     int get_num_work();
     QString generate_path_file(QString filename);
@@ -56,9 +58,9 @@ private slots:
 
 private:
     Ui::CreatePracticWindow *ui;
-    QSqlDatabase db;
     QString name_font;
     int id_font_color, size_font;
+    bool use_deadline;
 };
 
 #endif // CREATEPRACTICWINDOW_H

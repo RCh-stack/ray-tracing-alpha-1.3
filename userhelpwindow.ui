@@ -17,9 +17,9 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>460</y>
-     <width>51</width>
-     <height>51</height>
+     <y>470</y>
+     <width>41</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -60,10 +60,10 @@ QPushButton:pressed {
   <widget class="QPushButton" name="button_next_page">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>460</y>
-     <width>51</width>
-     <height>51</height>
+     <x>60</x>
+     <y>470</y>
+     <width>41</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -105,6 +105,116 @@ QPushButton:pressed {
      <string>Содержание</string>
     </property>
    </column>
+   <item>
+    <property name="text">
+     <string>Главное меню</string>
+    </property>
+    <item>
+     <property name="text">
+      <string>Модуль «Теория»</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Модуль «Демонстрация»</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Модуль «Практика»</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Модуль «Тестирование»</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Дополнительно</string>
+     </property>
+    </item>
+   </item>
+   <item>
+    <property name="text">
+     <string>Просмотр теоретических материалов</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Демонстрация выполнения алгоритма</string>
+    </property>
+    <item>
+     <property name="text">
+      <string>Настройки демонстрации</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Пошаговое выполнение</string>
+     </property>
+    </item>
+   </item>
+   <item>
+    <property name="text">
+     <string>Практические задания</string>
+    </property>
+    <item>
+     <property name="text">
+      <string>Получение лабораторных работ</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Сдача выполненных работ</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Доработка и корректировка работы</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Статистика по выполненным работам</string>
+     </property>
+    </item>
+   </item>
+   <item>
+    <property name="text">
+     <string>Тестирование</string>
+    </property>
+    <item>
+     <property name="text">
+      <string>Первоначальные настройки</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Режимы тестирования</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Прохождение тестов</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Статистика по пройденным тестам</string>
+     </property>
+    </item>
+   </item>
+   <item>
+    <property name="text">
+     <string>Руководство пользователя</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>О программе</string>
+    </property>
+   </item>
   </widget>
  </widget>
  <resources/>

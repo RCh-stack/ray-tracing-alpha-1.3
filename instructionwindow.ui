@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Инструкция - RayTracing</string>
+   <string>Справка - RayTracing</string>
   </property>
   <widget class="QTextBrowser" name="text_instruction">
    <property name="geometry">

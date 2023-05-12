@@ -1,5 +1,8 @@
 #include "editpracticwork.h"
 #include "ui_editpracticwork.h"
+#include "userhelpwindow.h"
+
+#define UNUSED(x) [&x]{}()
 
 EditPracticWork::EditPracticWork(QWidget *parent) :
     QDialog(parent),
@@ -7,14 +10,7 @@ EditPracticWork::EditPracticWork(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("C:/Program Files (x86)/Qt Project/RayTracing/EducationSystem.sqlite");
-
-    if (!db.open())
-        QMessageBox::critical(this, "Ошибка", db.lastError().text());
-
     set_window_options();
-
 }
 
 EditPracticWork::~EditPracticWork()
@@ -43,6 +39,35 @@ void EditPracticWork::set_window_options()
     setPalette(p);
 }
 
+void EditPracticWork::set_system_options()
+{
+    QSqlQuery query;
+    query.prepare(select_system_options());
+    query.exec();
+
+    if(query.next())
+    {
+        int id_format = query.value("NumberDefaultFormatFile").toInt();
+        if(id_format > 0)
+            set_default_format_file(id_format);
+
+        if(query.value("UseSomeFormatFile").toBool())
+            set_formats_files (query.value("FormatFileList").toString());
+    }
+}
+
+void EditPracticWork::set_default_format_file(int id_format)
+{
+    QSqlQuery query;
+    query.prepare(select_format_file());
+    query.bindValue(":id_format",       id_format);
+
+    query.exec();
+
+    if(query.next())
+        format_file = "*" + query.value("Name").toString();
+}
+
 // 1.4
 void EditPracticWork::set_visible_information()
 {
@@ -52,7 +77,7 @@ void EditPracticWork::set_visible_information()
 
 void EditPracticWork::on_button_path_clicked()
 {
-    QString filePath = QFileDialog::getOpenFileName(this, "Открыть файл", QString(), "*.cpp ");
+    QString filePath = QFileDialog::getOpenFileName(this, "Открыть файл", QString(), get_format_file());
     ui->text_path->setText(filePath);
 }
 
@@ -81,6 +106,7 @@ void EditPracticWork::update_select_work()
     query.bindValue(":text_work",  read_text_work_from_file(get_path_to_file()));
     query.bindValue(":id_status",   2);
     query.bindValue(":note",          "");
+    query.bindValue(":date",           QDate::currentDate());
     query.exec();
 
     QMessageBox::information(this, "Редактирование работы", "Лабораторная работа успешно прикреплена.");
@@ -88,7 +114,12 @@ void EditPracticWork::update_select_work()
 
 void EditPracticWork::on_button_help_clicked()
 {
+    UserHelpWindow *uhw = new UserHelpWindow;
+    uhw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+    uhw->open_file_by_code(0); // -- УКАЗАТЬ НУЖНЫЙ --
 
+    uhw->exec();
+    uhw->deleteLater();
 }
 
 // 1.4
@@ -117,5 +148,5 @@ void EditPracticWork::on_button_exit_clicked()
 
 void EditPracticWork::on_EditPracticWork_finished(int result)
 {
-
+    UNUSED(result);
 }

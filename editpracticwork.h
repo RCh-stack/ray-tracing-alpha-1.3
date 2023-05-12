@@ -2,11 +2,10 @@
 #define EDITPRACTICWORK_H
 
 #include <QDialog>
+#include <QDate>
 #include <QFileDialog>
 #include <QTextStream>
 #include <QMessageBox>
-#include <QSqlDatabase>
-#include <QSqlError>
 #include <QSqlQuery>
 #include "sql_requests.h"
 
@@ -23,6 +22,7 @@ public:
     ~EditPracticWork();
 
     void set_window_options();
+    void set_system_options();
     void set_visible_information();
 
     void set_id_user(QString id) { id_user = id; }
@@ -36,6 +36,10 @@ public:
 
     void set_path_to_file(QString path) { path_to_file = path; }
     QString get_path_to_file() { return path_to_file; }
+
+    void set_default_format_file(int id_format);
+    void set_formats_files(QString formats) {  format_file = formats; }
+    QString get_format_file() { return format_file; }
 
     void update_select_work();
     QString read_text_work_from_file(QString path);
@@ -53,11 +57,8 @@ private slots:
 
 private:
     Ui::EditPracticWork *ui;
-    QSqlDatabase db;
-    QString id_user;
-    QString name_work;
+    QString id_user, name_work, path_to_file, format_file;
     int id_work;
-    QString path_to_file;
 };
 
 #endif // EDITPRACTICWORK_H

@@ -7,12 +7,6 @@ InstructionWindow::InstructionWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("C:/Program Files (x86)/Qt Project/RayTracing/EducationSystem.sqlite");
-
-    if (!db.open())
-        QMessageBox::critical(this, "Ошибка", db.lastError().text());
-
     set_window_options();
 }
 
@@ -33,7 +27,7 @@ void InstructionWindow::set_window_options()
 void InstructionWindow::open_file(int id_page)
 {
     QSqlQuery query;
-    query.prepare(select_help_file());
+    query.prepare(select_instruction_file());
     query.bindValue(":id_page",  id_page);
     query.exec();
     if(!query.next())

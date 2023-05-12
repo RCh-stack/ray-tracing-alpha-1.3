@@ -4,9 +4,7 @@
 #include <QDialog>
 #include <QFile>
 #include <QTextStream>
-#include <QSqlDatabase>
 #include <QMessageBox>
-#include <QSqlError>
 #include <QSqlQuery>
 #include "sql_requests.h"
 
@@ -28,7 +26,6 @@ public:
 
 private:
     Ui::InstructionWindow *ui;
-    QSqlDatabase db;
 };
 
 #endif // INSTRUCTIONWINDOW_H

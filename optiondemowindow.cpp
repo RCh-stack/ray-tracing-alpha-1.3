@@ -2,6 +2,7 @@
 #include "ui_optiondemowindow.h"
 #include "demonstrationwindow.h"
 #include "ui_demonstrationwindow.h"
+#include "userhelpwindow.h"
 
 OptionDemoWindow::OptionDemoWindow(QWidget *parent) :
     QDialog(parent),
@@ -260,7 +261,12 @@ void OptionDemoWindow::on_button_cancel_clicked()
 
 void OptionDemoWindow::on_button_help_clicked()
 {
+    UserHelpWindow *uhw = new UserHelpWindow;
+    uhw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+    uhw->open_file_by_code(0); // -- УКАЗАТЬ НУЖНЫЙ --
 
+    uhw->exec();
+    uhw->deleteLater();
 }
 
 void OptionDemoWindow::on_check_option_clicked()

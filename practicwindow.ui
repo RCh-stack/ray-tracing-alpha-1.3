@@ -40,7 +40,7 @@
     <rect>
      <x>200</x>
      <y>50</y>
-     <width>341</width>
+     <width>321</width>
      <height>22</height>
     </rect>
    </property>
@@ -119,7 +119,7 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>190</x>
      <y>370</y>
-     <width>231</width>
+     <width>211</width>
      <height>21</height>
     </rect>
    </property>
@@ -331,7 +331,7 @@ QPushButton:pressed {
   <widget class="QPushButton" name="button_update">
    <property name="geometry">
     <rect>
-     <x>440</x>
+     <x>415</x>
      <y>365</y>
      <width>31</width>
      <height>31</height>
@@ -388,6 +388,70 @@ QPushButton:pressed {
      <y>440</y>
      <width>661</width>
      <height>101</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_date_delivery">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>370</y>
+     <width>101</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);
+</string>
+   </property>
+   <property name="text">
+    <string>Дата сдачи:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_deadline">
+   <property name="geometry">
+    <rect>
+     <x>540</x>
+     <y>50</y>
+     <width>101</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);
+</string>
+   </property>
+   <property name="text">
+    <string>Срок сдачи:</string>
+   </property>
+  </widget>
+  <widget class="QDateEdit" name="date_delivery">
+   <property name="geometry">
+    <rect>
+     <x>600</x>
+     <y>370</y>
+     <width>110</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QDateEdit" name="deadline">
+   <property name="geometry">
+    <rect>
+     <x>650</x>
+     <y>50</y>
+     <width>110</width>
+     <height>22</height>
     </rect>
    </property>
   </widget>

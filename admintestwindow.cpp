@@ -4,6 +4,7 @@
 #include "usersteststatswindow.h"
 #include "opentestfile.h"
 #include "changetestwindow.h"
+#include "adminhelpwindow.h"
 
 AdminTestWindow::AdminTestWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -46,7 +47,12 @@ void AdminTestWindow::set_window_options()
 
 void AdminTestWindow::on_action_help_triggered()
 {
+    AdminHelpWindow *ahw = new AdminHelpWindow;
+    ahw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+    ahw->open_file_by_code(0); // -- УКАЗАТЬ НУЖНЫЙ --
 
+    ahw->exec();
+    ahw->deleteLater();
 }
 
 void AdminTestWindow::on_action_manual_triggered()
@@ -101,5 +107,10 @@ void AdminTestWindow::on_button_edit_clicked()
 
 void AdminTestWindow::on_button_help_clicked()
 {
+    AdminHelpWindow *ahw = new AdminHelpWindow;
+    ahw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+    ahw->open_file_by_code(0); // -- УКАЗАТЬ НУЖНЫЙ --
 
+    ahw->exec();
+    ahw->deleteLater();
 }

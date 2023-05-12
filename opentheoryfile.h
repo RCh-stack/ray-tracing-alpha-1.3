@@ -3,8 +3,6 @@
 
 #include <QDialog>
 #include <QMessageBox>
-#include <QSqlDatabase>
-#include <QSqlError>
 #include <QSqlQuery>
 #include <QTableWidgetItem>
 #include "sql_requests.h"
@@ -32,7 +30,6 @@ private slots:
 
 private:
     Ui::OpenTheoryFile *ui;
-    QSqlDatabase db;
     int id_page;
 };
 

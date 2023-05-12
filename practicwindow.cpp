@@ -2,6 +2,7 @@
 #include "ui_practicwindow.h"
 #include "addpracticwork.h"
 #include "editpracticwork.h"
+#include "userhelpwindow.h"
 
 PracticWindow::PracticWindow(QWidget *parent) :
     QDialog(parent),
@@ -9,13 +10,9 @@ PracticWindow::PracticWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("C:/Program Files (x86)/Qt Project/RayTracing/EducationSystem.sqlite");
-
-    if (!db.open())
-        QMessageBox::critical(this, "Ошибка", db.lastError().text());
-
     set_window_options();
+    set_date_options();
+    set_system_options();
 
     QFont font("Century Gothic", 10);
     ui->text_note->setFont(font);
@@ -53,6 +50,41 @@ void PracticWindow::set_window_options()
     setPalette(p);
 }
 
+void PracticWindow::set_date_options()
+{
+    ui->label_deadline->setVisible(false);
+    ui->deadline->setVisible(false);
+    ui->deadline->setEnabled(false);
+
+    ui->label_date_delivery->setVisible(false);
+    ui->date_delivery->setVisible(false);
+    ui->date_delivery->setEnabled(false);
+}
+
+void PracticWindow::set_system_options()
+{
+    QSqlQuery query;
+    query.prepare(select_system_options());
+    query.exec();
+
+    if(query.next())
+    {
+        if(query.value("UseDeadLineWork").toBool())
+        {
+            ui->label_deadline->setVisible(true);
+            ui->deadline->setVisible(true);
+
+            set_check_date(true);
+            set_allow_pass(true);
+        }
+        else
+            set_check_date(false);
+
+        if(query.value("AllowDeliveryWorkAfterEndTerm").toBool())
+            set_check_date(false);
+    }
+}
+
 // 1.6
 void PracticWindow::set_list_works()
 {
@@ -71,18 +103,27 @@ void PracticWindow::set_enabled_button(int id_status)
 {
     if(id_status == 1)
     {
-        ui->button_send_work->setEnabled(1);
-        ui->button_edit_work->setEnabled(0);
+        ui->button_send_work->setEnabled(true);
+        ui->button_edit_work->setEnabled(false);
+
+        ui->label_date_delivery->setVisible(false);
+        ui->date_delivery->setVisible(false);
     }
     else if(id_status == 2 || id_status == 4)
     {
-        ui->button_send_work->setEnabled(0);
-        ui->button_edit_work->setEnabled(0);
+        ui->button_send_work->setEnabled(false);
+        ui->button_edit_work->setEnabled(false);
+
+        ui->label_date_delivery->setVisible(true);
+        ui->date_delivery->setVisible(true);
     }
     else
     {
-        ui->button_send_work->setEnabled(0);
-        ui->button_edit_work->setEnabled(1);
+        ui->button_send_work->setEnabled(false);
+        ui->button_edit_work->setEnabled(true);
+
+        ui->label_date_delivery->setVisible(true);
+        ui->date_delivery->setVisible(true);
     }
 }
 
@@ -118,7 +159,16 @@ QString PracticWindow::get_lab_work(int id_work)
     query.exec();
 
     if(query.next())
+    {
+        QString deadlineStr = query.value("Deadline").toString();
+        if (deadlineStr.isEmpty())
+            ui->deadline->setDate(QDate::fromString("01-01-2001", "dd-MM-yyyy"));
+        else
+            ui->deadline->setDate(QDate::fromString(deadlineStr, "dd-MM-yyyy"));
+        ui->deadline->update();
+
         return query.value("Path").toString();
+    }
 
     return "";
 }
@@ -148,8 +198,17 @@ QString PracticWindow::get_note(QString id_user, int id_work)
 
     query.exec();
 
-    if(query.next())
+    if (query.next())
+    {
+        QString dateStr = query.value("DateDelivery").toString();
+        if (!dateStr.isEmpty())
+            ui->date_delivery->setDate(QDate::fromString(dateStr, "dd-MM-yyyy"));
+       else
+            ui->date_delivery->setDate(QDate::currentDate());
+        ui->date_delivery->update();
+
         return query.value("Note").toString();
+    }
 
     return "";
 }
@@ -174,6 +233,21 @@ void PracticWindow::on_comboBox_works_currentIndexChanged(int index)
 }
 
 void PracticWindow::on_button_send_work_clicked()
+{
+    if(get_check_date())
+    {
+        set_allow_pass(check_delivery_date(QDate::currentDate(), ui->deadline->date()));
+
+        if(get_allow_pass())
+            add_new_work();
+        else
+            QMessageBox::critical(this, "Уведомление", "Срок сдачи работы истек, либо не установлен преподавателем.");
+    }
+    else
+        add_new_work();
+}
+
+void PracticWindow::add_new_work()
 {
     AddPracticWork *apw = new AddPracticWork;
     apw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
@@ -222,7 +296,12 @@ void PracticWindow::on_button_edit_work_clicked()
 
 void PracticWindow::on_button_help_clicked()
 {
+    UserHelpWindow *uhw = new UserHelpWindow;
+    uhw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+    uhw->open_file_by_code(0); // -- УКАЗАТЬ НУЖНЫЙ --
 
+    uhw->exec();
+    uhw->deleteLater();
 }
 
 void PracticWindow::on_button_exit_clicked()

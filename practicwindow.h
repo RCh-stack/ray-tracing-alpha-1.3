@@ -3,11 +3,10 @@
 
 #include <QDialog>
 #include <QFile>
+#include <QDate>
 #include <QTextStream>
 #include <QTreeWidgetItem>
 #include <QMessageBox>
-#include <QSqlDatabase>
-#include <QSqlError>
 #include <QSqlQuery>
 #include "sql_requests.h"
 
@@ -24,12 +23,16 @@ public:
     ~PracticWindow();
 
     void set_window_options();
+    void set_system_options();
+    void set_date_options();
     void set_list_works();
     void set_enabled_button(int id_status);
     void update_status_work();
 
     void output_table_of_contents(int row_index);
     void open_file(QString path);
+    bool check_delivery_date(QDate date_due, QDate date_deadline) { return date_due < date_deadline; }
+    void add_new_work();
 
     QString get_lab_work(int id_work);
     QString get_note(QString id_user, int id_work);
@@ -42,6 +45,12 @@ public:
 
     void set_fullname_user(QString fullname) { fullname_user = fullname; }
     QString get_fullname_user() { return fullname_user; }
+
+    void set_allow_pass(bool flag) { allow_pass = flag; }
+    bool get_allow_pass() { return allow_pass; }
+
+    void set_check_date(bool flag) { check_date = flag; }
+    bool get_check_date() { return check_date; }
 
 private slots:
     void on_comboBox_works_currentIndexChanged(int index);
@@ -61,10 +70,8 @@ public slots:
 
 private:
     Ui::PracticWindow *ui;
-    QSqlDatabase db;
-    QString id_user;
-    QString fullname_user;
-    QString note;
+    QString id_user, fullname_user, note;
+    bool allow_pass, check_date;
 };
 
 #endif // PRACTICWINDOW_H

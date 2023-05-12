@@ -3,18 +3,13 @@
 #include "userprofilewindow.h"
 #include "adduserwindow.h"
 #include "edituserwindow.h"
+#include "adminhelpwindow.h"
 
 AdminPanelWindow::AdminPanelWindow(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AdminPanelWindow)
 {
     ui->setupUi(this);    
-
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("C:/Program Files (x86)/Qt Project/RayTracing/EducationSystem.sqlite");
-
-    if (!db.open())
-        QMessageBox::critical(this, "Ошибка", db.lastError().text());
 
     set_window_options();
     ui->use_selection->setChecked(1);
@@ -286,7 +281,12 @@ void AdminPanelWindow::close_add_edit_window(int result)
 
 void AdminPanelWindow::on_button_help_clicked()
 {
+    AdminHelpWindow *ahw = new AdminHelpWindow;
+    ahw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+    ahw->open_file_by_code(0); // -- УКАЗАТЬ НУЖНЫЙ --
 
+    ahw->exec();
+    ahw->deleteLater();
 }
 
 void AdminPanelWindow::on_button_exit_clicked()

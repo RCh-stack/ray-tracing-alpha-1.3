@@ -2,6 +2,7 @@
 #include "ui_admintheorywindow.h"
 #include "opentheoryfile.h"
 #include "editingtoolswindow.h"
+#include "adminhelpwindow.h"
 
 AdminTheoryWindow::AdminTheoryWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -9,16 +10,10 @@ AdminTheoryWindow::AdminTheoryWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("C:/Program Files (x86)/Qt Project/RayTracing/EducationSystem.sqlite");
-
-    if (!db.open())
-        QMessageBox::critical(this, "Ошибка", db.lastError().text());
-
     set_window_options();
     set_default_options();
 
-    ui->text_num->setEnabled(0);
+    ui->text_num->setEnabled(false);
 }
 
 AdminTheoryWindow::~AdminTheoryWindow()
@@ -182,7 +177,12 @@ void AdminTheoryWindow::on_button_exit_clicked()
 
 void AdminTheoryWindow::on_button_help_clicked()
 {
+    AdminHelpWindow *ahw = new AdminHelpWindow;
+    ahw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+    ahw->open_file_by_code(0); // -- УКАЗАТЬ НУЖНЫЙ --
 
+    ahw->exec();
+    ahw->deleteLater();
 }
 
 // 1.5

@@ -28,7 +28,6 @@ SOURCES += main.cpp\
     adminmainwindow.cpp \
     aboutwindowinformation.cpp \
     userprofilewindow.cpp \
-    useroptionwindow.cpp \
     adminpanelwindow.cpp \
     adduserwindow.cpp \
     edituserwindow.cpp \
@@ -52,7 +51,12 @@ SOURCES += main.cpp\
     changetestwindow.cpp \
     userhelpwindow.cpp \
     adminhelpwindow.cpp \
-    instructionwindow.cpp
+    instructionwindow.cpp \
+    viewresulttestwindow.cpp \
+    adminoptionwindow.cpp \
+    listformatfile.cpp \
+    addformatfile.cpp \
+    editformatfile.cpp
 
 HEADERS  += mainwindow.h \
     authorizationwindow.h \
@@ -69,7 +73,6 @@ HEADERS  += mainwindow.h \
     adminmainwindow.h \
     aboutwindowinformation.h \
     userprofilewindow.h \
-    useroptionwindow.h \
     adminpanelwindow.h \
     adduserwindow.h \
     edituserwindow.h \
@@ -94,7 +97,12 @@ HEADERS  += mainwindow.h \
     changetestwindow.h \
     userhelpwindow.h \
     adminhelpwindow.h \
-    instructionwindow.h
+    instructionwindow.h \
+    viewresulttestwindow.h \
+    adminoptionwindow.h \
+    listformatfile.h \
+    addformatfile.h \
+    editformatfile.h
 
 FORMS    += mainwindow.ui \
     authorizationwindow.ui \
@@ -107,7 +115,6 @@ FORMS    += mainwindow.ui \
     adminmainwindow.ui \
     aboutwindowinformation.ui \
     userprofilewindow.ui \
-    useroptionwindow.ui \
     adminpanelwindow.ui \
     adduserwindow.ui \
     edituserwindow.ui \
@@ -131,7 +138,12 @@ FORMS    += mainwindow.ui \
     changetestwindow.ui \
     userhelpwindow.ui \
     adminhelpwindow.ui \
-    instructionwindow.ui
+    instructionwindow.ui \
+    viewresulttestwindow.ui \
+    adminoptionwindow.ui \
+    listformatfile.ui \
+    addformatfile.ui \
+    editformatfile.ui
 
 RESOURCES += \
     images.qrc \

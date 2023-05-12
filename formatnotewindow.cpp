@@ -61,5 +61,5 @@ void FormatNoteWindow::on_button_cancel_clicked()
 
 void FormatNoteWindow::on_button_help_clicked()
 {
-
+    // instruction ---
 }

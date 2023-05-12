@@ -115,14 +115,41 @@ inline QString select_question()
     return "SELECT * FROM Question WHERE ID_Question = :id_question AND ID_Theme = :id_theme";
 }
 
+inline QString select_answer_of_question()
+{
+    return "SELECT * FROM AnswerToQuestion WHERE ID_User = :id_user AND ID_Theme = :id_theme AND ID_Question = :id_question";
+}
+
+inline QString insert_answer_of_question()
+{
+    return "INSERT INTO AnswerToQuestion (ID_User, ID_Theme, ID_Question, Answer) VALUES (:id_user, :id_theme, :id_question, :id_answer)";
+}
+
+inline QString update_answer_of_question()
+{
+    return "UPDATE AnswerToQuestion SET Answer = :id_answer WHERE ID_User = :id_user AND ID_Theme = :id_theme AND ID_Question = :id_question";
+}
+
 inline QString insert_test_result()
 {
     return "INSERT INTO ResultTest (ID_User, ID_Theme, Grade, Date) VALUES (:id_user, :id_theme, :grade, :date)";
 }
 
+inline QString update_test_result()
+{
+    return "UPDATE ResultTest SET Grade = :grade, Date = :date WHERE ID_User = :id_user AND ID_Theme = :id_theme";
+}
+
+inline QString select_test_result()
+{
+    return "SELECT * FROM ResultTest WHERE ID_User = :id_user AND ID_Theme = :id_theme";
+}
+
 inline QString select_test_results_for_user()
 {
-    return "SELECT * FROM ResultTest WHERE ID_User = :id_user";
+    return "SELECT ThemeTest.ID_Theme, ThemeTest.Name, Grade, ResultTest.Date "
+              "FROM ResultTest "
+              "JOIN ThemeTest ON ResultTest.ID_Theme = ThemeTest.ID_Theme WHERE ID_User = :id_user";
 }
 
 inline QString select_theme_lab_work()
@@ -179,7 +206,7 @@ inline QString select_all_lab_works_with_selections()
 inline QString select_all_tests_results()
 {
     return "SELECT 'Group'.Name_Group AS GroupName, User.ID_User, User.Fullname, "
-            "TT.Name AS NameTest, Grade FROM ResultTest "
+            "TT.ID_Theme, TT.Name AS NameTest, Grade, Date FROM ResultTest "
             "JOIN User ON ResultTest.ID_User = User.ID_User "
             "JOIN 'Group' ON User.ID_Group = 'Group'.ID_Group "
             "JOIN ThemeTest TT on ResultTest.ID_Theme = TT.ID_Theme";
@@ -197,12 +224,14 @@ inline QString select_all_tests_results_with_selections()
 
 inline QString insert_lab_work()
 {
-    return "INSERT INTO LabWork (ID_User, ID_Work, TextWork, Status, Note) VALUES (:id_user, :id_work, :text_work, :id_status, :note)";
+    return "INSERT INTO LabWork (ID_User, ID_Work, TextWork, Status, Note, DateDelivery) "
+           "VALUES (:id_user, :id_work, :text_work, :id_status, :note, strftime('%d-%m-%Y', :date))";
 }
 
 inline QString update_lab_work()
 {
-    return "UPDATE LabWork SET TextWork = :text_work, Status = :id_status, Note = :note WHERE ID_User = :id_user AND ID_Work = :id_work";
+    return "UPDATE LabWork SET TextWork = :text_work, Status = :id_status, Note = :note, DateDelivery = strftime('%d-%m-%Y', :date) "
+           "WHERE ID_User = :id_user AND ID_Work = :id_work";
 }
 
 inline QString select_last_num_work()
@@ -232,12 +261,12 @@ inline QString insert_theory_page()
 
 inline QString insert_theme_work()
 {
-    return "INSERT INTO ThemeWork (ID_Theme, Name, Path) VALUES (:id_theme, :name_theme, :path)";
+    return "INSERT INTO ThemeWork (ID_Theme, Name, Path, Deadline) VALUES (:id_theme, :name_theme, :path, strftime('%d-%m-%Y', :deadline))";
 }
 
 inline QString update_theme_work()
 {
-    return "UPDATE ThemeWork SET Name = :name_theme AND Path = :path WHERE ID_Theme = :id_theme";
+    return "UPDATE ThemeWork SET Name = :name_theme, Path = :path, Deadline = strftime('%d-%m-%Y', :deadline) WHERE ID_Theme = :id_theme";
 }
 
 inline QString insert_theme_test()
@@ -262,19 +291,79 @@ inline QString update_question()
            "Answer_4 = :answer_4, Right_Answer = :right_answer WHERE ID_Theme = :id_theme AND ID_Question = :id_question";
 }
 
-inline QString select_help_file()
+inline QString select_instruction_file()
 {
-    return "SELECT * FROM HelpPage WHERE ID_Page = :id_page";
+    return "SELECT * FROM InstructionPage WHERE ID_Page = :id_page";
 }
 
-inline QString select_help_page_by_id()
+inline QString select_user_help_page_by_id()
 {
-    return "SELECT * FROM HelpPage WHERE ID_Page = :id";
+    return "SELECT * FROM UserHelpPage WHERE ID_Page = :id";
 }
 
-inline QString select_help_page_by_name()
+inline QString select_user_help_page_by_name()
 {
-    return "SELECT * FROM HelpPage WHERE Name_Theme = :name";
+    return "SELECT * FROM UserHelpPage WHERE Name_Theme = :name";
+}
+
+inline QString select_admin_help_page_by_id()
+{
+    return "SELECT * FROM AdminHelpPage WHERE ID_Page = :id";
+}
+
+inline QString select_admin_help_page_by_name()
+{
+    return "SELECT * FROM AdminHelpPage WHERE Name_Theme = :name";
+}
+
+inline QString select_all_rgb_colors()
+{
+    return "SELECT * FROM RGBColor";
+}
+
+inline QString select_rgb_color()
+{
+    return "SELECT * FROM RGBColor WHERE ID_Color = :id_color";
+}
+
+inline QString select_all_formats_files()
+{
+    return "SELECT * FROM FormatFile";
+}
+
+inline QString select_format_file()
+{
+    return "SELECT * FROM FormatFile WHERE ID_Format = :id_format";
+}
+
+inline QString select_used_formats_files()
+{
+    return "SELECT * FROM FormatFile WHERE Used = 1";
+}
+
+inline QString insert_format_file()
+{
+    return "INSERT INTO FormatFile (Name, Used) VALUES (:name, :used)";
+}
+
+inline QString update_format_file()
+{
+    return "UPDATE FormatFile SET Name = :name, Used = :used WHERE ID_Format = :id";
+}
+
+inline QString select_system_options()
+{
+    return "SELECT * FROM SystemOptions WHERE ID_Record = 1";
+}
+
+inline QString update_system_options()
+{
+    return "UPDATE SystemOptions SET UseMoreTheoryPages = :use_more_theory, NumberPrimaryPage = :number_primary, "
+           "UseCopySelectPage = :use_copy_select, UseSelectPageInList = :use_select_page, NumberColorSelectedPage = :number_color_select, "
+           "UseDeadLineWork = :use_deadline, NumberDefaultFormatFile = :number_format_file, UseSomeFormatFile = :use_some_format, "
+           "FormatFileList = :format_file, AllowDeliveryWorkAfterEndTerm = :allow_delivery_work, UseHintsInTest = :use_hints, "
+           "NumberHints = :number_hints, UseViewResult = :use_view_result, UseRepeatPassage = :use_repeat_passage, "
+           "UseTimer = :use_timer, TimerValue = :value_timer WHERE ID_Record = 1";
 }
 
 #endif // SQL_REQUESTS

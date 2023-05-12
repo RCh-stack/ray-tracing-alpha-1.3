@@ -1,17 +1,13 @@
 #include "usersteststatswindow.h"
 #include "ui_usersteststatswindow.h"
+#include "adminhelpwindow.h"
+#include "viewresulttestwindow.h"
 
 UsersTestStatsWindow::UsersTestStatsWindow(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::UsersTestStatsWindow)
 {
     ui->setupUi(this);
-
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("C:/Program Files (x86)/Qt Project/RayTracing/EducationSystem.sqlite");
-
-    if (!db.open())
-        QMessageBox::critical(this, "Ошибка", db.lastError().text());
 
     set_window_options();
     set_enabled_combobox(false);
@@ -43,10 +39,11 @@ void UsersTestStatsWindow::set_window_options()
     p.setBrush(QPalette::Background, bkgnd);
     setPalette(p);
 
-    ui->table_list->setColumnWidth(0, 100);
-    ui->table_list->setColumnWidth(1, 220);
-    ui->table_list->setColumnWidth(2, 340);
-    ui->table_list->setColumnWidth(3, 120);
+    ui->table_list->setColumnWidth(0, 200);
+    ui->table_list->setColumnWidth(1, 100);
+    ui->table_list->setColumnWidth(2, 270);
+    ui->table_list->setColumnWidth(3, 70);
+    ui->table_list->setColumnWidth(4, 140);
 }
 
 // 1.6
@@ -118,10 +115,11 @@ void UsersTestStatsWindow::output_list_tests()
     for(int i = 0; query.next(); i++)
     {
         ui->table_list->insertRow(i);
-        ui->table_list->setItem(i, 0, new QTableWidgetItem(query.value("GroupName").toString()));
-        ui->table_list->setItem(i, 1, new QTableWidgetItem(query.value("ID_User").toString() + " - " + query.value("Fullname").toString()));
+        ui->table_list->setItem(i, 0, new QTableWidgetItem(query.value("ID_User").toString() + " - " + query.value("Fullname").toString()));
+        ui->table_list->setItem(i, 1, new QTableWidgetItem(query.value("ID_Theme").toString()));
         ui->table_list->setItem(i, 2, new QTableWidgetItem(query.value("NameTest").toString()));
         ui->table_list->setItem(i, 3, new QTableWidgetItem(query.value("Grade").toString()));
+        ui->table_list->setItem(i, 4, new QTableWidgetItem(query.value("Date").toString()));
     }
 }
 
@@ -139,10 +137,11 @@ void UsersTestStatsWindow::output_list_tests_with_selection(int id_group, int id
     for(int i = 0; query.next(); i++)
     {
         ui->table_list->insertRow(i);
-        ui->table_list->setItem(i, 0, new QTableWidgetItem(query.value("GroupName").toString()));
-        ui->table_list->setItem(i, 1, new QTableWidgetItem(query.value("ID_User").toString() + " - " + query.value("Fullname").toString()));
+        ui->table_list->setItem(i, 0, new QTableWidgetItem(query.value("ID_User").toString() + " - " + query.value("Fullname").toString()));
+        ui->table_list->setItem(i, 1, new QTableWidgetItem(query.value("ID_Theme").toString()));
         ui->table_list->setItem(i, 2, new QTableWidgetItem(query.value("NameTest").toString()));
         ui->table_list->setItem(i, 3, new QTableWidgetItem(query.value("Grade").toString()));
+        ui->table_list->setItem(i, 4, new QTableWidgetItem(query.value("Date").toString()));
     }
 }
 
@@ -195,11 +194,32 @@ void UsersTestStatsWindow::on_button_update_clicked()
 
 void UsersTestStatsWindow::on_button_help_clicked()
 {
+    AdminHelpWindow *ahw = new AdminHelpWindow;
+    ahw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+    ahw->open_file_by_code(0); // -- УКАЗАТЬ НУЖНЫЙ --
 
+    ahw->exec();
+    ahw->deleteLater();
 }
 
 // 1.6
 void UsersTestStatsWindow::on_button_exit_clicked()
 {
     this->close();
+}
+
+void UsersTestStatsWindow::on_table_list_cellDoubleClicked(int row, int column)
+{
+    column = 1;
+
+    ViewResultTestWindow *vrtw = new ViewResultTestWindow;
+    vrtw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+
+    vrtw->set_id_user(QString::fromStdString(std::regex_replace(ui->table_list->item(row, column - 1)->text().toStdString(), std::regex(R"([\D])"), "")));
+    vrtw->set_theme_test(ui->table_list->item(row, column)->text().toInt());
+    vrtw->set_name_test(ui->table_list->item(row, column + 1)->text());
+    vrtw->output_data_in_form();
+
+    vrtw->exec();
+    vrtw->deleteLater();
 }

@@ -5,8 +5,6 @@
 #include <QDir>
 #include <QMessageBox>
 #include <QTextStream>
-#include <QSqlDatabase>
-#include <QSqlError>
 #include <QSqlQuery>
 #include "sql_requests.h"
 
@@ -24,6 +22,7 @@ public:
 
     void set_window_options();
     void set_default_options();
+    void set_system_options();
     void set_font_options();
 
     void get_data_from_db();
@@ -54,6 +53,9 @@ public:
     void set_id_font_color(int id) { id_font_color = id; }
     int get_id_font_color() { return id_font_color; }
 
+    void set_use_deadline(bool use) { use_deadline = use; }
+    bool get_use_deadline() { return use_deadline; }
+
 private slots:
     void on_text_work_textChanged();
 
@@ -69,9 +71,9 @@ private slots:
 
 private:
     Ui::ChangePracticWindow *ui;
-    QSqlDatabase db;
     int id_work, id_font_color, size_font;
     QString name_file, name_theme, path_to_file, name_font;
+    bool use_deadline;
 };
 
 #endif // CHANGEPRACTICWINDOW_H

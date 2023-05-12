@@ -4,15 +4,18 @@
 #include "ui_testwindow.h"
 #include "userteststatswindow.h"
 #include "ui_userteststatswindow.h"
+#include "userhelpwindow.h"
 
 OptionTestWindow::OptionTestWindow(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::OptionTestWindow)
 {
     ui->setupUi(this);
-    ui->datetime_test->setDateTime(QDateTime::currentDateTime());
 
     set_window_options();
+    set_system_options();
+
+    ui->datetime_test->setDateTime(QDateTime::currentDateTime());
 }
 
 OptionTestWindow::~OptionTestWindow()
@@ -44,6 +47,21 @@ void OptionTestWindow::set_window_options()
     setPalette(p);
 }
 
+void OptionTestWindow::set_system_options()
+{
+    QSqlQuery query;
+    query.prepare(select_system_options());
+    query.exec();
+
+    if(query.next())
+    {
+        if(query.value("UseRepeatPassage").toBool())
+            set_allow_repeat_try(true);
+        else
+            set_allow_repeat_try(false);
+    }
+}
+
 // 1.6
 void OptionTestWindow::set_list_tests()
 {
@@ -66,18 +84,30 @@ void OptionTestWindow::set_visible_name_user()
 // 1.2 + 1.3
 void OptionTestWindow::on_button_start_clicked()
 {
-    TestWindow *tw = new TestWindow;
-    tw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+    if(get_allow_repeat_try())
+    {
+        QMessageBox::StandardButton reply;
+        reply = QMessageBox::question(this, "Уведомление", "Данный тест уже был пройден. Хотите использовать новую попытку?"
+                                                             "\nДанные о предыдущей попытке будут очищены.",
+                                      QMessageBox::Yes|QMessageBox::No);
+        if (reply == QMessageBox::Yes)
+        {
+            TestWindow *tw = new TestWindow;
+            tw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
 
-    tw->set_id_user(get_id_user());
-    tw->set_date_test(ui->datetime_test->dateTime());
-    tw->set_mode_test(ui->comboBox_modes->currentIndex());
-    tw->set_theme_test(ui->comboBox_topics->currentIndex() + 1);
+            tw->set_id_user(get_id_user());
+            tw->set_date_test(ui->datetime_test->dateTime());
+            tw->set_mode_test(ui->comboBox_modes->currentIndex());
+            tw->set_theme_test(ui->comboBox_topics->currentIndex() + 1);
 
-    tw->start_test();
+            tw->start_test();
 
-    tw->exec();
-    tw->deleteLater();
+            tw->exec();
+            tw->deleteLater();
+        }
+    }
+    else
+        QMessageBox::warning(this, "Уведомление", "Данный тест уже пройден, новая попытка недоступна.");
 }
 
 void OptionTestWindow::on_button_cancel_clicked()
@@ -87,7 +117,12 @@ void OptionTestWindow::on_button_cancel_clicked()
 
 void OptionTestWindow::on_button_help_clicked()
 {
+    UserHelpWindow *uhw = new UserHelpWindow;
+    uhw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+    uhw->open_file_by_code(0); // -- УКАЗАТЬ НУЖНЫЙ --
 
+    uhw->exec();
+    uhw->deleteLater();
 }
 
 // 1.3

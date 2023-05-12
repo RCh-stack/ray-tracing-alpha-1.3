@@ -3,8 +3,6 @@
 
 #include <QDialog>
 #include <QMessageBox>
-#include <QSqlDatabase>
-#include <QSqlError>
 #include <QSqlQuery>
 #include "sql_requests.h"
 
@@ -41,7 +39,6 @@ private slots:
 
 private:
     Ui::AddUserWindow *ui;
-    QSqlDatabase db;
 };
 
 #endif // ADDUSERWINDOW_H

@@ -6,7 +6,7 @@
 #include "ui_mainwindow.h"
 #include "aboutwindowinformation.h"
 #include "userprofilewindow.h"
-#include "useroptionwindow.h"
+#include "userhelpwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -53,7 +53,7 @@ void MainWindow::on_button_theory_clicked()
 {
     TheoryWindow *tw = new TheoryWindow;
     tw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
-    tw->set_list_themes();
+
     tw->exec();
     tw->deleteLater();
 }
@@ -70,11 +70,12 @@ void MainWindow::on_button_demo_clicked()
 void MainWindow::on_button_test_clicked()
 {
     OptionTestWindow *otw = new OptionTestWindow;
+    otw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+
     otw->set_id_user(get_id_user());
     otw->set_fullname_user(get_fullname_user());
     otw->set_visible_name_user();
     otw->set_list_tests();
-    otw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
 
     otw->exec();
     otw->deleteLater();
@@ -84,11 +85,12 @@ void MainWindow::on_button_test_clicked()
 void MainWindow::on_button_practic_clicked()
 {
     PracticWindow *pw = new PracticWindow;
+    pw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+
     pw->set_id_user(get_id_user());
     pw->set_fullname_user(get_fullname_user());
     pw->set_list_works();
-    pw->output_table_of_contents(0);
-    pw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+    pw->output_table_of_contents(0); 
 
     pw->exec();
     pw->deleteLater();
@@ -120,22 +122,14 @@ QString MainWindow::get_name_group(int id)
 void MainWindow::on_action_user_profile_triggered()
 {
     UserProfileWindow *upw = new UserProfileWindow;
+    upw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+
     upw->set_fullname(get_fullname_user());
     upw->set_group(get_name_group(get_id_group()));
     upw->set_role("Студент");
-    upw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
 
     upw->exec();
     upw->deleteLater();
-}
-
-void MainWindow::on_action_user_option_triggered()
-{
-    UserOptionWindow *uow = new UserOptionWindow;
-    uow->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
-
-    uow->exec();
-    uow->deleteLater();
 }
 
 // 1.4
@@ -146,7 +140,12 @@ void MainWindow::on_action_exit_triggered()
 
 void MainWindow::on_action_help_triggered()
 {
+    UserHelpWindow *uhw = new UserHelpWindow;
+    uhw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+    uhw->open_file_by_code(0); // -- УКАЗАТЬ НУЖНЫЙ --
 
+    uhw->exec();
+    uhw->deleteLater();
 }
 
 void MainWindow::on_action_manual_triggered()
@@ -156,5 +155,10 @@ void MainWindow::on_action_manual_triggered()
 
 void MainWindow::on_button_help_clicked()
 {
+    UserHelpWindow *uhw = new UserHelpWindow;
+    uhw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+    uhw->open_file_by_code(0); // -- УКАЗАТЬ НУЖНЫЙ --
 
+    uhw->exec();
+    uhw->deleteLater();
 }

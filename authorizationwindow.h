@@ -13,6 +13,7 @@
 
 #include <QDialog>
 #include <QDir>
+#include <QKeyEvent>
 #include <QMessageBox>
 #include <QSqlDatabase>
 #include <QSqlError>
@@ -69,6 +70,13 @@ private slots:
     void on_button_show_code_pressed();
 
     void on_button_show_code_released();
+
+// **********************************************************
+
+protected:
+    void keyPressEvent(QKeyEvent *event);
+
+// **********************************************************
 
 private:
     Ui::AuthorizationWindow *ui;

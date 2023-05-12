@@ -6,8 +6,6 @@
 #include <QTextStream>
 #include <QTreeWidgetItem>
 #include <QMessageBox>
-#include <QSqlDatabase>
-#include <QSqlError>
 #include <QSqlQuery>
 #include "sql_requests.h"
 
@@ -39,7 +37,6 @@ private slots:
 
 private:
     Ui::UserHelpWindow *ui;
-    QSqlDatabase db;
     int pages_read;
 };
 

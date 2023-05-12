@@ -54,5 +54,7 @@
         <file>images/clear-text-button.png</file>
         <file>images/add-test-button.png</file>
         <file>images/edit-test-button.png</file>
+        <file>images/indeterminate-checkbox.png</file>
+        <file>images/checked-checkbox.png</file>
     </qresource>
 </RCC>

@@ -300,3 +300,11 @@ void AuthorizationWindow::on_button_show_code_released()
 {
     ui->text_code_admin->setEchoMode(QLineEdit::Password);
 }
+
+void AuthorizationWindow::keyPressEvent(QKeyEvent *event)
+{
+     if(event->key() == Qt::Key_F1)
+        on_button_help_clicked();
+    else
+        QDialog::keyPressEvent(event);
+}

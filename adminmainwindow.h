@@ -28,7 +28,7 @@ private slots:
 
     void on_action_about_information_triggered();
 
-    void on_action_user_option_triggered();
+    void on_action_admin_option_triggered();
 
     void on_button_admin_panel_clicked();
 

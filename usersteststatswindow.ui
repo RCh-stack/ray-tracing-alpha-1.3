@@ -136,12 +136,12 @@ color: rgb(0, 0, 0);
    </property>
    <column>
     <property name="text">
-     <string>Группа</string>
+     <string>Студент</string>
     </property>
    </column>
    <column>
     <property name="text">
-     <string>Студент</string>
+     <string>Номер теста</string>
     </property>
    </column>
    <column>
@@ -152,6 +152,11 @@ color: rgb(0, 0, 0);
    <column>
     <property name="text">
      <string>Оценка</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Дата прохождения</string>
     </property>
    </column>
   </widget>

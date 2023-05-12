@@ -1,19 +1,17 @@
 #include "adduserwindow.h"
 #include "ui_adduserwindow.h"
+#include "adminhelpwindow.h"
+
+#define UNUSED(x) [&x]{}()
 
 AddUserWindow::AddUserWindow(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AddUserWindow)
 {
     ui->setupUi(this);
+
     set_window_options();
     list_available_groups(0);
-
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("C:/Program Files (x86)/Qt Project/RayTracing/EducationSystem.sqlite");
-
-    if (!db.open())
-        QMessageBox::critical(this, "Ошибка", db.lastError().text());
 
     ui->text_code->setEnabled(0);
 }
@@ -151,7 +149,12 @@ void AddUserWindow::on_button_exit_clicked()
 
 void AddUserWindow::on_button_help_clicked()
 {
+    AdminHelpWindow *ahw = new AdminHelpWindow;
+    ahw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+    ahw->open_file_by_code(0); // -- УКАЗАТЬ НУЖНЫЙ --
 
+    ahw->exec();
+    ahw->deleteLater();
 }
 
 // 1.2
@@ -162,5 +165,5 @@ bool AddUserWindow::code_is_number(const std::string& s)
 
 void AddUserWindow::on_AddUserWindow_finished(int result)
 {
-
+    UNUSED(result);
 }

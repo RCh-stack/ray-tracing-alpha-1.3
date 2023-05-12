@@ -1,18 +1,13 @@
 #include "checkpracticworkwindow.h"
 #include "ui_checkpracticworkwindow.h"
 #include "formatnotewindow.h"
+#include "adminhelpwindow.h"
 
 CheckPracticWorkWindow::CheckPracticWorkWindow(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::CheckPracticWorkWindow)
 {
     ui->setupUi(this);
-
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("C:/Program Files (x86)/Qt Project/RayTracing/EducationSystem.sqlite");
-
-    if (!db.open())
-        QMessageBox::critical(this, "Ошибка", db.lastError().text());
 
     set_window_options();
     set_font_default();
@@ -248,7 +243,12 @@ void CheckPracticWorkWindow::on_button_enter_note_clicked()
 
 void CheckPracticWorkWindow::on_button_help_clicked()
 {
+    AdminHelpWindow *ahw = new AdminHelpWindow;
+    ahw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+    ahw->open_file_by_code(0); // -- УКАЗАТЬ НУЖНЫЙ --
 
+    ahw->exec();
+    ahw->deleteLater();
 }
 
 // 1.6

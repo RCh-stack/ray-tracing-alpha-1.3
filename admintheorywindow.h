@@ -5,8 +5,6 @@
 #include <QFileDialog>
 #include <QTextStream>
 #include <QMessageBox>
-#include <QSqlDatabase>
-#include <QSqlError>
 #include <QSqlQuery>
 #include "sql_requests.h"
 
@@ -79,7 +77,6 @@ private slots:
 
 private:
     Ui::AdminTheoryWindow *ui;
-    QSqlDatabase db;
     int id_page, id_font_color, size_font;
     QString name_file, name_theme, name_font;
     QString file_path;

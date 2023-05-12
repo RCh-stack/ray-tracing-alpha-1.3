@@ -40,8 +40,6 @@ private slots:
 
     void on_action_user_profile_triggered();
 
-    void on_action_user_option_triggered();
-
     void on_action_exit_triggered();
 
     void on_action_help_triggered();

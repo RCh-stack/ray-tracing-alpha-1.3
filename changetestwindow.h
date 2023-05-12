@@ -3,8 +3,6 @@
 
 #include <QDialog>
 #include <QMessageBox>
-#include <QSqlDatabase>
-#include <QSqlError>
 #include <QSqlQuery>
 #include "sql_requests.h"
 
@@ -22,7 +20,6 @@ public:
 
     void set_window_options();
     void set_default_options();
-    void set_font_options();
 
     void set_id_theme(int id) { id_theme = id; }
     int get_id_theme() { return id_theme; }
@@ -54,7 +51,6 @@ private slots:
 
 private:
     Ui::ChangeTestWindow *ui;
-    QSqlDatabase db;
     int id_theme;
 };
 

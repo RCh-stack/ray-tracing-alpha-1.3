@@ -1,5 +1,7 @@
 #include "userteststatswindow.h"
 #include "ui_userteststatswindow.h"
+#include "userhelpwindow.h"
+#include "viewresulttestwindow.h"
 
 UserTestStatsWindow::UserTestStatsWindow(QWidget *parent) :
     QDialog(parent),
@@ -7,13 +9,8 @@ UserTestStatsWindow::UserTestStatsWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("C:/Program Files (x86)/Qt Project/RayTracing/EducationSystem.sqlite");
-
-    if (!db.open())
-        QMessageBox::critical(this, "Ошибка", db.lastError().text());
-
     set_window_options();
+    set_system_options();
 }
 
 UserTestStatsWindow::~UserTestStatsWindow()
@@ -43,25 +40,26 @@ void UserTestStatsWindow::set_window_options()
     ui->text_user_name->setEnabled(0);
 }
 
+void UserTestStatsWindow::set_system_options()
+{
+    QSqlQuery query;
+    query.prepare(select_system_options());
+    query.exec();
+
+    if(query.next())
+    {
+        if(query.value("UseViewResult").toBool())
+            set_allow_view(true);
+        else
+            set_allow_view(false);
+    }
+}
+
 // 1.3
 void UserTestStatsWindow::set_title_information()
 {
     ui->text_id_user->setText(get_user_id());
     ui->text_user_name->setText(get_user_name());
-}
-
-// 1.3
-QString UserTestStatsWindow::get_name_theme_test(int id_theme)
-{
-    QSqlQuery query;
-    query.prepare(select_name_test());
-    query.bindValue(":id_theme",    id_theme);
-    query.exec();
-
-    if(query.next())
-        return query.value("Name").toString();
-
-    return "";
 }
 
 // 1.3
@@ -75,8 +73,8 @@ void UserTestStatsWindow::output_table_information()
     for(int i = 0; query.next(); i++)
     {
         ui->table_stats->insertRow(i);
-        ui->table_stats->setItem(i, 0, new QTableWidgetItem(query.value("ID_User").toString()));
-        ui->table_stats->setItem(i, 1, new QTableWidgetItem(get_name_theme_test(query.value("ID_Theme").toInt())));
+        ui->table_stats->setItem(i, 0, new QTableWidgetItem(query.value("ID_Theme").toString()));
+        ui->table_stats->setItem(i, 1, new QTableWidgetItem(query.value("Name").toString()));
         ui->table_stats->setItem(i, 2, new QTableWidgetItem(query.value("Grade").toString()));
         ui->table_stats->setItem(i, 3, new QTableWidgetItem(query.value("Date").toString()));
     }
@@ -91,5 +89,29 @@ void UserTestStatsWindow::on_button_exit_clicked()
 // 1.3
 void UserTestStatsWindow::on_button_help_clicked()
 {
+    UserHelpWindow *uhw = new UserHelpWindow;
+    uhw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+    uhw->open_file_by_code(0); // -- УКАЗАТЬ НУЖНЫЙ --
 
+    uhw->exec();
+    uhw->deleteLater();
+}
+
+void UserTestStatsWindow::on_table_stats_cellDoubleClicked(int row, int column)
+{
+    if(get_allow_view())
+    {
+        column = 1;
+
+        ViewResultTestWindow *vrtw = new ViewResultTestWindow;
+        vrtw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+
+        vrtw->set_id_user(get_user_id());
+        vrtw->set_theme_test(ui->table_stats->item(row, 0)->text().toInt());
+        vrtw->set_name_test(ui->table_stats->item(row, column)->text());
+        vrtw->output_data_in_form();
+
+        vrtw->exec();
+        vrtw->deleteLater();
+    }
 }

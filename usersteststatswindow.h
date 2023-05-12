@@ -3,9 +3,8 @@
 
 #include <QDialog>
 #include <QMessageBox>
-#include <QSqlDatabase>
-#include <QSqlError>
 #include <QSqlQuery>
+#include <regex>
 #include "sql_requests.h"
 
 namespace Ui {
@@ -48,9 +47,10 @@ private slots:
 
     void on_button_exit_clicked();
 
+    void on_table_list_cellDoubleClicked(int row, int column);
+
 private:
     Ui::UsersTestStatsWindow *ui;
-    QSqlDatabase db;
 };
 
 #endif // USERSTESTSTATSWINDOW_H

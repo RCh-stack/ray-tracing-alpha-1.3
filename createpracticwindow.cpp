@@ -1,6 +1,7 @@
 #include "createpracticwindow.h"
 #include "ui_createpracticwindow.h"
 #include "editingtoolswindow.h"
+#include "adminhelpwindow.h"
 
 CreatePracticWindow::CreatePracticWindow(QWidget *parent) :
     QDialog(parent),
@@ -8,14 +9,9 @@ CreatePracticWindow::CreatePracticWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("C:/Program Files (x86)/Qt Project/RayTracing/EducationSystem.sqlite");
-
-    if (!db.open())
-        QMessageBox::critical(this, "Ошибка", db.lastError().text());
-
     set_window_options();
     set_default_options();
+    set_system_options();
 }
 
 CreatePracticWindow::~CreatePracticWindow()
@@ -49,6 +45,29 @@ void CreatePracticWindow::set_window_options()
     QPalette p = palette();
     p.setBrush(QPalette::Background, bkgnd);
     setPalette(p);
+}
+
+void CreatePracticWindow::set_system_options()
+{
+    QSqlQuery query;
+    query.prepare(select_system_options());
+    query.exec();
+
+    if(query.next())
+    {
+        if(query.value("UseDeadLineWork").toBool())
+        {
+            set_use_deadline(true);
+            ui->label_deadline->setVisible(true);
+            ui->deadline->setVisible(true);
+        }
+        else
+        {
+            set_use_deadline(false);
+            ui->label_deadline->setVisible(false);
+            ui->deadline->setVisible(false);
+        }
+    }
 }
 
 // 1.6
@@ -146,6 +165,10 @@ void CreatePracticWindow::add_file_in_database()
     query.bindValue(":id_theme",        ui->text_number->text().simplified());
     query.bindValue(":name_theme",  ui->text_name_work->text().simplified());
     query.bindValue(":path",               generate_path_file(ui->text_name_file->text().simplified()));
+    if(get_use_deadline())
+        query.bindValue(":deadline",     ui->deadline->date());
+    else
+        query.bindValue(":deadline",     "");
 
     query.exec();
 
@@ -170,7 +193,12 @@ void CreatePracticWindow::on_button_options_clicked()
 
 void CreatePracticWindow::on_button_help_clicked()
 {
+    AdminHelpWindow *ahw = new AdminHelpWindow;
+    ahw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+    ahw->open_file_by_code(0); // -- УКАЗАТЬ НУЖНЫЙ --
 
+    ahw->exec();
+    ahw->deleteLater();
 }
 
 // 1.6

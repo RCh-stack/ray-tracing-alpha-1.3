@@ -7,8 +7,6 @@
 #include <QTextStream>
 #include <QTreeWidgetItem>
 #include <QMessageBox>
-#include <QSqlDatabase>
-#include <QSqlError>
 #include <QSqlQuery>
 #include "sql_requests.h"
 
@@ -27,7 +25,9 @@ public:
     void set_window_options();
     void set_enabled_button(int id_page);
     void set_list_themes();
+    void set_system_options();
 
+    QString get_code_color(int id_color);
     int get_max_num();
 
     void open_file_by_code(int row_index);
@@ -41,10 +41,14 @@ private slots:
 
     void on_list_of_contents_itemClicked(QTreeWidgetItem *item);
 
+    void on_button_help_clicked();
+
 private:
     Ui::TheoryWindow *ui;
-    QSqlDatabase db;
     int pages_read;
+    bool used_color_selected;
+    int id_color_selected;
+    QTreeWidgetItem *selected_item;
 };
 
 #endif // THEORYWINDOW_H

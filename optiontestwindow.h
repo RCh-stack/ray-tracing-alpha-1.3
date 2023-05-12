@@ -16,6 +16,7 @@ public:
     ~OptionTestWindow();
 
     void set_window_options();
+    void set_system_options();
     void set_list_tests();
     void set_visible_name_user();
 
@@ -24,6 +25,9 @@ public:
 
     void set_fullname_user(QString fullname) { fullname_user = fullname; }
     QString get_fullname_user() { return fullname_user; }
+
+    void set_allow_repeat_try(bool allow) { allow_repeat_try = allow; }
+    bool get_allow_repeat_try() { return allow_repeat_try; }
 
 private slots:
     void on_button_start_clicked();
@@ -38,6 +42,7 @@ private:
     Ui::OptionTestWindow *ui;
     QString id_user;
     QString fullname_user;
+    bool allow_repeat_try;
 };
 
 #endif // OPTIONTESTWINDOW_H

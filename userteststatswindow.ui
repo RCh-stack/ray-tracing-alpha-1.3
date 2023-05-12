@@ -59,7 +59,7 @@
    </attribute>
    <column>
     <property name="text">
-     <string>ID</string>
+     <string>ID теста</string>
     </property>
    </column>
    <column>

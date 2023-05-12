@@ -3,8 +3,6 @@
 
 #include <QDialog>
 #include <QMessageBox>
-#include <QSqlDatabase>
-#include <QSqlError>
 #include <QSqlQuery>
 #include <regex>
 #include "sql_requests.h"
@@ -67,7 +65,6 @@ private slots:
 
 private:
     Ui::CheckPracticWorkWindow *ui;
-    QSqlDatabase db;
     QString id_user;
     int id_work, id_status;
     QString note;
