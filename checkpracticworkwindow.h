@@ -2,6 +2,7 @@
 #define CHECKPRACTICWORKWINDOW_H
 
 #include <QDialog>
+#include <QKeyEvent>
 #include <QMessageBox>
 #include <QSqlQuery>
 #include <regex>
@@ -62,6 +63,9 @@ private slots:
     void on_button_enter_note_clicked();
 
     void on_button_clear_clicked();
+
+protected:
+    void keyPressEvent(QKeyEvent *event);
 
 private:
     Ui::CheckPracticWorkWindow *ui;

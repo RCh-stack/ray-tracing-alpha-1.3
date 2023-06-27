@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QFile>
 #include <QDir>
+#include <QKeyEvent>
 #include <QTextStream>
 #include <QTreeWidgetItem>
 #include <QMessageBox>
@@ -42,6 +43,9 @@ private slots:
     void on_list_of_contents_itemClicked(QTreeWidgetItem *item);
 
     void on_button_help_clicked();
+
+protected:
+    void keyPressEvent(QKeyEvent *event);
 
 private:
     Ui::TheoryWindow *ui;

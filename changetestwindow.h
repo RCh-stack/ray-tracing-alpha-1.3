@@ -2,6 +2,7 @@
 #define CHANGETESTWINDOW_H
 
 #include <QDialog>
+#include <QKeyEvent>
 #include <QMessageBox>
 #include <QSqlQuery>
 #include "sql_requests.h"
@@ -48,6 +49,9 @@ private slots:
     void on_button_help_clicked();
 
     void on_button_exit_clicked();
+
+protected:
+    void keyPressEvent(QKeyEvent *event);
 
 private:
     Ui::ChangeTestWindow *ui;

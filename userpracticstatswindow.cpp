@@ -209,3 +209,11 @@ void UserPracticStatsWindow::on_button_help_clicked()
     ahw->exec();
     ahw->deleteLater();
 }
+
+void UserPracticStatsWindow::keyPressEvent(QKeyEvent *event)
+{
+     if(event->key() == Qt::Key_F1)
+        on_button_help_clicked();
+    else
+        QDialog::keyPressEvent(event);
+}

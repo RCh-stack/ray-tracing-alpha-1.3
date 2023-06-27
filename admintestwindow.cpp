@@ -114,3 +114,11 @@ void AdminTestWindow::on_button_help_clicked()
     ahw->exec();
     ahw->deleteLater();
 }
+
+void AdminTestWindow::keyPressEvent(QKeyEvent *event)
+{
+     if(event->key() == Qt::Key_F1)
+        on_button_help_clicked();
+    else
+        QMainWindow::keyPressEvent(event);
+}

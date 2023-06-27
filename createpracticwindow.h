@@ -2,6 +2,7 @@
 #define CREATEPRACTICWINDOW_H
 
 #include <QDialog>
+#include <QKeyEvent>
 #include <QDir>
 #include <QMessageBox>
 #include <QTextStream>
@@ -55,6 +56,9 @@ private slots:
     void on_button_exit_clicked();
 
     void on_text_work_textChanged();
+
+protected:
+    void keyPressEvent(QKeyEvent *event);
 
 private:
     Ui::CreatePracticWindow *ui;

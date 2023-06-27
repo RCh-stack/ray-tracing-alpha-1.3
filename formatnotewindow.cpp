@@ -61,5 +61,18 @@ void FormatNoteWindow::on_button_cancel_clicked()
 
 void FormatNoteWindow::on_button_help_clicked()
 {
-    // instruction ---
+    InstructionWindow *iw = new InstructionWindow;
+    iw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+    iw->open_file(0); // нужный
+
+    iw->exec();
+    iw->deleteLater();
+}
+
+void FormatNoteWindow::keyPressEvent(QKeyEvent *event)
+{
+     if(event->key() == Qt::Key_F1)
+        on_button_help_clicked();
+    else
+        QDialog::keyPressEvent(event);
 }

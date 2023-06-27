@@ -62,3 +62,11 @@ void UserProfileWindow::on_button_help_clicked()
     iw->exec();
     iw->deleteLater();
 }
+
+void UserProfileWindow::keyPressEvent(QKeyEvent *event)
+{
+     if(event->key() == Qt::Key_F1)
+        on_button_help_clicked();
+    else
+        QDialog::keyPressEvent(event);
+}

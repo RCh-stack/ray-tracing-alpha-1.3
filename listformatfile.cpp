@@ -131,3 +131,11 @@ void ListFormatFile::on_button_exit_clicked()
     if (reply == QMessageBox::Yes)
         this->close();
 }
+
+void ListFormatFile::keyPressEvent(QKeyEvent *event)
+{
+     if(event->key() == Qt::Key_F1)
+        on_button_help_clicked();
+    else
+        QDialog::keyPressEvent(event);
+}

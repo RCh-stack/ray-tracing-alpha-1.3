@@ -2,6 +2,7 @@
 #define ADDUSERWINDOW_H
 
 #include <QDialog>
+#include <QKeyEvent>
 #include <QMessageBox>
 #include <QSqlQuery>
 #include "sql_requests.h"
@@ -23,6 +24,7 @@ public:
     bool code_is_number(const std::string& s);
     bool input_validation();
     int get_id_group();
+    bool check_user();
     void add_new_user();
     void clear_input_fields();
 
@@ -36,6 +38,9 @@ private slots:
     void on_button_help_clicked();
 
     void on_AddUserWindow_finished(int result);
+
+protected:
+    void keyPressEvent(QKeyEvent *event);
 
 private:
     Ui::AddUserWindow *ui;

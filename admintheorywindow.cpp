@@ -185,6 +185,28 @@ void AdminTheoryWindow::on_button_help_clicked()
     ahw->deleteLater();
 }
 
+void AdminTheoryWindow::closeEvent(QCloseEvent *event)
+{
+    if(event->spontaneous() && event->isAccepted())
+    {
+        QMessageBox::StandardButton reply = QMessageBox::question(this, "Закрыть окно",
+                                                                  "Вы уверены, что хотите завершить редактирование?\nДанные не будут сохранены.",
+                                                                  QMessageBox::Yes|QMessageBox::No);
+        if (reply == QMessageBox::Yes)
+            event->accept();
+        else
+            event->ignore();
+    }
+}
+
+void AdminTheoryWindow::keyPressEvent(QKeyEvent *event)
+{
+     if(event->key() == Qt::Key_F1)
+        on_button_help_clicked();
+    else
+        QMainWindow::keyPressEvent(event);
+}
+
 // 1.5
 void AdminTheoryWindow::set_options_for_file(int id_page)
 {
@@ -212,8 +234,11 @@ void AdminTheoryWindow::on_action_open_resource_triggered()
     set_id_page(otw->get_id_page());
     otw->deleteLater();
 
-    open_and_output_file(get_path_file(get_id_page()));
-    set_options_for_file(get_id_page());
+    if(get_id_page() != 0)
+    {
+        open_and_output_file(get_path_file(get_id_page()));
+        set_options_for_file(get_id_page());
+    }
 }
 
 // 1.5
@@ -234,8 +259,15 @@ QString AdminTheoryWindow::get_path_file(int id_page)
 void AdminTheoryWindow::on_action_open_directory_triggered()
 {
     QString filePath = QFileDialog::getOpenFileName(this, "Открыть файл", QString(), "*.html ");
-    set_path_file(filePath);
-    open_and_output_file(filePath);
+    QFile file(filePath);
+    QTextStream html(&file);
+    if ((file.exists()) && (file.open(QIODevice::ReadOnly | QIODevice::Text)))
+    {
+        QString text_file = html.readAll();
+        ui->html_theory->setText(text_file);
+        ui->text_theory->setPlainText(text_file);
+        file.close();
+    }
 }
 
 // 1.5

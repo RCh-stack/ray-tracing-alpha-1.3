@@ -1,11 +1,37 @@
 ﻿<html>
 <body>
 <p><font size = '7' face = 'Times New Roman'><strong>Этап 6. Создание преломлений</strong></font></p>
-
-<p><strong>//</strong></p>
-
-<p><strong>...</strong></p>
-
-<p><strong>//</strong></p>
+<p><font size = '5' face = 'Times New Roman'> Теперь в заключении мы можем добавить эффект преломления для наших сфер. По реализации он схож на реализацию отражений.
+Но перед этим мы меняем структуру для материала следующим образом: <br></font></p>
+<p><font size = '4' face = 'Century Gothic'>
+Material(const float &r, const Vec4f &a, const Vec3f &color, const float &spec) : refractive_index(r), albedo(a), diffuse_color(color), specular_exponent(spec) {} <br>
+Material() : refractive_index(1), albedo(1,0,0,0), diffuse_color(), specular_exponent() {} <br>
+float refractive_index; <br>
+Vec4f albedo; <br></font></p>
+<p><font size = '5' face = 'Times New Roman'>И далее мы напишем функцию для добавления преломлений. Она будет выглядеть следующим образом: <br></font></p>
+<p><font size = '4' face = 'Century Gothic'>
+Vec3f refract(const Vec3f &I, const Vec3f &N, const float &refractive_index) { <br>
+&nbsp;&nbsp;&nbsp; float cosi = - std::max(-1.f, std::min(1.f, I*N)); <br>
+&nbsp;&nbsp;&nbsp; float etai = 1, etat = refractive_index; <br>
+&nbsp;&nbsp;&nbsp; Vec3f n = N; <br>
+&nbsp;&nbsp;&nbsp; if (cosi &lt 0) { <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cosi = -cosi; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; std::swap(etai, etat); n = -N; <br>
+&nbsp;&nbsp;&nbsp; } <br><br>
+&nbsp;&nbsp;&nbsp; float eta = etai / etat; <br>
+&nbsp;&nbsp;&nbsp; float k = 1 - eta*eta*(1 - cosi*cosi); <br><br>
+&nbsp;&nbsp;&nbsp; return k < 0 ? Vec3f(0,0,0) : I*eta + n*(eta * cosi - sqrtf(k)); <br>
+} <br></font></p>
+<p><font size = '5' face = 'Times New Roman'> Теперь внесем изменения в функцию трассировки, добавив вызов нашей функции для создания преломлений: <br></font></p>
+<p><font size = '4' face = 'Century Gothic'>
+Vec3f refract_dir = refract(dir, N, material.refractive_index).normalize(); <br>
+Vec3f refract_orig = refract_dir*N < 0 ? point - N*1e-3 : point + N*1e-3; <br>
+Vec3f refract_color = cast_ray(refract_orig, refract_dir, spheres, lights, depth + 1); <br>
+... <br>
+return material.diffuse_color * diffuse_light_intensity * material.albedo[0] + Vec3f(1., 1., 1.)*specular_light_intensity * material.albedo[1] <br>
+&nbsp;&nbsp;&nbsp; + reflect_color*material.albedo[2] + refract_color*material.albedo[3]; <br></font></p>
+<p><font size = '5' face = 'Times New Roman'> Также не забудем изменить материал для сферы, сделав одну из них "стеклянной": <br></font></p>
+<p><font size = '4' face = 'Century Gothic'>
+Material      glass(1.5, Vec4f(0.0,  0.5, 0.1, 0.8), Vec3f(0.6, 0.7, 0.8),  125.); <br></font></p>
 </body>
 </html>

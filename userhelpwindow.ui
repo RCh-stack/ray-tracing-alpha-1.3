@@ -109,40 +109,15 @@ QPushButton:pressed {
     <property name="text">
      <string>Главное меню</string>
     </property>
-    <item>
-     <property name="text">
-      <string>Модуль «Теория»</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Модуль «Демонстрация»</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Модуль «Практика»</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Модуль «Тестирование»</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Дополнительно</string>
-     </property>
-    </item>
    </item>
    <item>
     <property name="text">
-     <string>Просмотр теоретических материалов</string>
+     <string>Модуль «Теория»</string>
     </property>
    </item>
    <item>
     <property name="text">
-     <string>Демонстрация выполнения алгоритма</string>
+     <string>Модуль «Демонстрация»</string>
     </property>
     <item>
      <property name="text">
@@ -157,13 +132,8 @@ QPushButton:pressed {
    </item>
    <item>
     <property name="text">
-     <string>Практические задания</string>
+     <string>Модуль «Практика»</string>
     </property>
-    <item>
-     <property name="text">
-      <string>Получение лабораторных работ</string>
-     </property>
-    </item>
     <item>
      <property name="text">
       <string>Сдача выполненных работ</string>
@@ -182,7 +152,7 @@ QPushButton:pressed {
    </item>
    <item>
     <property name="text">
-     <string>Тестирование</string>
+     <string>Модуль «Тестирование»</string>
     </property>
     <item>
      <property name="text">

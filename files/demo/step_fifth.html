@@ -1,11 +1,20 @@
 ﻿<html>
 <body>
 <p><font size = '7' face = 'Times New Roman'><strong>Этап 5. Создание отражений</strong></font></p>
-
-<p><strong>//</strong></p>
-
-<p><strong>...</strong></p>
-
-<p><strong>//</strong></p>
+<p><font size = '5' face = 'Times New Roman'>Для того, чтобы добавить на нашу сцену эффект отражения, необходимо придерживаться следующего правила: при пересечении с объектом мы просто 
+считаем отражённый луч и рекурсивно вызываем функцию cast_ray в направлении отражённого луча. Глубину рекурсии можно задать по усмотрению, чтобы визуально увидеть разницу между
+разными параметрами. <br><br>
+Для реализации отражений добавим в функцию трассировки следующий код: <br></font></p>
+<p><font size = '4' face = 'Century Gothic'>
+Vec3f reflect_dir = reflect(dir, N).normalize(); <br>
+Vec3f reflect_orig = reflect_dir*N < 0 ? point - N*1e-3 : point + N*1e-3; <br>
+Vec3f reflect_color = cast_ray(reflect_orig, reflect_dir, spheres, lights, depth + 1); <br></font></p>
+<p><font size = '5' face = 'Times New Roman'> Также необходимо изменить структуру материала для сферы: <br></font></p>
+<p><font size = '4' face = 'Century Gothic'>
+Material(const Vec3f &a, const Vec3f &color, const float &spec) : albedo(a), diffuse_color(color), specular_exponent(spec) {} <br>
+Material() : albedo(1,0,0), diffuse_color(), specular_exponent() {} <br>
+Vec3f albedo; <br></font></p>
+<p><font size = '5' face = 'Times New Roman'> И установить на сцене две сферы с отзеркаливанием: <br></font></p>
+<p><font size = '4' face = 'Century Gothic'> Material     mirror(Vec3f(0.0, 10.0, 0.8), Vec3f(1.0, 1.0, 1.0), 1425.); // сфера с эффектом зеркала <br></font></p>
 </body>
 </html>

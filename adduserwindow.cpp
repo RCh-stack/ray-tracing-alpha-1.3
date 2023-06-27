@@ -99,8 +99,23 @@ bool AddUserWindow::input_validation()
         QMessageBox::critical(this, "Ошибка", "Код доступа должен состоять только из цифр!");
         return false;
     }
+    else if(!check_user())
+    {
+        QMessageBox::critical(this, "Ошибка", "Пользователь с таким ID уже существует!");
+        return false;
+    }
 
     return true;
+}
+
+bool AddUserWindow::check_user()
+{
+    QSqlQuery query;
+    query.prepare(select_user_by_id());
+    query.bindValue(":id_user",     ui->text_login->text().simplified());
+    query.exec();
+
+    return !query.next();
 }
 
 // 1.2
@@ -155,6 +170,14 @@ void AddUserWindow::on_button_help_clicked()
 
     ahw->exec();
     ahw->deleteLater();
+}
+
+void AddUserWindow::keyPressEvent(QKeyEvent *event)
+{
+     if(event->key() == Qt::Key_F1)
+        on_button_help_clicked();
+    else
+        QDialog::keyPressEvent(event);
 }
 
 // 1.2

@@ -118,8 +118,28 @@ bool EditUserWindow::input_validation()
         QMessageBox::critical(this, "Ошибка", "Код доступа должен состоять только из цифр!");
         return false;
     }
+    else if(!check_user())
+    {
+        QMessageBox::critical(this, "Ошибка", "Пользователь с таким ID уже существует!");
+        return false;
+    }
 
     return true;
+}
+
+bool EditUserWindow::check_user()
+{
+    if(get_current_id() != ui->text_login->text().simplified())
+    {
+        QSqlQuery query;
+        query.prepare(select_user_by_id());
+        query.bindValue(":id_user",     ui->text_login->text().simplified());
+        query.exec();
+
+        return !query.next();
+    }
+    else
+        return true;
 }
 
 // 1.3
@@ -165,6 +185,14 @@ void EditUserWindow::on_button_help_clicked()
 
     ahw->exec();
     ahw->deleteLater();
+}
+
+void EditUserWindow::keyPressEvent(QKeyEvent *event)
+{
+     if(event->key() == Qt::Key_F1)
+        on_button_help_clicked();
+    else
+        QDialog::keyPressEvent(event);
 }
 
 // 1.3

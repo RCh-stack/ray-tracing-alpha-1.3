@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/sqlite">
+        <file>EducationSystem.sqlite</file>
+    </qresource>
+</RCC>

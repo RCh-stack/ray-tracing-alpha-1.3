@@ -1,11 +1,33 @@
 ﻿<html>
 <body>
 <p><font size = '7' face = 'Times New Roman'><strong>Этап 4. Добавление теней</strong></font></p>
+<p><font size = '5' face = 'Times New Roman'>Для добавления теней на нашу сцену нам необходимо внести небольшие изменения в функцию трассировки. <br><br>
+Для создания эффекта теней, при отрисовке каждой точки мы просто убеждаемся, не пересекает ли луч точка-источник света объекты нашей сцены, 
+и если пересекает, то пропускам текущий источник света. Но еще на самую малость мы сдвигаем точку в направлении нормали: <br></font></p>
+<p><font size = '4' face = 'Century Gothic'>Vec3f shadow_orig = light_dir*N < 0 ? point - N*1e-3 : point + N*1e-3; <br></font></p>
+<p><font size = '5' face = 'Times New Roman'> В итоге наша функция трассировки будет выглядеть следующим образом: <br></font></p>
+<p><font size = '4' face = 'Century Gothic'>
+Vec3f cast_ray(const Vec3f &orig, const Vec3f &dir, const std::vector<Sphere> &spheres, const std::vector<Light> &lights) { <br>
+&nbsp;&nbsp;&nbsp;    Vec3f point, N; <br>
+&nbsp;&nbsp;&nbsp;    Material material; <br>
+&nbsp;&nbsp;&nbsp;    if (!scene_intersect(orig, dir, spheres, point, N, material)) { <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       return Vec3f(0.2, 0.7, 0.8); <br>
+&nbsp;&nbsp;&nbsp;    } <br><br>
+&nbsp;&nbsp;&nbsp;    float diffuse_light_intensity = 0, specular_light_intensity = 0; <br>
+&nbsp;&nbsp;&nbsp;    for (size_t i = 0; i &lt lights.size(); i++) { <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        Vec3f light_dir      = (lights[i].position - point).normalize(); <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        float light_distance = (lights[i].position - point).norm(); <br><br>
 
-<p><strong>//</strong></p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        Vec3f shadow_orig = light_dir*N < 0 ? point - N*1e-3 : point + N*1e-3; // проверяем точку перед добавлением тени
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        Vec3f shadow_pt, shadow_N; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        Material tmpmaterial; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        if (scene_intersect(shadow_orig, light_dir, spheres, shadow_pt, shadow_N, tmpmaterial) && (shadow_pt-shadow_orig).norm() < light_distance) <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            continue; <br><br>
 
-<p><strong>...</strong></p>
-
-<p><strong>//</strong></p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        diffuse_light_intensity  += lights[i].intensity * std::max(0.f, light_dir*N); <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        specular_light_intensity += powf(std::max(0.f, -reflect(-light_dir, N)*dir), material.specular_exponent)*lights[i].intensity; <br>
+&nbsp;&nbsp;&nbsp;    } <br><br>
+&nbsp;&nbsp;&nbsp;    return material.diffuse_color * diffuse_light_intensity * material.albedo[0] + Vec3f(1., 1., 1.)*specular_light_intensity * material.albedo[1];<br>
+} <br></font></p>
 </body>
 </html>

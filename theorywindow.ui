@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Теория | Ray Tracing | Beta 1.0v</string>
+   <string>Теория | Ray Tracing | 1.0v</string>
   </property>
   <widget class="QTextBrowser" name="text_theory">
    <property name="geometry">

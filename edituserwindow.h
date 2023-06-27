@@ -2,6 +2,7 @@
 #define EDITUSERWINDOW_H
 
 #include <QDialog>
+#include <QKeyEvent>
 #include <QMessageBox>
 #include <QSqlQuery>
 #include "sql_requests.h"
@@ -23,6 +24,7 @@ public:
     bool code_is_number(const std::string& s);
     bool input_validation();
     int get_id_group();
+    bool check_user();
     void edit_current_user();
 
     void set_user_data_by_id();
@@ -39,6 +41,9 @@ private slots:
     void on_button_help_clicked();
 
     void on_EditUserWindow_finished(int result);
+
+protected:
+    void keyPressEvent(QKeyEvent *event);
 
 private:
     Ui::EditUserWindow *ui;

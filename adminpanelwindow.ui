@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>849</width>
-    <height>314</height>
+    <width>838</width>
+    <height>304</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Администрирование пользователей | Ray Tracing | Beta 1.0v</string>
+   <string>Администрирование пользователей | Ray Tracing | 1.0v</string>
   </property>
   <widget class="QLabel" name="label_roles">
    <property name="geometry">
@@ -59,10 +59,10 @@ color: rgb(0, 0, 0);
   <widget class="QPushButton" name="button_add">
    <property name="geometry">
     <rect>
-     <x>700</x>
+     <x>690</x>
      <y>90</y>
-     <width>51</width>
-     <height>51</height>
+     <width>41</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="toolTip">
@@ -88,16 +88,16 @@ QPushButton:pressed {
    </property>
    <property name="iconSize">
     <size>
-     <width>36</width>
-     <height>36</height>
+     <width>32</width>
+     <height>32</height>
     </size>
    </property>
   </widget>
   <widget class="QPushButton" name="button_exit">
    <property name="geometry">
     <rect>
-     <x>800</x>
-     <y>260</y>
+     <x>790</x>
+     <y>250</y>
      <width>41</width>
      <height>41</height>
     </rect>
@@ -133,7 +133,7 @@ QPushButton:pressed {
   <widget class="QPushButton" name="button_help">
    <property name="geometry">
     <rect>
-     <x>800</x>
+     <x>790</x>
      <y>10</y>
      <width>41</width>
      <height>41</height>
@@ -170,10 +170,10 @@ QPushButton:pressed {
   <widget class="QPushButton" name="button_edit">
    <property name="geometry">
     <rect>
-     <x>700</x>
+     <x>690</x>
      <y>170</y>
-     <width>51</width>
-     <height>51</height>
+     <width>41</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="toolTip">
@@ -199,18 +199,18 @@ QPushButton:pressed {
    </property>
    <property name="iconSize">
     <size>
-     <width>36</width>
-     <height>36</height>
+     <width>32</width>
+     <height>32</height>
     </size>
    </property>
   </widget>
   <widget class="QPushButton" name="button_delete">
    <property name="geometry">
     <rect>
-     <x>700</x>
+     <x>690</x>
      <y>250</y>
-     <width>51</width>
-     <height>51</height>
+     <width>41</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="toolTip">
@@ -236,8 +236,8 @@ QPushButton:pressed {
    </property>
    <property name="iconSize">
     <size>
-     <width>36</width>
-     <height>36</height>
+     <width>32</width>
+     <height>32</height>
     </size>
    </property>
   </widget>
@@ -326,7 +326,7 @@ QPushButton:pressed {
      <x>20</x>
      <y>90</y>
      <width>661</width>
-     <height>211</height>
+     <height>201</height>
     </rect>
    </property>
    <property name="editTriggers">

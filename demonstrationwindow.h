@@ -2,6 +2,7 @@
 #define DEMONSTRATIONWINDOW_H
 
 #include <QDialog>
+#include <QKeyEvent>
 #include <QFile>
 #include <QTextStream>
 #include <QTextCodec>
@@ -12,10 +13,13 @@
 #include <cmath>
 #include <iostream>
 #include <fstream>
+#include <locale>
 #include <vector>
 
 #include "geometry.h"
+#include "model.h"
 #include "sphere.h"
+#include "triangle.h"
 #include "light.h"
 #include "material.h"
 #include "sql_requests.h"
@@ -55,15 +59,20 @@ public:
     void set_lighting_flag(bool flag) { flag_lighting = flag; }
     void set_refraction_flag(bool flag) { flag_refraction = flag; }
     void set_flag_output_scene(bool flag) { flag_output_scene = flag; }
+    void set_flag_plane(bool flag) { flag_plane = flag; }
 
     bool get_reflection_flag() { return flag_reflections; }
     bool get_lighting_flag() { return flag_lighting; }
     bool get_refraction_flag() { return flag_refraction; }
     bool get_flag_output_scene() { return flag_output_scene; }
+    bool get_flag_plane() { return flag_plane; }
     //      Конец области дополнительных функций
 
     // Rus:
     //      Область работы с числовыми параметрами
+    void set_id_type(int id) { id_type = id; }
+    int get_id_type() { return id_type; }
+
     void set_radius(float r_1, float r_2, float r_3, float r_4) { radius[0] = r_1; radius[1] = r_2; radius[2] = r_3; radius[3] = r_4; }
     float get_radius(int index) { return radius[index]; }
 
@@ -74,9 +83,33 @@ public:
     void set_y(float y_1, float y_2, float y_3, float y_4) { y[0] = y_1 ; y[1] = y_2; y[2] = y_3; y[3] = y_4;}
     void set_z(float z_1, float z_2, float z_3, float z_4) { z[0] = z_1 ; z[1] = z_2; z[2] = z_3; z[3] = z_4;}
 
+    void set_a_x(float x_1, float x_2, float x_3, float x_4) { a_x[0] = x_1 ; a_x[1] = x_2; a_x[2] = x_3; a_x[3] = x_4; }
+    void set_a_y(float y_1, float y_2, float y_3, float y_4) { a_y[0] = y_1 ; a_y[1] = y_2; a_y[2] = y_3; a_y[3] = y_4; }
+    void set_a_z(float z_1, float z_2, float z_3, float z_4) { a_z[0] = z_1 ; a_z[1] = z_2; a_z[2] = z_3; a_z[3] = z_4; }
+
+    void set_b_x(float x_1, float x_2, float x_3, float x_4) { b_x[0] = x_1 ; b_x[1] = x_2; b_x[2] = x_3; b_x[3] = x_4; }
+    void set_b_y(float y_1, float y_2, float y_3, float y_4) { b_y[0] = y_1 ; b_y[1] = y_2; b_y[2] = y_3; b_y[3] = y_4; }
+    void set_b_z(float z_1, float z_2, float z_3, float z_4) { b_z[0] = z_1 ; b_z[1] = z_2; b_z[2] = z_3; b_z[3] = z_4; }
+
+    void set_c_x(float x_1, float x_2, float x_3, float x_4) { c_x[0] = x_1 ; c_x[1] = x_2; c_x[2] = x_3; c_x[3] = x_4; }
+    void set_c_y(float y_1, float y_2, float y_3, float y_4) { c_y[0] = y_1 ; c_y[1] = y_2; c_y[2] = y_3; c_y[3] = y_4; }
+    void set_c_z(float z_1, float z_2, float z_3, float z_4) { c_z[0] = z_1 ; c_z[1] = z_2; c_z[2] = z_3; c_z[3] = z_4; }
+
     float get_x(int index) { return x[index]; }
     float get_y(int index) { return y[index]; }
     float get_z(int index) { return z[index]; }
+
+    float get_a_x(int index) { return a_x[index]; }
+    float get_a_y(int index) { return a_y[index]; }
+    float get_a_z(int index) { return a_z[index]; }
+
+    float get_b_x(int index) { return b_x[index]; }
+    float get_b_y(int index) { return b_y[index]; }
+    float get_b_z(int index) { return b_z[index]; }
+
+    float get_c_x(int index) { return c_x[index]; }
+    float get_c_y(int index) { return c_y[index]; }
+    float get_c_z(int index) { return c_z[index]; }
 
     void set_x_light(float x_1, float x_2, float x_3) { xLigth[0] = x_1 ; xLigth[1] = x_2; xLigth[2] = x_3; }
     void set_y_light(float y_1, float y_2, float y_3) { yLigth[0] = y_1 ; yLigth[1] = y_2; yLigth[2] = y_3; }
@@ -108,6 +141,7 @@ public:
     //      Область реализации алгоритма
 
     bool scene_intersect(const Vec3f &orig, const Vec3f &dir, const std:: vector<Sphere> &spheres, Vec3f &hit, Vec3f&N, Material &material);
+    bool scene_intersect(const Vec3f &orig, const Vec3f &dir, const std::vector<Triangle> &triangles, Vec3f &hit, Vec3f &N, Material &material);
     bool scene_intersect(const Vec3f &orig, const Vec3f&dir, const std:: vector<Sphere> &spheres, Vec3f &hit, Vec3f &N, Material3f &material);
     bool scene_intersect(const Vec3f &orig, const Vec3f&dir, const std:: vector<Sphere> &spheres, Vec3f &hit, Vec3f &N, Material4f &material);
 
@@ -145,6 +179,9 @@ private slots:
     void on_button_help_clicked();
     //      Конец области системных функций
 
+protected:
+    void keyPressEvent(QKeyEvent *event);
+
 private:
     Ui::DemonstrationWindow *ui;
     int step; // -- шаг алгоритма --
@@ -152,12 +189,15 @@ private:
     int id_background_color; // -- цвет фона --
     unsigned int width, height, fov; // -- ширина и высота буффера для сохр. изобр., поле зрения --
     std::vector<Sphere> spheres; // -- сферы --
+    std::vector<Triangle> triangles;
     std::vector<Light> lights; // -- источники освещения --
     int color[4]; // -- коды цветов сфер --
     float radius[4], x[4], y[4], z[4], refraction[4];  // -- параметры сфер --
+    float a_x[4], a_y[4], a_z[4], b_x[4], b_y[4], b_z[4], c_x[4], c_y[4], c_z[4];
     float xLigth[3], yLigth[3], zLigth[3], d[3]; // -- параметры источников освещения --
     int id_format_output; // -- код формата вывода поясняющей информации к алгоритму --
-    bool flag_reflections, flag_lighting, flag_refraction; // -- флаги использования отражений и освещения + преломления --
+    int id_type; // тип объектов
+    bool flag_reflections, flag_lighting, flag_refraction, flag_plane; // -- флаги использования отражений и освещения + преломления --
     bool flag_output_scene; // отображать сцену или нет
 };
 

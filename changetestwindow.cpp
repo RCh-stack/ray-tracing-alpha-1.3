@@ -195,7 +195,7 @@ void ChangeTestWindow::set_flag_correct_answer(int id_right_answer)
 // 1.7
 void ChangeTestWindow::on_button_edit_question_clicked()
 {
-    if(ui->text_question->toPlainText().length())
+    if(ui->text_question->toPlainText().length() == 0)
         QMessageBox::critical(this, "Уведомление", "Не заполнено поле с вопросом");
     else if(ui->text_answer_1->text().length() == 0)
         QMessageBox::critical(this, "Уведомление", "Не заполнено поле с первым номером ответа!");
@@ -238,6 +238,14 @@ void ChangeTestWindow::on_button_help_clicked()
 
     ahw->exec();
     ahw->deleteLater();
+}
+
+void ChangeTestWindow::keyPressEvent(QKeyEvent *event)
+{
+     if(event->key() == Qt::Key_F1)
+        on_button_help_clicked();
+    else
+        QDialog::keyPressEvent(event);
 }
 
 // 1.7

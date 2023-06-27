@@ -1,11 +1,39 @@
 ﻿<html>
 <body>
 <p><font size = '7' face = 'Times New Roman'><strong>Этап 3. Создание блестящих поверхностей</strong></font></p>
+<p><font size = '5' face = 'Times New Roman'>Изменим структуру Материала, добавив в него новый параметр <i>альбедо</i>, а также <i>показатель зеркальности</i>.
+<br> По итогу наша структура Material будет выглядеть следующим образом: <br></font></p>
+<p><font size = '4' face = 'Century Gothic'>
+struct Material { <br>
+&nbsp;&nbsp;&nbsp; Material(const Vec2f &a, const Vec3f &color, const float &spec) : albedo(a), diffuse_color(color), specular_exponent(spec) {} <br>
+&nbsp;&nbsp;&nbsp; Material() : albedo(1,0), diffuse_color(), specular_exponent() {} <br><br>
+&nbsp;&nbsp;&nbsp; Vec2f albedo; <br>
+&nbsp;&nbsp;&nbsp; Vec3f diffuse_color; <br>
+&nbsp;&nbsp;&nbsp; float specular_exponent; <br>
+}; <br></font></p>
+<p><font size = '5' face = 'Times New Roman'> Далее напишем новую функцию, которая будет вычислять отражение для объекта с учетом нескольких источников 
+освещения и наших новых параметров. Функция может выглядеть так: <br></font></p>
+<p><font size = '4' face = 'Century Gothic'>
+Vec3f reflect(const Vec3f &I, const Vec3f &N) { <br>
+&nbsp;&nbsp;&nbsp; return I - N*2.f*(I*N); <br>
+} <br></font></p>
+<p><font size = '5' face = 'Times New Roman'> По итогу внесенных изменений, изменяем нашу функцию для выполнения трассировки лучей и получим следующий результат: <br></font></p>
+<p><font size = '4' face = 'Century Gothic'>
+Vec3f cast_ray(const Vec3f &orig, const Vec3f &dir, const std::vector<Sphere> &spheres, const std::vector<Light> &lights) { <br>
+&nbsp;&nbsp;&nbsp; Vec3f point, N; <br>
+&nbsp;&nbsp;&nbsp; Material material; <br>
+&nbsp;&nbsp;&nbsp; if (!scene_intersect(orig, dir, spheres, point, N, material)) { <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return Vec3f(0.2, 0.7, 0.8); <br>
+&nbsp;&nbsp;&nbsp; } <br><br>
 
-<p><strong>//</strong></p>
+&nbsp;&nbsp;&nbsp; float diffuse_light_intensity = 0, specular_light_intensity = 0; <br>
+&nbsp;&nbsp;&nbsp; for (size_t i = 0; i &lt lights.size(); i++) { <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Vec3f light_dir      = (lights[i].position - point).normalize(); <br><br>
 
-<p><strong>...</strong></p>
-
-<p><strong>//</strong></p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        diffuse_light_intensity  += lights[i].intensity * std::max(0.f, light_dir * N); <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        specular_light_intensity += powf(std::max(0.f, -reflect(-light_dir, N) * dir), material.specular_exponent) * lights[i].intensity; <br>
+&nbsp;&nbsp;&nbsp;	} <br><br>
+ &nbsp;&nbsp;&nbsp;   return material.diffuse_color * diffuse_light_intensity * material.albedo[0] + Vec3f(1., 1., 1.) * specular_light_intensity * material.albedo[1]; <br>
+}</font></p>
 </body>
 </html>

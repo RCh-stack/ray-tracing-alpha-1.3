@@ -223,3 +223,11 @@ void UsersTestStatsWindow::on_table_list_cellDoubleClicked(int row, int column)
     vrtw->exec();
     vrtw->deleteLater();
 }
+
+void UsersTestStatsWindow::keyPressEvent(QKeyEvent *event)
+{
+     if(event->key() == Qt::Key_F1)
+        on_button_help_clicked();
+    else
+        QDialog::keyPressEvent(event);
+}

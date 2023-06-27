@@ -248,7 +248,7 @@ void ViewResultTestWindow::on_button_help_clicked()
 {
     UserHelpWindow *uhw = new UserHelpWindow;
     uhw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
-    uhw->open_file_by_code(0); // -- УКАЗАТЬ НУЖНЫЙ --
+    uhw->open_file_by_code(13);
 
     uhw->exec();
     uhw->deleteLater();
@@ -257,4 +257,12 @@ void ViewResultTestWindow::on_button_help_clicked()
 void ViewResultTestWindow::on_button_exit_clicked()
 {
     this->close();
+}
+
+void ViewResultTestWindow::keyPressEvent(QKeyEvent *event)
+{
+     if(event->key() == Qt::Key_F1)
+        on_button_help_clicked();
+    else
+        QDialog::keyPressEvent(event);
 }

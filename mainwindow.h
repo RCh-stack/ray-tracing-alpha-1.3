@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QKeyEvent>
 
 namespace Ui {
 class MainWindow;
@@ -47,6 +48,9 @@ private slots:
     void on_action_manual_triggered();
 
     void on_button_help_clicked();
+
+protected:
+    void keyPressEvent(QKeyEvent *event);
 
 private:
     Ui::MainWindow *ui;

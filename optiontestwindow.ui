@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Настройки тестирования | Ray Tracing | Beta 1.0v</string>
+   <string>Настройки тестирования | Ray Tracing | 1.0v</string>
   </property>
   <widget class="QPushButton" name="button_start">
    <property name="geometry">

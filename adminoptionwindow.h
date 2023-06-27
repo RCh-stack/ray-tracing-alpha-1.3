@@ -2,6 +2,7 @@
 #define ADMINOPTIONWINDOW_H
 
 #include <QDialog>
+#include <QKeyEvent>
 #include <QMessageBox>
 #include <QSqlQuery>
 #include "sql_requests.h"
@@ -42,6 +43,9 @@ private slots:
     void on_use_hints_clicked();
 
     void on_use_time_clicked();
+
+protected:
+    void keyPressEvent(QKeyEvent *event);
 
 private:
     Ui::AdminOptionWindow *ui;

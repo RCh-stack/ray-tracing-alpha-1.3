@@ -3,8 +3,8 @@
         <file>files/demo/step_first.html</file>
         <file>files/demo/step_second.html</file>
         <file>files/demo/step_third.html</file>
-        <file>files/demo/step_fifth.html</file>
         <file>files/demo/step_fourth.html</file>
+        <file>files/demo/step_fifth.html</file>
         <file>files/demo/step_sixth.html</file>
     </qresource>
     <qresource prefix="/theory_files">
@@ -17,6 +17,12 @@
         <file>files/theory/sixth.html</file>
         <file>files/theory/seventh.html</file>
         <file>files/theory/eighth.html</file>
+        <file>files/theory/ninth.html</file>
+        <file>files/theory/tenth.html</file>
+        <file>files/theory/eleventh.html</file>
+        <file>files/theory/twelfth.html</file>
+        <file>files/theory/thirteenth.html</file>
+        <file>files/theory/fourteenth.html</file>
     </qresource>
     <qresource prefix="/lab_files">
         <file>files/lab/first_lab.html</file>
@@ -25,5 +31,21 @@
     </qresource>
     <qresource prefix="/help_files">
         <file>files/help/authorization.html</file>
+        <file>files/help/usermainwindow.html</file>
+        <file>files/help/theory_module.html</file>
+        <file>files/help/demo_module.html</file>
+        <file>files/help/optiondemowindow.html</file>
+        <file>files/help/demowindow.html</file>
+        <file>files/help/practic_module.html</file>
+        <file>files/help/add_work.html</file>
+        <file>files/help/edit_work.html</file>
+        <file>files/help/stats_work.html</file>
+        <file>files/help/test_module.html</file>
+        <file>files/help/optiontestwindow.html</file>
+        <file>files/help/test_modes.html</file>
+        <file>files/help/test_run.html</file>
+        <file>files/help/test_stats.html</file>
+        <file>files/help/about_information.html</file>
+        <file>files/help/usermanual.html</file>
     </qresource>
 </RCC>

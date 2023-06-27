@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1120</width>
+    <width>1159</width>
     <height>520</height>
    </rect>
   </property>
@@ -18,7 +18,7 @@
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>341</width>
+     <width>381</width>
      <height>431</height>
     </rect>
    </property>
@@ -27,11 +27,131 @@
      <string>Содержание</string>
     </property>
    </column>
+   <item>
+    <property name="text">
+     <string>Главное меню</string>
+    </property>
+    <item>
+     <property name="text">
+      <string>Модуль «Администрирование»</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Модуль «Теория»</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Модуль «Практика»</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Модуль «Тестирование»</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Дополнительно</string>
+     </property>
+    </item>
+   </item>
+   <item>
+    <property name="text">
+     <string>Администрирование пользователей</string>
+    </property>
+    <item>
+     <property name="text">
+      <string>Список пользователей</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Добавление нового пользователя</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Редактирование пользователя</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Пометка на удаление</string>
+     </property>
+    </item>
+   </item>
+   <item>
+    <property name="text">
+     <string>Администрирование модуля «Теория»</string>
+    </property>
+    <item>
+     <property name="text">
+      <string>Добавление новых файлов</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Редактирование выбранных файлов</string>
+     </property>
+    </item>
+   </item>
+   <item>
+    <property name="text">
+     <string>Администрирование модуля «Практика»</string>
+    </property>
+    <item>
+     <property name="text">
+      <string>Добавление новых работ</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Редактирование работ</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Проверка выполненных работ</string>
+     </property>
+    </item>
+   </item>
+   <item>
+    <property name="text">
+     <string>Администрирование модуля «Тестирование»</string>
+    </property>
+    <item>
+     <property name="text">
+      <string>Добавление теста</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Редактирование теста</string>
+     </property>
+    </item>
+   </item>
+   <item>
+    <property name="text">
+     <string>Настройки для администратора</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Руководство администратора</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>О программе</string>
+    </property>
+   </item>
   </widget>
   <widget class="QTextBrowser" name="text_help">
    <property name="geometry">
     <rect>
-     <x>360</x>
+     <x>400</x>
      <y>10</y>
      <width>751</width>
      <height>501</height>
@@ -42,9 +162,9 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>460</y>
-     <width>51</width>
-     <height>51</height>
+     <y>470</y>
+     <width>41</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -75,10 +195,10 @@ QPushButton:pressed {
   <widget class="QPushButton" name="button_next_page">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>460</y>
-     <width>51</width>
-     <height>51</height>
+     <x>60</x>
+     <y>470</y>
+     <width>41</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="styleSheet">

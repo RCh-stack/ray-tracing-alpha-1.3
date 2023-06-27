@@ -216,7 +216,7 @@ void CreateTestWindow::get_select_question(int id_theme, int id_question)
 // 1.7
 void CreateTestWindow::on_button_add_question_clicked()
 {
-    if(ui->text_question->toPlainText().length())
+    if(ui->text_question->toPlainText().length() == 0)
         QMessageBox::critical(this, "Уведомление", "Не заполнено поле с вопросом");
     else if(ui->text_answer_1->text().length() == 0)
         QMessageBox::critical(this, "Уведомление", "Не заполнено поле с первым номером ответа!");
@@ -321,4 +321,12 @@ void CreateTestWindow::on_button_help_clicked()
 
     ahw->exec();
     ahw->deleteLater();
+}
+
+void CreateTestWindow::keyPressEvent(QKeyEvent *event)
+{
+     if(event->key() == Qt::Key_F1)
+        on_button_help_clicked();
+    else
+        QDialog::keyPressEvent(event);
 }

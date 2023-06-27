@@ -2,6 +2,7 @@
 #define EDITPRACTICWORK_H
 
 #include <QDialog>
+#include <QKeyEvent>
 #include <QDate>
 #include <QFileDialog>
 #include <QTextStream>
@@ -54,6 +55,9 @@ private slots:
     void on_button_exit_clicked();
 
     void on_EditPracticWork_finished(int result);
+
+protected:
+    void keyPressEvent(QKeyEvent *event);
 
 private:
     Ui::EditPracticWork *ui;

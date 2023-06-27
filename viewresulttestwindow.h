@@ -2,6 +2,7 @@
 #define VIEWRESULTTESTWINDOW_H
 
 #include <QDialog>
+#include <QKeyEvent>
 #include <QMessageBox>
 #include <QDateTime>
 #include <QSqlQuery>
@@ -60,6 +61,9 @@ private slots:
     void on_button_help_clicked();
 
     void on_button_exit_clicked();
+
+protected:
+    void keyPressEvent(QKeyEvent *event);
 
 private:
     Ui::ViewResultTestWindow *ui;

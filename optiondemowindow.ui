@@ -7,38 +7,17 @@
     <x>0</x>
     <y>0</y>
     <width>853</width>
-    <height>737</height>
+    <height>759</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Настройка демонстрации | Ray Tracing | Beta 1.0v</string>
+   <string>Настройка демонстрации | Ray Tracing | 1.0v</string>
   </property>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>20</y>
-     <width>321</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>8</pointsize>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(255, 255, 255);</string>
-   </property>
-   <property name="text">
-    <string>Использовать настройки по умолчанию</string>
-   </property>
-  </widget>
   <widget class="QCheckBox" name="check_option">
    <property name="geometry">
     <rect>
      <x>400</x>
-     <y>20</y>
+     <y>40</y>
      <width>20</width>
      <height>21</height>
     </rect>
@@ -62,14 +41,14 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>60</y>
+     <y>70</y>
      <width>401</width>
      <height>101</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>8</pointsize>
+     <pointsize>9</pointsize>
     </font>
    </property>
    <property name="styleSheet">
@@ -89,7 +68,7 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>8</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -110,7 +89,7 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>8</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -131,7 +110,7 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>8</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -242,7 +221,7 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>8</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -346,7 +325,7 @@ color: rgb(0, 0, 0);
     </property>
     <property name="font">
      <font>
-      <pointsize>8</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -391,7 +370,7 @@ color: rgb(0, 0, 0);
     </property>
     <property name="font">
      <font>
-      <pointsize>8</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -430,14 +409,14 @@ color: rgb(0, 0, 0);
    <property name="geometry">
     <rect>
      <x>440</x>
-     <y>60</y>
+     <y>70</y>
      <width>401</width>
      <height>101</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>8</pointsize>
+     <pointsize>9</pointsize>
     </font>
    </property>
    <property name="styleSheet">
@@ -457,7 +436,7 @@ color: rgb(0, 0, 0);
     </property>
     <property name="font">
      <font>
-      <pointsize>8</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -478,7 +457,7 @@ color: rgb(0, 0, 0);
     </property>
     <property name="font">
      <font>
-      <pointsize>8</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -499,7 +478,7 @@ color: rgb(0, 0, 0);
     </property>
     <property name="font">
      <font>
-      <pointsize>8</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -610,7 +589,7 @@ color: rgb(0, 0, 0);
     </property>
     <property name="font">
      <font>
-      <pointsize>8</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -714,7 +693,7 @@ color: rgb(0, 0, 0);
     </property>
     <property name="font">
      <font>
-      <pointsize>8</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -759,7 +738,7 @@ color: rgb(0, 0, 0);
     </property>
     <property name="font">
      <font>
-      <pointsize>8</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -798,14 +777,14 @@ color: rgb(0, 0, 0);
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>180</y>
+     <y>190</y>
      <width>401</width>
      <height>101</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>8</pointsize>
+     <pointsize>9</pointsize>
     </font>
    </property>
    <property name="styleSheet">
@@ -825,7 +804,7 @@ color: rgb(0, 0, 0);
     </property>
     <property name="font">
      <font>
-      <pointsize>8</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -846,7 +825,7 @@ color: rgb(0, 0, 0);
     </property>
     <property name="font">
      <font>
-      <pointsize>8</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -867,7 +846,7 @@ color: rgb(0, 0, 0);
     </property>
     <property name="font">
      <font>
-      <pointsize>8</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -978,7 +957,7 @@ color: rgb(0, 0, 0);
     </property>
     <property name="font">
      <font>
-      <pointsize>8</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -1082,7 +1061,7 @@ color: rgb(0, 0, 0);
     </property>
     <property name="font">
      <font>
-      <pointsize>8</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -1151,14 +1130,14 @@ color: rgb(0, 0, 0);
     </property>
     <property name="font">
      <font>
-      <pointsize>8</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="styleSheet">
      <string notr="true">color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>R:</string>
+     <string>P:</string>
     </property>
    </widget>
   </widget>
@@ -1166,14 +1145,14 @@ color: rgb(0, 0, 0);
    <property name="geometry">
     <rect>
      <x>440</x>
-     <y>180</y>
+     <y>190</y>
      <width>401</width>
      <height>101</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>8</pointsize>
+     <pointsize>9</pointsize>
     </font>
    </property>
    <property name="styleSheet">
@@ -1193,7 +1172,7 @@ color: rgb(0, 0, 0);
     </property>
     <property name="font">
      <font>
-      <pointsize>8</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -1214,7 +1193,7 @@ color: rgb(0, 0, 0);
     </property>
     <property name="font">
      <font>
-      <pointsize>8</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -1235,7 +1214,7 @@ color: rgb(0, 0, 0);
     </property>
     <property name="font">
      <font>
-      <pointsize>8</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -1346,7 +1325,7 @@ color: rgb(0, 0, 0);
     </property>
     <property name="font">
      <font>
-      <pointsize>8</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -1474,7 +1453,7 @@ color: rgb(0, 0, 0);
     </property>
     <property name="font">
      <font>
-      <pointsize>8</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -1495,7 +1474,7 @@ color: rgb(0, 0, 0);
     </property>
     <property name="font">
      <font>
-      <pointsize>8</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -1534,14 +1513,14 @@ color: rgb(0, 0, 0);
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>530</y>
+     <y>540</y>
      <width>831</width>
      <height>121</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>8</pointsize>
+     <pointsize>9</pointsize>
     </font>
    </property>
    <property name="styleSheet">
@@ -1555,13 +1534,13 @@ color: rgb(0, 0, 0);
      <rect>
       <x>10</x>
       <y>70</y>
-      <width>181</width>
+      <width>231</width>
       <height>21</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>8</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -1582,7 +1561,7 @@ color: rgb(0, 0, 0);
     </property>
     <property name="font">
      <font>
-      <pointsize>8</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -1672,7 +1651,7 @@ QPushButton:pressed {
    <property name="geometry">
     <rect>
      <x>390</x>
-     <y>670</y>
+     <y>680</y>
      <width>41</width>
      <height>41</height>
     </rect>
@@ -1714,7 +1693,7 @@ QPushButton:pressed {
    <property name="geometry">
     <rect>
      <x>440</x>
-     <y>670</y>
+     <y>680</y>
      <width>41</width>
      <height>41</height>
     </rect>
@@ -1756,7 +1735,7 @@ QPushButton:pressed {
    <property name="geometry">
     <rect>
      <x>800</x>
-     <y>690</y>
+     <y>700</y>
      <width>41</width>
      <height>41</height>
     </rect>
@@ -1793,14 +1772,14 @@ QPushButton:pressed {
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>290</y>
+     <y>300</y>
      <width>461</width>
      <height>231</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>8</pointsize>
+     <pointsize>9</pointsize>
     </font>
    </property>
    <property name="styleSheet">
@@ -1818,6 +1797,11 @@ QPushButton:pressed {
       <height>61</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
     <property name="title">
      <string>Свет 1</string>
     </property>
@@ -1832,7 +1816,7 @@ QPushButton:pressed {
      </property>
      <property name="font">
       <font>
-       <pointsize>8</pointsize>
+       <pointsize>9</pointsize>
       </font>
      </property>
      <property name="styleSheet">
@@ -1880,7 +1864,7 @@ QPushButton:pressed {
      </property>
      <property name="font">
       <font>
-       <pointsize>8</pointsize>
+       <pointsize>9</pointsize>
       </font>
      </property>
      <property name="styleSheet">
@@ -1928,7 +1912,7 @@ QPushButton:pressed {
      </property>
      <property name="font">
       <font>
-       <pointsize>8</pointsize>
+       <pointsize>9</pointsize>
       </font>
      </property>
      <property name="styleSheet">
@@ -1976,7 +1960,7 @@ QPushButton:pressed {
      </property>
      <property name="font">
       <font>
-       <pointsize>8</pointsize>
+       <pointsize>9</pointsize>
       </font>
      </property>
      <property name="styleSheet">
@@ -2020,6 +2004,11 @@ QPushButton:pressed {
       <height>61</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
     <property name="title">
      <string>Свет 2</string>
     </property>
@@ -2034,7 +2023,7 @@ QPushButton:pressed {
      </property>
      <property name="font">
       <font>
-       <pointsize>8</pointsize>
+       <pointsize>9</pointsize>
       </font>
      </property>
      <property name="styleSheet">
@@ -2082,7 +2071,7 @@ QPushButton:pressed {
      </property>
      <property name="font">
       <font>
-       <pointsize>8</pointsize>
+       <pointsize>9</pointsize>
       </font>
      </property>
      <property name="styleSheet">
@@ -2130,7 +2119,7 @@ QPushButton:pressed {
      </property>
      <property name="font">
       <font>
-       <pointsize>8</pointsize>
+       <pointsize>9</pointsize>
       </font>
      </property>
      <property name="styleSheet">
@@ -2178,7 +2167,7 @@ QPushButton:pressed {
      </property>
      <property name="font">
       <font>
-       <pointsize>8</pointsize>
+       <pointsize>9</pointsize>
       </font>
      </property>
      <property name="styleSheet">
@@ -2222,6 +2211,11 @@ QPushButton:pressed {
       <height>61</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
     <property name="title">
      <string>Свет 3</string>
     </property>
@@ -2236,7 +2230,7 @@ QPushButton:pressed {
      </property>
      <property name="font">
       <font>
-       <pointsize>8</pointsize>
+       <pointsize>9</pointsize>
       </font>
      </property>
      <property name="styleSheet">
@@ -2284,7 +2278,7 @@ QPushButton:pressed {
      </property>
      <property name="font">
       <font>
-       <pointsize>8</pointsize>
+       <pointsize>9</pointsize>
       </font>
      </property>
      <property name="styleSheet">
@@ -2332,7 +2326,7 @@ QPushButton:pressed {
      </property>
      <property name="font">
       <font>
-       <pointsize>8</pointsize>
+       <pointsize>9</pointsize>
       </font>
      </property>
      <property name="styleSheet">
@@ -2380,7 +2374,7 @@ QPushButton:pressed {
      </property>
      <property name="font">
       <font>
-       <pointsize>8</pointsize>
+       <pointsize>9</pointsize>
       </font>
      </property>
      <property name="styleSheet">
@@ -2420,41 +2414,41 @@ QPushButton:pressed {
    <property name="geometry">
     <rect>
      <x>490</x>
-     <y>290</y>
+     <y>300</y>
      <width>351</width>
-     <height>131</height>
+     <height>231</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>8</pointsize>
+     <pointsize>9</pointsize>
     </font>
    </property>
    <property name="styleSheet">
     <string notr="true">::title{color:white}</string>
    </property>
    <property name="title">
-    <string>Демонстрация</string>
+    <string>Сцена</string>
    </property>
    <widget class="QLabel" name="label_39">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>90</y>
-      <width>171</width>
+      <width>181</width>
       <height>21</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>8</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="styleSheet">
      <string notr="true">color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Добавлять преломления&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Создавать преломления&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QCheckBox" name="global_is_refraction">
@@ -2486,13 +2480,13 @@ QPushButton:pressed {
      <rect>
       <x>10</x>
       <y>30</y>
-      <width>171</width>
+      <width>201</width>
       <height>21</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>8</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -2537,14 +2531,14 @@ QPushButton:pressed {
     </property>
     <property name="font">
      <font>
-      <pointsize>8</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="styleSheet">
      <string notr="true">color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Добавлять отражения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Создавать отражения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QCheckBox" name="global_is_reflex">
@@ -2571,39 +2565,18 @@ QPushButton:pressed {
      </size>
     </property>
    </widget>
-  </widget>
-  <widget class="QGroupBox" name="group_scene">
-   <property name="geometry">
-    <rect>
-     <x>490</x>
-     <y>430</y>
-     <width>351</width>
-     <height>91</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>8</pointsize>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">::title{color:white}</string>
-   </property>
-   <property name="title">
-    <string>Сцена</string>
-   </property>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>20</y>
+      <y>180</y>
       <width>91</width>
       <height>21</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>8</pointsize>
+      <pointsize>9</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -2616,9 +2589,9 @@ QPushButton:pressed {
    <widget class="QComboBox" name="global_color">
     <property name="geometry">
      <rect>
-      <x>90</x>
-      <y>20</y>
-      <width>241</width>
+      <x>100</x>
+      <y>180</y>
+      <width>231</width>
       <height>22</height>
      </rect>
     </property>
@@ -2682,23 +2655,28 @@ color: rgb(0, 0, 0);
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>60</y>
-      <width>131</width>
-      <height>16</height>
+      <y>120</y>
+      <width>161</width>
+      <height>20</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
     </property>
     <property name="styleSheet">
      <string notr="true">color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>Отображать сцену</string>
+     <string>Создавать плоскость</string>
     </property>
    </widget>
    <widget class="QCheckBox" name="global_display_scene">
     <property name="geometry">
      <rect>
       <x>315</x>
-      <y>60</y>
+      <y>120</y>
       <width>21</width>
       <height>20</height>
      </rect>
@@ -2707,6 +2685,122 @@ color: rgb(0, 0, 0);
      <string/>
     </property>
    </widget>
+   <widget class="QLabel" name="label_63">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>150</y>
+      <width>191</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>Равноугольная проекция:</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="global_is_plane">
+    <property name="geometry">
+     <rect>
+      <x>315</x>
+      <y>150</y>
+      <width>21</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>40</y>
+     <width>321</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>9</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string>Использовать настройки по умолчанию</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_44">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>10</y>
+     <width>121</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>9</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string>Шаблоны:</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboBox_types">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>10</y>
+     <width>191</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);
+</string>
+   </property>
+   <item>
+    <property name="text">
+     <string>шаблон 1</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>шаблон 2</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>шаблон 3</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>шаблон 4</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>шаблон 5</string>
+    </property>
+   </item>
   </widget>
  </widget>
  <resources/>

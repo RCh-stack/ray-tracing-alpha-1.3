@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QDate>
+#include <QKeyEvent>
 #include <QFileDialog>
 #include <QTextStream>
 #include <QMessageBox>
@@ -54,6 +55,9 @@ private slots:
     void on_button_exit_clicked();
 
     void on_AddPracticWork_finished(int result);
+
+protected:
+    void keyPressEvent(QKeyEvent *event);
 
 private:
     Ui::AddPracticWork *ui;

@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Администрирование модуля &quot;Практика&quot; | RayTracing | Beta 1.0v</string>
+   <string>Администрирование модуля &quot;Практика&quot; | RayTracing | 1.0v</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="button_add_work">

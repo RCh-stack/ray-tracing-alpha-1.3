@@ -6,19 +6,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1074</width>
-    <height>760</height>
+    <width>1191</width>
+    <height>897</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Демонстрация | Ray Tracing | Beta 1.0v</string>
+   <string>Демонстрация | Ray Tracing | 1.0v</string>
   </property>
   <widget class="QTextBrowser" name="text_description">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>520</y>
-     <width>991</width>
+     <y>660</y>
+     <width>1101</width>
      <height>231</height>
     </rect>
    </property>
@@ -33,16 +33,16 @@
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>1050</width>
-     <height>500</height>
+     <width>1170</width>
+     <height>640</height>
     </rect>
    </property>
   </widget>
   <widget class="QPushButton" name="button_start_demo">
    <property name="geometry">
     <rect>
-     <x>1010</x>
-     <y>520</y>
+     <x>1130</x>
+     <y>660</y>
      <width>51</width>
      <height>51</height>
     </rect>
@@ -81,8 +81,8 @@ QPushButton:pressed {
   <widget class="QPushButton" name="button_help">
    <property name="geometry">
     <rect>
-     <x>1020</x>
-     <y>710</y>
+     <x>1140</x>
+     <y>850</y>
      <width>41</width>
      <height>41</height>
     </rect>
@@ -121,8 +121,8 @@ QPushButton:pressed {
   <widget class="QPushButton" name="button_prev_step">
    <property name="geometry">
     <rect>
-     <x>1010</x>
-     <y>640</y>
+     <x>1130</x>
+     <y>780</y>
      <width>51</width>
      <height>51</height>
     </rect>
@@ -161,8 +161,8 @@ QPushButton:pressed {
   <widget class="QPushButton" name="button_next_step">
    <property name="geometry">
     <rect>
-     <x>1010</x>
-     <y>580</y>
+     <x>1130</x>
+     <y>720</y>
      <width>51</width>
      <height>51</height>
     </rect>

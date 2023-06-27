@@ -8,9 +8,6 @@ AdminHelpWindow::AdminHelpWindow(QWidget *parent) :
     ui->setupUi(this);
 
     set_window_options();
-    //pages_read = 0;
-    //open_file_by_code(pages_read);
-    //set_enabled_button(pages_read); // записать при open_file_by_code при открытии формы
 }
 
 AdminHelpWindow::~AdminHelpWindow()

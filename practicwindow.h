@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QFile>
 #include <QDate>
+#include <QKeyEvent>
 #include <QTextStream>
 #include <QTreeWidgetItem>
 #include <QMessageBox>
@@ -67,6 +68,9 @@ private slots:
 
 public slots:
     void close_add_edit_window(int result);
+
+protected:
+    void keyPressEvent(QKeyEvent *event);
 
 private:
     Ui::PracticWindow *ui;

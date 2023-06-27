@@ -2,7 +2,9 @@
 #define FORMATNOTEWINDOW_H
 
 #include <QDialog>
+#include <QKeyEvent>
 #include <QMessageBox>
+#include "instructionwindow.h"
 
 namespace Ui {
 class FormatNoteWindow;
@@ -28,6 +30,9 @@ private slots:
     void on_button_cancel_clicked();
 
     void on_button_help_clicked();
+
+protected:
+    void keyPressEvent(QKeyEvent *event);
 
 private:
     Ui::FormatNoteWindow *ui;

@@ -23,6 +23,7 @@ public:
 
     void set_window_options();
     void set_enabled_button(int id_page);
+    int get_last_page();
 
     void open_file_by_code(int row_index);
     void open_file_by_name(QString name);
@@ -38,6 +39,7 @@ private slots:
 private:
     Ui::UserHelpWindow *ui;
     int pages_read;
+    QTreeWidgetItem *selected_item;
 };
 
 #endif // USERHELPWINDOW_H

@@ -99,6 +99,13 @@ void ChangePracticWindow::get_data_from_db()
 
     if(query.next())
     {
+        QString deadlineStr = query.value("Deadline").toString();
+        if (deadlineStr.isEmpty())
+            ui->deadline->setDate(QDate::fromString("01-01-2001", "dd-MM-yyyy"));
+        else
+            ui->deadline->setDate(QDate::fromString(deadlineStr, "dd-MM-yyyy"));
+        ui->deadline->update();
+
         set_name_theme(query.value("Name").toString());
         split_string_with_path(query.value("Path").toString());
     }
@@ -252,6 +259,14 @@ void ChangePracticWindow::on_button_help_clicked()
 
     ahw->exec();
     ahw->deleteLater();
+}
+
+void ChangePracticWindow::keyPressEvent(QKeyEvent *event)
+{
+     if(event->key() == Qt::Key_F1)
+        on_button_help_clicked();
+    else
+        QDialog::keyPressEvent(event);
 }
 
 // 1.6

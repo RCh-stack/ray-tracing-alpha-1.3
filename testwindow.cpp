@@ -382,7 +382,7 @@ void TestWindow::on_button_help_clicked()
 {
     UserHelpWindow *uhw = new UserHelpWindow;
     uhw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
-    uhw->open_file_by_code(0); // -- УКАЗАТЬ НУЖНЫЙ --
+    uhw->open_file_by_code(12);
 
     uhw->exec();
     uhw->deleteLater();

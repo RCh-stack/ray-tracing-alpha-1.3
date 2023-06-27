@@ -70,7 +70,20 @@ void EditingToolsWindow::set_default_edit_options()
 
 void EditingToolsWindow::on_button_help_clicked()
 {
-    // instruction - хватит
+    InstructionWindow *iw = new InstructionWindow;
+    iw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+    iw->open_file(0); // нужный
+
+    iw->exec();
+    iw->deleteLater();
+}
+
+void EditingToolsWindow::keyPressEvent(QKeyEvent *event)
+{
+     if(event->key() == Qt::Key_F1)
+        on_button_help_clicked();
+    else
+        QDialog::keyPressEvent(event);
 }
 
 // 1.5

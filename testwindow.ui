@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>615</width>
-    <height>416</height>
+    <width>611</width>
+    <height>413</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Тестирование | Ray Tracing | Beta 1.0v</string>
+   <string>Тестирование | Ray Tracing | 1.0v</string>
   </property>
   <widget class="QTextBrowser" name="text_question">
    <property name="geometry">

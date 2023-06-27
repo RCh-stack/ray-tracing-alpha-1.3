@@ -9,7 +9,7 @@
 */
 inline QString select_user()
 {
-    return "SELECT * FROM User WHERE ID_User = :login AND Password = :password AND Status = :id_status";
+    return "SELECT * FROM User WHERE ID_User = :login AND Password = :password AND Status = :id_status AND ID_Group <> 3";
 }
 
 inline QString select_user_by_id()
@@ -19,7 +19,7 @@ inline QString select_user_by_id()
 
 inline QString select_admin()
 {
-    return "SELECT * FROM User WHERE ID_User = :login AND Password = :password AND Code = :code AND Status = :id_status";
+    return "SELECT * FROM User WHERE ID_User = :login AND Password = :password AND Code = :code AND Status = :id_status AND ID_Group = 3";
 }
 
 inline QString select_group()
@@ -110,6 +110,11 @@ inline QString select_theme_test()
     return "SELECT * FROM ThemeTest WHERE ID_Theme = :id_theme";
 }
 
+inline QString delete_all_answers()
+{
+    return "DELETE FROM AnswerToQuestion WHERE ID_User = :id_user AND ID_Theme = :id_theme";
+}
+
 inline QString select_question()
 {
     return "SELECT * FROM Question WHERE ID_Question = :id_question AND ID_Theme = :id_theme";
@@ -132,12 +137,12 @@ inline QString update_answer_of_question()
 
 inline QString insert_test_result()
 {
-    return "INSERT INTO ResultTest (ID_User, ID_Theme, Grade, Date) VALUES (:id_user, :id_theme, :grade, :date)";
+    return "INSERT INTO ResultTest (ID_User, ID_Theme, Grade, Date) VALUES (:id_user, :id_theme, :grade, strftime('%d-%m-%Y', :date))";
 }
 
 inline QString update_test_result()
 {
-    return "UPDATE ResultTest SET Grade = :grade, Date = :date WHERE ID_User = :id_user AND ID_Theme = :id_theme";
+    return "UPDATE ResultTest SET Grade = :grade, Date = strftime('%d-%m-%Y', :date) WHERE ID_User = :id_user AND ID_Theme = :id_theme";
 }
 
 inline QString select_test_result()
@@ -249,11 +254,6 @@ inline QString select_last_num_test()
     return "SELECT MAX(ID_Theme) AS LastNum FROM ThemeTest";
 }
 
-inline QString select_last_num_help_page()
-{
-    return "SELECT MAX(ID_Page) AS LastNum FROM HelpPage";
-}
-
 inline QString insert_theory_page()
 {
     return "INSERT INTO TheoryPage (ID_Page, Name_Page, Name_Theme, Path) VALUES (:id_page, :name_page, :name_theme, :path)";
@@ -296,6 +296,11 @@ inline QString select_instruction_file()
     return "SELECT * FROM InstructionPage WHERE ID_Page = :id_page";
 }
 
+inline QString select_last_user_help_page()
+{
+    return "SELECT MAX(ID_Page) AS LastNum FROM UserHelpPage";
+}
+
 inline QString select_user_help_page_by_id()
 {
     return "SELECT * FROM UserHelpPage WHERE ID_Page = :id";
@@ -303,7 +308,12 @@ inline QString select_user_help_page_by_id()
 
 inline QString select_user_help_page_by_name()
 {
-    return "SELECT * FROM UserHelpPage WHERE Name_Theme = :name";
+    return "SELECT * FROM UserHelpPage WHERE Name_Header = :name";
+}
+
+inline QString select_last_admin_help_page()
+{
+    return "SELECT MAX(ID_Page) AS LastNum FROM AdminHelpPage";
 }
 
 inline QString select_admin_help_page_by_id()
@@ -313,7 +323,7 @@ inline QString select_admin_help_page_by_id()
 
 inline QString select_admin_help_page_by_name()
 {
-    return "SELECT * FROM AdminHelpPage WHERE Name_Theme = :name";
+    return "SELECT * FROM AdminHelpPage WHERE Name_Header = :name";
 }
 
 inline QString select_all_rgb_colors()

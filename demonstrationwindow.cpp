@@ -10,7 +10,7 @@ DemonstrationWindow::DemonstrationWindow(QWidget *parent) :
 
     set_window_options();
 
-    step = 0, width = 1048, height = 498, fov = 1.5;
+    step = 0, width = 1168, height = 638, fov = 1.5;
     ui->button_next_step->setEnabled(0);
     ui->button_prev_step->setEnabled(0);
 }
@@ -64,10 +64,6 @@ Vec3f DemonstrationWindow::get_background_color()
 }
 
 // 1.4
-// 0.5 0.5 0.5 - светло-серый
-// 0.7 0.5 0.5 - розовый
-// 0.8 0.5 0.3 - оранжевый (мандариновый)
-// 0.8 0.7 0.1 - желтый
 Vec3f DemonstrationWindow::get_sphere_color(int id_color)
 {
     return id_color == 0 ? Vec3f(0.4, 0.4, 0.3) :
@@ -320,12 +316,6 @@ Vec3f refract(const Vec3f &I, const Vec3f &N, const float &refractive_index)
     return k < 0 ? Vec3f(0, 0, 0) : I * eta + n * (eta * cosi - sqrtf(k));
 }
 
-// -- ПЕРВЫЙ ШАГ --
-// -- Vec3f(0.2, 0.5, 0.8);  - синий темнее --
-// -- Vec3f(0.2, 0.7, 0.8);  - голубой (стандарт)--
-// -- Vec3f(0.2, 0.6, 0.9);  - синий светлее
-// -- Vec3f(0.2, 0.7, 0.7);  - зеленый (болотный)
-// -- Vec3f(0.3, 0.9, 0.7);  - зеленый (светлее)
 Vec3f DemonstrationWindow::cast_ray(const Vec3f &orig, const Vec3f &dir, const std::vector<Sphere> &spheres)
 {
     Vec3f point, N;
@@ -481,7 +471,7 @@ void DemonstrationWindow::save_image_in_framebuffer(std::vector<Vec3f> &framebuf
 // 1.2
 void DemonstrationWindow::save_image_in_framebuffer_with_lighting(std::vector<Vec3f> &framebuffer)
 {
-    std:: ofstream ofs;
+    std::ofstream ofs;
     ofs.open(get_path_to_image() + "/out.ppm", std::ios::binary);
     ofs << "P6\n" << width << " " << height << "\n 255\n";
     for (size_t i = 0; i < height * width; ++i)
@@ -503,10 +493,22 @@ void DemonstrationWindow::start_render(const std::vector<Sphere> &spheres)
     {
         for (size_t i = 0; i < width; i++)
         {
-            float x = (2 * (i + 0.5)/(float)width - 1) * tan (fov/2.) * width/(float)height;
-            float y = -(2 * (j + 0.5)/(float)height - 1) * tan(fov/2.);
-            Vec3f dir = Vec3f(x, y, -1).normalize();
-            framebuffer[i + j * width] = cast_ray(Vec3f(0,0,0), dir, spheres);
+            if(get_flag_plane())
+            {
+                float a = 2.0 * 3.14 * i / (float)width;
+                float b = 3.14 * (j - height / 2.0) / (float)height;
+                float dir_x = cos(b) * cos(a);
+                float dir_y = -sin(b);
+                float dir_z = cos(b) * sin(a);
+                framebuffer[i + j * width] = cast_ray(Vec3f(0,0,-10), Vec3f(dir_x, dir_y, dir_z), spheres);
+            }
+            else
+            {
+                float x = (2 * (i + 0.5)/(float)width - 1) * tan (fov/2.) * width/(float)height;
+                float y = -(2 * (j + 0.5)/(float)height - 1) * tan(fov/2.);
+                Vec3f dir = Vec3f(x, y, -1).normalize();
+                framebuffer[i + j * width] = cast_ray(Vec3f(0,0,0), dir, spheres);
+            }
         }
     }
 
@@ -521,19 +523,40 @@ void DemonstrationWindow::start_render(const std:: vector<Sphere> &spheres, cons
     {
         for (size_t i = 0; i < width; i++)
         {
-            float x = (2 * (i + 0.5)/(float)width - 1) * tan(fov/2.) * width/(float)height;
-            float y = -(2 * (j + 0.5)/(float)height - 1) * tan(fov/2.);
-            Vec3f dir = Vec3f(x, y, -1).normalize();
-            if(step == 2)
-                framebuffer[i + j * width] = cast_ray(Vec3f (0, 0 ,0), dir, spheres, lights);
-            else if(step == 3)
-                framebuffer[i + j * width] = cast_ray_light(Vec3f(0, 0, 0), dir, spheres, lights);
-            else if(step == 4)
-                framebuffer[i + j * width] = cast_ray_light2(Vec3f(0, 0, 0), dir, spheres, lights);
-            else if(step == 5)
-                framebuffer[i + j * width] = cast_ray_light3(Vec3f(0, 0, 0), dir, spheres, lights);
-            else if(step == 6)
-                framebuffer[i + j * width] = cast_ray_light4(Vec3f(0, 0, 0), dir, spheres, lights);
+            if(get_flag_plane())
+            {
+                float a = 2.0 * 3.14 * i / (float)width;
+                float b = 3.14 * (j - height / 2.0) / (float)height;
+                float dir_x = cos(b) * cos(a);
+                float dir_y = -sin(b);
+                float dir_z = cos(b) * sin(a);
+                if(step == 2)
+                    framebuffer[i + j * width] = cast_ray(Vec3f(0,0,-10), Vec3f(dir_x, dir_y, dir_z), spheres, lights);
+                else if(step == 3)
+                    framebuffer[i + j * width] = cast_ray_light(Vec3f(0,0,-10), Vec3f(dir_x, dir_y, dir_z), spheres, lights);
+                else if(step == 4)
+                    framebuffer[i + j * width] = cast_ray_light2(Vec3f(0,0,-10), Vec3f(dir_x, dir_y, dir_z), spheres, lights);
+                else if(step == 5)
+                     framebuffer[i + j * width] = cast_ray_light3(Vec3f(0,0,-10), Vec3f(dir_x, dir_y, dir_z), spheres, lights);
+                else if(step == 6)
+                    framebuffer[i + j * width] = cast_ray_light4(Vec3f(0,0,-10), Vec3f(dir_x, dir_y, dir_z), spheres, lights);
+            }
+            else
+            {
+                float x = (2 * (i + 0.5)/(float)width - 1) * tan(fov/2.) * width/(float)height;
+                float y = -(2 * (j + 0.5)/(float)height - 1) * tan(fov/2.);
+                Vec3f dir = Vec3f(x, y, -1).normalize();
+                if(step == 2)
+                    framebuffer[i + j * width] = cast_ray(Vec3f (0, 0 ,0), dir, spheres, lights);
+                else if(step == 3)
+                    framebuffer[i + j * width] = cast_ray_light(Vec3f(0, 0, 0), dir, spheres, lights);
+                else if(step == 4)
+                    framebuffer[i + j * width] = cast_ray_light2(Vec3f(0, 0, 0), dir, spheres, lights);
+                else if(step == 5)
+                    framebuffer[i + j * width] = cast_ray_light3(Vec3f(0, 0, 0), dir, spheres, lights);
+                else if(step == 6)
+                    framebuffer[i + j * width] = cast_ray_light4(Vec3f(0, 0, 0), dir, spheres, lights);
+            }
         }
     }
 
@@ -544,6 +567,7 @@ void DemonstrationWindow::start_render(const std:: vector<Sphere> &spheres, cons
 void DemonstrationWindow::initialize_scene_elements()
 {
     spheres.clear();
+    triangles.clear();
     lights.clear();
 
     if(step == 1 || step == 2)
@@ -664,8 +688,16 @@ void DemonstrationWindow::on_button_help_clicked()
 {
     UserHelpWindow *uhw = new UserHelpWindow;
     uhw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
-    uhw->open_file_by_code(0); // -- УКАЗАТЬ НУЖНЫЙ --
+    uhw->open_file_by_code(4);
 
     uhw->exec();
     uhw->deleteLater();
+}
+
+void DemonstrationWindow::keyPressEvent(QKeyEvent *event)
+{
+     if(event->key() == Qt::Key_F1)
+        on_button_help_clicked();
+    else
+        QDialog::keyPressEvent(event);
 }

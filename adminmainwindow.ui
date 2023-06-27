@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>RayTracing | Подсистема «Администратор» | Beta 1.0v</string>
+   <string>RayTracing | Подсистема «Администратор» | 1.0v</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="label">

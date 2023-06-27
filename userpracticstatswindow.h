@@ -2,6 +2,7 @@
 #define USERPRACTICSTATSWINDOW_H
 
 #include <QDialog>
+#include <QKeyEvent>
 #include <QMessageBox>
 #include <QSqlDatabase>
 #include <QSqlError>
@@ -46,6 +47,9 @@ private slots:
     void on_comboBox_statuses_currentIndexChanged(int index);
 
     void on_button_update_clicked();
+
+protected:
+    void keyPressEvent(QKeyEvent *event);
 
 private:
     Ui::UserPracticStatsWindow *ui;

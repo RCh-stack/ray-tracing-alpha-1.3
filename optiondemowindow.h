@@ -2,6 +2,7 @@
 #define OPTIONDEMOWINDOW_H
 
 #include <QDialog>
+#include <QKeyEvent>
 #include <QFileDialog>
 
 namespace Ui {
@@ -39,6 +40,11 @@ private slots:
     void on_check_option_clicked();
 
     void on_button_path_clicked();
+
+    void on_comboBox_types_currentIndexChanged(int index);
+
+protected:
+    void keyPressEvent(QKeyEvent *event);
 
 private:
     Ui::OptionDemoWindow *ui;

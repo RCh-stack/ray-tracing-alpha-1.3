@@ -289,6 +289,14 @@ void AdminPanelWindow::on_button_help_clicked()
     ahw->deleteLater();
 }
 
+void AdminPanelWindow::keyPressEvent(QKeyEvent *event)
+{
+     if(event->key() == Qt::Key_F1)
+        on_button_help_clicked();
+    else
+        QDialog::keyPressEvent(event);
+}
+
 void AdminPanelWindow::on_button_exit_clicked()
 {
     this->close();

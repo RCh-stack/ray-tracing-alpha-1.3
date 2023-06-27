@@ -2,6 +2,7 @@
 #define CHANGEPRACTICWINDOW_H
 
 #include <QDialog>
+#include <QKeyEvent>
 #include <QDir>
 #include <QMessageBox>
 #include <QTextStream>
@@ -68,6 +69,9 @@ private slots:
     void on_button_help_clicked();
 
     void on_button_exit_clicked();
+
+protected:
+    void keyPressEvent(QKeyEvent *event);
 
 private:
     Ui::ChangePracticWindow *ui;

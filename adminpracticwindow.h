@@ -2,6 +2,7 @@
 #define ADMINPRACTICWINDOW_H
 
 #include <QMainWindow>
+#include <QKeyEvent>
 
 namespace Ui {
 class AdminPracticWindow;
@@ -34,6 +35,9 @@ private slots:
     void on_action_help_triggered();
 
     void on_action_manual_triggered();
+
+protected:
+    void keyPressEvent(QKeyEvent *event);
 
 private:
     Ui::AdminPracticWindow *ui;

@@ -2,6 +2,7 @@
 #define ADMINTHEORYWINDOW_H
 
 #include <QMainWindow>
+#include <QKeyEvent>
 #include <QFileDialog>
 #include <QTextStream>
 #include <QMessageBox>
@@ -74,6 +75,10 @@ private slots:
     void on_action_open_directory_triggered();
 
     void on_button_options_clicked();
+
+protected:
+    void closeEvent(QCloseEvent *event) override;
+    void keyPressEvent(QKeyEvent *event);
 
 private:
     Ui::AdminTheoryWindow *ui;

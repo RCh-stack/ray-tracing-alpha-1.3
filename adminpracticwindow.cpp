@@ -128,3 +128,11 @@ void AdminPracticWindow::on_action_manual_triggered()
 {
 
 }
+
+void AdminPracticWindow::keyPressEvent(QKeyEvent *event)
+{
+     if(event->key() == Qt::Key_F1)
+        on_button_help_clicked();
+    else
+        QMainWindow::keyPressEvent(event);
+}

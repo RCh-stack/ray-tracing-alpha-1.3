@@ -14,7 +14,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = RayTracing
 TEMPLATE = app
-
+ICON = main_icon.ico
 
 SOURCES += main.cpp\
         mainwindow.cpp \
@@ -56,7 +56,8 @@ SOURCES += main.cpp\
     adminoptionwindow.cpp \
     listformatfile.cpp \
     addformatfile.cpp \
-    editformatfile.cpp
+    editformatfile.cpp \
+    model.cpp
 
 HEADERS  += mainwindow.h \
     authorizationwindow.h \
@@ -102,7 +103,9 @@ HEADERS  += mainwindow.h \
     adminoptionwindow.h \
     listformatfile.h \
     addformatfile.h \
-    editformatfile.h
+    editformatfile.h \
+    triangle.h \
+    model.h
 
 FORMS    += mainwindow.ui \
     authorizationwindow.ui \

@@ -81,33 +81,67 @@ void OptionTestWindow::set_visible_name_user()
     ui->label_user->setText(get_fullname_user());
 }
 
+bool OptionTestWindow::check_test_passing(QString id_user, int id_theme)
+{
+    QSqlQuery query;
+    query.prepare(select_test_result());
+    query.bindValue(":id_user",     id_user);
+    query.bindValue(":id_theme",  id_theme);
+
+    query.exec();
+    return query.next();
+}
+
 // 1.2 + 1.3
 void OptionTestWindow::on_button_start_clicked()
 {
-    if(get_allow_repeat_try())
+    if(check_test_passing(get_id_user(), ui->comboBox_topics->currentIndex() + 1))
     {
-        QMessageBox::StandardButton reply;
-        reply = QMessageBox::question(this, "Уведомление", "Данный тест уже был пройден. Хотите использовать новую попытку?"
-                                                             "\nДанные о предыдущей попытке будут очищены.",
-                                      QMessageBox::Yes|QMessageBox::No);
-        if (reply == QMessageBox::Yes)
+        if(get_allow_repeat_try())
         {
-            TestWindow *tw = new TestWindow;
-            tw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
-
-            tw->set_id_user(get_id_user());
-            tw->set_date_test(ui->datetime_test->dateTime());
-            tw->set_mode_test(ui->comboBox_modes->currentIndex());
-            tw->set_theme_test(ui->comboBox_topics->currentIndex() + 1);
-
-            tw->start_test();
-
-            tw->exec();
-            tw->deleteLater();
+            QMessageBox::StandardButton reply;
+            reply = QMessageBox::question(this, "Уведомление", "Данный тест уже был пройден. Хотите использовать новую попытку?"
+                                                                 "\nДанные о предыдущей попытке будут очищены.",
+                                          QMessageBox::Yes|QMessageBox::No);
+            if (reply == QMessageBox::Yes)
+            {
+                delete_answers();
+                run_test();
+            }
         }
+        else
+            QMessageBox::warning(this, "Уведомление", "Данный тест уже пройден, новая попытка недоступна.");
     }
     else
-        QMessageBox::warning(this, "Уведомление", "Данный тест уже пройден, новая попытка недоступна.");
+    {
+        delete_answers();
+        run_test();
+    }
+}
+
+void OptionTestWindow::delete_answers()
+{
+    QSqlQuery query;
+    query.prepare(delete_all_answers());
+    query.bindValue(":id_user",     get_id_user());
+    query.bindValue(":id_theme",  ui->comboBox_topics->currentIndex() + 1);
+    query.exec();
+}
+
+void OptionTestWindow::run_test()
+{
+    TestWindow *tw = new TestWindow;
+    tw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+
+    tw->set_id_user(get_id_user());
+    tw->set_date_test(ui->datetime_test->dateTime());
+    tw->set_mode_test(ui->comboBox_modes->currentIndex());
+    tw->set_theme_test(ui->comboBox_topics->currentIndex() + 1);
+
+    tw->start_test();
+
+    tw->exec();
+    tw->deleteLater();
 }
 
 void OptionTestWindow::on_button_cancel_clicked()
@@ -119,7 +153,7 @@ void OptionTestWindow::on_button_help_clicked()
 {
     UserHelpWindow *uhw = new UserHelpWindow;
     uhw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
-    uhw->open_file_by_code(0); // -- УКАЗАТЬ НУЖНЫЙ --
+    uhw->open_file_by_code(10);
 
     uhw->exec();
     uhw->deleteLater();
@@ -137,4 +171,12 @@ void OptionTestWindow::on_button_stats_clicked()
 
     utsw->exec();
     utsw->deleteLater();
+}
+
+void OptionTestWindow::keyPressEvent(QKeyEvent *event)
+{
+     if(event->key() == Qt::Key_F1)
+        on_button_help_clicked();
+    else
+        QDialog::keyPressEvent(event);
 }

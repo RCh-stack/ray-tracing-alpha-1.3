@@ -116,10 +116,18 @@ void EditPracticWork::on_button_help_clicked()
 {
     UserHelpWindow *uhw = new UserHelpWindow;
     uhw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
-    uhw->open_file_by_code(0); // -- УКАЗАТЬ НУЖНЫЙ --
+    uhw->open_file_by_code(7);
 
     uhw->exec();
     uhw->deleteLater();
+}
+
+void EditPracticWork::keyPressEvent(QKeyEvent *event)
+{
+     if(event->key() == Qt::Key_F1)
+        on_button_help_clicked();
+    else
+        QDialog::keyPressEvent(event);
 }
 
 // 1.4
@@ -130,9 +138,14 @@ void EditPracticWork::on_button_edit_clicked()
     if (reply == QMessageBox::Yes)
     {
         set_path_to_file(ui->text_path->text());
-        update_select_work();
-        ui->button_path->setEnabled(0);
-        ui->text_path->setEnabled(0);
+        if(get_path_to_file().length() == 0)
+            QMessageBox::critical(this, "Ошибка", "Путь к файлу некорректный!");
+        else
+        {
+            update_select_work();
+            ui->button_path->setEnabled(0);
+            ui->text_path->setEnabled(0);
+        }
     }
 }
 

@@ -2,6 +2,7 @@
 #define CREATETESTWINDOW_H
 
 #include <QDialog>
+#include <QKeyEvent>
 #include <QMessageBox>
 #include <QSqlQuery>
 #include "sql_requests.h"
@@ -53,6 +54,9 @@ private slots:
     void on_button_help_clicked();
 
     void on_comboBox_numbers_currentIndexChanged(int index);
+
+protected:
+    void keyPressEvent(QKeyEvent *event);
 
 private:
     Ui::CreateTestWindow *ui;

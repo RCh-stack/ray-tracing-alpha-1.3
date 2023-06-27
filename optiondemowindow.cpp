@@ -130,7 +130,6 @@ void OptionDemoWindow::set_default_settings_mode()
     ui->group_lights->setEnabled(0);
     ui->group_demo->setEnabled(0);
     ui->group_other->setEnabled(0);
-    ui->group_scene->setEnabled(0);
 
     set_default_color();
     set_default_value();
@@ -143,7 +142,9 @@ void OptionDemoWindow::set_default_settings_mode()
     ui->global_is_refraction->setChecked(1);
     ui->global_display_scene->setChecked(0);
 
-    ui->other_path->setText("C:/Program Files (x86)/Qt Project/RayTracing");
+    //ui->other_path->setText("C:/Program Files (x86)/Qt Project/RayTracing");
+    //ui->other_path->setText(QDir::currentPath());
+    ui->other_path->setText("C:/Users/Public/Pictures");
 }
 
 // 1.3
@@ -156,7 +157,6 @@ void OptionDemoWindow::set_users_settings_mode()
     ui->group_lights->setEnabled(1);
     ui->group_demo->setEnabled(1);
     ui->group_other->setEnabled(1);
-    ui->group_scene->setEnabled(1);
 }
 
 // 1.1
@@ -231,6 +231,7 @@ void OptionDemoWindow::on_button_start_clicked()
     dw->set_sphere_color(ui->value1_color->currentIndex(), ui->value2_color->currentIndex(), ui->value3_color->currentIndex(), ui->value4_color->currentIndex());
 
     // -- установка числовых характеристик (координаты, радиусы, интенсивность и т.д) --
+    dw->set_id_type(ui->comboBox_types->currentIndex() + 1);
     dw->set_radius(ui->value1_R->value(), ui->value2_R->value(), ui->value3_R->value(), ui->value4_R->value());
     dw->set_x(ui->value1_X->value(), ui->value2_X->value(), ui->value3_X->value(), ui->value4_X->value());
     dw->set_y(ui->value1_Y->value(), ui->value2_Y->value(), ui->value3_Y->value(), ui->value4_Y->value());
@@ -247,6 +248,7 @@ void OptionDemoWindow::on_button_start_clicked()
     dw->set_reflection_flag(ui->global_is_reflex->isChecked());
     dw->set_lighting_flag(ui->global_is_light->isChecked());
     dw->set_refraction_flag(ui->global_is_refraction->isChecked());
+    dw->set_flag_plane(ui->global_is_plane->isChecked());
     dw->set_code_format_output(ui->other_format->currentIndex());
 
     dw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
@@ -263,7 +265,7 @@ void OptionDemoWindow::on_button_help_clicked()
 {
     UserHelpWindow *uhw = new UserHelpWindow;
     uhw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
-    uhw->open_file_by_code(0); // -- УКАЗАТЬ НУЖНЫЙ --
+    uhw->open_file_by_code(3);
 
     uhw->exec();
     uhw->deleteLater();
@@ -283,4 +285,158 @@ void OptionDemoWindow::on_button_path_clicked()
     QString filePath = QFileDialog::getExistingDirectory(this, "Путь к файлу", QString(), QFileDialog::ShowDirsOnly);
     if(filePath.length() != 0)
         ui->other_path->setText(filePath);
+}
+
+void OptionDemoWindow::keyPressEvent(QKeyEvent *event)
+{
+     if(event->key() == Qt::Key_F1)
+        on_button_help_clicked();
+    else
+        QDialog::keyPressEvent(event);
+}
+
+void OptionDemoWindow::on_comboBox_types_currentIndexChanged(int index)
+{
+    if(index == 0)
+        set_default_settings_mode();\
+    else if(index == 1)
+    {
+        set_default_light();
+        ui->global_color->setCurrentIndex(2);
+
+        ui->value1_R->setValue(3);
+        ui->value1_X->setValue(-2);
+        ui->value1_Y->setValue(0);
+        ui->value1_Z->setValue(-7);
+
+        ui->value2_R->setValue(4);
+        ui->value2_X->setValue(-1);
+        ui->value2_Y->setValue(0);
+        ui->value2_Z->setValue(-14);
+
+        ui->value3_R->setValue(4);
+        ui->value3_X->setValue(2);
+        ui->value3_Y->setValue(0);
+        ui->value3_Z->setValue(-21);
+
+        ui->value4_R->setValue(4);
+        ui->value4_X->setValue(5);
+        ui->value4_Y->setValue(0);
+        ui->value4_Z->setValue(-28);
+
+        ui->global_is_plane->setChecked(0);
+        ui->global_display_scene->setChecked(0);
+    }
+    else if(index == 2)
+    {
+        set_default_light();
+        ui->global_color->setCurrentIndex(4);
+
+        ui->value1_R->setValue(2);
+        ui->value1_X->setValue(-5);
+        ui->value1_Y->setValue(0);
+        ui->value1_Z->setValue(-3);
+
+        ui->value2_R->setValue(1);
+        ui->value2_X->setValue(0.5);
+        ui->value2_Y->setValue(0.4);
+        ui->value2_Z->setValue(-5);
+
+        ui->value3_R->setValue(1);
+        ui->value3_X->setValue(-1);
+        ui->value3_Y->setValue(0);
+        ui->value3_Z->setValue(-9);
+
+        ui->value4_R->setValue(1);
+        ui->value4_X->setValue(7);
+        ui->value4_Y->setValue(-1);
+        ui->value4_Z->setValue(-12);
+
+        ui->global_is_plane->setChecked(0);
+        ui->global_display_scene->setChecked(0);
+    }
+    else if(index == 3)
+    {
+        ui->global_color->setCurrentIndex(0);
+
+        ui->value1_R->setValue(1);
+        ui->value1_X->setValue(-3);
+        ui->value1_Y->setValue(0);
+        ui->value1_Z->setValue(-16);
+
+        ui->value2_R->setValue(1);
+        ui->value2_X->setValue(0);
+        ui->value2_Y->setValue(0);
+        ui->value2_Z->setValue(-16);
+
+        ui->value3_R->setValue(1);
+        ui->value3_X->setValue(-2);
+        ui->value3_Y->setValue(1);
+        ui->value3_Z->setValue(-3);
+
+        ui->value4_R->setValue(1);
+        ui->value4_X->setValue(4);
+        ui->value4_Y->setValue(1);
+        ui->value4_Z->setValue(-4);
+
+        ui->global_is_plane->setChecked(1);
+        ui->global_display_scene->setChecked(1);
+
+        ui->light1_X->setValue(20);
+        ui->light1_Y->setValue(20);
+        ui->light1_Z->setValue(20);
+        ui->light1_D->setValue(2);
+
+        ui->light2_X->setValue(30);
+        ui->light2_Y->setValue(50);
+        ui->light2_Z->setValue(25);
+        ui->light2_D->setValue(2);
+
+        ui->light3_X->setValue(30);
+        ui->light3_Y->setValue(20);
+        ui->light3_Z->setValue(30);
+        ui->light3_D->setValue(2);
+    }
+    else
+    {
+        ui->global_color->setCurrentIndex(3);
+
+        ui->value1_R->setValue(4);
+        ui->value1_X->setValue(-7);
+        ui->value1_Y->setValue(0);
+        ui->value1_Z->setValue(-5);
+
+        ui->value2_R->setValue(2);
+        ui->value2_X->setValue(-7);
+        ui->value2_Y->setValue(0);
+        ui->value2_Z->setValue(-5);
+
+        ui->value3_R->setValue(2);
+        ui->value3_X->setValue(7);
+        ui->value3_Y->setValue(0);
+        ui->value3_Z->setValue(-5);
+
+        ui->value4_R->setValue(4);
+        ui->value4_X->setValue(7);
+        ui->value4_Y->setValue(0);
+        ui->value4_Z->setValue(-5);
+
+        ui->global_is_plane->setChecked(0);
+        ui->global_display_scene->setChecked(0);
+
+        ui->light1_X->setValue(20);
+        ui->light1_Y->setValue(20);
+        ui->light1_Z->setValue(20);
+        ui->light1_D->setValue(2);
+
+        ui->light2_X->setValue(30);
+        ui->light2_Y->setValue(50);
+        ui->light2_Z->setValue(25);
+        ui->light2_D->setValue(2);
+
+        ui->light3_X->setValue(30);
+        ui->light3_Y->setValue(20);
+        ui->light3_Z->setValue(30);
+        ui->light3_D->setValue(2);
+    }
 }

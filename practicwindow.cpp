@@ -298,7 +298,7 @@ void PracticWindow::on_button_help_clicked()
 {
     UserHelpWindow *uhw = new UserHelpWindow;
     uhw->setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
-    uhw->open_file_by_code(0); // -- УКАЗАТЬ НУЖНЫЙ --
+    uhw->open_file_by_code(5);
 
     uhw->exec();
     uhw->deleteLater();
@@ -313,4 +313,12 @@ void PracticWindow::on_button_exit_clicked()
 void PracticWindow::on_button_update_clicked()
 {
     update_status_work();
+}
+
+void PracticWindow::keyPressEvent(QKeyEvent *event)
+{
+     if(event->key() == Qt::Key_F1)
+        on_button_help_clicked();
+    else
+        QDialog::keyPressEvent(event);
 }

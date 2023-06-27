@@ -2,6 +2,7 @@
 #define USERPROFILEWINDOW_H
 
 #include <QDialog>
+#include <QKeyEvent>
 
 namespace Ui {
 class UserProfileWindow;
@@ -25,6 +26,9 @@ private slots:
     void on_button_close_clicked();
 
     void on_button_help_clicked();
+
+protected:
+    void keyPressEvent(QKeyEvent *event);
 
 private:
     Ui::UserProfileWindow *ui;

@@ -2,6 +2,7 @@
 #define ADMINMAINWINDOW_H
 
 #include <QMainWindow>
+#include <QKeyEvent>
 
 namespace Ui {
 class AdminMainWindow;
@@ -45,6 +46,9 @@ private slots:
     void on_button_admin_lab_clicked();
 
     void on_button_admin_test_clicked();
+
+protected:
+    void keyPressEvent(QKeyEvent *event);
 
 private:
     Ui::AdminMainWindow *ui;

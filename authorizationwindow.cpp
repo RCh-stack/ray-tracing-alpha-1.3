@@ -34,7 +34,10 @@ AuthorizationWindow::AuthorizationWindow(QWidget *parent) :
     ui->text_code_admin->setEnabled(0);
 
     db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("C:/Program Files (x86)/Qt Project/RayTracing/EducationSystem.sqlite");
+    std::string dbpath = QDir::currentPath().toStdString();
+    const char* path = dbpath.c_str();
+    QMessageBox::information(this, "a", QString::fromUtf8(path));
+    db.setDatabaseName(QString::fromUtf8(path) + "/EducationSystem.sqlite");
 
     if (!db.open())
         QMessageBox::critical(NULL, QObject::tr("Ошибка!"), db.lastError().text());

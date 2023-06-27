@@ -2,6 +2,7 @@
 #define USERSTESTSTATSWINDOW_H
 
 #include <QDialog>
+#include <QKeyEvent>
 #include <QMessageBox>
 #include <QSqlQuery>
 #include <regex>
@@ -48,6 +49,9 @@ private slots:
     void on_button_exit_clicked();
 
     void on_table_list_cellDoubleClicked(int row, int column);
+
+protected:
+    void keyPressEvent(QKeyEvent *event);
 
 private:
     Ui::UsersTestStatsWindow *ui;

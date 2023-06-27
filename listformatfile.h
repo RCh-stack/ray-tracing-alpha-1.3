@@ -2,6 +2,7 @@
 #define LISTFORMATFILE_H
 
 #include <QDialog>
+#include <QKeyEvent>
 #include <QMessageBox>
 #include <QSqlQuery>
 #include "sql_requests.h"
@@ -33,6 +34,9 @@ private slots:
 
 public slots:
     void close_add_edit_window(int result);
+
+protected:
+    void keyPressEvent(QKeyEvent *event);
 
 private:
     Ui::ListFormatFile *ui;

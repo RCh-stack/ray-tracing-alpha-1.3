@@ -2,7 +2,9 @@
 #define EDITINGTOOLSWINDOW_H
 
 #include <QDialog>
+#include <QKeyEvent>
 #include <QMessageBox>
+#include "instructionwindow.h"
 
 namespace Ui {
 class EditingToolsWindow;
@@ -37,6 +39,9 @@ private slots:
     void on_button_save_clicked();
 
     void on_button_exit_clicked();
+
+protected:
+    void keyPressEvent(QKeyEvent *event);
 
 private:
     Ui::EditingToolsWindow *ui;
